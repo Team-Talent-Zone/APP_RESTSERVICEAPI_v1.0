@@ -1,0 +1,80 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.src.restcontroller" />
+
+	<bean id="myBasicAuthenticationEntryPoint" class="com.src.security.CustomBasicAuthenticationEntryPoint"></bean>
+
+	<bean id="applicationConfigProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:rest.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="/WEB-INF/jdbc-dev.properties" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.src.entity" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.show_sql=true
+				hibernate.c3p0.min_size=5
+				hibernate.c3p0.max_size=20
+				hibernate.c3p0.timeout=1800
+				hibernate.c3p0.max_statements=50
+				hibernate.connection.autocommit=auto
+				hibernate.connection.release_mode=auto
+			</value>
+		</property>
+	</bean>
+
+	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
+	<bean id="contentRestDAO" class="com.src.dao.ContentRestDAOImpl"></bean>
+	<bean id="purchaseRestDAO" class="com.src.dao.PurchaseRestDAOImpl"></bean>
+	<bean id="quoteRestDAO" class="com.src.dao.QuoteRestDAOImpl"></bean>
+
+	<bean id="purchaseService" class="com.src.service.PurchaseServiceImpl"></bean>
+	<bean id="quoteService" class="com.src.service.QuoteServiceImpl"></bean>
+	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
+	<bean id="contentService" class="com.src.service.ContentServiceImpl"></bean>
+
+	<mvc:annotation-driven>
+	</mvc:annotation-driven>
+	<beans:bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</beans:bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
