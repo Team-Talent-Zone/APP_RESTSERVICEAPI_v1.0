@@ -57,14 +57,7 @@
 	</bean>
 
 	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
-	<bean id="contentRestDAO" class="com.src.dao.ContentRestDAOImpl"></bean>
-	<bean id="purchaseRestDAO" class="com.src.dao.PurchaseRestDAOImpl"></bean>
-	<bean id="quoteRestDAO" class="com.src.dao.QuoteRestDAOImpl"></bean>
-
-	<bean id="purchaseService" class="com.src.service.PurchaseServiceImpl"></bean>
-	<bean id="quoteService" class="com.src.service.QuoteServiceImpl"></bean>
 	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
-	<bean id="contentService" class="com.src.service.ContentServiceImpl"></bean>
 
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>

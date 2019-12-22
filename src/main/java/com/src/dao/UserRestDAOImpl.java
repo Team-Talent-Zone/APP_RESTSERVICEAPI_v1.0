@@ -22,7 +22,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.ErrorMessageConfigConstant;
-import com.src.entity.ProblemStmtEntity;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserRoleEntity;
@@ -39,7 +38,27 @@ public class UserRestDAOImpl implements UserRestDAO {
 	protected Properties applicationConfigProperties;
 
 	final Logger logger = LoggerFactory.getLogger(UserRestDAOImpl.class);
-
+	
+/*
+ * (non-Javadoc)
+ * @see com.src.dao.UserRestDAO#findByUsername(java.lang.String)
+ */
+	
+	@Transactional
+	public UserEntity findByUsername(String username) {
+		logger.info("Inside USER DAO findByUsername method");
+		UserEntity userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq("username", username));
+		userEntity = (UserEntity) criteria.uniqueResult();
+		if (userEntity != null) {
+			return userEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(ErrorMessageConfigConstant.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
+						+ " for user name :" + username);
+	}
+	
 	@Transactional
 	public UserEntity checkUsername(String username) {
 		logger.info("Inside User DAO CheckUsername method ");
@@ -79,20 +98,7 @@ public class UserRestDAOImpl implements UserRestDAO {
 				applicationConfigProperties.getProperty(ErrorMessageConfigConstant.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
-	@Transactional
-	public UserEntity findByUsername(String username) {
-		logger.info("Inside USER DAO findByUsername method");
-		UserEntity userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-		criteria.add(Restrictions.eq("username", username));
-		userEntity = (UserEntity) criteria.uniqueResult();
-		if (userEntity != null) {
-			return userEntity;
-		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(ErrorMessageConfigConstant.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
-						+ " for user name :" + username);
-	}
+
 
 	@Transactional
 	public UserEntity getUserByUserId(int userId) {
