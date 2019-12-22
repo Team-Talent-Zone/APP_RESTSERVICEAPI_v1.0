@@ -1,22 +1,25 @@
-package com.src.restcontroller;
+package com.src.service;
 
 import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
- 
-import com.src.service.UserService;
 
-@Controller
-class AbstractRestController {
+import com.src.dao.UserRestDAO;
+
+public class AbstractManager {
 
 	@Resource(name = "applicationConfigProperties")
 	protected Properties applicationConfigProperties;
 
 	@Autowired
-	protected UserService userService;
- 
+	protected HttpServletRequest request;
+
+	@Autowired
+	protected UserRestDAO userRestDAO;
+
+	 
 
 }
