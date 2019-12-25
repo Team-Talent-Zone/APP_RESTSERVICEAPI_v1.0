@@ -9,7 +9,8 @@ import com.src.entity.UserEntity;
 
 @Service("userManager")
 @Transactional(rollbackFor = { Exception.class })
-public class UserServiceImpl extends AbstractManager implements UserService {
+public class UserServiceImpl extends AbstractServiceManager implements
+		UserService {
 
 	public UserEntity checkUsername(String username) {
 		return userRestDAO.checkUsername(username);
@@ -20,6 +21,7 @@ public class UserServiceImpl extends AbstractManager implements UserService {
 	}
 
 	public UserEntity saveUser(UserEntity userEntity) {
+		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		return userRestDAO.saveUser(userEntity);
 	}
 
@@ -38,10 +40,6 @@ public class UserServiceImpl extends AbstractManager implements UserService {
 
 	public UserEntity findByUsername(String username) {
 		return userRestDAO.findByUsername(username);
-	}
-
-	public ArrayList<UserEntity> getAllUsersNotNotificatedToTeam() {
-		return userRestDAO.getAllUsersNotNotificatedToTeam();
 	}
 
 }
