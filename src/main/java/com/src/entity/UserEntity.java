@@ -1,6 +1,7 @@
 package com.src.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,15 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "userdetails")
-@Table(name = "userdetails")
+@Table(name = "APP_USER_DETAILS")
 public class UserEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "USERID")
+	@Column(name = "userId")
 	@GeneratedValue
-	private Integer userid;
+	private Integer userId;
 
 	@Column(name = "USERNAME")
 	private String username;
@@ -29,8 +30,8 @@ public class UserEntity implements Serializable {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@Column(name = "ENABLED")
-	private boolean enabled;
+	@Column(name = "ISACTIVE")
+	private boolean isactive;
 
 	@Column(name = "FIRSTNAME")
 	private String firstname;
@@ -38,44 +39,26 @@ public class UserEntity implements Serializable {
 	@Column(name = "LASTNAME")
 	private String lastname;
 
-	@Column(name = "FULLNAME")
-	private String fullname;
-	
-	@Column(name = "ABTYOU")
-	private String abtyou;
-
-	@Column(name = "UPLOADPICURL")
-	private String uploadpicurl;
-
-	@Column(name = "isrecoverypwd")
+	@Column(name = "ISRECOVERYPWD")
 	private boolean isrecoverypwd;
 
-	@Column(name = "PHONENUMBER")
-	private String phonenumber;
+	@Column(name = "REASONOFDEACTIVATION")
+	private String reasonofdeactivation;
 
 	@Column(name = "CREATEDON")
 	private String createdon;
+	
+	@Column(name = "CREATEDBY")
+	private String createdby;
 
-	@Column(name = "LASTUPDATEDON")
-	private String lastupdatedon;
 
-	@Column(name = "LASTUPDATEDBY")
-	private String lastupdatedby;
+	@Column(name = "UPDATEDBY")
+	private String updateby;
 
-	@Column(name = "ISSPCERTIFIED")
-	private boolean isspcertified;
-	
-	@Column(name = "ISNOTIFICATEDTOTEAM")
-	private boolean isnotificatedtoteam;
-	
-	@Column(name = "REASONFORDISABLE")
-	private String reasonfordisable;
-	
-	@Column(name = "LASTLOGINEDIN")
-	private String lastloginedin;
-	
-	/*@Column(name = "istermsacceptedatsignup")
-	private boolean istermsacceptedatsignup;*/
+	@Column(name = "UPDATEDON")
+	private String updatedon;
+
+	 
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserRoleEntity> userroles;
@@ -83,12 +66,12 @@ public class UserEntity implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserBizEntity> userbizdetails;
 
-	public Integer getUserid() {
-		return userid;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -107,13 +90,12 @@ public class UserEntity implements Serializable {
 		this.password = password;
 	}
 
-
-	public Set<UserRoleEntity> getUserroles() {
-		return userroles;
+	public boolean isIsactive() {
+		return isactive;
 	}
 
-	public void setUserroles(Set<UserRoleEntity> userroles) {
-		this.userroles = userroles;
+	public void setIsactive(boolean isactive) {
+		this.isactive = isactive;
 	}
 
 	public String getFirstname() {
@@ -132,44 +114,20 @@ public class UserEntity implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public boolean isIsrecoverypwd() {
+		return isrecoverypwd;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setIsrecoverypwd(boolean isrecoverypwd) {
+		this.isrecoverypwd = isrecoverypwd;
 	}
 
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getReasonofdeactivation() {
+		return reasonofdeactivation;
 	}
 
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-
-	public Set<UserBizEntity> getUserbizdetails() {
-		return userbizdetails;
-	}
-
-	public void setUserbizdetails(Set<UserBizEntity> userbizdetails) {
-		this.userbizdetails = userbizdetails;
-	}
-
-	public String getAbtyou() {
-		return abtyou;
-	}
-
-	public void setAbtyou(String abtyou) {
-		this.abtyou = abtyou;
-	}
-
-	public String getUploadpicurl() {
-		return uploadpicurl;
-	}
-
-	public void setUploadpicurl(String uploadpicurl) {
-		this.uploadpicurl = uploadpicurl;
+	public void setReasonofdeactivation(String reasonofdeactivation) {
+		this.reasonofdeactivation = reasonofdeactivation;
 	}
 
 	public String getCreatedon() {
@@ -180,78 +138,51 @@ public class UserEntity implements Serializable {
 		this.createdon = createdon;
 	}
 
-	public String getLastupdatedon() {
-		return lastupdatedon;
+	public String getCreatedby() {
+		return createdby;
 	}
 
-	public void setLastupdatedon(String lastupdatedon) {
-		this.lastupdatedon = lastupdatedon;
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
 	}
 
-	public String getLastupdatedby() {
-		return lastupdatedby;
+	public String getUpdateby() {
+		return updateby;
 	}
 
-	public void setLastupdatedby(String lastupdatedby) {
-		this.lastupdatedby = lastupdatedby;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
-	public boolean isIsspcertified() {
-		return isspcertified;
+	public String getUpdatedon() {
+		return updatedon;
 	}
 
-	public void setIsspcertified(boolean isspcertified) {
-		this.isspcertified = isspcertified;
-	}
-	
-	public boolean isIsnotificatedtoteam() {
-		return isnotificatedtoteam;
+	public void setUpdatedon(String updatedon) {
+		this.updatedon = updatedon;
 	}
 
-	public void setIsnotificatedtoteam(boolean isnotificatedtoteam) {
-		this.isnotificatedtoteam = isnotificatedtoteam;
-	}
-	
-	public boolean isEnabled() {
-		return enabled;
+	public Set<UserRoleEntity> getUserroles() {
+		return userroles;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setUserroles(Set<UserRoleEntity> userroles) {
+		this.userroles = userroles;
 	}
 
-	public boolean isIsrecoverypwd() {
-		return isrecoverypwd;
+	public Set<UserBizEntity> getUserbizdetails() {
+		return userbizdetails;
 	}
 
-	public void setIsrecoverypwd(boolean isrecoverypwd) {
-		this.isrecoverypwd = isrecoverypwd;
+	public void setUserbizdetails(Set<UserBizEntity> userbizdetails) {
+		this.userbizdetails = userbizdetails;
 	}
 
-	public String getReasonfordisable() {
-		return reasonfordisable;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setReasonfordisable(String reasonfordisable) {
-		this.reasonfordisable = reasonfordisable;
-	}
-
-	public String getLastloginedin() {
-		return lastloginedin;
-	}
-
-	public void setLastloginedin(String lastloginedin) {
-		this.lastloginedin = lastloginedin;
-	}
-
-	/*public boolean isIstermsacceptedatsignup() {
-		return istermsacceptedatsignup;
-	}
-
-	public void setIstermsacceptedatsignup(boolean istermsacceptedatsignup) {
-		this.istermsacceptedatsignup = istermsacceptedatsignup;
-	}*/
-
+	 
 	
 	
 	
