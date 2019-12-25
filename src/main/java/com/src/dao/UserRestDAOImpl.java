@@ -165,7 +165,7 @@ public class UserRestDAOImpl implements UserRestDAO {
 			userEntity.setUserbizdetails(userBizEntities);
 			sessionFactory.getCurrentSession().saveOrUpdate(userEntity);
 			logger.info("Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :"
-					+ userEntity.getUserid());
+					+ userEntity.getUserId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(ErrorMessageConfigConstant.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));

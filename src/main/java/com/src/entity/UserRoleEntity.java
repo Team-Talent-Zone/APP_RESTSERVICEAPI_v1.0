@@ -14,41 +14,49 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "userroles")
-@Table(name = "userroles")
+@Table(name = "APP_USER_ROLE")
 public class UserRoleEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ROLEID")
 	@GeneratedValue
-	private Integer id;
+	private Integer roleId;
 
-	@Column(insertable = false, updatable = false, name = "userid")
-	private int userid;
+	@Column(insertable = false, updatable = false, name = "userId")
+	private int userId;
 	
-	@Column(name = "ROLE")
-	private String role;
+	@Column(name = "ROLENAME")
+	private String rolename;
  
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "userid" , nullable=false)
+	@JoinColumn(name = "userId" , nullable=false)
 	@JsonIgnore
 	private UserEntity userdetails;
 
-	public Integer getId() {
-		return id;
+	public Integer getRoleId() {
+		return roleId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
- 
-	public String getRole() {
-		return role;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
 	}
 
 	public UserEntity getUserdetails() {
@@ -59,13 +67,11 @@ public class UserRoleEntity implements Serializable {
 		this.userdetails = userdetails;
 	}
 
-	public int getUserid() {
-		return userid;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+	 
 
 	
 }

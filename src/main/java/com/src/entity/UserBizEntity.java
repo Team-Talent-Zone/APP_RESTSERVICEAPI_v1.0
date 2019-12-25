@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "userbizdetails")
-@Table(name = "userbizdetails")
+@Table(name = "APP_USER_BIZ_DETAILS")
 public class UserBizEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,62 +22,67 @@ public class UserBizEntity implements Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue
-	private Integer id;
+	private Integer Id;
 
-	@Column(insertable = false, updatable = false, name = "userid")
-	private int userid;
+	@Column(insertable = false, updatable = false, name = "userId")
+	private int userId;
 	
 	@Column(name = "BIZNAME")
 	private String bizname;
 
-	@Column(name = "DESIGNATION")
-	private String designation;
-
-	@Column(name = "TYPEOFBIZ")
-	private String typeofbiz;
-
-	@Column(name = "ABTBIZ")
-	private String abtbiz;
+	@Column(name = "BIZTYPE")
+	private String biztype;
 
 	@Column(name = "BIZWEBSITE")
 	private String bizwebsite;
 
-	@Column(name = "BIZFULLADDRESS")
-	private String bizFullAddress;
+	@Column(name = "ABTBIZ")
+	private String abtbiz;
 
 	@Column(name = "PURPOSEOFSIGNUP")
 	private String purposeofsignup;
 
-	@Column(name = "STREET_NUMBER")
-	private String streetNumber;
-	@Column(name = "STREET_ADDRESS")
+	@Column(name = "DESIGNATION")
+	private String designation;
+	
+ 
+	@Column(name = "STREETADDRESS")
 	private String streetAddress;
+	
 	@Column(name = "CITY")
 	private String city;
+	
 	@Column(name = "STATE")
 	private String state;
+	
 	@Column(name = "COUNTRY")
 	private String country;
+	
 	@Column(name = "ZIPCODE")
 	private String zipcode;
 
-	@Column(name = "LATITUDE")
-	private String latitude;
-
-	@Column(name = "LONGITUDE")
-	private String longitude;
+	@Column(name = "FULLADDRESS")
+	private String fulladdress;
 
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "userid", nullable=false)
+	@JoinColumn(name = "userId", nullable=false)
 	@JsonIgnore
 	private UserEntity userdetails;
 
 	public Integer getId() {
-		return id;
+		return Id;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		Id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getBizname() {
@@ -88,28 +93,12 @@ public class UserBizEntity implements Serializable {
 		this.bizname = bizname;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public String getBiztype() {
+		return biztype;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-
-	public String getTypeofbiz() {
-		return typeofbiz;
-	}
-
-	public void setTypeofbiz(String typeofbiz) {
-		this.typeofbiz = typeofbiz;
-	}
-
-	public String getAbtbiz() {
-		return abtbiz;
-	}
-
-	public void setAbtbiz(String abtbiz) {
-		this.abtbiz = abtbiz;
+	public void setBiztype(String biztype) {
+		this.biztype = biztype;
 	}
 
 	public String getBizwebsite() {
@@ -120,20 +109,12 @@ public class UserBizEntity implements Serializable {
 		this.bizwebsite = bizwebsite;
 	}
 
-	public String getBizFullAddress() {
-		return bizFullAddress;
+	public String getAbtbiz() {
+		return abtbiz;
 	}
 
-	public void setBizFullAddress(String bizFullAddress) {
-		this.bizFullAddress = bizFullAddress;
-	}
-
-	public UserEntity getUserdetails() {
-		return userdetails;
-	}
-
-	public void setUserdetails(UserEntity userdetails) {
-		this.userdetails = userdetails;
+	public void setAbtbiz(String abtbiz) {
+		this.abtbiz = abtbiz;
 	}
 
 	public String getPurposeofsignup() {
@@ -144,20 +125,20 @@ public class UserBizEntity implements Serializable {
 		this.purposeofsignup = purposeofsignup;
 	}
 
-	public String getStreetNumber() {
-	    return streetNumber;
+	public String getDesignation() {
+		return designation;
 	}
 
-	public void setStreetNumber(String streetNumber) {
-	    this.streetNumber = streetNumber;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 	public String getStreetAddress() {
-	    return streetAddress;
+		return streetAddress;
 	}
 
 	public void setStreetAddress(String streetAddress) {
-	    this.streetAddress = streetAddress;
+		this.streetAddress = streetAddress;
 	}
 
 	public String getCity() {
@@ -192,29 +173,27 @@ public class UserBizEntity implements Serializable {
 		this.zipcode = zipcode;
 	}
 
-	public String getLatitude() {
-		return latitude;
+	public String getFulladdress() {
+		return fulladdress;
 	}
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+	public void setFulladdress(String fulladdress) {
+		this.fulladdress = fulladdress;
 	}
 
-	public String getLongitude() {
-		return longitude;
+	public UserEntity getUserdetails() {
+		return userdetails;
 	}
 
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setUserdetails(UserEntity userdetails) {
+		this.userdetails = userdetails;
 	}
 
-	public int getUserid() {
-		return userid;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+	 
 
 	
 }
