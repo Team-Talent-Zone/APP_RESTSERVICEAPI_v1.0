@@ -20,6 +20,5 @@ public interface UserService {
 
 	public UserEntity checkUsername(String username);
 
-	public ArrayList<UserEntity> getAllUsersNotNotificatedToTeam();
-
+ 
 }

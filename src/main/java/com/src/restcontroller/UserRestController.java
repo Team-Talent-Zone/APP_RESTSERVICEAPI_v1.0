@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.src.entity.UserEntity;
 
 @Controller
-public class UserRestController extends AbstractRestController {
+public class UserRestController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(UserRestController.class);
 
 	@RequestMapping(value = "/getUser/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> loadUserByUsername(@PathVariable("username") String username)
-			throws JSONException {
+	public ResponseEntity<UserEntity> loadUserByUsername(
+			@PathVariable("username") String username) throws JSONException {
 		UserEntity userEntity = userService.findByUsername(username);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable("userId") int userId) {
+	public ResponseEntity<UserEntity> getUserByUserId(
+			@PathVariable("userId") int userId) {
 		UserEntity userEntity = userService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
@@ -36,34 +37,39 @@ public class UserRestController extends AbstractRestController {
 	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<UserEntity>> manageUsers() {
 		ArrayList<UserEntity> listofAllUsers = userService.getAllUsers();
-		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
+		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers,
+				HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getUsersByRole/{role}", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<UserEntity>> getUsersByRole(@PathVariable("role") String role) {
-		ArrayList<UserEntity> listOfBusinessAdminUsers = userService.getUsersByRole(role);
-		return new ResponseEntity<ArrayList<UserEntity>>(listOfBusinessAdminUsers, HttpStatus.OK);
+	public ResponseEntity<ArrayList<UserEntity>> getUsersByRole(
+			@PathVariable("role") String role) {
+		ArrayList<UserEntity> listOfBusinessAdminUsers = userService
+				.getUsersByRole(role);
+		return new ResponseEntity<ArrayList<UserEntity>>(
+				listOfBusinessAdminUsers, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/saveorupdateuser", method = RequestMethod.POST)
-	public ResponseEntity<UserEntity> saveorupdateUserDetails(@RequestBody UserEntity userEntityObj) {
-		UserEntity userEntity = userService.saveorupdateUserDetails(userEntityObj);
+	public ResponseEntity<UserEntity> saveorupdateUserDetails(
+			@RequestBody UserEntity userEntityObj) {
+		UserEntity userEntity = userService
+				.saveorupdateUserDetails(userEntityObj);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST)
-	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
+	public ResponseEntity<UserEntity> saveUser(
+			@RequestBody UserEntity userEntityObject) {
 		UserEntity userEntity = userService.saveUser(userEntityObject);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET)
-	public ResponseEntity<UserEntity> checkUsername(@PathVariable("username") String username) {
-		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
+	public ResponseEntity<UserEntity> checkUsername(
+			@PathVariable("username") String username) {
+		return new ResponseEntity<UserEntity>(
+				userService.checkUsername(username), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getAllUsersNotNotificatedToTeam", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<UserEntity>> getAllUsersNotNotificatedToTeam() {
-		return new ResponseEntity<ArrayList<UserEntity>>(userService.getAllUsersNotNotificatedToTeam(), HttpStatus.OK);
-	}
 }
