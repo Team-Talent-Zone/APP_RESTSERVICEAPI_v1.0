@@ -26,12 +26,12 @@ public class UserRoleEntity implements Serializable {
 
 	@Column(insertable = false, updatable = false, name = "userId")
 	private int userId;
-	
-	@Column(name = "ROLENAME")
-	private String rolename;
- 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "userId" , nullable=false)
+
+	@Column(name = "ROLECODE")
+	private String rolecode;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
 	private UserEntity userdetails;
 
@@ -51,12 +51,12 @@ public class UserRoleEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getRolename() {
-		return rolename;
+	public String getRolecode() {
+		return rolecode;
 	}
 
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
+	public void setRolecode(String rolecode) {
+		this.rolecode = rolecode;
 	}
 
 	public UserEntity getUserdetails() {
@@ -71,7 +71,4 @@ public class UserRoleEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	 
-
-	
 }
