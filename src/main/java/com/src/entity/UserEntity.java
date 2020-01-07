@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/*
+ * This is UserEntity class 
+ */
+
 @Entity(name = "userdetails")
 @Table(name = "APP_USER_DETAILS")
 public class UserEntity implements Serializable {
@@ -57,8 +61,7 @@ public class UserEntity implements Serializable {
 	@Column(name = "UPDATEDON")
 	private String updatedon;
 
-	 
-	
+	 	
 	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserRoleEntity> userroles;
 
