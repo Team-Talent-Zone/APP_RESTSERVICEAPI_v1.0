@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.entity.ReferenceLookUpEntity;
+import com.src.entity.UserEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -29,7 +29,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupByKey method");
 		List<ReferenceLookUpEntity> referenceLookUpEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
- 		criteria.add(Restrictions.eq("key", key));
+		criteria.add(Restrictions.eq("key", key));
 		referenceLookUpEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = referenceLookUpEntity != null ? referenceLookUpEntity.size() : 0;
 		logger.debug(
@@ -56,6 +56,21 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_ERRORMSG));
+	}
+
+	@Transactional
+	public ReferenceLookUpEntity getReferenceLookupByShortKey(String shortkey) {
+		ReferenceLookUpEntity referenceLookUpEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
+		criteria.add(Restrictions.eq("shortkey", shortkey));
+		referenceLookUpEntity = (ReferenceLookUpEntity) criteria.uniqueResult();
+		if (referenceLookUpEntity != null) {
+			return referenceLookUpEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
+						+ shortkey);
+
 	}
 
 }

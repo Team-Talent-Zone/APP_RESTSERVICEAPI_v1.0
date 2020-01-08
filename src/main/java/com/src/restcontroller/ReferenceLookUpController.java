@@ -32,4 +32,11 @@ public class ReferenceLookUpController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<ReferenceLookUpEntity>>(referenceLookUpEntities, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getReferenceLookupByShortKey/{shortkey}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ReferenceLookUpEntity> getReferenceLookupByShortKey(@PathVariable("shortkey") String shortkey)
+			throws JSONException {
+		ReferenceLookUpEntity referenceLookUpEntity = referenceLookUpService.getReferenceLookupByShortKey(shortkey);
+		return new ResponseEntity<ReferenceLookUpEntity>(referenceLookUpEntity, HttpStatus.OK);
+	}
+
 }

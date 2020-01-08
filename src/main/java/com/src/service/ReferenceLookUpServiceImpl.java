@@ -15,9 +15,12 @@ public class ReferenceLookUpServiceImpl extends AbstractServiceManager implement
 		return referenceLookUpDAO.getReferenceLookupByKey(key);
 	}
 
-	@Override
 	public ArrayList<ReferenceLookUpEntity> getAllReferenceLookupData() {
 		return referenceLookUpDAO.getAllReferenceLookupData();
+	}
+
+	public ReferenceLookUpEntity getReferenceLookupByShortKey(String shortkey) {
+		return referenceLookUpDAO.getReferenceLookupByShortKey(shortkey);
 	}
 
 }

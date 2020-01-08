@@ -10,5 +10,5 @@ public interface ReferenceLookUpDAO {
 
 	public ArrayList<ReferenceLookUpEntity> getAllReferenceLookupData();
 
-
+	public ReferenceLookUpEntity getReferenceLookupByShortKey(String shortkey);
 }

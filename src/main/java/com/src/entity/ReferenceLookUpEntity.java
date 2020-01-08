@@ -28,6 +28,9 @@ public class ReferenceLookUpEntity implements Serializable {
 	@Column(name = "LABEL")
 	private String label;
 
+	@Column(name = "SHORTKEY")
+	private String shortkey;
+
 	public Integer getId() {
 		return Id;
 	}
@@ -62,6 +65,14 @@ public class ReferenceLookUpEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getShortkey() {
+		return shortkey;
+	}
+
+	public void setShortkey(String shortkey) {
+		this.shortkey = shortkey;
 	}
 
 }
