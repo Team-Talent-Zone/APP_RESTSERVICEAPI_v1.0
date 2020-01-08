@@ -14,6 +14,8 @@ public class AppConfig {
 	public static final String REFERNCELOOKUP_KEY_ERRORMSG = "referencelookup_key_errorMsg";
 	public static final String REFERNCELOOKUP_ERRORMSG = "referencelookup_errorMsg";
 
+	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
+
 	private AppConfig() {
 	}
 
