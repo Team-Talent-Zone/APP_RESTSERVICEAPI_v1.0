@@ -10,7 +10,10 @@ public class AppConfig {
 	public static final String GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG = "getAllUsersByRole_noadminusersfound_errorMsg";
 	public static final String GETALLUSERSNOTNOTIFICATEDTOTEAM_NOUSERSFOUND_ERRORMSG = "getAllUsersNotNotificatedToTeam_nousersfound_errorMsg";
 	public static final String SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG = "saveorupdateUserDetails_unabletoupdate_errorMsg";
-	 
+
+	public static final String REFERNCELOOKUP_KEY_ERRORMSG = "referencelookup_key_errorMsg";
+	public static final String REFERNCELOOKUP_ERRORMSG = "referencelookup_errorMsg";
+
 	private AppConfig() {
 	}
 

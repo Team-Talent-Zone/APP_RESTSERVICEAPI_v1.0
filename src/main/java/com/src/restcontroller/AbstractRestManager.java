@@ -6,7 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
- 
+
+import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
 
 @Controller
@@ -17,6 +18,9 @@ class AbstractRestManager {
 
 	@Autowired
 	protected UserService userService;
+	
+	@Autowired
+	protected ReferenceLookUpService referenceLookUpService;
  
 
 }

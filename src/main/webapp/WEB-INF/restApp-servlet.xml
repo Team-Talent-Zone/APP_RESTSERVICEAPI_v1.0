@@ -72,6 +72,11 @@
 	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
 	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
 
+	<bean id="referenceLookUpDAO"
+		class="com.src.dao.ReferenceLookUpDAOImpl"></bean>
+	<bean id="referenceLookUpService"
+		class="com.src.service.ReferenceLookUpServiceImpl"></bean>
+
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>
 	<beans:bean id="jsonMessageConverter"
