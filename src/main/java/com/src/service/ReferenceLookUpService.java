@@ -10,6 +10,6 @@ public interface ReferenceLookUpService {
 
 	public ArrayList<ReferenceLookUpEntity> getAllReferenceLookupData();
 
-	public ReferenceLookUpEntity getReferenceLookupByShortKey(String shortkey);
+	public String getReferenceLookupByShortKey(String shortkey);
 
 }

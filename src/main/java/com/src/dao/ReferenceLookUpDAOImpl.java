@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.entity.ReferenceLookUpEntity;
-import com.src.entity.UserEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -59,18 +58,18 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 	}
 
 	@Transactional
-	public ReferenceLookUpEntity getReferenceLookupByShortKey(String shortkey) {
+	public String getReferenceLookupByShortKey(String shortkey) {
 		ReferenceLookUpEntity referenceLookUpEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
 		criteria.add(Restrictions.eq("shortkey", shortkey));
 		referenceLookUpEntity = (ReferenceLookUpEntity) criteria.uniqueResult();
 		if (referenceLookUpEntity != null) {
-			return referenceLookUpEntity;
+			return referenceLookUpEntity.getCode().toString();
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
 						+ shortkey);
-
+		
 	}
 
 }
