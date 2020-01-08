@@ -4,7 +4,7 @@
 	<groupId>RestAPI</groupId>
 	<artifactId>RestAPI</artifactId>
 	<packaging>war</packaging>
-	<version>2.0</version>
+	<version>2.0</version> 
 	<name>RestAPI</name>
 
 	<properties>
