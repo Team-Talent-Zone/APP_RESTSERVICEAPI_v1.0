@@ -29,7 +29,7 @@ public class CustomBasicAuthenticationEntryPoint extends
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		setRealmName("Technelinkrest");
+		setRealmName("RESTAPI");
 		super.afterPropertiesSet();
 	}
 }
