@@ -1,27 +1,28 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "referencelookup")
-@Table(name = "APP_REFERENCELOOKUP")
-public class ReferenceLookUpEntity implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity(name = "referencelookupmappingsubcategories")
+@Table(name = "APP_REFERENCELOOKUP_MAPPING_SUBCATEGORIES")
+public class ReferenceLookUpMappingSubCategoryEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "REFId")
+	@Column(name = "Id")
 	@GeneratedValue
-	private Integer refId;
+	private Integer Id;
 
 	@Column(name = "CODE")
 	private String code;
@@ -34,25 +35,41 @@ public class ReferenceLookUpEntity implements Serializable {
 
 	@Column(name = "SHORTKEY")
 	private String shortkey;
-	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "referencelookup")
-	private Set<ReferenceLookUpMappingEntity> referencelookupmapping;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "mapId", nullable = false)
+	@JsonIgnore
+	private ReferenceLookUpMappingEntity referencelookupmapping;
 
-	public Set<ReferenceLookUpMappingEntity> getReferencelookupmapping() {
+	@Column(insertable = false, updatable = false, name = "mapId")
+	private int mapId;
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public ReferenceLookUpMappingEntity getReferencelookupmapping() {
 		return referencelookupmapping;
 	}
 
-	public void setReferencelookupmapping(Set<ReferenceLookUpMappingEntity> referencelookupmapping) {
+	public void setReferencelookupmapping(ReferenceLookUpMappingEntity referencelookupmapping) {
 		this.referencelookupmapping = referencelookupmapping;
 	}
 
-	public Integer getRefId() {
-		return refId;
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
 	}
 
-	public void setRefId(Integer refId) {
-		this.refId = refId;
+	public Integer getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(Integer mapId) {
+		this.mapId = mapId;
 	}
 
 	public String getCode() {

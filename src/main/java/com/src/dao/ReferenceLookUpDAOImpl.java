@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.entity.ReferenceLookUpEntity;
+import com.src.entity.ReferenceLookUpMappingEntity;
+import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -69,7 +72,49 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
 						+ shortkey);
-		
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<ReferenceLookUpMappingEntity> getReferenceLookupMappingByRefId(int refId) {
+
+		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingByRefId method ");
+		List<ReferenceLookUpMappingEntity> lookUpMappingEntities = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
+		criteria.createAlias("referencelookupmapping", "rlookupmapping", JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq("rlookupmapping.refId", refId));
+		lookUpMappingEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = lookUpMappingEntities != null ? lookUpMappingEntities.size() : 0;
+		logger.debug("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingByRefId method : Get All Lookup Mapping :"
+				+ size);
+		if (size > 0) {
+			return (ArrayList<ReferenceLookUpMappingEntity>) lookUpMappingEntities;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<ReferenceLookUpMappingSubCategoryEntity> getReferenceLookupMappingSubCategoryByMapId(int mapId) {
+
+		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingSubCategoryByMapId method ");
+		List<ReferenceLookUpMappingSubCategoryEntity> lookUpMappingSubCategoryEntities = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(ReferenceLookUpMappingEntity.class);
+		criteria.createAlias("referencelookupmappingsubcategories", "rlookupmappingsubcat", JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq("rlookupmappingsubcat.mapId", mapId));
+		lookUpMappingSubCategoryEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = lookUpMappingSubCategoryEntities != null ? lookUpMappingSubCategoryEntities.size() : 0;
+		logger.debug(
+				"Inside REFERENCE LOOKUP DAO getReferenceLookupMappingSubCategoryByMapId method : Get All Lookup Mapping Category :"
+						+ size);
+		if (size > 0) {
+			return (ArrayList<ReferenceLookUpMappingSubCategoryEntity>) lookUpMappingSubCategoryEntities;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
+
 	}
 
 }
