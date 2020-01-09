@@ -77,6 +77,11 @@
 	<bean id="referenceLookUpService"
 		class="com.src.service.ReferenceLookUpServiceImpl"></bean>
 
+	<bean id="lookUpTemplateDAO"
+		class="com.src.dao.LookUpTemplateDAOImpl"></bean>
+	<bean id="lookUpTemplateService"
+		class="com.src.service.LookUpTemplateServiceImpl"></bean>
+
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>
 	<beans:bean id="jsonMessageConverter"
