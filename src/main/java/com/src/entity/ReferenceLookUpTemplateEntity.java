@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "lookuptemplates")
-@Table(name = "APP_LOOKUP_TEMPLATES")
-public class LookUpTemplateEntity implements Serializable {
+@Table(name = "APP_REFERENCELOOKUP_TEMPLATES")
+public class ReferenceLookUpTemplateEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,6 +22,17 @@ public class LookUpTemplateEntity implements Serializable {
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+
+	@Column(name = "SHORTKEY")
+	private String shortkey;
+
+	public String getShortkey() {
+		return shortkey;
+	}
+
+	public void setShortkey(String shortkey) {
+		this.shortkey = shortkey;
+	}
 
 	public String getName() {
 		return name;

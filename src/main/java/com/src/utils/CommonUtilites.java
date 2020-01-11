@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 
-public class AppUtilites {
+public class CommonUtilites {
 
 	public static String getCurrentDate() {
 		DateFormat dateFormat = null;
