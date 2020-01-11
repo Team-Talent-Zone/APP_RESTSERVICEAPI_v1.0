@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.CustomMsgConfig;
+import com.src.constant.AppConfig;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserRoleEntity;
@@ -46,7 +46,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.NO_CONTENT,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
+						.getProperty(AppConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
 						+ " for user name :" + username);
 	}
 
@@ -64,7 +64,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.NO_CONTENT,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG)
+						.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG)
 						+ username);
 	}
 
@@ -93,7 +93,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.BAD_REQUEST,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
+						.getProperty(AppConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	@Transactional
@@ -110,7 +110,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.NO_CONTENT,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+						.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
 
@@ -130,7 +130,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.NO_CONTENT,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+						.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -153,7 +153,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(
 				HttpStatus.NO_CONTENT,
 				applicationConfigProperties
-						.getProperty(CustomMsgConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
+						.getProperty(AppConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
 	}
 
 	@Transactional
@@ -179,7 +179,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			throw new RestCustomException(
 					HttpStatus.BAD_REQUEST,
 					applicationConfigProperties
-							.getProperty(CustomMsgConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
+							.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 

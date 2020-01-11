@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.CustomMsgConfig;
+import com.src.constant.AppConfig;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.exception.RestCustomException;
 
@@ -28,7 +28,7 @@ public class LookUpTemplateDAOImpl extends AbstractDAOManager implements LookUpT
 			return lookUpTemplateEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
+				applicationConfigProperties.getProperty(AppConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
 						+ shortkey);
 
 	}
