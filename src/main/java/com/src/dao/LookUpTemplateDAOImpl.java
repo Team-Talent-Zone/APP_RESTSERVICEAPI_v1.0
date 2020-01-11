@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
-import com.src.entity.LookUpTemplateEntity;
+import com.src.constant.CustomMsgConfig;
+import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -19,16 +19,17 @@ public class LookUpTemplateDAOImpl extends AbstractDAOManager implements LookUpT
 	final Logger logger = LoggerFactory.getLogger(LookUpTemplateDAOImpl.class);
 
 	@Transactional
-	public LookUpTemplateEntity getLookupTemplateByName(String name) {
-		LookUpTemplateEntity lookUpTemplateEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(LookUpTemplateEntity.class);
-		criteria.add(Restrictions.eq("name", name));
-		lookUpTemplateEntity = (LookUpTemplateEntity) criteria.uniqueResult();
+	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
+		ReferenceLookUpTemplateEntity lookUpTemplateEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpTemplateEntity.class);
+		criteria.add(Restrictions.eq("shortkey", shortkey));
+		lookUpTemplateEntity = (ReferenceLookUpTemplateEntity) criteria.uniqueResult();
 		if (lookUpTemplateEntity != null) {
 			return lookUpTemplateEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :" + name);
+				applicationConfigProperties.getProperty(CustomMsgConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
+						+ shortkey);
 
 	}
 

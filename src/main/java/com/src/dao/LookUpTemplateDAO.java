@@ -1,9 +1,9 @@
 package com.src.dao;
 
-import com.src.entity.LookUpTemplateEntity;
+import com.src.entity.ReferenceLookUpTemplateEntity;
 
 public interface LookUpTemplateDAO {
 
-	public LookUpTemplateEntity getLookupTemplateByName(String key);
+	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey);
 
 }
