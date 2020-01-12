@@ -82,7 +82,8 @@
 	<bean id="lookUpTemplateService"
 		class="com.src.service.LookUpTemplateServiceImpl"></bean>
 
-	<bean id="utilService" class="com.src.service.UtilServiceImpl"></bean>
+	<bean id="utilService" class="com.src.service.UtilityServiceImpl"></bean>
+
 
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>

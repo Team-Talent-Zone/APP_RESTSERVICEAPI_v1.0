@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.src.service.LookUpTemplateService;
 import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
-import com.src.service.UtilService;
+import com.src.service.UtilityService;
 
 @Controller
 class AbstractRestManager {
@@ -28,6 +28,6 @@ class AbstractRestManager {
 	protected LookUpTemplateService lookUpTemplateService;
 
 	@Autowired
-	protected UtilService utilService;
+	protected UtilityService utilService;
 
 }

@@ -17,6 +17,7 @@ public class UtilConfig {
 	public static final String FOLDER_BG = "BG";
 	
 	public static final String FOLDER_WIDGETS = "WIDGETS";
+	
 
 }
 
