@@ -1,6 +1,6 @@
 package com.src.constant;
 
-public class UtilConfig {
+public class UtilityConfig {
 
 	public static final String HOST= "smtp-mail.outlook.com";
 	
