@@ -29,7 +29,7 @@ public class AppConfig {
 	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
 
 	/*
-	 * Define below are the Email Subject and Short Key Constants
+	 * Defined below are the Email Subject and Short Key Constants
 	 */
 	public final static String EMAIL_SUBJECT_SOMETHINGWENTWRONG = "Something Went Wrong. Urgent Attention Needed";
 
