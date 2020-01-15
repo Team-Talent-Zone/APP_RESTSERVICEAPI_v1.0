@@ -28,6 +28,14 @@ public class AppConfig {
 
 	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
 
+	public static final String SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentDetails_unabletosave_errorMsg";
+
+	public static final String SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentFUTransDetails_unabletosave_errorMsg";
+
+	public static final String SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentCBATransDetails_unabletosave_errorMsg";
+
+	public static final String SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentRefundTransDetails_unabletosave_errorMsg";
+
 	/*
 	 * Defined below are the Email Subject and Short Key Constants
 	 */
@@ -38,9 +46,8 @@ public class AppConfig {
 	public final static String EMAIL_SUBJECT_VERIFYEMAILADDRESS = "Verify your email";
 
 	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen15";
-	
-	public final static String EMAIL_SENT_FROMUSER = "team.spprt2019@gmail.com";
 
+	public final static String EMAIL_SENT_FROMUSER = "team.spprt2019@gmail.com";
 
 	private AppConfig() {
 	}

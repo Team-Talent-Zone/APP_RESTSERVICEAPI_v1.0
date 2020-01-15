@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.src.service.LookUpTemplateService;
+import com.src.service.PaymentService;
 import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
 import com.src.service.UtilityService;
@@ -29,5 +30,8 @@ class AbstractRestManager {
 
 	@Autowired
 	protected UtilityService utilService;
+	
+	@Autowired
+	protected PaymentService paymentService;
 
 }

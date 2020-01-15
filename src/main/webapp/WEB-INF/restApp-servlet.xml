@@ -84,6 +84,10 @@
 
 	<bean id="utilService" class="com.src.service.UtilityServiceImpl"></bean>
 
+	<bean id="paymentService"
+		class="com.src.service.PaymentServiceImpl"></bean>
+	<bean id="paymentDAO" class="com.src.dao.PaymentDAOImpl"></bean>
+
 
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>

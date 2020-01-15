@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.src.dao.LookUpTemplateDAO;
+import com.src.dao.PaymentDAO;
 import com.src.dao.ReferenceLookUpDAO;
 import com.src.dao.UserRestDAO;
 
@@ -31,5 +32,8 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected LookUpTemplateDAO lookUpTemplateDAO;
+	
+	@Autowired
+	protected PaymentDAO paymentDAO;
 
 }

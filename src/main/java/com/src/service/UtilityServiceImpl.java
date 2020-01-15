@@ -13,6 +13,7 @@ import com.src.helper.SendEmailHelper;
 
 @Service("utilService")
 public class UtilityServiceImpl implements UtilityService {
+
 	final static Logger logger = LoggerFactory.getLogger(UtilityServiceImpl.class);
 
 	public UtilEntity sendEmail(UtilEntity utilEntity) throws JSONException {
@@ -37,6 +38,5 @@ public class UtilityServiceImpl implements UtilityService {
 		S3AWSHelper s3awsHelper = new S3AWSHelper();
 		return s3awsHelper.uploadWidgetPicsInS3(inputFile, userid);
 	}
-
 
 }
