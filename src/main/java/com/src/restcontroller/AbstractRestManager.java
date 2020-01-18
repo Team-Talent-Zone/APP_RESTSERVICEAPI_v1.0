@@ -13,6 +13,11 @@ import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
 import com.src.service.UtilityService;
 
+/**
+ * The <code> AbstractRestManager </code>interface used to
+ * provides functionality details.
+ *
+ */
 @Controller
 class AbstractRestManager {
 
@@ -30,7 +35,7 @@ class AbstractRestManager {
 
 	@Autowired
 	protected UtilityService utilService;
-	
+
 	@Autowired
 	protected PaymentService paymentService;
 

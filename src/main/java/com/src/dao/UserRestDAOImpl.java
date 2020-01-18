@@ -15,62 +15,73 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
+import com.src.constant.UserConstant;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserRoleEntity;
 import com.src.exception.RestCustomException;
 
+/**
+ * The <code> UserRestDAOImpl </code> class handles data access operation for
+ * <code>UserDetails</code>.
+ * 
+ * @author azmiri.
+ * @version 1.0
+ * 
+ */
 @Repository
 @Transactional(rollbackFor = { Exception.class })
 public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
+	final Logger LOGGER = LoggerFactory.getLogger(UserRestDAOImpl.class);
 
-	final Logger logger = LoggerFactory.getLogger(UserRestDAOImpl.class);
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Get the User Details by UserName.
 	 * 
-	 * @see com.src.dao.UserRestDAO#findByUsername(java.lang.String)
+	 * @param username
 	 */
-
 	@Transactional
 	public UserEntity findByUsername(String username) {
-		logger.info("Inside USER DAO findByUsername method");
+		LOGGER.info(UserConstant.USER_DAO_FINDBYUSERNAME);
 		UserEntity userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserEntity.class);
-		criteria.add(Restrictions.eq("username", username));
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.NO_CONTENT,
-				applicationConfigProperties
-						.getProperty(AppConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
 						+ " for user name :" + username);
 	}
 
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 */
 	@Transactional
 	public UserEntity checkUsername(String username) {
-		logger.info("Inside User DAO CheckUsername method ");
+		LOGGER.info(UserConstant.USER_DAO_CHECKUSERNAME);
 		UserEntity userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserEntity.class);
-		criteria.add(Restrictions.eq("username", username));
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.NO_CONTENT,
-				applicationConfigProperties
-						.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG)
-						+ username);
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + username);
 	}
 
+	/**
+	 * Save the User Details.
+	 * 
+	 * @param userEntityObject
+	 * @return
+	 */
 	@Transactional
 	public UserEntity saveUser(UserEntity userEntity) {
-		logger.info("Inside USER DAO saveUser method");
+		LOGGER.info(UserConstant.USER_DAO_SAVEUSER);
 		Set<UserRoleEntity> userRoleEntities = new HashSet<UserRoleEntity>();
 		for (UserRoleEntity userRoleEntity : userEntity.getUserroles()) {
 			userRoleEntities.add(userRoleEntity);
@@ -83,83 +94,86 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		}
 		userEntity.setUserroles(userRoleEntities);
 		userEntity.setUserbizdetails(userBizEntities);
-		int savedId = (Integer) sessionFactory.getCurrentSession().save(
-				userEntity);
-		logger.debug("At User DAO saveUser method :  Saved User Details Succesfully : New User Id :"
-				+ savedId);
+		int savedId = (Integer) sessionFactory.getCurrentSession().save(userEntity);
+		LOGGER.debug(UserConstant.USER_DAO_SUCCESSFULL_SAVEUSER + savedId);
 		if (savedId > 0) {
 			return userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.BAD_REQUEST,
-				applicationConfigProperties
-						.getProperty(AppConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * Get the User Details by UserId.
+	 * 
+	 * @param userId
+	 */
 	@Transactional
 	public UserEntity getUserByUserId(int userId) {
-		logger.info("Inside USER DAO getUserByUserId method");
+		LOGGER.info(UserConstant.USER_DAO_GETUSERBYUSERID);
 		UserEntity userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserEntity.class);
-		criteria.add(Restrictions.eq("userid", userId));
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.NO_CONTENT,
-				applicationConfigProperties
-						.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
 
+	/**
+	 * Get All User Details from the List.
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<UserEntity> getAllUsers() {
-		logger.info("Inside USER DAO getAllUsers method");
-		List<UserEntity> userEntity = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserEntity.class)
+		LOGGER.info(UserConstant.USER_DAO_GETALLUSERS);
+		List<UserEntity> userEntity = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
-		logger.debug("Inside USER DAO getAllUsers method : Get All Users :"
-				+ size);
+		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLUSERS + size);
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.NO_CONTENT,
-				applicationConfigProperties
-						.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
+	/**
+	 * Get User Details by the Role.
+	 * 
+	 * @param role
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<UserEntity> getUsersByRole(String role) {
-		logger.info("Inside DAO getUsersByRole method ");
+		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYROLE);
 		List<UserEntity> userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserEntity.class);
-		criteria.createAlias("userroles", "urole", JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq("urole.rolecode", role));
-		userEntity = criteria.setResultTransformer(
-				Criteria.DISTINCT_ROOT_ENTITY).list();
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.createAlias(UserConstant.USERROLES, UserConstant.UROLE, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(UserConstant.UROLE_ROLECODE, role));
+		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
-		logger.debug("Inside USER DAO getUsersByRole method : Get All Users By Role :"
-				+ size);
+		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETUSERSBYROLE + size);
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}
-		throw new RestCustomException(
-				HttpStatus.NO_CONTENT,
-				applicationConfigProperties
-						.getProperty(AppConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
 	}
 
+	/**
+	 * Update or Edit on user Details Screen.
+	 * 
+	 * @param userEntityObj
+	 */
 	@Transactional
 	public void saveorupdateUserDetails(UserEntity userEntity) {
 		try {
-			logger.info("Inside USER DAO saveorupdateUserDetails method ");
+			LOGGER.info(UserConstant.USER_DAO_SAVEORUPDATEUSERDETAILS);
 			Set<UserRoleEntity> userRoleEntities = new HashSet<UserRoleEntity>();
 			for (UserRoleEntity userRoleEntity : userEntity.getUserroles()) {
 				userRoleEntities.add(userRoleEntity);
@@ -173,13 +187,10 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			userEntity.setUserroles(userRoleEntities);
 			userEntity.setUserbizdetails(userBizEntities);
 			sessionFactory.getCurrentSession().saveOrUpdate(userEntity);
-			logger.info("Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :"
-					+ userEntity.getUserId());
+			LOGGER.info(UserConstant.USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS + userEntity.getUserId());
 		} catch (RestCustomException e) {
-			throw new RestCustomException(
-					HttpStatus.BAD_REQUEST,
-					applicationConfigProperties
-							.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
+			throw new RestCustomException(HttpStatus.BAD_REQUEST,
+					applicationConfigProperties.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 

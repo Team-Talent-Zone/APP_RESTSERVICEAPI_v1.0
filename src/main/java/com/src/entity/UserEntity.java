@@ -12,29 +12,36 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * The <code> UserEntity </code> class defines a POJO that provides back-end
+ * functionality for the <code>UserDetails</code> pages.
+ * 
+ * @author azmiri.
+ * @version 1.0
+ * 
+ */
 @Entity(name = "userdetails")
 @Table(name = "APP_USER_DETAILS")
 public class UserEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 428235307895292984L;
 
 	@Id
-	@Column(name = "userId")
+	@Column(name = "USERID")
 	@GeneratedValue
 	private Integer userId;
 
 	@Column(name = "USERNAME")
 	private String username;
-	
+
 	@Column(name = "PASSWORD")
 	private String password;
-	
+
 	@Column(name = "ISACTIVE")
 	private boolean isactive;
 
 	@Column(name = "FIRSTNAME")
 	private String firstname;
-	
+
 	@Column(name = "LASTNAME")
 	private String lastname;
 
@@ -46,10 +53,9 @@ public class UserEntity implements Serializable {
 
 	@Column(name = "CREATEDON")
 	private String createdon;
-	
+
 	@Column(name = "CREATEDBY")
 	private String createdby;
-
 
 	@Column(name = "UPDATEDBY")
 	private String updateby;
@@ -57,11 +63,13 @@ public class UserEntity implements Serializable {
 	@Column(name = "UPDATEDON")
 	private String updatedon;
 
-	 	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "userdetails")
+	@Column(name = "AVTARURL")
+	private String avtarurl;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserRoleEntity> userroles;
 
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "userdetails")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserBizEntity> userbizdetails;
 
 	public Integer getUserId() {
@@ -180,8 +188,11 @@ public class UserEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	 
-	
-	
-	
+	public String getAvtarurl() {
+		return avtarurl;
+	}
+
+	public void setAvtarurl(String avtarurl) {
+		this.avtarurl = avtarurl;
+	}
 }
