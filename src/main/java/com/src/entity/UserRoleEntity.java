@@ -32,11 +32,11 @@ public class UserRoleEntity implements Serializable {
 	@GeneratedValue
 	private Integer roleId;
 
-	@Column(insertable = false, updatable = false, name = "userId")
-	private int userId;
-
 	@Column(name = "ROLECODE")
 	private String rolecode;
+
+	@Column(insertable = false, updatable = false, name = "userId")
+	private int userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)

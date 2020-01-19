@@ -9,10 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.src.dao.LookUpTemplateDAO;
+import com.src.dao.NewServiceDAO;
 import com.src.dao.PaymentDAO;
 import com.src.dao.ReferenceLookUpDAO;
 import com.src.dao.UserRestDAO;
 
+/**
+ * The <code> AbstractServiceManager </code>interface used to provides
+ * functionality details.
+ *
+ */
 public class AbstractServiceManager {
 
 	@Resource(name = "applicationConfigProperties")
@@ -26,14 +32,17 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected PasswordEncoder encoder;
-	
+
 	@Autowired
 	protected ReferenceLookUpDAO referenceLookUpDAO;
 
 	@Autowired
 	protected LookUpTemplateDAO lookUpTemplateDAO;
-	
+
 	@Autowired
 	protected PaymentDAO paymentDAO;
+
+	@Autowired
+	protected NewServiceDAO newServiceRestDAO;
 
 }
