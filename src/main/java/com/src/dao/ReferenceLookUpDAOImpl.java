@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		List<ReferenceLookUpEntity> referenceLookUpEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
 		criteria.add(Restrictions.eq("key", key));
+		criteria.addOrder(Order.asc("referencelookupmapping.label"));
 		referenceLookUpEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = referenceLookUpEntity != null ? referenceLookUpEntity.size() : 0;
 		logger.debug(

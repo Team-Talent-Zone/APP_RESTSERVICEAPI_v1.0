@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,6 @@ import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
 public class ReferenceLookUpController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(ReferenceLookUpController.class);
 
-	@CrossOrigin
 	@RequestMapping(value = "/getReferenceLookupByKey/{key}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<ReferenceLookUpEntity>> getReferenceLookupByKey(@PathVariable("key") String key) {
 		ArrayList<ReferenceLookUpEntity> referenceLookUpEntities = referenceLookUpService.getReferenceLookupByKey(key);
