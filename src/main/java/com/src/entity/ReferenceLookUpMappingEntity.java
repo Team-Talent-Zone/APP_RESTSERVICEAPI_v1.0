@@ -1,7 +1,7 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,16 +48,16 @@ public class ReferenceLookUpMappingEntity implements Serializable {
 	private int refId;
 
 	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "referencelookupmapping")
-	private Set<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories;
+	private ArrayList<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories;
 
 	
-	public Set<ReferenceLookUpMappingSubCategoryEntity> getReferencelookupmappingsubcategories() {
+	public ArrayList<ReferenceLookUpMappingSubCategoryEntity> getReferencelookupmappingsubcategories() {
 		return referencelookupmappingsubcategories;
 	}
 
 
 	public void setReferencelookupmappingsubcategories(
-			Set<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories) {
+			ArrayList<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories) {
 		this.referencelookupmappingsubcategories = referencelookupmappingsubcategories;
 	}
 
