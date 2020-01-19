@@ -31,7 +31,7 @@ public class NewServiceHistoryEntity implements Serializable {
 	private Integer id;
 
 	@Column(insertable = true, updatable = true, name = "USERID")
-	private Integer userId;
+	private int userId;
 
 	@Column(name = "DECISIONBY")
 	private String decisionBy;
@@ -51,11 +51,11 @@ public class NewServiceHistoryEntity implements Serializable {
 	@Column(name = "MANAGERID")
 	private Integer managerId;
 
-	@Column(insertable = false, updatable = false, name = "OURSERVICEID")
-	private Integer ourServiceId;
+	@Column(insertable = false, updatable = false, name = "ourserviceId")
+	private int ourserviceId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ourServiceId", nullable = false)
+	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
 	private NewServiceEntity newService;
 
@@ -67,12 +67,12 @@ public class NewServiceHistoryEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getOurServiceId() {
-		return ourServiceId;
+	public Integer getOurserviceId() {
+		return ourserviceId;
 	}
 
-	public void setOurServiceId(Integer ourServiceId) {
-		this.ourServiceId = ourServiceId;
+	public void setOurserviceId(Integer ourserviceId) {
+		this.ourserviceId = ourserviceId;
 	}
 
 	public Integer getUserId() {

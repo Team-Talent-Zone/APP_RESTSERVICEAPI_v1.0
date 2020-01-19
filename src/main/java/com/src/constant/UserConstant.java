@@ -25,12 +25,11 @@ public class UserConstant {
 
 	// Constants
 	public static final String USERNAME = "username";
-	public static final String USERID = "userid";
+	public static final String USERID = "userId";
 	public static final String USERROLES = "userroles";
 	public static final String UROLE = "urole";
 	public static final String UROLE_ROLECODE = "urole.rolecode";
 	public static final String USER_MANAGER = "userManager";
-	public static final String USERID1 = "userId";
 	public static final String ROLE = "role";
 	
 	//Table Mappings

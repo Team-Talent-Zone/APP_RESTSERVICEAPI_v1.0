@@ -27,7 +27,7 @@ public class NewServiceEntity implements Serializable {
 	@Id
 	@Column(name = "OURSERVICEID")
 	@GeneratedValue
-	private Integer ourServiceId;
+	private Integer ourserviceId;
 
 	@Column(name = "NAME")
 	private String name;
@@ -71,18 +71,18 @@ public class NewServiceEntity implements Serializable {
 	@Column(name = "AMOUNT")
 	private Float amount;
 
-	@Column(insertable = true, updatable = true, name = "USERID")
+	@Column(insertable = true, updatable = true, name = "userId")
 	private Integer userId;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
 	private Set<NewServiceHistoryEntity> serviceHistory;
 
-	public Integer getOurServiceId() {
-		return ourServiceId;
+	public Integer getOurserviceId() {
+		return ourserviceId;
 	}
 
-	public void setOurServiceId(Integer ourServiceId) {
-		this.ourServiceId = ourServiceId;
+	public void setOurserviceId(Integer ourserviceId) {
+		this.ourserviceId = ourserviceId;
 	}
 
 	public String getName() {

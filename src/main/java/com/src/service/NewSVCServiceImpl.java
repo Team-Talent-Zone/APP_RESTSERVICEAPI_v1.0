@@ -33,6 +33,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 			inputHisEnty.setDecisionBy(CommonUtilites.getCurrentDateInNewFormat());
 			inputHisEnty.setLocked(Boolean.FALSE);
 			newServiceHistoryEntity.add(inputHisEnty);
+			inputHisEnty.setNewService(newServiceEntity);
 		}
 		newServiceEntity.setServiceHistory(newServiceHistoryEntity);
 		return newServiceRestDAO.saveNewService(newServiceEntity);

@@ -45,7 +45,7 @@ public class UserRestController extends AbstractRestManager {
 	 * @param userId
 	 */
 	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID1) int userId) {
+	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID) int userId) {
 		UserEntity userEntity = userService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
@@ -101,7 +101,7 @@ public class UserRestController extends AbstractRestManager {
 	 * @param username
 	 */
 	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET,
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+			 produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
 		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
 	}
