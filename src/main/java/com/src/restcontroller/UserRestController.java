@@ -1,6 +1,7 @@
 package com.src.restcontroller;
 
 import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ public class UserRestController extends AbstractRestManager {
 	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/getUser/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> loadUserByUsername(@PathVariable(UserConstant.USERNAME) String username)
+	public ResponseEntity<UserEntity> loginUserByUsername(@PathVariable(UserConstant.USERNAME) String username)
 			throws JSONException {
 		UserEntity userEntity = userService.findByUsername(username);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -83,13 +84,12 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Save the User Details.
+	 * Save the CBA (client business administration and freelance ) User Details.
 	 * 
 	 * @param userEntityObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
 		UserEntity userEntity = userService.saveUser(userEntityObject);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -100,8 +100,7 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param username
 	 */
-	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET,
-			 produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
 		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
 	}

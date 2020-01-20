@@ -42,5 +42,5 @@ class AbstractRestManager {
 
 	@Autowired
 	protected NewSVCService newServiceSvc;
-
+	
 }

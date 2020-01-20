@@ -82,18 +82,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	@Transactional
 	public UserEntity saveUser(UserEntity userEntity) {
 		LOGGER.info(UserConstant.USER_DAO_SAVEUSER);
-		Set<UserRoleEntity> userRoleEntities = new HashSet<UserRoleEntity>();
-		for (UserRoleEntity userRoleEntity : userEntity.getUserroles()) {
-			userRoleEntities.add(userRoleEntity);
-			userRoleEntity.setUserdetails(userEntity);
-		}
-		Set<UserBizEntity> userBizEntities = new HashSet<UserBizEntity>();
-		for (UserBizEntity userBizEntity : userEntity.getUserbizdetails()) {
-			userBizEntities.add(userBizEntity);
-			userBizEntity.setUserdetails(userEntity);
-		}
-		userEntity.setUserroles(userRoleEntities);
-		userEntity.setUserbizdetails(userBizEntities);
 		int savedId = (Integer) sessionFactory.getCurrentSession().save(userEntity);
 		LOGGER.debug(UserConstant.USER_DAO_SUCCESSFULL_SAVEUSER + savedId);
 		if (savedId > 0) {

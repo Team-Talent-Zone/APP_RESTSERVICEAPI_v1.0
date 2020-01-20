@@ -44,5 +44,5 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected NewServiceDAO newServiceRestDAO;
-
+	
 }

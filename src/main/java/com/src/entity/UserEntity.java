@@ -71,6 +71,12 @@ public class UserEntity implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<UserBizEntity> userbizdetails;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private Set<FreelanceEntity> freeLanceDetails;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private Set<FreelancehistoryEntity> freelancehistoryentity;
 
 	public Integer getUserId() {
 		return userId;
@@ -194,5 +200,21 @@ public class UserEntity implements Serializable {
 
 	public void setAvtarurl(String avtarurl) {
 		this.avtarurl = avtarurl;
+	}
+
+	public Set<FreelanceEntity> getFreeLanceDetails() {
+		return freeLanceDetails;
+	}
+
+	public void setFreeLanceDetails(Set<FreelanceEntity> freeLanceDetails) {
+		this.freeLanceDetails = freeLanceDetails;
+	}
+
+	public Set<FreelancehistoryEntity> getFreelancehistoryentity() {
+		return freelancehistoryentity;
+	}
+
+	public void setFreelancehistoryentity(Set<FreelancehistoryEntity> freelancehistoryentity) {
+		this.freelancehistoryentity = freelancehistoryentity;
 	}
 }
