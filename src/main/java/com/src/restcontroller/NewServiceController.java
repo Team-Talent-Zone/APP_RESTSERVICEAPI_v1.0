@@ -24,11 +24,26 @@ public class NewServiceController extends AbstractRestManager {
 	 * 
 	 * @param newServiceEntityObject
 	 */
-	@RequestMapping(value = "/saveNewService/", method = RequestMethod.POST, 
+	@RequestMapping(value = "/saveNewService/", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NewServiceEntity> saveNewService(@RequestBody NewServiceEntity newServiceEntityObject) {
-	
+
 		NewServiceEntity newServiceEntity = newServiceSvc.saveNewService(newServiceEntityObject);
 		return new ResponseEntity<NewServiceEntity>(newServiceEntity, HttpStatus.OK);
 	}
+
+	/**
+	 * Method is to save or Update the New Service.
+	 * 
+	 * @param newServiceEntityObject
+	 * @return
+	 */
+	@RequestMapping(value = "/saveOrUpdateNewService/", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NewServiceEntity> saveorupdateNewService(
+			@RequestBody NewServiceEntity newServiceEntityObject) {
+		NewServiceEntity newServiceEntity = newServiceSvc.saveOrUpdateNewService(newServiceEntityObject);
+		return new ResponseEntity<NewServiceEntity>(newServiceEntity, HttpStatus.OK);
+	}
+
 }

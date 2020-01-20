@@ -34,4 +34,17 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
+
+	@Transactional
+	public void saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
+		try {
+			logger.info(NewServiceConstant.INSIDE_SAVEORUPDATE_NEWSERVICE);
+			sessionFactory.getCurrentSession().saveOrUpdate(newServiceEntity);
+			logger.info(NewServiceConstant.CONFIRMED_SAVEORUPDATE_NEWSERVICE + newServiceEntity.getOurserviceId());
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
+	}
+
 }

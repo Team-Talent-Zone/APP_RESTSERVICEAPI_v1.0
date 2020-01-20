@@ -13,4 +13,7 @@ public interface NewSVCService {
 
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity);
 
+	public NewServiceEntity saveOrUpdateNewService(NewServiceEntity newServiceEntity);
+	
+
 }
