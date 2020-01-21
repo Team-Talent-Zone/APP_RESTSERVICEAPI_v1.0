@@ -60,10 +60,11 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
-		FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
-		FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
-
+		
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
+			
+			FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
+			FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 			
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setBgDone(Boolean.FALSE);
