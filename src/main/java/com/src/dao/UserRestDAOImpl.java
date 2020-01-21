@@ -1,9 +1,7 @@
 	package com.src.dao;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -16,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.constant.UserConstant;
-import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
-import com.src.entity.UserRoleEntity;
 import com.src.exception.RestCustomException;
 
 /**
@@ -162,18 +158,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	public void saveorupdateUserDetails(UserEntity userEntity) {
 		try {
 			LOGGER.info(UserConstant.USER_DAO_SAVEORUPDATEUSERDETAILS);
-			Set<UserRoleEntity> userRoleEntities = new HashSet<UserRoleEntity>();
-			for (UserRoleEntity userRoleEntity : userEntity.getUserroles()) {
-				userRoleEntities.add(userRoleEntity);
-				userRoleEntity.setUserdetails(userEntity);
-			}
-			Set<UserBizEntity> userBizEntities = new HashSet<UserBizEntity>();
-			for (UserBizEntity userBizEntity : userEntity.getUserbizdetails()) {
-				userBizEntities.add(userBizEntity);
-				userBizEntity.setUserdetails(userEntity);
-			}
-			userEntity.setUserroles(userRoleEntities);
-			userEntity.setUserbizdetails(userBizEntities);
 			sessionFactory.getCurrentSession().saveOrUpdate(userEntity);
 			LOGGER.info(UserConstant.USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS + userEntity.getUserId());
 		} catch (RestCustomException e) {

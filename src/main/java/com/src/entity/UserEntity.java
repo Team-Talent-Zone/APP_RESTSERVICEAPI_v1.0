@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -66,17 +65,17 @@ public class UserEntity implements Serializable {
 	@Column(name = "AVTARURL")
 	private String avtarurl;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private Set<UserRoleEntity> userroles;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private UserRoleEntity userroles;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private Set<UserBizEntity> userbizdetails;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private UserBizEntity userbizdetails;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private Set<FreelanceEntity> freeLanceDetails;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private FreelanceEntity freeLanceDetails;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private Set<FreelancehistoryEntity> freelancehistoryentity;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private FreelancehistoryEntity freelancehistoryentity;
 
 	public Integer getUserId() {
 		return userId;
@@ -174,20 +173,12 @@ public class UserEntity implements Serializable {
 		this.updatedon = updatedon;
 	}
 
-	public Set<UserRoleEntity> getUserroles() {
+	public UserRoleEntity getUserroles() {
 		return userroles;
 	}
 
-	public void setUserroles(Set<UserRoleEntity> userroles) {
+	public void setUserroles(UserRoleEntity userroles) {
 		this.userroles = userroles;
-	}
-
-	public Set<UserBizEntity> getUserbizdetails() {
-		return userbizdetails;
-	}
-
-	public void setUserbizdetails(Set<UserBizEntity> userbizdetails) {
-		this.userbizdetails = userbizdetails;
 	}
 
 	public static long getSerialversionuid() {
@@ -202,19 +193,28 @@ public class UserEntity implements Serializable {
 		this.avtarurl = avtarurl;
 	}
 
-	public Set<FreelanceEntity> getFreeLanceDetails() {
+	public UserBizEntity getUserbizdetails() {
+		return userbizdetails;
+	}
+
+	public void setUserbizdetails(UserBizEntity userbizdetails) {
+		this.userbizdetails = userbizdetails;
+	}
+
+	public FreelanceEntity getFreeLanceDetails() {
 		return freeLanceDetails;
 	}
 
-	public void setFreeLanceDetails(Set<FreelanceEntity> freeLanceDetails) {
+	public void setFreeLanceDetails(FreelanceEntity freeLanceDetails) {
 		this.freeLanceDetails = freeLanceDetails;
 	}
 
-	public Set<FreelancehistoryEntity> getFreelancehistoryentity() {
+	public FreelancehistoryEntity getFreelancehistoryentity() {
 		return freelancehistoryentity;
 	}
 
-	public void setFreelancehistoryentity(Set<FreelancehistoryEntity> freelancehistoryentity) {
+	public void setFreelancehistoryentity(FreelancehistoryEntity freelancehistoryentity) {
 		this.freelancehistoryentity = freelancehistoryentity;
 	}
+
 }

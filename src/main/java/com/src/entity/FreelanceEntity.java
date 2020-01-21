@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import software.amazon.ion.Decimal;
-
 /**
  * The <code> FreelancerEntity </code> class defines a POJO that provides
  * back-end functionality for the <code>Free Lancer User</code> pages.
@@ -79,7 +77,7 @@ public class FreelanceEntity implements Serializable {
 	private Integer hourlyRate;
 	
 	@Column(name = "PERCENTAGEDEDUCT")
-	private Decimal percentageDeduct;
+	private float percentageDeduct;
 
 	public Integer getFreeLanceId() {
 		return freeLanceId;
@@ -193,14 +191,12 @@ public class FreelanceEntity implements Serializable {
 		this.userdetails = userdetails;
 	}
 
-	public Decimal getPercentageDeduct() {
+	public float getPercentageDeduct() {
 		return percentageDeduct;
 	}
 
-	public void setPercentageDeduct(Decimal percentageDeduct) {
+	public void setPercentageDeduct(float percentageDeduct) {
 		this.percentageDeduct = percentageDeduct;
 	}
-
-	
 
 }

@@ -32,7 +32,8 @@ public class UserConstant {
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
 	
-	public static final String USER_FREE_LANCER = "userFreeLancer";
+	public static final String FREELANCER_USER = "FREELANCER_USER";
+	
 	
 	//Table Mappings
 	
