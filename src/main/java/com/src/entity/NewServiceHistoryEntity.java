@@ -2,6 +2,7 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,15 @@ public class NewServiceHistoryEntity implements Serializable {
 	@Column(name = "ID")
 	private Integer id;
 
-	@Column(insertable = true, updatable = true, name = "USERID")
+	@Column(insertable = false, updatable = false, name = "ourserviceId")
+	private int ourserviceId;
+
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
+	@JoinColumn(name = "ourserviceId", nullable = false)
+	@JsonIgnore
+	private NewServiceEntity newService;
+
+	@Column(insertable = true, updatable = false, name = "userId")
 	private int userId;
 
 	@Column(name = "DECISIONBY")
@@ -50,14 +59,6 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	@Column(name = "MANAGERID")
 	private Integer managerId;
-
-	@Column(insertable = false, updatable = false, name = "ourserviceId")
-	private int ourserviceId;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ourserviceId", nullable = false)
-	@JsonIgnore
-	private NewServiceEntity newService;
 
 	public Integer getId() {
 		return id;
@@ -138,4 +139,13 @@ public class NewServiceHistoryEntity implements Serializable {
 	public void setManagerId(Integer managerId) {
 		this.managerId = managerId;
 	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public void setOurserviceId(int ourserviceId) {
+		this.ourserviceId = ourserviceId;
+	}
+
 }

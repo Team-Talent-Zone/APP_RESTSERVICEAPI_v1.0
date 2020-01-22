@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,31 +33,26 @@ public class NewServicePackageEntity implements Serializable {
 	@Column(name = "SERVICEPACKNAME")
 	private String servicePackName;
 
-	@Column(insertable = false, updatable = false, name = "OURSERVICEID")
-	private Integer ourSeriviceId;
-
 	@Column(name = "PKGAMOUNT")
 	private Float pkgAmount;
 
-	@Column(name = "PKGVALIDYRS")
+	@Column(name = "pkgvalidperiod")
 	private String pkgValidYears;
 
 	@Column(name = "ISACTIVE")
 	private boolean isActive;
 
 	@Column(name = "CREATEDON")
-	private Date createdOn;
+	private String createdOn;
 
-	@Column(insertable = false, updatable = false, name = "USERID")
+	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId", nullable = false)
-	@JsonIgnore
-	private UserEntity userdetails;
+	@Column(insertable = false, updatable = false, name = "ourserviceId")
+	private Integer ourSeriviceId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "OURSERVICEID", nullable = false)
+	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
 	private NewServiceEntity newService;
 
@@ -110,11 +104,11 @@ public class NewServicePackageEntity implements Serializable {
 		this.isActive = isActive;
 	}
 
-	public Date getCreatedOn() {
+	public String getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(String createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -132,14 +126,6 @@ public class NewServicePackageEntity implements Serializable {
 
 	public void setNewService(NewServiceEntity newService) {
 		this.newService = newService;
-	}
-
-	public UserEntity getUserdetails() {
-		return userdetails;
-	}
-
-	public void setUserdetails(UserEntity userdetails) {
-		this.userdetails = userdetails;
 	}
 
 }

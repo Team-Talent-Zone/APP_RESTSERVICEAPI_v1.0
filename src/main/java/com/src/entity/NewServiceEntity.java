@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,7 +24,7 @@ public class NewServiceEntity implements Serializable {
 	private static final long serialVersionUID = 178635312682419598L;
 
 	@Id
-	@Column(name = "OURSERVICEID")
+	@Column(name = "ourserviceId")
 	@GeneratedValue
 	private Integer ourserviceId;
 
@@ -71,11 +70,14 @@ public class NewServiceEntity implements Serializable {
 	@Column(name = "AMOUNT")
 	private Float amount;
 
-	@Column(insertable = true, updatable = true, name = "userId")
+	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
-	private Set<NewServiceHistoryEntity> serviceHistory;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
+	private NewServiceHistoryEntity serviceHistory;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
+	private NewServicePackageEntity servicePackage;
 
 	public Integer getOurserviceId() {
 		return ourserviceId;
@@ -205,12 +207,19 @@ public class NewServiceEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public Set<NewServiceHistoryEntity> getServiceHistory() {
+	public NewServiceHistoryEntity getServiceHistory() {
 		return serviceHistory;
 	}
 
-	public void setServiceHistory(Set<NewServiceHistoryEntity> serviceHistory) {
+	public void setServiceHistory(NewServiceHistoryEntity serviceHistory) {
 		this.serviceHistory = serviceHistory;
 	}
 
+	public NewServicePackageEntity getServicePackage() {
+		return servicePackage;
+	}
+
+	public void setServicePackage(NewServicePackageEntity servicePackage) {
+		this.servicePackage = servicePackage;
+	}
 }
