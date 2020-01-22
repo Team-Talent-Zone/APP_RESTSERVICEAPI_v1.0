@@ -76,9 +76,6 @@ public class NewServiceEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
 	private NewServiceHistoryEntity serviceHistory;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
-	private NewServicePackageEntity servicePackage;
-
 	public Integer getOurserviceId() {
 		return ourserviceId;
 	}
@@ -215,11 +212,4 @@ public class NewServiceEntity implements Serializable {
 		this.serviceHistory = serviceHistory;
 	}
 
-	public NewServicePackageEntity getServicePackage() {
-		return servicePackage;
-	}
-
-	public void setServicePackage(NewServicePackageEntity servicePackage) {
-		this.servicePackage = servicePackage;
-	}
 }

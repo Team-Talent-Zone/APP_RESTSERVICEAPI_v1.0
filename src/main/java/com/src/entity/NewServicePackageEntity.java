@@ -4,14 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The <code> NewServicePackageEntity </code> class defines a POJO that provides
@@ -48,14 +43,9 @@ public class NewServicePackageEntity implements Serializable {
 	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
 
-	@Column(insertable = false, updatable = false, name = "ourserviceId")
-	private Integer ourSeriviceId;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ourserviceId", nullable = false)
-	@JsonIgnore
-	private NewServiceEntity newService;
-
+	@Column(insertable = true, updatable = false, name = "ourserviceId")
+	private Integer ourserviceId;
+ 
 	public Integer getServicePackId() {
 		return servicePackId;
 	}
@@ -72,12 +62,12 @@ public class NewServicePackageEntity implements Serializable {
 		this.servicePackName = servicePackName;
 	}
 
-	public Integer getOurSeriviceId() {
-		return ourSeriviceId;
+	public Integer getOurserviceId() {
+		return ourserviceId;
 	}
 
-	public void setOurSeriviceId(Integer ourSeriviceId) {
-		this.ourSeriviceId = ourSeriviceId;
+	public void setOurserviceId(Integer ourserviceId) {
+		this.ourserviceId = ourserviceId;
 	}
 
 	public Float getPkgAmount() {
@@ -120,12 +110,5 @@ public class NewServicePackageEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public NewServiceEntity getNewService() {
-		return newService;
-	}
-
-	public void setNewService(NewServiceEntity newService) {
-		this.newService = newService;
-	}
 
 }
