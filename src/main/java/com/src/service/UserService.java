@@ -64,5 +64,13 @@ public interface UserService {
 	 * @throws Exception 
 	 */
 	public UserEntity checkUsername(String username) ;
+	
+	/**
+	 * Helps in password recovery.
+	 * 
+	 * @param username
+	 * @throws Exception 
+	 */
+	public UserEntity forgetPassword(String username);
 
 }

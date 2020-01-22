@@ -64,5 +64,7 @@ public interface UserRestDAO {
 	 * @throws Exception 
 	 */
 	public UserEntity checkUsername(String username) ;
+	
+
 
 }

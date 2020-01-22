@@ -67,7 +67,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) +" " +username);
+				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
+						+ username);
 	}
 
 	/**
@@ -78,6 +79,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 */
 	@Transactional
 	public UserEntity saveUser(UserEntity userEntity) {
+
 		LOGGER.info(UserConstant.USER_DAO_SAVEUSER);
 		int savedId = (Integer) sessionFactory.getCurrentSession().save(userEntity);
 		LOGGER.debug(UserConstant.USER_DAO_SUCCESSFULL_SAVEUSER + savedId);
@@ -166,5 +168,4 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 					applicationConfigProperties.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
-
 }

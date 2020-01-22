@@ -33,7 +33,8 @@ public class UserRestController extends AbstractRestManager {
 	 * @param username
 	 * @throws JSONException
 	 */
-	@RequestMapping(value = "/getUser/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getUser/{username}", method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> loginUserByUsername(@PathVariable(UserConstant.USERNAME) String username)
 			throws JSONException {
 		UserEntity userEntity = userService.findByUsername(username);
@@ -45,7 +46,8 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID) int userId) {
 		UserEntity userEntity = userService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -77,7 +79,8 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param userEntityObj
 	 */
-	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveorupdateUserDetails(@RequestBody UserEntity userEntityObj) {
 		UserEntity userEntity = userService.saveorupdateUserDetails(userEntityObj);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -89,7 +92,8 @@ public class UserRestController extends AbstractRestManager {
 	 * @param userEntityObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
 		UserEntity userEntity = userService.saveUser(userEntityObject);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -100,9 +104,21 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param username
 	 */
-	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
 		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
+	}
+	
+	/**
+	 * Saves the new password by encrypting.
+	 * 
+	 * @param username
+	 */
+	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
+		return new ResponseEntity<UserEntity>(userService.forgetPassword(username), HttpStatus.OK);
 	}
 
 }

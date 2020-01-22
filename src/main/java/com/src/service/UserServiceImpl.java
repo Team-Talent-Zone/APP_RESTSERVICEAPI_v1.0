@@ -57,18 +57,20 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setCreatedby(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
 
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
-		
+
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
-			
+
 			FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
-			
+
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setBgDone(Boolean.FALSE);
 			freelanceentity.setBgStarted(Boolean.FALSE);
+			freelancehistoryEntity.setLocked(Boolean.FALSE);
 
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
@@ -109,12 +111,19 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity saveorupdateUserDetails(UserEntity userEntity) {
 
+		//Below IF condition is written for forgetPassword recovery 
+		if (userEntity.isIsrecoverypwd()) {
+			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+		}
+
+		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
-		FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
-		FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
+
+			FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
+			FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
@@ -128,6 +137,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userBizEntity.setUserdetails(userEntity);
 		userEntity.setUserbizdetails(userBizEntity);
 
+		userRestDAO.saveorupdateUserDetails(userEntity);
 		return userEntity;
 	}
 
@@ -139,6 +149,23 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity findByUsername(String username) {
 		return userRestDAO.findByUsername(username);
+	}
+
+	/**
+	 * Helps in setting new password.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public UserEntity forgetPassword(String username) {
+
+		UserEntity userEntity = userRestDAO.checkUsername(username);
+		String newPassword = CommonUtilites.genRandomAlphaNumeric();
+		userEntity.setIsrecoverypwd(Boolean.TRUE);
+		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
+		userEntity.setPassword(encoder.encode(newPassword));
+
+		return userEntity;
 	}
 
 }

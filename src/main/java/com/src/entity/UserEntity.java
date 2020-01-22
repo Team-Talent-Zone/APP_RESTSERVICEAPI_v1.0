@@ -125,6 +125,8 @@ public class UserEntity implements Serializable {
 		this.lastname = lastname;
 	}
 
+	
+
 	public boolean isIsrecoverypwd() {
 		return isrecoverypwd;
 	}
