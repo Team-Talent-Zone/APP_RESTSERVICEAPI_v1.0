@@ -1,4 +1,4 @@
-	package com.src.dao;
+package com.src.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
+	 * @throws Exception
 	 */
 	@Transactional
 	public UserEntity checkUsername(String username) {
@@ -66,7 +67,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + username);
+				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) +" " +username);
 	}
 
 	/**

@@ -3,29 +3,28 @@ package com.src.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class RestCustomException extends RuntimeException {
 
 	private static final long serialVersionUID = -2859292084648724403L;
-	private final HttpStatus httpStatusCode;
-	private  String errorCustomMessage;
-	private  String errorSysThrow;
+	private final HttpStatus statusCode;
+	private String message;
 
-	public RestCustomException(HttpStatus errorCode, String errorCustomMessage) {
-		this.httpStatusCode = errorCode;
-		this.errorCustomMessage = errorCustomMessage;
+	public RestCustomException(HttpStatus statusCode, String message) {
+		this.statusCode = statusCode;
+		this.message = message;
 	}
 
-	public String getErrorCustomMessage() {
-		return errorCustomMessage;
+	public String getMessage() {
+		return message;
 	}
 
-	public String getErrorSysThrow() {
-		return errorSysThrow;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public HttpStatus getHttpStatusCode() {
-		return httpStatusCode;
+	public HttpStatus getStatusCode() {
+		return statusCode;
 	}
 
 }
