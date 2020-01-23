@@ -6,7 +6,7 @@
 	<artifactId>RestAPI</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>RestAPI</name>
+ 	<name>RestAPI</name>
 
 	<properties>
 		<org.springframework.version>4.3.1.RELEASE
