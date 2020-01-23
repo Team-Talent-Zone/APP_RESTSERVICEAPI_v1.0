@@ -13,6 +13,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> UserRoleEntity </code> class defines a POJO that provides back-end
+ * functionality for the <code>UserDetails</code> pages.
+ * 
+ * @author azmiri.
+ * @version 1.0
+ * 
+ */
 @Entity(name = "userroles")
 @Table(name = "APP_USER_ROLE")
 public class UserRoleEntity implements Serializable {
@@ -24,11 +32,11 @@ public class UserRoleEntity implements Serializable {
 	@GeneratedValue
 	private Integer roleId;
 
-	@Column(insertable = false, updatable = false, name = "userId")
-	private int userId;
-
 	@Column(name = "ROLECODE")
 	private String rolecode;
+
+	@Column(insertable = false, updatable = false, name = "userId")
+	private int userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)

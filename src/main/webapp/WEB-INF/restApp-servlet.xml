@@ -24,6 +24,8 @@
 	<context:annotation-config />
 	<context:component-scan
 		base-package="com.src.restcontroller" />
+	<context:component-scan
+		base-package="com.src.exception" />
 
 	<bean id="myBasicAuthenticationEntryPoint"
 		class="com.src.security.CustomBasicAuthenticationEntryPoint"></bean>
@@ -46,8 +48,10 @@
 		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
 		p:password="${jdbc.password}">
 		<property name="initialSize" value="10" />
-		<property name="maxActive" value="5" />
-		<property name="maxWait" value="5000" />
+		<property name="maxActive" value="100" />
+		<property name="maxWait" value="10000" />
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQuery" value="select 1 from dual" />
 	</bean>
 
 
@@ -60,17 +64,20 @@
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
 				hibernate.show_sql=true
 				hibernate.c3p0.min_size=5
-				hibernate.c3p0.max_size=20
+				hibernate.c3p0.max_size=100
 				hibernate.c3p0.timeout=1800
 				hibernate.c3p0.max_statements=50
-				hibernate.connection.autocommit=auto
-				hibernate.connection.release_mode=auto
+				hibernate.c3p0.idle_test_period=60
+				hibernate.c3p0.acquire_increment=2
 			</value>
 		</property>
 	</bean>
 
 	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
 	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
+
+	<bean id="newServiceSvc" class="com.src.service.NewSVCServiceImpl"></bean>
+	<bean id="newServiceDAO" class="com.src.dao.NewServiceDAOImpl"></bean>
 
 	<bean id="referenceLookUpDAO"
 		class="com.src.dao.ReferenceLookUpDAOImpl"></bean>
@@ -82,7 +89,12 @@
 	<bean id="lookUpTemplateService"
 		class="com.src.service.LookUpTemplateServiceImpl"></bean>
 
-	<bean id="utilService" class="com.src.service.UtilServiceImpl"></bean>
+	<bean id="utilService" class="com.src.service.UtilityServiceImpl"></bean>
+
+	<bean id="paymentService"
+		class="com.src.service.PaymentServiceImpl"></bean>
+	<bean id="paymentDAO" class="com.src.dao.PaymentDAOImpl"></bean>
+
 
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>

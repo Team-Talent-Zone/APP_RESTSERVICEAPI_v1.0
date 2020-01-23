@@ -6,10 +6,10 @@ import org.json.JSONException;
 
 import com.src.entity.UtilEntity;
 
-public interface UtilService {
+public interface UtilityService {
 
 	public UtilEntity sendEmail(UtilEntity utilEntity) throws JSONException;
-
+	
 	public String uploadAvatarsInS3(File inputFile, int userid);
 
 	public String uploadBgDocsInS3(File inputFile, int userid);

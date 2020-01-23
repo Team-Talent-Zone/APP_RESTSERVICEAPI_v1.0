@@ -13,6 +13,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> UserBizEntity </code> class defines a POJO that provides back-end
+ * functionality for the <code>UserDetails</code> pages.
+ * 
+ * @author azmiri.
+ * @version 1.0
+ * 
+ */
 @Entity(name = "userbizdetails")
 @Table(name = "APP_USER_BIZ_DETAILS")
 public class UserBizEntity implements Serializable {
@@ -26,7 +34,7 @@ public class UserBizEntity implements Serializable {
 
 	@Column(insertable = false, updatable = false, name = "userId")
 	private int userId;
-	
+
 	@Column(name = "BIZNAME")
 	private String bizname;
 
@@ -44,28 +52,27 @@ public class UserBizEntity implements Serializable {
 
 	@Column(name = "DESIGNATION")
 	private String designation;
-	
- 
+
 	@Column(name = "STREETADDRESS")
 	private String streetAddress;
-	
+
 	@Column(name = "CITY")
 	private String city;
-	
+
 	@Column(name = "STATE")
 	private String state;
-	
+
 	@Column(name = "COUNTRY")
 	private String country;
-	
+
 	@Column(name = "ZIPCODE")
 	private String zipcode;
 
 	@Column(name = "FULLADDRESS")
 	private String fulladdress;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "userId", nullable=false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
 	private UserEntity userdetails;
 
@@ -193,7 +200,4 @@ public class UserBizEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	 
-
-	
 }
