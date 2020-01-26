@@ -1,4 +1,4 @@
-package com.src.constant;
+package com.src.testsamplecode;
 
 import org.sonarsource.scanner.api.internal.shaded.minimaljson.Json;
 import org.sonarsource.scanner.api.internal.shaded.minimaljson.JsonValue;
