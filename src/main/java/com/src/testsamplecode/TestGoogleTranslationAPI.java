@@ -16,7 +16,7 @@ public class TestGoogleTranslationAPI {
 		ArrayList<TestStaticContent> arrayList = new ArrayList<TestStaticContent>();
 		TestStaticContent testStaticContent1 = new TestStaticContent();
 		testStaticContent1.setContent(
-				"A platform that publishes â€œNâ€? number of service (sites) to a individual/company into a technology to manage their business features");
+				"A platform that publishes N number of service (sites) to a individual or a company into a technology to manage their business features");
 
 		TestStaticContent testStaticContent2 = new TestStaticContent();
 		testStaticContent2.setContent(
