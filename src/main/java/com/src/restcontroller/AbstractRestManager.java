@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.src.service.LookUpTemplateService;
 import com.src.service.NewSVCService;
 import com.src.service.PaymentService;
 import com.src.service.ReferenceLookUpService;
@@ -30,9 +29,6 @@ class AbstractRestManager {
 
 	@Autowired
 	protected ReferenceLookUpService referenceLookUpService;
-
-	@Autowired
-	protected LookUpTemplateService lookUpTemplateService;
 
 	@Autowired
 	protected UtilityService utilService;

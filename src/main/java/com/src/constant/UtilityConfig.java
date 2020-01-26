@@ -18,6 +18,8 @@ public class UtilityConfig {
 	
 	public static final String FOLDER_WIDGETS = "WIDGETS";
 	
+	public static final String PROJECT_ID = "astral-scout-261009";
+	
 
 }
 

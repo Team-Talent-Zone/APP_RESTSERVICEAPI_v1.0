@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.src.dao.LookUpTemplateDAO;
 import com.src.dao.NewServiceDAO;
 import com.src.dao.PaymentDAO;
 import com.src.dao.ReferenceLookUpDAO;
@@ -35,9 +34,6 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected ReferenceLookUpDAO referenceLookUpDAO;
-
-	@Autowired
-	protected LookUpTemplateDAO lookUpTemplateDAO;
 
 	@Autowired
 	protected PaymentDAO paymentDAO;

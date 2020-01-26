@@ -25,12 +25,21 @@ public class AppConfig {
 	public static final String REFERNCELOOKUPMAPPING_REFID_ERRORMSG = "referencelookupmapping_refId_errorMsg";
 
 	public static final String REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG = "referencelookupmappingcategories_mapId_errorMsg";
+	
+	public static final String REFERNCELOOKUP_STATICCONTENT_KEY_ERRORMSG = "referencelookupstaticcontent_key_errorMsg";
+
+	public static final String REFERNCELOOKUP_STATICCONTENT_ERRORMSG = "referencelookupstaticcontent_errorMsg";
 
 	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
+
 	public static final String NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG = "newservice_unabletosave_errorMsg";
+	
 	public static final String GETBYSERVICEID_USERNOTFOUND_ERRORMSG = "getByOurServiceId_usernotfound_errorMsg";
+	
 	public static final String GETBYSERVICEPACKID_ERRORMSG = "getByOurServicePackId_usernotfound_errorMsg";
+	
 	public static final String SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG = "saveorupdateServiceDetails_unabletoupdate_errorMsg";
+	
 	public static final String GETBYSERVICEHISTORYID_USERNOTFOUND_ERRORMSG = "getByOurServiceHistory_usernotfound_errorMsg";
 
 	public static final String SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentDetails_unabletosave_errorMsg";

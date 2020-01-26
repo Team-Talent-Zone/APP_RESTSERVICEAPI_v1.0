@@ -16,6 +16,8 @@ import com.src.constant.AppConfig;
 import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
+import com.src.entity.ReferenceLookUpTemplateEntity;
+import com.src.entity.ReferenceStaticDataEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -100,8 +102,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 
 		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingSubCategoryByMapId method ");
 		List<ReferenceLookUpMappingSubCategoryEntity> lookUpMappingSubCategoryEntities = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(ReferenceLookUpMappingEntity.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpMappingEntity.class);
 		criteria.createAlias("referencelookupmappingsubcategories", "rlookupmappingsubcat", JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq("rlookupmappingsubcat.mapId", mapId));
 		lookUpMappingSubCategoryEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -117,4 +118,56 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 
 	}
 
+	@Transactional
+	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
+		ReferenceLookUpTemplateEntity lookUpTemplateEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpTemplateEntity.class);
+		criteria.add(Restrictions.eq("shortkey", shortkey));
+		lookUpTemplateEntity = (ReferenceLookUpTemplateEntity) criteria.uniqueResult();
+		if (lookUpTemplateEntity != null) {
+			return lookUpTemplateEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
+						+ shortkey);
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntityBykey(String key) {
+		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupByKey method");
+		List<ReferenceStaticDataEntity> staticDataEntities = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceStaticDataEntity.class);
+		criteria.add(Restrictions.eq("key", key));
+		staticDataEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = staticDataEntities != null ? staticDataEntities.size() : 0;
+		logger.debug(
+				"Inside REFERENCE LOOKUP DAO getLookupStaticDataEntityBykey method : Get All Reference Static Content Look Up Data By Key :"
+						+ key + " Size is: " + size);
+		if (size > 0) {
+			return (ArrayList<ReferenceStaticDataEntity>) staticDataEntities;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_STATICCONTENT_KEY_ERRORMSG)
+						+ " for key :" + key);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity() {
+		List<ReferenceStaticDataEntity> staticDataEntities = this.sessionFactory.getCurrentSession()
+				.createCriteria(ReferenceStaticDataEntity.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
+		int size = staticDataEntities != null ? staticDataEntities.size() : 0;
+		logger.debug(
+				"Inside REFERENCE STATIC CONTENT LOOKUP DAO  getLookupStaticDataEntity method : Get All Static Content Reference Look Up :"
+						+ size);
+		if (size > 0) {
+			return (ArrayList<ReferenceStaticDataEntity>) staticDataEntities;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_STATICCONTENT_ERRORMSG));
+
+	}
 }
