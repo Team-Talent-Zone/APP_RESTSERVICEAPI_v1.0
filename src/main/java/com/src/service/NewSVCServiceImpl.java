@@ -9,6 +9,7 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
+import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -77,5 +78,15 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
 	}
+
+	@Override
+	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		userServiceDetailsEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		userServiceDetailsEntity.setActive(Boolean.TRUE);
+		NewServiceEntity newServiceEntity = new NewServiceEntity();
+		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
+		userServiceDetailsEntity.setNewService(newServiceEntity);
+		return newServiceRestDAO.saveUserServiceDetails(userServiceDetailsEntity);}
 
 }

@@ -17,6 +17,7 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
+import com.src.entity.UserServiceDetailsEntity;
 import com.src.exception.RestCustomException;
 
 /**
@@ -31,6 +32,9 @@ import com.src.exception.RestCustomException;
 public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceDAO {
 	final Logger LOGGER = LoggerFactory.getLogger(NewServiceDAOImpl.class);
 
+	/**
+	 * To save the New Service Details.
+	 */
 	@Transactional
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICE);
@@ -43,6 +47,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To save or Update the New Service Details.
+	 */
 	@Transactional
 	public void saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
 		try {
@@ -55,6 +62,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		}
 	}
 
+	/**
+	 * To save New Service History Details.
+	 */
 	@Transactional
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY);
@@ -67,6 +77,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To save the service Package Details.
+	 */
 	@Transactional
 	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEPACKAGE);
@@ -79,6 +92,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To Get all the Service Details.
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
@@ -97,6 +113,21 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+	}
+	
+	/**
+	 * To save the User Service Details.
+	 */
+	@Transactional
+	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVE_USERSERVICE_DETAILS);
+		int userServiceDetailsID = (Integer) sessionFactory.getCurrentSession().save(userServiceDetailsEntity);
+		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_USERSERVICE_DETAILS + userServiceDetailsID);
+		if (userServiceDetailsID > 0) {
+			return userServiceDetailsEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 }
