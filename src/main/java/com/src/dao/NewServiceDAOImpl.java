@@ -56,14 +56,15 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	}
 
 	@Transactional
-	public void saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
-		try {
-			LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY);
-			sessionFactory.getCurrentSession().saveOrUpdate(newServiceHistoryEntity);
-		} catch (RestCustomException e) {
-			throw new RestCustomException(HttpStatus.BAD_REQUEST,
-					applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY);
+		int serviceHistorySavedID = (Integer) sessionFactory.getCurrentSession().save(newServiceHistoryEntity);
+		LOGGER.debug(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY + serviceHistorySavedID);
+		if (serviceHistorySavedID > 0) {
+			return newServiceHistoryEntity;
 		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	@Transactional

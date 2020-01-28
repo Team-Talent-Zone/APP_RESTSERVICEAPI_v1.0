@@ -56,8 +56,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());
 		newServiceHistoryEntity.setNewService(newServiceEntity);
-		newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
-		return newServiceHistoryEntity;
+		return newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
 	}
 
 	@Override
