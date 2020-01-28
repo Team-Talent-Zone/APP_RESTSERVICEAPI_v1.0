@@ -1,5 +1,6 @@
 package com.src.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class ReferenceLookUpServiceImpl extends AbstractServiceManager implement
 		return referenceLookUpDAO.getLookupStaticDataEntityBykey(key);
 	}
 
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity() {
+	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity(String targetLanguage) throws IOException {
 		return referenceLookUpDAO.getLookupStaticDataEntity();
 	}
 

@@ -1,5 +1,6 @@
 package com.src.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.src.entity.ReferenceLookUpEntity;
@@ -24,7 +25,7 @@ public interface ReferenceLookUpService {
 
 	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntityBykey(String key);
 	
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity();
+	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity(String targetLanguage) throws IOException;
 
 
 }

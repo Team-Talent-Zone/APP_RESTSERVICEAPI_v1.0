@@ -147,19 +147,12 @@
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.api.grpc/grpc-google-cloud-translate-v3 -->
-		<dependency>
-			<groupId>com.google.api.grpc</groupId>
-			<artifactId>grpc-google-cloud-translate-v3</artifactId>
-			<version>1.0.2</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate -->
 		<dependency>
 			<groupId>com.google.cloud</groupId>
 			<artifactId>google-cloud-translate</artifactId>
 			<version>1.94.1</version>
 		</dependency>
-
 	</dependencies>
 	<profiles>
 		<profile>

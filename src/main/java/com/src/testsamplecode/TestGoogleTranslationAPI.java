@@ -40,7 +40,7 @@ public class TestGoogleTranslationAPI {
 		// TODO(developer): Replace these variables before running the sample.
 		String projectId = "astral-scout-261009";
 		// Supported Languages: https://cloud.google.com/translate/docs/languages
-		String targetLanguage = "te";
+		String targetLanguage = "hi";
 		for (TestStaticContent tsc : arrayList) {
 			translateText(projectId, targetLanguage, tsc.getContent());
 		}

@@ -155,6 +155,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity() {
 		List<ReferenceStaticDataEntity> staticDataEntities = this.sessionFactory.getCurrentSession()
 				.createCriteria(ReferenceStaticDataEntity.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

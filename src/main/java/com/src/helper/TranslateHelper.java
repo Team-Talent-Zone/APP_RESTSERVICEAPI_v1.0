@@ -16,13 +16,13 @@ public class TranslateHelper {
 
 	public ArrayList<ReferenceStaticDataEntity> translateText(ArrayList<ReferenceStaticDataEntity> staticDataEntities,
 			String targetLanguage) throws IOException {
-
+		ArrayList<ReferenceStaticDataEntity> staticEntities = new ArrayList<ReferenceStaticDataEntity>();
 		for (ReferenceStaticDataEntity entity : staticDataEntities) {
 			String responseText = translateText(UtilityConfig.PROJECT_ID, targetLanguage, entity.getContent());
 			entity.setContent(responseText);
-			staticDataEntities.add(entity);
+			staticEntities.add(entity);
 		}
-		return staticDataEntities;
+		return staticEntities;
 	}
 
 	// Translating Text

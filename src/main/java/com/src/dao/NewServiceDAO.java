@@ -19,7 +19,7 @@ public interface NewServiceDAO {
 
 	public void saveOrUpdateNewService(NewServiceEntity newServiceEntity);
 
-	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
+	public void saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
 	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity);
 

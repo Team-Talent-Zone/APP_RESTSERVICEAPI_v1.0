@@ -30,7 +30,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 
 		NewServiceHistoryEntity inputHisEnty = newServiceEntity.getServiceHistory();
-		inputHisEnty.setDecisionBy(CommonUtilites.getCurrentDateInNewFormat());
+		inputHisEnty.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
 		inputHisEnty.setLocked(Boolean.FALSE);
 		inputHisEnty.setNewService(newServiceEntity);
 		newServiceEntity.setServiceHistory(inputHisEnty);
@@ -53,14 +53,25 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
 		newServiceHistoryEntity.setLocked(Boolean.TRUE);
 		newServiceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
-		return newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
+		NewServiceEntity newServiceEntity = new NewServiceEntity();
+		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());
+		newServiceHistoryEntity.setNewService(newServiceEntity);
+		newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
+		return newServiceHistoryEntity;
 	}
 
 	@Override
-	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
-		newServicePackageEntity.setActive(Boolean.TRUE);
-		newServicePackageEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		return newServiceRestDAO.saveNewServicePackage(newServicePackageEntity);
+	public ArrayList<NewServicePackageEntity> saveNewServicePackage(
+			ArrayList<NewServicePackageEntity> newServicePackageEntity) {
+
+		ArrayList<NewServicePackageEntity> entities = new ArrayList<NewServicePackageEntity>();
+		for (NewServicePackageEntity packageEntity : newServicePackageEntity) {
+			packageEntity.setActive(Boolean.TRUE);
+			packageEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+			NewServicePackageEntity entity = newServiceRestDAO.saveNewServicePackage(packageEntity);
+			entities.add(entity);
+		}
+		return entities;
 	}
 
 	@Override

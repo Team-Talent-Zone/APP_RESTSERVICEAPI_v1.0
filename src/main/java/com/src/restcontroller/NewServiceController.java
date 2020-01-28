@@ -66,21 +66,19 @@ public class NewServiceController extends AbstractRestManager {
 	 * @param newServiceHistoryObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveNewServicePackage/", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<NewServicePackageEntity> saveNewServicePackage(
-			@RequestBody NewServicePackageEntity newServicePackageObject) {
-		NewServicePackageEntity newServicePackageEntity = newServiceSvc.saveNewServicePackage(newServicePackageObject);
-		return new ResponseEntity<NewServicePackageEntity>(newServicePackageEntity, HttpStatus.OK);
+	@RequestMapping(value = "/saveNewServicePackage/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServicePackageEntity>> saveNewServicePackage(
+			@RequestBody ArrayList<NewServicePackageEntity> servicePackageEntities) {
+		ArrayList<NewServicePackageEntity> packageEntities = newServiceSvc
+				.saveNewServicePackage(servicePackageEntities);
+		return new ResponseEntity<ArrayList<NewServicePackageEntity>>(packageEntities, HttpStatus.OK);
 	}
-	
 
 	/**
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllServiceDetails/", method = RequestMethod.GET,
-	produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<NewServiceEntity>> getAllServiceDetails() {
 		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
 		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);

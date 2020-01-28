@@ -1,5 +1,6 @@
 package com.src.restcontroller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.UtilityConfig;
 import com.src.entity.ReferenceStaticDataEntity;
+import com.src.helper.TranslateHelper;
 
 @Controller
 public class LookUpStaticDataController extends AbstractRestManager {
@@ -26,10 +29,17 @@ public class LookUpStaticDataController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<ReferenceStaticDataEntity>>(staticData, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getLookupStaticDataEntity/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<ReferenceStaticDataEntity>> getLookupStaticDataEntity() {
-		ArrayList<ReferenceStaticDataEntity> staticData = referenceLookUpService.getLookupStaticDataEntity();
-		return new ResponseEntity<ArrayList<ReferenceStaticDataEntity>>(staticData, HttpStatus.OK);
+	@RequestMapping(value = "/getLookupStaticDataEntity/{targetLanguage}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<ReferenceStaticDataEntity>> getLookupStaticDataEntity(
+			@PathVariable("targetLanguage") String targetLanguage) throws IOException {
+		ArrayList<ReferenceStaticDataEntity> staticDataEntities = referenceLookUpService
+				.getLookupStaticDataEntity(targetLanguage);
+		TranslateHelper translateHelper = new TranslateHelper();
+		if (targetLanguage != UtilityConfig.TARGET_DEFAULT_LANGUAGE.toUpperCase()
+				|| targetLanguage != UtilityConfig.TARGET_DEFAULT_LANGUAGE.toLowerCase()) {
+			staticDataEntities = translateHelper.translateText(staticDataEntities, targetLanguage);
+		}
+		return new ResponseEntity<ArrayList<ReferenceStaticDataEntity>>(staticDataEntities, HttpStatus.OK);
 	}
 
 }

@@ -18,10 +18,11 @@ public interface NewSVCService {
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity);
 
 	public NewServiceEntity saveOrUpdateNewService(NewServiceEntity newServiceEntity);
-	
-	public NewServiceHistoryEntity saveNewServiceHistory (NewServiceHistoryEntity newServiceHistoryEntity);
-	
-	public NewServicePackageEntity saveNewServicePackage (NewServicePackageEntity newServicePackageEntity);
-	
+
+	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
+
+	public ArrayList<NewServicePackageEntity> saveNewServicePackage(
+			ArrayList<NewServicePackageEntity> newServicePackageEntity);
+
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
 }

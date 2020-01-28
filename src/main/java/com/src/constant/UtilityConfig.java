@@ -20,6 +20,7 @@ public class UtilityConfig {
 	
 	public static final String PROJECT_ID = "astral-scout-261009";
 	
-
+	public final static String TARGET_DEFAULT_LANGUAGE = "EN";
+	
 }
 

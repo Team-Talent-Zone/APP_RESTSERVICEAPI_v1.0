@@ -15,5 +15,5 @@ public interface UtilityService {
 	public String uploadBgDocsInS3(File inputFile, int userid);
 
 	public String uploadWidgetPicsInS3(File inputFile, int userid);
-
+	
 }
