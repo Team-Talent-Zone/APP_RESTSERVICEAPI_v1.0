@@ -33,7 +33,6 @@ public class SendEmailHelper {
 		String htmlFormat = velocityHelper.generateEmailInHtmlFormat(utilEntity.getTemplateURL(), velocityContext);
 
 		if (htmlFormat != null) {
-
 			utilEntity.setBody(htmlFormat);
 			utilEntity = prepareEmail(utilEntity);
 		}
@@ -63,14 +62,14 @@ public class SendEmailHelper {
 			t = (SMTPTransport) session.getTransport("smtp");
 			t.connect(UtilityConfig.HOST, UtilityConfig.USERNAME, UtilityConfig.PWD);
 			t.sendMessage(msg, msg.getAllRecipients());
-			logger.debug("Inside the prepareEmail method of MSEmailSend class Of AWS_MS_Utility Jar : Is Email Sent  "
+			logger.debug("Inside the prepareEmail method of SendEmailHelper class   : Is Email Sent  "
 					+ t.getLastServerResponse());
 
 			utilEntity.setLastServerResponse(t.getLastServerResponse());
 			utilEntity.setStatus(t.getReportSuccess());
 
 		} catch (Exception e) {
-			logger.error("Error Occured inside the prepareEmail method of MSEmailSend class Of AWS_MS_Utility Jar :"
+			logger.error("Error Occured inside the prepareEmail method of SendEmailHelper class Of Jar :"
 					+ e.toString());
 		} finally {
 			try {

@@ -17,7 +17,6 @@ public class UtilityServiceImpl implements UtilityService {
 	final static Logger logger = LoggerFactory.getLogger(UtilityServiceImpl.class);
 
 	public UtilEntity sendEmail(UtilEntity utilEntity) throws JSONException {
-
 		SendEmailHelper emailHelper = new SendEmailHelper();
 		return emailHelper.sendEmail(utilEntity);
 	}
