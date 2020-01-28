@@ -66,7 +66,7 @@ public class SendEmailHelper {
 					+ t.getLastServerResponse());
 
 			utilEntity.setLastServerResponse(t.getLastServerResponse());
-			utilEntity.setStatus(t.getReportSuccess());
+			utilEntity.setLastReturnCode(t.getLastReturnCode());
 
 		} catch (Exception e) {
 			logger.error("Error Occured inside the prepareEmail method of SendEmailHelper class Of Jar :"
