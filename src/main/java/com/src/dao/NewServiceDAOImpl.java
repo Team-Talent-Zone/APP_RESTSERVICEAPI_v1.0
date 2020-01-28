@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
+import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -129,5 +130,19 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
-
+	
+	/**
+	 * To save the freelance on Service.
+	 */
+	@Transactional
+	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVE_FREELANCE_ONSERVICE);
+		int userServiceDetailsID = (Integer) sessionFactory.getCurrentSession().save(freeLanceOnServiceEntity);
+		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_FREELANCE_ONSERVICE + userServiceDetailsID);
+		if (userServiceDetailsID > 0) {
+			return freeLanceOnServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	}
 }

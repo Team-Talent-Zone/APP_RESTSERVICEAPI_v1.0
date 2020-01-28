@@ -22,6 +22,8 @@ public class NewServiceConstant {
 	public static final String NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS = "Inside New Service DAO getAllServiceDetails method : get All Service Details :";
 	public static final String INSIDE_SAVE_USERSERVICE_DETAILS = "Inside DAO saveUserServiceDetails method";
 	public static final String CONFIRM_SAVE_USERSERVICE_DETAILS = "At saveUserServiceDetails method in DAO:  Saved Use Service Details Succesfully : User Service Details Id :";
+	public static final String INSIDE_SAVE_FREELANCE_ONSERVICE = "Inside DAO saveFreeLanceOnService method";
+	public static final String CONFIRM_SAVE_FREELANCE_ONSERVICE = "At saveFreeLanceOnService method in DAO:  Saved freelance on Service Succesfully : freelance on Service Id :";
 
 	
 	public static final String SERVICE_HISTORY  = "serviceHistory";

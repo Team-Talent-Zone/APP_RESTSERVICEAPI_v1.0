@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -114,6 +115,23 @@ public class NewServiceController extends AbstractRestManager {
 		UserServiceDetailsEntity UserServiceDetailsEntity = newServiceSvc
 				.saveUserServiceDetails(userServiceDetailsObject);
 		return new ResponseEntity<UserServiceDetailsEntity>(UserServiceDetailsEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Method is to save Free Lance On Service Details.
+	 * 
+	 * @param newServiceHistoryObject
+	 * @return
+	 */
+	@RequestMapping(value = "/saveFreeLanceOnService/", 
+			method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceOnServiceEntity> saveFreeLanceOnService(
+			@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntityObject) {
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = newServiceSvc
+				.saveFreeLanceOnService(freeLanceOnServiceEntityObject);
+		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
 	}
 
 }

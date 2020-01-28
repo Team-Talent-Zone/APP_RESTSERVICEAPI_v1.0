@@ -2,6 +2,7 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -55,4 +56,13 @@ public interface NewServiceDAO {
 	 * @return
 	 */
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+	
+	
+	/**
+	 * To save free Lance on Service.
+	 * @param freeLanceOnServiceEntity
+	 * @return
+	 */
+	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
+	
 }

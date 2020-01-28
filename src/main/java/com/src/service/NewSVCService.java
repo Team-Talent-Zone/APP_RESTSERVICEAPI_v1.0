@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -57,5 +58,12 @@ public interface NewSVCService {
 	 * @return
 	 */
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+
+	/**
+	 * To save Free Lance on Service.
+	 * @param FreeLanceOnServiceEntity
+	 * @return
+	 */
+	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 }
