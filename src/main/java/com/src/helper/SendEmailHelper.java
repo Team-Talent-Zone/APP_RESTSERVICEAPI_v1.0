@@ -45,7 +45,7 @@ public class SendEmailHelper {
 
 		try {
 			Properties props = System.getProperties();
-			props.put("mail.smtp.host", UtilityConfig.HOST);
+			props.put("mail.smtp.host", UtilityConfig.HOST_DEV_SMTP);
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.starttls.enable", "true");
@@ -60,7 +60,7 @@ public class SendEmailHelper {
 			msg.setContent(utilEntity.getBody(), "text/html; charset=utf-8");
 			msg.setSentDate(new Date());
 			t = (SMTPTransport) session.getTransport("smtp");
-			t.connect(UtilityConfig.HOST, UtilityConfig.USERNAME, UtilityConfig.PWD);
+			t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
 			t.sendMessage(msg, msg.getAllRecipients());
 			logger.debug("Inside the prepareEmail method of SendEmailHelper class   : Is Email Sent  "
 					+ t.getLastServerResponse());
@@ -69,8 +69,7 @@ public class SendEmailHelper {
 			utilEntity.setLastReturnCode(t.getLastReturnCode());
 
 		} catch (Exception e) {
-			logger.error("Error Occured inside the prepareEmail method of SendEmailHelper class Of Jar :"
-					+ e.toString());
+			logger.error("Error Occured inside the prepareEmail method of SendEmailHelper class :" + e.toString());
 		} finally {
 			try {
 				t.close();
@@ -83,7 +82,7 @@ public class SendEmailHelper {
 
 	public UtilEntity returnUtilEntityObjByShortKey(Object obj, String shortKey, String templateURL)
 			throws JSONException {
-		
+
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObj = new JSONObject();
 		UtilEntity utilEntity = null;
@@ -101,7 +100,7 @@ public class SendEmailHelper {
 						templateURL);
 			}
 		}
-		
+
 		jsonArray.put(jsonObj);
 		utilEntity.setJsonArray(jsonArray);
 		return utilEntity;
@@ -109,7 +108,7 @@ public class SendEmailHelper {
 
 	private static UtilEntity createUtilEntity(String emailToUser, String emailSubject, String templateURL) {
 		UtilEntity utilEntity = new UtilEntity();
-		utilEntity.setFromUser(AppConfig.EMAIL_SENT_FROMUSER);
+		utilEntity.setFromUser(AppConfig.EMAIL_SENT_FROMUSER_DEV);
 		utilEntity.setToUser(emailToUser);
 		utilEntity.setSubject(emailSubject);
 		utilEntity.setTemplateURL(templateURL);

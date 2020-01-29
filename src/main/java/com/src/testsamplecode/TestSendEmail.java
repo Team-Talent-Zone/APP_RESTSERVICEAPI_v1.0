@@ -21,7 +21,7 @@ public class TestSendEmail {
 	public static void sendEmail() throws MessagingException {
 		SMTPTransport t = null;
 		Properties props = System.getProperties();
-		props.put("mail.smtp.host", UtilityConfig.HOST);
+		props.put("mail.smtp.host", UtilityConfig.HOST_DEV_SMTP);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -36,7 +36,7 @@ public class TestSendEmail {
 		msg.setContent("<html><body><h1> Test Send Email </h1></body></html>", "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
 		t = (SMTPTransport) session.getTransport("smtp");
-		t.connect(UtilityConfig.HOST, UtilityConfig.USERNAME, UtilityConfig.PWD);
+		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
 		t.sendMessage(msg, msg.getAllRecipients());
 		System.out.println("Inside the prepareEmail method of MSEmailSend class Of AWS_MS_Utility Jar : Is Email Sent  "
 				+ t.getLastServerResponse());

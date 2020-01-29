@@ -61,7 +61,7 @@ public class AppConfig {
 
 	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen15";
 
-	public final static String EMAIL_SENT_FROMUSER = "team.spprt2019@gmail.com";
+	public final static String EMAIL_SENT_FROMUSER_DEV = "team.spprt2019@gmail.com";
 	
 
 	private AppConfig() {

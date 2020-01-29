@@ -17,7 +17,6 @@ import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
-import com.src.entity.ReferenceStaticDataEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -133,42 +132,4 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntityBykey(String key) {
-		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupByKey method");
-		List<ReferenceStaticDataEntity> staticDataEntities = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceStaticDataEntity.class);
-		criteria.add(Restrictions.eq("key", key));
-		staticDataEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = staticDataEntities != null ? staticDataEntities.size() : 0;
-		logger.debug(
-				"Inside REFERENCE LOOKUP DAO getLookupStaticDataEntityBykey method : Get All Reference Static Content Look Up Data By Key :"
-						+ key + " Size is: " + size);
-		if (size > 0) {
-			return (ArrayList<ReferenceStaticDataEntity>) staticDataEntities;
-		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_STATICCONTENT_KEY_ERRORMSG)
-						+ " for key :" + key);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@Transactional
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity() {
-		List<ReferenceStaticDataEntity> staticDataEntities = this.sessionFactory.getCurrentSession()
-				.createCriteria(ReferenceStaticDataEntity.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.list();
-		int size = staticDataEntities != null ? staticDataEntities.size() : 0;
-		logger.debug(
-				"Inside REFERENCE STATIC CONTENT LOOKUP DAO  getLookupStaticDataEntity method : Get All Static Content Reference Look Up :"
-						+ size);
-		if (size > 0) {
-			return (ArrayList<ReferenceStaticDataEntity>) staticDataEntities;
-		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_STATICCONTENT_ERRORMSG));
-
-	}
 }

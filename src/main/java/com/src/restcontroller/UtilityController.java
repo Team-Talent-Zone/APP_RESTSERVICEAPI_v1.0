@@ -3,7 +3,6 @@ package com.src.restcontroller;
 import java.io.File;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,26 +21,29 @@ public class UtilityController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(UtilityController.class);
 
 	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody String jsonStr) throws JSONException {
-		JSONObject jObject = new JSONObject(jsonStr);
-		File inputFile = new File(jObject.get("inputFilePath").toString());
-		String avatarURL = utilService.uploadAvatarsInS3(inputFile, (Integer) jObject.get("userid"));
+	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws JSONException {
+		// JSONObject jObject = new JSONObject(jsonStr);
+		// File inputFile = new File(jObject.get("inputFilePath").toString());
+		String avatarURL = utilService.uploadAvatarsInS3(inputFile, userId);
 		return new ResponseEntity<String>(avatarURL, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody String jsonStr) throws JSONException {
-		JSONObject jObject = new JSONObject(jsonStr);
-		File inputFile = new File(jObject.get("inputFilePath").toString());
-		String bgDocURL = utilService.uploadBgDocsInS3(inputFile, (Integer) jObject.get("userid"));
+	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws JSONException {
+		// JSONObject jObject = new JSONObject(jsonStr);
+		// File inputFile = new File(jObject.get("inputFilePath").toString());
+		String bgDocURL = utilService.uploadBgDocsInS3(inputFile, userId);
 		return new ResponseEntity<String>(bgDocURL, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody String jsonStr) throws JSONException {
-		JSONObject jObject = new JSONObject(jsonStr);
-		File inputFile = new File(jObject.get("inputFilePath").toString());
-		String widgetURL = utilService.uploadWidgetPicsInS3(inputFile, (Integer) jObject.get("userid"));
+	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws JSONException {
+		// JSONObject jObject = new JSONObject(jsonStr);
+		// File inputFile = new File(jObject.get("inputFilePath").toString());
+		String widgetURL = utilService.uploadWidgetPicsInS3(inputFile, userId);
 		return new ResponseEntity<String>(widgetURL, HttpStatus.OK);
 
 	}

@@ -1,6 +1,5 @@
 package com.src.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
-import com.src.entity.ReferenceStaticDataEntity;
 
 @Service("referenceLookUpManager")
 @Transactional(rollbackFor = { Exception.class })
@@ -39,13 +37,4 @@ public class ReferenceLookUpServiceImpl extends AbstractServiceManager implement
 	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
 		return referenceLookUpDAO.getLookupTemplateEntityByShortkey(shortkey);
 	}
-
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntityBykey(String key) {
-		return referenceLookUpDAO.getLookupStaticDataEntityBykey(key);
-	}
-
-	public ArrayList<ReferenceStaticDataEntity> getLookupStaticDataEntity(String targetLanguage) throws IOException {
-		return referenceLookUpDAO.getLookupStaticDataEntity();
-	}
-
 }
