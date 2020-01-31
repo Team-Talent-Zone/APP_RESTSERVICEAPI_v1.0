@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
@@ -32,9 +33,11 @@ public class ReferenceLookUpController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<ReferenceLookUpEntity>>(referenceLookUpEntities, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getReferenceLookupByShortKey/{shortkey}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+	@RequestMapping(value = "/getReferenceLookupByShortKey/{shortkey}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getReferenceLookupByShortKey(@PathVariable("shortkey") String shortkey) {
-		return new ResponseEntity<String>(referenceLookUpService.getReferenceLookupByShortKey(shortkey), HttpStatus.OK);
+		Gson gson = new Gson();
+		String code =  referenceLookUpService.getReferenceLookupByShortKey(shortkey);
+		return new ResponseEntity<String>(gson.toJson(code),HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getReferenceLookupMappingByRefId/{refId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

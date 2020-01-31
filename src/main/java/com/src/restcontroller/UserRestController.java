@@ -107,7 +107,8 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
+		UserEntity userEntity =  userService.checkUsername(username);
+		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 	
 	/**
