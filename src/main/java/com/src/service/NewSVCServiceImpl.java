@@ -11,6 +11,7 @@ import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -94,7 +95,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
 	}
-
+  
 	/**
 	 * To Save User Service Details.
 	 */
@@ -102,13 +103,18 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
 		userServiceDetailsEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceDetailsEntity.setActive(Boolean.TRUE);
+		
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
-		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
+
+		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
+		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
+		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
 		return newServiceRestDAO.saveUserServiceDetails(userServiceDetailsEntity);
 	}
-
+	
 	/**
 	 * To save Free Lance On Service Details.
 	 */
@@ -125,4 +131,18 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetailsEntity);
 		return newServiceRestDAO.saveFreeLanceOnService(freeLanceOnServiceEntity);
 	}
+
+	@Override
+	public UserServiceDetailsEntity saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

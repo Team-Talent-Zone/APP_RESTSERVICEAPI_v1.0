@@ -145,4 +145,19 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
+
+	@Override
+	public void saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 }

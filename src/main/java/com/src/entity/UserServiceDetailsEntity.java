@@ -2,6 +2,7 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author Shanoor
  *
  */
-@Entity(name = "userServiceDetails")
+@Entity(name = "userServiceDetailsEntity")
 @Table(name = "APP_USER_SERVICE_DETAILS")
 public class UserServiceDetailsEntity implements Serializable {
 	private static final long serialVersionUID = 178635312682419598L;
@@ -30,9 +32,9 @@ public class UserServiceDetailsEntity implements Serializable {
 	@GeneratedValue
 	private Integer serviceId;
 
-	@Column(insertable = false, updatable = false, name = "OURSERVICEID")
-	private int ourserviceId;
-
+	@Column(insertable = false, updatable = false, name = "ourserviceId")
+	private Integer ourserviceId;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
@@ -64,6 +66,9 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "SERVICEENDON")
 	private String serviceEndOn;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
+	private UserServiceEventHistoryEntity userServiceEventHistory;
 
 	public Integer getServiceId() {
 		return serviceId;
@@ -73,11 +78,13 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.serviceId = serviceId;
 	}
 
-	public int getOurserviceId() {
+	
+
+	public Integer getOurserviceId() {
 		return ourserviceId;
 	}
 
-	public void setOurserviceId(int ourserviceId) {
+	public void setOurserviceId(Integer ourserviceId) {
 		this.ourserviceId = ourserviceId;
 	}
 
@@ -161,4 +168,12 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.serviceEndOn = serviceEndOn;
 	}
 
+	public UserServiceEventHistoryEntity getUserServiceEventHistory() {
+		return userServiceEventHistory;
+	}
+
+	public void setUserServiceEventHistory(UserServiceEventHistoryEntity userServiceEventHistory) {
+		this.userServiceEventHistory = userServiceEventHistory;
+	}
+ 
 }

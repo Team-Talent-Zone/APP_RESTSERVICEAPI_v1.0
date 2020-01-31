@@ -65,5 +65,19 @@ public interface NewSVCService {
 	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
+	
+	/**
+	 * To edit and update the user Service details.
+	 * @param userServiceDetailsEntity
+	 * @return
+	 */
+	public UserServiceDetailsEntity saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+	
+	/**
+	 * To edit and Update the Free Lance on Service.
+	 * @param freeLanceOnServiceEntity
+	 * @return
+	 */
+	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 }

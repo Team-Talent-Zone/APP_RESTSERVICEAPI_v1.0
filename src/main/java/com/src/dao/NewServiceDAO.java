@@ -65,4 +65,16 @@ public interface NewServiceDAO {
 	 */
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 	
+	/**
+	 * To save or Update the User Service Details.
+	 * @param newServiceEntity
+	 */
+	public void saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+	
+	/**
+	 * To save or Update the Free Lance on Service Details.
+	 * @param newServiceEntity
+	 */
+	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
+	
 }

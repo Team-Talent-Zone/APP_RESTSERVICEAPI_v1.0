@@ -133,5 +133,38 @@ public class NewServiceController extends AbstractRestManager {
 				.saveFreeLanceOnService(freeLanceOnServiceEntityObject);
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
 	}
+	
+	/**
+	 * Method is to save or Update the User Service Details.
+	 * 
+	 * @param saveOrUpdateUserSVCDetails
+	 * @return
+	 */
+	@RequestMapping(value = "/saveOrUpdateUserSVCDetails/", 
+			method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserServiceDetailsEntity> saveOrUpdateUserSVCDetails(
+			@RequestBody UserServiceDetailsEntity userServiceDetailsEntityObject) {
+		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc.saveOrUpdateUserSVCDetails(userServiceDetailsEntityObject);
+		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
+	}
+																	
+	
+	/**
+	 * Method is to save or Update the Free Lance On Service.
+	 * 
+	 * @param saveOrUpdateFreeLanceOnService
+	 * @return
+	 */
+	@RequestMapping(value = "/saveOrUpdateFreeLanceOnService/", 
+			method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceOnServiceEntity> saveOrUpdateFreeLanceOnService(
+			@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntityObject) {
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = newServiceSvc.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntityObject);
+		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
+	}
 
 }
