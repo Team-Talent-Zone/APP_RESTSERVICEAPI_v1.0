@@ -95,7 +95,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
 	}
-  
+
 	/**
 	 * To Save User Service Details.
 	 */
@@ -103,7 +103,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
 		userServiceDetailsEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceDetailsEntity.setActive(Boolean.TRUE);
-		
+
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
@@ -114,7 +114,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
 		return newServiceRestDAO.saveUserServiceDetails(userServiceDetailsEntity);
 	}
-	
+
 	/**
 	 * To save Free Lance On Service Details.
 	 */
@@ -132,17 +132,35 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		return newServiceRestDAO.saveFreeLanceOnService(freeLanceOnServiceEntity);
 	}
 
+	/**
+	 * To save or Update User Service Details.
+	 */
 	@Override
 	public UserServiceDetailsEntity saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		NewServiceEntity newServiceEntity = new NewServiceEntity();
+		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
+		userServiceDetailsEntity.setNewService(newServiceEntity);
+		
+		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
+		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
+		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
+		newServiceRestDAO.saveOrUpdateUserSVCDetails(userServiceDetailsEntity);
+		return userServiceDetailsEntity;
 	}
 
+	/**
+	 * To save or Update FreeLance on Service Details.
+	 */
 	@Override
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		
+		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
+		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
+		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
+		newServiceRestDAO.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntity);
+		return freeLanceOnServiceEntity;
 	}
-
 
 }

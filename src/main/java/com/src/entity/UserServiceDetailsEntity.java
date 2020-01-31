@@ -34,7 +34,7 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(insertable = false, updatable = false, name = "ourserviceId")
 	private Integer ourserviceId;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
@@ -66,7 +66,7 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "SERVICEENDON")
 	private String serviceEndOn;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private UserServiceEventHistoryEntity userServiceEventHistory;
 
@@ -77,8 +77,6 @@ public class UserServiceDetailsEntity implements Serializable {
 	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
-
-	
 
 	public Integer getOurserviceId() {
 		return ourserviceId;
@@ -175,5 +173,5 @@ public class UserServiceDetailsEntity implements Serializable {
 	public void setUserServiceEventHistory(UserServiceEventHistoryEntity userServiceEventHistory) {
 		this.userServiceEventHistory = userServiceEventHistory;
 	}
- 
+
 }

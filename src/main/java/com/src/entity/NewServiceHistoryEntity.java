@@ -32,7 +32,7 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	@Column(insertable = false, updatable = false, name = "ourserviceId")
 	private int ourserviceId;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore

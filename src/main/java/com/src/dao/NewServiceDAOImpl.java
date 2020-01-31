@@ -115,7 +115,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
-	
+
 	/**
 	 * To save the User Service Details.
 	 */
@@ -130,7 +130,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
-	
+
 	/**
 	 * To save the freelance on Service.
 	 */
@@ -146,18 +146,36 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
-	@Override
+	/**
+	 * To save or Update the New Service Details.
+	 */
+	@Transactional
 	public void saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
-		// TODO Auto-generated method stub
-		
+		try {
+			LOGGER.info(NewServiceConstant.INSIDE_SAVEORUPDATE_USERSERVICEDETAILS);
+			sessionFactory.getCurrentSession().saveOrUpdate(userServiceDetailsEntity);
+			LOGGER.info(NewServiceConstant.CONFIRMED_SAVEORUPDATE_USERSERVICEDETAILS
+					+ userServiceDetailsEntity.getServiceId());
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
 	}
 
-	@Override
+	/**
+	 * To save or Update the New Service Details.
+	 */
+	@Transactional
 	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
-		// TODO Auto-generated method stub
-		
+		try {
+			LOGGER.info(NewServiceConstant.INSIDE_SAVEORUPDATE_FREELANCE_ON_SERVICE);
+			sessionFactory.getCurrentSession().saveOrUpdate(freeLanceOnServiceEntity);
+			LOGGER.info(NewServiceConstant.CONFIRMED_SAVEORUPDATE_FREELANCE_ON_SERVICE
+					+ freeLanceOnServiceEntity.getJobId());
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
 	}
-	
-	
-	
+
 }
