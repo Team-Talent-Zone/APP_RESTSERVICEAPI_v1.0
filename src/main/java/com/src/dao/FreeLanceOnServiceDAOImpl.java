@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.exception.RestCustomException;
 
 /**
@@ -52,6 +53,18 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
+	}
+
+	@Override
+	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVE_FREELANCE_STAR_REVIEW_FB);
+		int freeLanceStarReviewFBID = (Integer) sessionFactory.getCurrentSession().save(freeLanceStarReviewFB);
+		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_FREELANCE_STAR_REVIEW_FB + freeLanceStarReviewFBID);
+		if (freeLanceStarReviewFBID > 0) {
+			return freeLanceStarReviewFB;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 }

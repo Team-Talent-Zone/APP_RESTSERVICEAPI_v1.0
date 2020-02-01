@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
  * The <code> FreeLanceOnServiceController </code> class defines managed beans
@@ -47,5 +48,19 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceSVC
 				.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntityObject);
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Method is to save Free Lance Star Review FeedBack.
+	 * 
+	 * @param freeLanceStarReviewFBObject
+	 * @return
+	 */
+	@RequestMapping(value = "/saveFreeLanceStarReviewFB/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceStarReviewFBEntity> saveFreeLanceStarReviewFB(
+			@RequestBody FreeLanceStarReviewFBEntity freeLanceStarReviewFBObject) {
+		FreeLanceStarReviewFBEntity freeLanceStarReviewFBEntity = freeLanceOnServiceSVC
+				.saveFreeLanceStarReviewFB(freeLanceStarReviewFBObject);
+		return new ResponseEntity<FreeLanceStarReviewFBEntity>(freeLanceStarReviewFBEntity, HttpStatus.OK);
 	}
 }

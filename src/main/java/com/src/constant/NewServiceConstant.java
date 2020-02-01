@@ -25,6 +25,9 @@ public class NewServiceConstant {
 	public static final String INSIDE_SAVE_FREELANCE_ONSERVICE = "Inside DAO saveFreeLanceOnService method";
 	public static final String CONFIRM_SAVE_FREELANCE_ONSERVICE = "At saveFreeLanceOnService method in DAO:  Saved freelance on Service Succesfully : freelance on Service Id :";
 
+	public static final String INSIDE_SAVE_FREELANCE_STAR_REVIEW_FB = "Inside DAO saveFreeLanceStarReviewFB method";
+	public static final String CONFIRM_SAVE_FREELANCE_STAR_REVIEW_FB = "At saveFreeLanceStarReviewFB method in DAO:  Saved freelance on Service Succesfully : Freelance Star Review Id :";
+
 	public static final String INSIDE_SAVEORUPDATE_USERSERVICEDETAILS = "Inside Serive DAO saveOrUpdateUserSVCDetails method.";
 	public static final String CONFIRMED_SAVEORUPDATE_USERSERVICEDETAILS = "Inside DAO saveOrUpdateUserSVCDetails method : Service Details Updated for Service Id :";
 	public static final String INSIDE_SAVEORUPDATE_FREELANCE_ON_SERVICE = "Inside Serive DAO saveOrUpdateFreeLanceOnService method.";

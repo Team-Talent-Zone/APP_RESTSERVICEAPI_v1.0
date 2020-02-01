@@ -1,6 +1,7 @@
 package com.src.service;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
  * The <code> FreeLanceOnServiceSVC </code> interface defines a business service
@@ -26,4 +27,13 @@ public interface FreeLanceOnServiceSVC {
 	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
+
+	/**
+	 * To save Free Lance Star Review FeedBack.
+	 * 
+	 * @param freeLanceStarReviewFB
+	 * @return
+	 */
+	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB);
+
 }

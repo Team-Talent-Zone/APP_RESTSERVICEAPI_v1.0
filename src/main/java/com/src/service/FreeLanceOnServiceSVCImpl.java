@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 
@@ -49,5 +50,18 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
 		freeLanceOnServiceDAO.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntity);
 		return freeLanceOnServiceEntity;
+	}
+
+	/**
+	 * To save Free Lance Star Review FeedBack Details.
+	 */
+	@Override
+	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
+		freeLanceStarReviewFB.setFeedBackOn(CommonUtilites.getCurrentDateInNewFormat());
+		
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = new FreeLanceOnServiceEntity();
+		freeLanceOnServiceEntity.setJobId(freeLanceStarReviewFB.getJobId());
+		freeLanceStarReviewFB.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
+		return freeLanceOnServiceDAO.saveFreeLanceStarReviewFB(freeLanceStarReviewFB);
 	}
 }
