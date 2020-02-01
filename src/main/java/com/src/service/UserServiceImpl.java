@@ -33,6 +33,16 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public UserEntity checkUsername(String username) {
 		return userRestDAO.checkUsername(username);
 	}
+	
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 */
+	public Boolean checkUsernameNotExist(String username) {
+		return userRestDAO.checkUsernameNotExist(username);
+	}
+
 
 	/**
 	 * Get the User Details by UserId.
@@ -55,7 +65,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setIsactive(Boolean.FALSE);
 		userEntity.setIsrecoverypwd(Boolean.FALSE);
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
-		userEntity.setCreatedby(CommonUtilites.getCurrentDateInNewFormat());
+		//userEntity.setCreatedby(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
 

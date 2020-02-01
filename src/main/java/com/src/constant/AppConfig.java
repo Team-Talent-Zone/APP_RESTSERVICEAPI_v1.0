@@ -4,6 +4,8 @@ public class AppConfig {
 
 	public static final String CHECK_USERNAME_USERNOTFOUND_ERRORMSG = "checkUsername_usernotfound_errorMsg";
 
+	public static final String CHECK_USERNAME_USERFOUND_ERRORMSG = "checkUsername_userfound_errorMsg";
+
 	public static final String SAVEUSER_UNABLE_TO_SAVE_ERRORMSG = "saveUser_unabletosave_errorMsg";
 
 	public static final String FINDBYUSERNAME_USERNOTFOUND_ERRORMSG = "findByUsername_usernotfound_errorMsg";

@@ -65,6 +65,14 @@ public interface UserRestDAO {
 	 */
 	public UserEntity checkUsername(String username) ;
 	
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 * @throws Exception 
+	 */
+	public boolean checkUsernameNotExist(String username) ;
+	
 
 
 }

@@ -112,6 +112,18 @@ public class UserRestController extends AbstractRestManager {
 	}
 	
 	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 */ 
+	@RequestMapping(value = "/checkusernamenotexist/{username}/", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> checkUsernameNotExist(@PathVariable(UserConstant.USERNAME) String username) {
+		boolean isusernotexist =  userService.checkUsernameNotExist(username);
+		return new ResponseEntity<Boolean>(isusernotexist, HttpStatus.OK);
+	}
+	
+	/**
 	 * Saves the new password by encrypting.
 	 * 
 	 * @param username

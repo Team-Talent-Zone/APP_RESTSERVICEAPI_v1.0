@@ -70,6 +70,27 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
 						+ username);
 	}
+	
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean checkUsernameNotExist(String username) {
+		LOGGER.info(UserConstant.USER_DAO_CHECKUSERNAME);
+		UserEntity userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
+		userEntity = (UserEntity) criteria.setMaxResults(1).uniqueResult();
+		if (userEntity == null) {
+			return true;
+		}
+		throw new RestCustomException(HttpStatus.FOUND,
+				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERFOUND_ERRORMSG) + " "
+						+ username);
+	}
 
 	/**
 	 * Save the User Details.

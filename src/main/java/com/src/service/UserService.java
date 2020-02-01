@@ -66,6 +66,14 @@ public interface UserService {
 	public UserEntity checkUsername(String username) ;
 	
 	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 * @throws Exception 
+	 */
+	public Boolean checkUsernameNotExist(String username) ;
+	
+	/**
 	 * Helps in password recovery.
 	 * 
 	 * @param username
