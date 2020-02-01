@@ -64,6 +64,14 @@ public interface UserRestDAO {
 	 * @throws Exception 
 	 */
 	public UserEntity checkUsername(String username) ;
+
+	/**
+	 * Gives the user details.
+	 * 
+	 * @param isrecoverypwd
+	 * @return
+	 */
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
 	
 	/**
 	 * Check the UserName from the Database.

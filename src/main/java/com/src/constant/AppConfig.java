@@ -51,6 +51,8 @@ public class AppConfig {
 	public static final String SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentCBATransDetails_unabletosave_errorMsg";
 
 	public static final String SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentRefundTransDetails_unabletosave_errorMsg";
+	
+	public static final String GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG = "getUserByRecoveryPwd_usernotfound_errorMsg";
 
 	/*
 	 * Defined below are the Email Subject and Short Key Constants

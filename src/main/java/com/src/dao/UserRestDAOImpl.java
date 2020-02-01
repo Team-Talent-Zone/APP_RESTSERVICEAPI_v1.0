@@ -70,7 +70,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
 						+ username);
 	}
-	
+
 	/**
 	 * Check the UserName from the Database.
 	 * 
@@ -88,8 +88,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return true;
 		}
 		throw new RestCustomException(HttpStatus.FOUND,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERFOUND_ERRORMSG) + " "
-						+ username);
+				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERFOUND_ERRORMSG) + " " + username);
 	}
 
 	/**
@@ -188,5 +187,36 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST,
 					applicationConfigProperties.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
+	}
+
+
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * 
+	 * @param isrecoverypwd
+	 * 
+	 */
+	@SuppressWarnings({ "unchecked" })
+	@Transactional
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd)throws RestCustomException {
+		if (isrecoverypwd != null && isrecoverypwd== true) {
+ 			LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+			List<UserEntity> userEntity = null;
+			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+			criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
+			userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			int size = userEntity != null ? userEntity.size() : 0;
+			LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+			if (size > 0) {
+				return (ArrayList<UserEntity>) userEntity;
+			}
+			else {
+				throw new RestCustomException(HttpStatus.NO_CONTENT,
+						applicationConfigProperties.getProperty(AppConfig.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+			}
+		}
+		else
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
 	}
 }

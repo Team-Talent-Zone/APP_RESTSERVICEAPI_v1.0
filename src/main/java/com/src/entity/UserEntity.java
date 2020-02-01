@@ -76,6 +76,9 @@ public class UserEntity implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private FreelancehistoryEntity freelancehistoryentity;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private UserManagerDetailsEntity usermanagerdetailsentity;
 
 	public Integer getUserId() {
 		return userId;
@@ -218,5 +221,15 @@ public class UserEntity implements Serializable {
 	public void setFreelancehistoryentity(FreelancehistoryEntity freelancehistoryentity) {
 		this.freelancehistoryentity = freelancehistoryentity;
 	}
+
+	public UserManagerDetailsEntity getUsermanagerdetailsentity() {
+		return usermanagerdetailsentity;
+	}
+
+	public void setUsermanagerdetailsentity(UserManagerDetailsEntity usermanagerdetailsentity) {
+		this.usermanagerdetailsentity = usermanagerdetailsentity;
+	}
+	
+	
 
 }

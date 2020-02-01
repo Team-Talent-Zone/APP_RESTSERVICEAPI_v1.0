@@ -177,5 +177,17 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		return userEntity;
 	}
+	
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * 
+	 * @param isrecoverypwd
+	 * @return toDAO
+	 */
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd)
+	{
+		return userRestDAO.getUserByRecoveryPwd(isrecoverypwd);
+		
+	}
 
 }

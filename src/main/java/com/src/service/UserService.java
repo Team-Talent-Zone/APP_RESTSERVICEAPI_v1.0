@@ -81,4 +81,12 @@ public interface UserService {
 	 */
 	public UserEntity forgetPassword(String username);
 
+
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * @param isrecoverypwd
+	 * @return
+	 */
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
+
 }
