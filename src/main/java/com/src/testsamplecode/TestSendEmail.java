@@ -32,8 +32,8 @@ public class TestSendEmail {
 
 		msg.setFrom(new InternetAddress("team.spprt2019@gmail.com"));
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ishaq.tasleem@gmail.com", false));
-		msg.setSubject("Test Email");
-		msg.setContent("<html><body><h1> Test Send Email </h1></body></html>", "text/html; charset=utf-8");
+		msg.setSubject("FeedBack To Azmiri ");
+		msg.setContent("Azmiri your doing great JOB", "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
 		t = (SMTPTransport) session.getTransport("smtp");
 		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
