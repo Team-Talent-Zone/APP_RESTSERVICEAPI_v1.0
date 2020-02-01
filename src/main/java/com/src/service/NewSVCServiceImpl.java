@@ -163,4 +163,12 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		return freeLanceOnServiceEntity;
 	}
 
+	/**
+	 * Get the User Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId) {
+		return newServiceRestDAO.getUserServiceDetailsByUserId(userId);
+	}
 }

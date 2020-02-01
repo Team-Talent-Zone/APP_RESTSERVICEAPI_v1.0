@@ -79,5 +79,11 @@ public interface NewSVCService {
 	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
-
+	
+	/**
+	 * Get the User Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId);
 }

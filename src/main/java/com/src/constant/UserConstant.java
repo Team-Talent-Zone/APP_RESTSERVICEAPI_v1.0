@@ -23,6 +23,8 @@ public class UserConstant {
 	public static final String USER_DAO_SAVEORUPDATEUSERDETAILS = "Inside USER DAO saveorupdateUserDetails method ";
 	public static final String USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS = "Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :";
 
+	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getUserServiceDetailsByUserId method";
+	
 	// Constants
 	public static final String USERNAME = "username";
 	public static final String USERID = "userId";

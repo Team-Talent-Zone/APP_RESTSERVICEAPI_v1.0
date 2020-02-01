@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
+import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
@@ -177,5 +178,24 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
-
+	
+	/**
+	 * Get the User Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	@Transactional
+	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId) {
+		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYUSERID);
+		UserServiceDetailsEntity userServiceDetailsEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		userServiceDetailsEntity = (UserServiceDetailsEntity) criteria.uniqueResult();
+		if (userServiceDetailsEntity != null) {
+			return userServiceDetailsEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+						+ " for user Id : " + userId);
+	}
 }

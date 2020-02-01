@@ -85,4 +85,10 @@ public interface NewServiceDAO {
 	 */
 	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
+	/**
+	 * Get the User Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId);
 }
