@@ -155,5 +155,27 @@ public class NewServiceController extends AbstractRestManager {
 		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc.getUserServiceDetailsByUserId(userId);
 		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
 	}
+	/**
+	 * Get the User Service Details by Service Id.
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/getUserServiceDetailsByServiceId/{serviceId}", method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserServiceDetailsEntity> getUserServiceDetailsByServiceId(
+			@PathVariable(UserConstant.SERVICEID) int serviceId) {
+		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc.getUserServiceDetailsByServiceId(serviceId);
+		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get All User Service Details from the List.
+	 * 
+	 */
+	@RequestMapping(value = "/getAllUserServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getAllUserServiceDetails() {
+		ArrayList<UserServiceDetailsEntity> listofAllUserService = newServiceSvc.getAllUserServiceDetails();
+		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(listofAllUserService, HttpStatus.OK);
+	}
 
 }

@@ -91,4 +91,19 @@ public interface NewServiceDAO {
 	 * @param userId
 	 */
 	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId);
+
+	/**
+	 * Get the User Details by serviceId.
+	 * 
+	 * @param serviceId
+	 */
+	public UserServiceDetailsEntity getUserServiceDetailsByServiceId(int serviceId);
+
+	/**
+	 * To get All User Service Details.
+	 * 
+	 * @return
+	 */
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
+
 }

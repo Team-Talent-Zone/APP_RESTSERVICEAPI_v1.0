@@ -140,7 +140,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-		
+
 		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
 		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
@@ -155,7 +155,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	@Override
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		
+
 		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
 		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
@@ -168,7 +168,26 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	 * 
 	 * @param userId
 	 */
+	@Override
 	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId) {
 		return newServiceRestDAO.getUserServiceDetailsByUserId(userId);
+	}
+
+	/**
+	 * Get the User Service Details by serviceId.
+	 * 
+	 * @param serviceId
+	 */
+	@Override
+	public UserServiceDetailsEntity getUserServiceDetailsByServiceId(int serviceId) {
+		return newServiceRestDAO.getUserServiceDetailsByServiceId(serviceId);
+	}
+
+	/**
+	 * To Get All User Service Details.
+	 */
+	@Override
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails() {
+		return newServiceRestDAO.getAllUserServiceDetails();
 	}
 }

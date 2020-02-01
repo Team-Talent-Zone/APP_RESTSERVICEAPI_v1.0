@@ -30,9 +30,15 @@ public class NewServiceConstant {
 	public static final String INSIDE_SAVEORUPDATE_FREELANCE_ON_SERVICE = "Inside Serive DAO saveOrUpdateFreeLanceOnService method.";
 	public static final String CONFIRMED_SAVEORUPDATE_FREELANCE_ON_SERVICE = "Inside DAO saveOrUpdateFreeLanceOnService method : Service Details Updated for job Id :";
 
+	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method";
+	public static final String NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method : get All User Service Details :";
+
 	public static final String SERVICE_HISTORY = "serviceHistory";
 	public static final String SERVICE_HISTORY_ALIAS = "sHistory";
 	public static final String SERVICE_HISTORY_ALIAS_STATUS = "sHistory.status";
 	public static final String NEW_SERVICE_STATUS_APPROVED = "APPROVED";
 	public static final String NEW_SERVICE_SVC = "newSVCService";
+	public static final String USER_SERVICE_DETAILS_ENTITY = "userServiceDetailsEntity";
+	public static final String USER_SERVICE_DETAILS_ALIAS = "userSvcDtls";
+	public static final String USER_SERVICE_DETAILS_ISACTIVE = "isActive";
 }

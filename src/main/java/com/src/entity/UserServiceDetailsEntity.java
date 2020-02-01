@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * The <code> UserServiceDetails </code> class defines a POJO that provides
+ * The <code> UserServiceDetailsEntity </code> class defines a POJO that provides
  * back-end functionality for the <code> User Service Details.</code>.
  * 
  * @author Shanoor

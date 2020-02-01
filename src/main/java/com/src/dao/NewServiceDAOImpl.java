@@ -178,7 +178,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
-	
+
 	/**
 	 * Get the User Service Details by UserId.
 	 * 
@@ -197,5 +197,45 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
+	}
+
+	/**
+	 * Get the User Service Details by serviceId.
+	 * 
+	 * @param serviceId
+	 */
+	@Transactional
+	public UserServiceDetailsEntity getUserServiceDetailsByServiceId(int serviceId) {
+		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
+		UserServiceDetailsEntity userServiceDetailsEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.SERVICEID, serviceId));
+		userServiceDetailsEntity = (UserServiceDetailsEntity) criteria.uniqueResult();
+		if (userServiceDetailsEntity != null) {
+			return userServiceDetailsEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+						+ " for Service Id : " + serviceId);
+	}
+
+	/**
+	 * To Get All User Service Details.
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails() {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
+		List<UserServiceDetailsEntity> newUserServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_ISACTIVE,true));
+		newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
+		if (size > 0) {
+			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 }

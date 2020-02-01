@@ -19,6 +19,7 @@ public interface NewSVCService {
 
 	/**
 	 * To save New Service details.
+	 * 
 	 * @param newServiceEntity
 	 * @return
 	 */
@@ -26,6 +27,7 @@ public interface NewSVCService {
 
 	/**
 	 * To Edit and Save (update) the New Service Details.
+	 * 
 	 * @param newServiceEntity
 	 * @return
 	 */
@@ -33,6 +35,7 @@ public interface NewSVCService {
 
 	/**
 	 * To save New Service History Details.
+	 * 
 	 * @param newServiceHistoryEntity
 	 * @return
 	 */
@@ -40,6 +43,7 @@ public interface NewSVCService {
 
 	/**
 	 * To save Service Package Details.
+	 * 
 	 * @param newServicePackageEntity
 	 * @return
 	 */
@@ -48,12 +52,14 @@ public interface NewSVCService {
 
 	/**
 	 * To Get the all Service Details.
+	 * 
 	 * @return
 	 */
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
 
 	/**
 	 * To save User Service Details.
+	 * 
 	 * @param UserServiceDetailsEntity
 	 * @return
 	 */
@@ -61,29 +67,46 @@ public interface NewSVCService {
 
 	/**
 	 * To save Free Lance on Service.
+	 * 
 	 * @param FreeLanceOnServiceEntity
 	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
-	
+
 	/**
 	 * To edit and update the user Service details.
+	 * 
 	 * @param userServiceDetailsEntity
 	 * @return
 	 */
 	public UserServiceDetailsEntity saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
-	
+
 	/**
 	 * To edit and Update the Free Lance on Service.
+	 * 
 	 * @param freeLanceOnServiceEntity
 	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
-	
+
 	/**
-	 * Get the User Details by UserId.
+	 * Get the User Service Details by UserId.
 	 * 
 	 * @param userId
 	 */
 	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId);
+
+	/**
+	 * Get the User Service Details by serviceId.
+	 * 
+	 * @param serviceId
+	 */
+	public UserServiceDetailsEntity getUserServiceDetailsByServiceId(int serviceId);
+
+	/**
+	 * To Get the all User Service Details.
+	 * 
+	 * @return Get All User Service Details.
+	 */
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
 }

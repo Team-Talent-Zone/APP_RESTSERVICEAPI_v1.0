@@ -24,7 +24,8 @@ public class UserConstant {
 	public static final String USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS = "Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :";
 
 	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getUserServiceDetailsByUserId method";
-	
+	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID = "Inside New Service DAO getUserServiceDetailsByServiceId method";
+
 	// Constants
 	public static final String USERNAME = "username";
 	public static final String USERID = "userId";
@@ -33,6 +34,7 @@ public class UserConstant {
 	public static final String UROLE_ROLECODE = "urole.rolecode";
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
+	public static final String SERVICEID = "serviceId";
 	
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	
