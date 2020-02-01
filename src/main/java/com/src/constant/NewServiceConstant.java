@@ -41,4 +41,7 @@ public class NewServiceConstant {
 	public static final String USER_SERVICE_DETAILS_ENTITY = "userServiceDetailsEntity";
 	public static final String USER_SERVICE_DETAILS_ALIAS = "userSvcDtls";
 	public static final String USER_SERVICE_DETAILS_ISACTIVE = "isActive";
+	public static final String USER_SERVICE_SVC = "newSVCService";
+	public static final String USER_SERVICE_DETAILS_SERVICE = "userServiceDtls";
+	public static final String FREE_LANCE_ON_SERVICE = "freeLanceOnService";
 }

@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.src.dao.FreeLanceOnServiceDAO;
 import com.src.dao.NewServiceDAO;
 import com.src.dao.PaymentDAO;
 import com.src.dao.ReferenceLookUpDAO;
 import com.src.dao.UserRestDAO;
+import com.src.dao.UserServiceDetailsDAO;
 
 /**
  * The <code> AbstractServiceManager </code>interface used to provides
@@ -40,5 +42,11 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected NewServiceDAO newServiceRestDAO;
-	
+
+	@Autowired
+	protected UserServiceDetailsDAO userServiceDetailsDAO;
+
+	@Autowired
+	protected FreeLanceOnServiceDAO freeLanceOnServiceDAO;
+
 }

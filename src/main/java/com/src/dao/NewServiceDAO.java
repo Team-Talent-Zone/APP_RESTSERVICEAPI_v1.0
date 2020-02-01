@@ -2,11 +2,9 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
-import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
-import com.src.entity.UserServiceDetailsEntity;
 
 /**
  * The <code> NewServiceDAO </code> interface defines a data access object for
@@ -54,56 +52,4 @@ public interface NewServiceDAO {
 	 * @return
 	 */
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
-
-	/**
-	 * To save User Service Details.
-	 * 
-	 * @param userServiceDetailsEntity
-	 * @return
-	 */
-	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
-
-	/**
-	 * To save free Lance on Service.
-	 * 
-	 * @param freeLanceOnServiceEntity
-	 * @return
-	 */
-	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
-
-	/**
-	 * To save or Update the User Service Details.
-	 * 
-	 * @param newServiceEntity
-	 */
-	public void saveOrUpdateUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
-
-	/**
-	 * To save or Update the Free Lance on Service Details.
-	 * 
-	 * @param newServiceEntity
-	 */
-	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
-
-	/**
-	 * Get the User Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	public UserServiceDetailsEntity getUserServiceDetailsByUserId(int userId);
-
-	/**
-	 * Get the User Details by serviceId.
-	 * 
-	 * @param serviceId
-	 */
-	public UserServiceDetailsEntity getUserServiceDetailsByServiceId(int serviceId);
-
-	/**
-	 * To get All User Service Details.
-	 * 
-	 * @return
-	 */
-	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
-
 }

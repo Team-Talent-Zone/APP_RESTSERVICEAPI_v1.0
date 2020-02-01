@@ -79,6 +79,12 @@
 	<bean id="newServiceSvc" class="com.src.service.NewSVCServiceImpl"></bean>
 	<bean id="newServiceDAO" class="com.src.dao.NewServiceDAOImpl"></bean>
 
+	<bean id="userServiceDetailsSVC" class="com.src.service.UserServiceDetailsSVCImpl"></bean>
+	<bean id="userServiceDetailsDAO" class="com.src.dao.UserServiceDetailsDAOImpl"></bean>
+
+	<bean id="freeLanceOnServiceSVC" class="com.src.service.FreeLanceOnServiceSVCImpl"></bean>
+	<bean id="freeLanceOnServiceDAO" class="com.src.dao.FreeLanceOnServiceDAOImpl"></bean>
+
 	<bean id="referenceLookUpDAO"
 		class="com.src.dao.ReferenceLookUpDAOImpl"></bean>
 	<bean id="referenceLookUpService"

@@ -6,21 +6,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.src.constant.UserConstant;
-import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
-import com.src.entity.UserServiceDetailsEntity;
 
 /**
  * The <code> NewServiceController </code> class defines managed beans which
- * provides back-end functionality or the <code>NewService</code> pages.
+ * provides back-end functionality on the <code>NewService</code> pages.
  * 
  * @author Shanoor
  *
@@ -87,95 +83,4 @@ public class NewServiceController extends AbstractRestManager {
 		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
 		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
 	}
-
-	/**
-	 * Method is to save User Service Details.
-	 * 
-	 * @param newServiceHistoryObject
-	 * @return
-	 */
-	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserServiceDetailsEntity> saveUserServiceDetails(
-			@RequestBody UserServiceDetailsEntity userServiceDetailsObject) {
-		UserServiceDetailsEntity UserServiceDetailsEntity = newServiceSvc
-				.saveUserServiceDetails(userServiceDetailsObject);
-		return new ResponseEntity<UserServiceDetailsEntity>(UserServiceDetailsEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Method is to save Free Lance On Service Details.
-	 * 
-	 * @param newServiceHistoryObject
-	 * @return
-	 */
-	@RequestMapping(value = "/saveFreeLanceOnService/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<FreeLanceOnServiceEntity> saveFreeLanceOnService(
-			@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntityObject) {
-		FreeLanceOnServiceEntity freeLanceOnServiceEntity = newServiceSvc
-				.saveFreeLanceOnService(freeLanceOnServiceEntityObject);
-		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Method is to save or Update the User Service Details.
-	 * 
-	 * @param saveOrUpdateUserSVCDetails
-	 * @return
-	 */
-	@RequestMapping(value = "/saveOrUpdateUserSVCDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserServiceDetailsEntity> saveOrUpdateUserSVCDetails(
-			@RequestBody UserServiceDetailsEntity userServiceDetailsEntityObject) {
-		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc
-				.saveOrUpdateUserSVCDetails(userServiceDetailsEntityObject);
-		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Method is to save or Update the Free Lance On Service.
-	 * 
-	 * @param saveOrUpdateFreeLanceOnService
-	 * @return
-	 */
-	@RequestMapping(value = "/saveOrUpdateFreeLanceOnService/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<FreeLanceOnServiceEntity> saveOrUpdateFreeLanceOnService(
-			@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntityObject) {
-		FreeLanceOnServiceEntity freeLanceOnServiceEntity = newServiceSvc
-				.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntityObject);
-		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Get the User Service Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@RequestMapping(value = "/getUserServiceDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserServiceDetailsEntity> getUserServiceDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc.getUserServiceDetailsByUserId(userId);
-		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
-	}
-	/**
-	 * Get the User Service Details by Service Id.
-	 * 
-	 * @param userId
-	 */
-	@RequestMapping(value = "/getUserServiceDetailsByServiceId/{serviceId}", method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserServiceDetailsEntity> getUserServiceDetailsByServiceId(
-			@PathVariable(UserConstant.SERVICEID) int serviceId) {
-		UserServiceDetailsEntity userServiceDetailsEntity = newServiceSvc.getUserServiceDetailsByServiceId(serviceId);
-		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
-	}
-	
-	/**
-	 * Get All User Service Details from the List.
-	 * 
-	 */
-	@RequestMapping(value = "/getAllUserServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getAllUserServiceDetails() {
-		ArrayList<UserServiceDetailsEntity> listofAllUserService = newServiceSvc.getAllUserServiceDetails();
-		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(listofAllUserService, HttpStatus.OK);
-	}
-
 }

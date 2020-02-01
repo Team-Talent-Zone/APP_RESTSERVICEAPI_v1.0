@@ -1,0 +1,53 @@
+package com.src.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.src.constant.NewServiceConstant;
+import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.UserServiceDetailsEntity;
+import com.src.utils.CommonUtilites;
+
+/**
+ * The <code> FreeLanceOnServiceSVCImpl </code> class provides the
+ * implementation for the <code>Free Lance on Service</code> related business
+ * interface.
+ * 
+ * @author Shanoor
+ *
+ */
+@Service(NewServiceConstant.FREE_LANCE_ON_SERVICE)
+@Transactional(rollbackFor = { Exception.class })
+public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements FreeLanceOnServiceSVC {
+
+	/**
+	 * To save Free Lance On Service Details.
+	 */
+	@Override
+	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceOnServiceEntity.setJobAccepted(Boolean.FALSE);
+		freeLanceOnServiceEntity.setOutStandingAmtPaid(Boolean.FALSE);
+		freeLanceOnServiceEntity.setJobCancel(Boolean.FALSE);
+		freeLanceOnServiceEntity.setJobActive(Boolean.FALSE);
+		freeLanceOnServiceEntity.setJobCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
+		userServiceDetailsEntity.setServiceId(freeLanceOnServiceEntity.getServiceId());
+		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetailsEntity);
+		return freeLanceOnServiceDAO.saveFreeLanceOnService(freeLanceOnServiceEntity);
+	}
+
+	/**
+	 * To save or Update FreeLance on Service Details.
+	 */
+	@Override
+	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+
+		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
+		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
+		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
+		freeLanceOnServiceDAO.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntity);
+		return freeLanceOnServiceEntity;
+	}
+}

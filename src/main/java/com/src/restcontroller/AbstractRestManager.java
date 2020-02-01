@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.src.helper.SendEmailHelper;
+import com.src.service.FreeLanceOnServiceSVC;
 import com.src.service.NewSVCService;
 import com.src.service.PaymentService;
 import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
+import com.src.service.UserServiceDetailsSVC;
 import com.src.service.UtilityService;
 
 /**
@@ -39,6 +41,13 @@ class AbstractRestManager {
 
 	@Autowired
 	protected NewSVCService newServiceSvc;
+	
+	@Autowired
+	protected UserServiceDetailsSVC userServiceDetailsService;
+
+	@Autowired
+	protected FreeLanceOnServiceSVC freeLanceOnServiceSVC;
+
 
 	SendEmailHelper emailHelper = new SendEmailHelper();
 
