@@ -23,7 +23,7 @@ public class UtilityController extends AbstractRestManager {
 
 	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody File inputFile, @RequestBody int userId)
-			throws JSONException {
+			throws Exception {
 		Gson gson = new Gson();
 		String avatarURL = utilService.uploadAvatarsInS3(inputFile, userId);
 		return new ResponseEntity<String>(gson.toJson(avatarURL), HttpStatus.OK);
@@ -32,8 +32,6 @@ public class UtilityController extends AbstractRestManager {
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody File inputFile, @RequestBody int userId)
 			throws JSONException {
-		// JSONObject jObject = new JSONObject(jsonStr);
-		// File inputFile = new File(jObject.get("inputFilePath").toString());
 		Gson gson = new Gson();
 		String bgDocURL = utilService.uploadBgDocsInS3(inputFile, userId);
 		return new ResponseEntity<String>(gson.toJson(bgDocURL), HttpStatus.OK);
@@ -42,24 +40,14 @@ public class UtilityController extends AbstractRestManager {
 	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody File inputFile, @RequestBody int userId)
 			throws JSONException {
-		// JSONObject jObject = new JSONObject(jsonStr);
-		// File inputFile = new File(jObject.get("inputFilePath").toString());
 		Gson gson = new Gson();
 		String widgetURL = utilService.uploadWidgetPicsInS3(inputFile, userId);
 		return new ResponseEntity<String>(gson.toJson(widgetURL), HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/autosendemail/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UtilEntity> autoSendEmail(@RequestBody UtilEntity utilEntity) throws JSONException {
-		UtilEntity utilEntityResponse = utilService.sendEmail(utilEntity);
-		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "/sendemail/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UtilEntity> sendEmail(@RequestBody Object obj, @RequestBody String templateURL,
-			@RequestBody String shortKey) throws JSONException {
-		UtilEntity utilEntity = emailHelper.returnUtilEntityObjByShortKey(obj, templateURL, shortKey);
+	public ResponseEntity<UtilEntity> sendEmail(@RequestBody UtilEntity utilEntity) throws Exception {
 		UtilEntity utilEntityResponse = utilService.sendEmail(utilEntity);
 		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}

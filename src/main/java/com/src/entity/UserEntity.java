@@ -233,14 +233,12 @@ public class UserEntity implements Serializable {
 		this.usermanagerdetailsentity = usermanagerdetailsentity;
 	}
 
-	public String getPreferLang() {
+	public String getPreferlang() {
 		return preferLang;
 	}
 
-	public void setPreferLang(String preferLang) {
-		this.preferLang = preferLang;
+	public void setPreferlang(String preferlang) {
+		this.preferLang = preferlang;
 	}
-	
-	
 
 }

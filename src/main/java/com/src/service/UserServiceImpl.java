@@ -65,7 +65,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setIsactive(Boolean.FALSE);
 		userEntity.setIsrecoverypwd(Boolean.FALSE);
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
-		//userEntity.setCreatedby(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
 

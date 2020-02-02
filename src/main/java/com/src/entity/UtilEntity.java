@@ -2,58 +2,43 @@ package com.src.entity;
 
 import java.io.Serializable;
 
-import org.json.JSONArray;
-
 public class UtilEntity implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private String fromUser;
+	private String fromuser;
 
-	private String toUser;
+	private String touser;
 
 	private String subject;
 
 	private String body;
 
-	private JSONArray jsonArray;
+	private String[] array;
 
-	private String templateURL;
+	private String templateurl;
 	
-	private int lastReturnCode;
+	private int lastreturncode;
 	
-	private String lastServerResponse;
-	
-	public String getLastServerResponse() {
-		return lastServerResponse;
+	private String lastserverresponse;
+
+	public String getFromuser() {
+		return fromuser;
 	}
 
-	public void setLastServerResponse(String lastServerResponse) {
-		this.lastServerResponse = lastServerResponse;
+	public void setFromuser(String fromuser) {
+		this.fromuser = fromuser;
 	}
 
-	public int getLastReturnCode() {
-		return lastReturnCode;
+	public String getTouser() {
+		return touser;
 	}
 
-	public void setLastReturnCode(int lastReturnCode) {
-		this.lastReturnCode = lastReturnCode;
-	}
-
-	public String getFromUser() {
-		return fromUser;
-	}
-
-	public void setFromUser(String fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public String getToUser() {
-		return toUser;
-	}
-
-	public void setToUser(String toUser) {
-		this.toUser = toUser;
+	public void setTouser(String touser) {
+		this.touser = touser;
 	}
 
 	public String getSubject() {
@@ -72,20 +57,37 @@ public class UtilEntity implements Serializable {
 		this.body = body;
 	}
 
-	public JSONArray getJsonArray() {
-		return jsonArray;
+	public String[] getArray() {
+		return array;
 	}
 
-	public void setJsonArray(JSONArray jsonArray) {
-		this.jsonArray = jsonArray;
+	public void setArray(String[] array) {
+		this.array = array;
 	}
 
-	public String getTemplateURL() {
-		return templateURL;
+	public String getTemplateurl() {
+		return templateurl;
 	}
 
-	public void setTemplateURL(String templateURL) {
-		this.templateURL = templateURL;
+	public void setTemplateurl(String templateurl) {
+		this.templateurl = templateurl;
 	}
 
+	public int getLastreturncode() {
+		return lastreturncode;
+	}
+
+	public void setLastreturncode(int lastreturncode) {
+		this.lastreturncode = lastreturncode;
+	}
+
+	public String getLastserverresponse() {
+		return lastserverresponse;
+	}
+
+	public void setLastserverresponse(String lastserverresponse) {
+		this.lastserverresponse = lastserverresponse;
+	}
+	
+	 
 }

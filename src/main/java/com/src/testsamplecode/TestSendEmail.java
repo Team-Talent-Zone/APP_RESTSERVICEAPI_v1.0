@@ -31,9 +31,9 @@ public class TestSendEmail {
 		Message msg = new MimeMessage(session);
 
 		msg.setFrom(new InternetAddress("team.spprt2019@gmail.com"));
-		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ishaq.tasleem@gmail.com", false));
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("komal.singhFU@yahoo.com", false));
 		msg.setSubject("FeedBack To Azmiri ");
-		msg.setContent("Azmiri your doing great JOB", "text/html; charset=utf-8");
+		msg.setContent("<html><h1><u>Azmiri your doing great JOB</u></h1></html>", "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
 		t = (SMTPTransport) session.getTransport("smtp");
 		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
@@ -42,7 +42,7 @@ public class TestSendEmail {
 				+ t.getLastServerResponse());
 
 		System.out.println(t.getLastServerResponse());
-		System.out.println(t.getReportSuccess());
+		System.out.println(t.getLastReturnCode());
 
 	}
 

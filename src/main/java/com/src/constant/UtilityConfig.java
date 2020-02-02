@@ -26,7 +26,5 @@ public class UtilityConfig {
 
 	public static final String FOLDER_WIDGETS = "WIDGETS";
 	
-	public final static String TARGET_DEFAULT_LANGUAGE = "EN";
-	
 }
 

@@ -61,17 +61,18 @@ public class AppConfig {
 
 	/*
 	 * Defined below are the Email Subject and Short Key Constants
+	 * 
 	 */
+	
+	public final static String EMAIL_SHORTKEY_SOMETHINGWENTWRONG = "autogen4";
+
 	public final static String EMAIL_SUBJECT_SOMETHINGWENTWRONG = "Something Went Wrong. Urgent Attention Needed";
 
-	public final static String EMAIL_SHORTKEY_SOMETHINGWENTWRONG = "autogen4";
+	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen28";
 
 	public final static String EMAIL_SUBJECT_VERIFYEMAILADDRESS = "Verify your email";
 
-	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen15";
-
 	public final static String EMAIL_SENT_FROMUSER_DEV = "team.spprt2019@gmail.com";
-
 	public static final String SERVICE_NOTFOUND_ERRORMSG = "service_notfound_errorMsg";
 
 	private AppConfig() {
