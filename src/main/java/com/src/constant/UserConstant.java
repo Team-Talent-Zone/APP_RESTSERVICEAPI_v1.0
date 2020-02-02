@@ -29,9 +29,14 @@ public class UserConstant {
 
 	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILSBYMANAGEID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
 	
+	public static final String USER_DAO_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method";
+	public static final String USER_DAO_INSIDE_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method : Get All Free Lance On Service :";
+	
 	public static final String USER_DETAILS = "userdetails";
 	public static final String USER_DETAILS_ISRECOVERYPWD = "isrecoverypwd";
 
+	public static final String FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getFreeLanceOnServiceDetailsByUserId method";
+	
 	// Constants
 	public static final String USERNAME = "username";
 	public static final String USERID = "userId";

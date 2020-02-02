@@ -1,5 +1,7 @@
 package com.src.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,4 +79,23 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceNotification.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
 		return freeLanceOnServiceDAO.saveFreeLanceOnServiceNotification(freeLanceOnServiceNotification);
 	}
+	
+	/**
+	 * To Get All Free Lance Service Details.
+	 */
+	@Override
+	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
+		return freeLanceOnServiceDAO.getAllFreelanceOnServiceDetails();
+	}
+	
+	/**
+	 * Get the Free Lance on Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	@Override
+	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId) {
+		return freeLanceOnServiceDAO.getFreeLanceOnServiceDetailsByUserId(userId);
+	}
+	
 }

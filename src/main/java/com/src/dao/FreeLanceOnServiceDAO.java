@@ -1,5 +1,7 @@
 package com.src.dao;
 
+import java.util.ArrayList;
+
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
@@ -45,4 +47,18 @@ public interface FreeLanceOnServiceDAO {
 	 */
 	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
 			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
+
+	/**
+	 * To get All Free LanceService Details.
+	 * 
+	 * @return
+	 */
+	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
+
+	/**
+	 * Get the Free Lance on Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
 }

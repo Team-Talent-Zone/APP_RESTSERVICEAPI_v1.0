@@ -1,13 +1,17 @@
 package com.src.restcontroller;
 
+import java.util.ArrayList;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
@@ -78,4 +82,29 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 				.saveFreeLanceOnServiceNotification(freeLanceOnServiceNotificationObject);
 		return new ResponseEntity<FreeLanceOnServiceNotification>(freeLanceOnServiceNotificationEntity, HttpStatus.OK);
 	}
+
+	/**
+	 * Get All Freelance on Service Details from the List.
+	 * 
+	 */
+	@RequestMapping(value = "/getAllFreelanceOnServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceOnServiceEntity>> getAllFreelanceOnServiceDetails() {
+		ArrayList<FreeLanceOnServiceEntity> freeLanceOnServiceEntity = freeLanceOnServiceSVC
+				.getAllFreelanceOnServiceDetails();
+		return new ResponseEntity<ArrayList<FreeLanceOnServiceEntity>>(freeLanceOnServiceEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get the Free Lance On Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/getFreeLanceOnServiceDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceOnServiceEntity> getFreeLanceOnServiceDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceSVC
+				.getFreeLanceOnServiceDetailsByUserId(userId);
+		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
+	}
+
 }

@@ -1,5 +1,10 @@
 package com.src.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -8,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
+import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
@@ -86,6 +92,45 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	}
+
+	/**
+	 * To get Free Lance on Service Details.
+	 */
+	@Transactional
+	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
+		LOGGER.info(UserConstant.USER_DAO_GETALLFREELANCEONSERVICE);
+		@SuppressWarnings("unchecked")
+		List<FreeLanceOnServiceEntity> freeLanceOnServiceEntity = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreeLanceOnServiceEntity.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
+		int size = freeLanceOnServiceEntity != null ? freeLanceOnServiceEntity.size() : 0;
+		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLFREELANCEONSERVICE + size);
+		if (size > 0) {
+			return (ArrayList<FreeLanceOnServiceEntity>) freeLanceOnServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+	}
+	
+	/**
+	 * Get the Free Lance On Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	@Transactional
+	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId) {
+		LOGGER.info(UserConstant.FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID);
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceOnServiceEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		freeLanceOnServiceEntity = (FreeLanceOnServiceEntity) criteria.uniqueResult();
+		if (freeLanceOnServiceEntity != null) {
+			return freeLanceOnServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+						+ " for user Id : " + userId);
 	}
 
 }
