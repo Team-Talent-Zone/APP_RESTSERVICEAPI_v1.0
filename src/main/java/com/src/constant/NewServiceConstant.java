@@ -36,6 +36,12 @@ public class NewServiceConstant {
 	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method";
 	public static final String NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method : get All User Service Details :";
 
+	public static final String INSIDE_SAVE_USERSERVICE_NOTIGFICATION = "Inside DAO saveUserServiceNotification method";
+	public static final String CONFIRM_SAVE_USERSERVICE_NOTIFICATION = "At saveUserServiceNotification method in DAO:  Saved Use Service Details Succesfully : User Service Notification Id :";
+
+	public static final String INSIDE_SAVE_FREELANCE_ON_SERVICE_NOTIFICATION = "Inside DAO saveFreeLanceOnServiceNotification method";
+	public static final String CONFIRM_SAVE_FREELANCE_ON_NOTIFICATION = "At saveFreeLanceOnServiceNotification method in DAO:  Saved Use Service Details Succesfully : Free Lance on Service Notification Id :";
+
 	public static final String SERVICE_HISTORY = "serviceHistory";
 	public static final String SERVICE_HISTORY_ALIAS = "sHistory";
 	public static final String SERVICE_HISTORY_ALIAS_STATUS = "sHistory.status";

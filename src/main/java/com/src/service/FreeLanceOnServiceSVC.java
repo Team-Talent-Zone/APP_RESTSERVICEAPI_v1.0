@@ -1,6 +1,7 @@
 package com.src.service;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
@@ -35,5 +36,14 @@ public interface FreeLanceOnServiceSVC {
 	 * @return
 	 */
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB);
+
+	/**
+	 * To save Free Lance on Service Notification.
+	 * 
+	 * @param saveFreeLanceOnServiceNotification
+	 * @return
+	 */
+	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
+			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.exception.RestCustomException;
 
@@ -55,13 +56,33 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 	}
 
-	@Override
+	/**
+	 * To Save Free Lance Star Review Feedback Details.
+	 */
+	@Transactional
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVE_FREELANCE_STAR_REVIEW_FB);
 		int freeLanceStarReviewFBID = (Integer) sessionFactory.getCurrentSession().save(freeLanceStarReviewFB);
 		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_FREELANCE_STAR_REVIEW_FB + freeLanceStarReviewFBID);
 		if (freeLanceStarReviewFBID > 0) {
 			return freeLanceStarReviewFB;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	}
+
+	/**
+	 * To Save Free Lance On Service Notification.
+	 */
+	@Transactional
+	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
+			FreeLanceOnServiceNotification freeLanceOnServiceNotification) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVE_FREELANCE_ON_SERVICE_NOTIFICATION);
+		int freeLanceOnServiceNotificationId = (Integer) sessionFactory.getCurrentSession()
+				.save(freeLanceOnServiceNotification);
+		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_FREELANCE_ON_NOTIFICATION + freeLanceOnServiceNotificationId);
+		if (freeLanceOnServiceNotificationId > 0) {
+			return freeLanceOnServiceNotification;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));

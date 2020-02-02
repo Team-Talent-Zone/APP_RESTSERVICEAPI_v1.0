@@ -9,6 +9,7 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
+import com.src.entity.UserServiceNotfications;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -85,6 +86,18 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	@Override
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails() {
 		return userServiceDetailsDAO.getAllUserServiceDetails();
+	}
+
+	/**
+	 * To Save User Service Notification.
+	 */
+	@Override
+	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication) {
+		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
+		userServiceDetailsEntity.setServiceId(userServiceNotfication.getServiceId());
+		userServiceNotfication.setUserServiceDetailsEntity(userServiceDetailsEntity);
+		userServiceDetailsDAO.saveUserServiceNotification(userServiceNotfication);
+		return userServiceNotfication;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.src.service;
 import java.util.ArrayList;
 
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceNotfications;
 
 /**
  * The <code> UserServiceDetailsService </code> interface defines a business
@@ -49,4 +50,12 @@ public interface UserServiceDetailsSVC {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
+	
+	/**
+	 * To save User Service Notificaton.
+	 * 
+	 * @param saveUserServiceNotification
+	 * @return
+	 */
+	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 }

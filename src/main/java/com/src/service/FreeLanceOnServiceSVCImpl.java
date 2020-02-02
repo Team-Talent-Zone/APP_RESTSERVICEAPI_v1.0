@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
@@ -58,10 +59,22 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
 		freeLanceStarReviewFB.setFeedBackOn(CommonUtilites.getCurrentDateInNewFormat());
-		
+
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = new FreeLanceOnServiceEntity();
 		freeLanceOnServiceEntity.setJobId(freeLanceStarReviewFB.getJobId());
 		freeLanceStarReviewFB.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
 		return freeLanceOnServiceDAO.saveFreeLanceStarReviewFB(freeLanceStarReviewFB);
+	}
+
+	/**
+	 * To save Free Lance On Service Notification Details.
+	 */
+	@Override
+	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
+			FreeLanceOnServiceNotification freeLanceOnServiceNotification) {
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = new FreeLanceOnServiceEntity();
+		freeLanceOnServiceEntity.setJobId(freeLanceOnServiceNotification.getJobId());
+		freeLanceOnServiceNotification.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
+		return freeLanceOnServiceDAO.saveFreeLanceOnServiceNotification(freeLanceOnServiceNotification);
 	}
 }

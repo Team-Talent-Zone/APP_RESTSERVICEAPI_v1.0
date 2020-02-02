@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceNotfications;
 
 /**
  * The <code> UserServiceDetailsController </code> class defines managed beans
@@ -61,7 +62,8 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	@RequestMapping(value = "/getUserServiceDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserServiceDetailsEntity> getUserServiceDetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
-		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService.getUserServiceDetailsByUserId(userId);
+		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
+				.getUserServiceDetailsByUserId(userId);
 		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
 	}
 
@@ -73,7 +75,8 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	@RequestMapping(value = "/getUserServiceDetailsByServiceId/{serviceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserServiceDetailsEntity> getUserServiceDetailsByServiceId(
 			@PathVariable(UserConstant.SERVICEID) int serviceId) {
-		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService.getUserServiceDetailsByServiceId(serviceId);
+		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
+				.getUserServiceDetailsByServiceId(serviceId);
 		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
 	}
 
@@ -85,5 +88,19 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getAllUserServiceDetails() {
 		ArrayList<UserServiceDetailsEntity> listofAllUserService = userServiceDetailsService.getAllUserServiceDetails();
 		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(listofAllUserService, HttpStatus.OK);
+	}
+
+	/**
+	 * Method is to User Service Notification.
+	 * 
+	 * @param saveUserServiceNotification
+	 * @return
+	 */
+	@RequestMapping(value = "/saveUserServiceNotification/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserServiceNotfications> saveUserServiceNotification(
+			@RequestBody UserServiceNotfications userServiceNotficationObject) {
+		UserServiceNotfications userServiceNotficationEntity = userServiceDetailsService
+				.saveUserServiceNotification(userServiceNotficationObject);
+		return new ResponseEntity<UserServiceNotfications>(userServiceNotficationEntity, HttpStatus.OK);
 	}
 }

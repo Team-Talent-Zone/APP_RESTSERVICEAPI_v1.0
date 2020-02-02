@@ -15,6 +15,7 @@ import com.src.constant.AppConfig;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceNotfications;
 import com.src.exception.RestCustomException;
 
 /**
@@ -118,5 +119,20 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+	}
+
+	/**
+	 * To save the User Service Notification.
+	 */
+	@Transactional
+	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication) {
+		LOGGER.info(NewServiceConstant.INSIDE_SAVE_USERSERVICE_NOTIGFICATION);
+		int userServiceNotificationId = (Integer) sessionFactory.getCurrentSession().save(userServiceNotfication);
+		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_USERSERVICE_NOTIFICATION + userServiceNotificationId);
+		if (userServiceNotificationId > 0) {
+			return userServiceNotfication;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 }

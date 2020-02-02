@@ -3,6 +3,7 @@ package com.src.dao;
 import java.util.ArrayList;
 
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceNotfications;
 
 /**
  * The <code> UserServiceDetailsDAO </code> interface defines a data access
@@ -49,5 +50,13 @@ public interface UserServiceDetailsDAO {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
+	
+	/**
+	 * To save User Service Notificaton.
+	 * 
+	 * @param saveUserServiceNotification
+	 * @return
+	 */
+	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 
 }

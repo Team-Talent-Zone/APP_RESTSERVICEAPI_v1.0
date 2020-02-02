@@ -1,6 +1,7 @@
 package com.src.dao;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
@@ -35,4 +36,13 @@ public interface FreeLanceOnServiceDAO {
 	 * @return
 	 */
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB);
+
+	/**
+	 * To save Free Lance on Service Notification.
+	 * 
+	 * @param saveFreeLanceOnServiceNotification
+	 * @return
+	 */
+	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
+			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
 }
