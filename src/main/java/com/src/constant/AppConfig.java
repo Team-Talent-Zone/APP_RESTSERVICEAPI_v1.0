@@ -1,5 +1,10 @@
 package com.src.constant;
 
+/**
+ * This is Constant file for Error Messgaes.
+ * @author Shanoor
+ *
+ */
 public class AppConfig {
 
 	public static final String CHECK_USERNAME_USERNOTFOUND_ERRORMSG = "checkUsername_usernotfound_errorMsg";
@@ -27,7 +32,7 @@ public class AppConfig {
 	public static final String REFERNCELOOKUPMAPPING_REFID_ERRORMSG = "referencelookupmapping_refId_errorMsg";
 
 	public static final String REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG = "referencelookupmappingcategories_mapId_errorMsg";
-	
+
 	public static final String REFERNCELOOKUP_STATICCONTENT_KEY_ERRORMSG = "referencelookupstaticcontent_key_errorMsg";
 
 	public static final String REFERNCELOOKUP_STATICCONTENT_ERRORMSG = "referencelookupstaticcontent_errorMsg";
@@ -35,13 +40,13 @@ public class AppConfig {
 	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
 
 	public static final String NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG = "newservice_unabletosave_errorMsg";
-	
+
 	public static final String GETBYSERVICEID_USERNOTFOUND_ERRORMSG = "getByOurServiceId_usernotfound_errorMsg";
-	
+
 	public static final String GETBYSERVICEPACKID_ERRORMSG = "getByOurServicePackId_usernotfound_errorMsg";
-	
+
 	public static final String SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG = "saveorupdateServiceDetails_unabletoupdate_errorMsg";
-	
+
 	public static final String GETBYSERVICEHISTORYID_USERNOTFOUND_ERRORMSG = "getByOurServiceHistory_usernotfound_errorMsg";
 
 	public static final String SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentDetails_unabletosave_errorMsg";
@@ -51,7 +56,7 @@ public class AppConfig {
 	public static final String SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentCBATransDetails_unabletosave_errorMsg";
 
 	public static final String SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentRefundTransDetails_unabletosave_errorMsg";
-	
+
 	public static final String GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG = "getUserByRecoveryPwd_usernotfound_errorMsg";
 
 	/*
@@ -66,7 +71,8 @@ public class AppConfig {
 	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen15";
 
 	public final static String EMAIL_SENT_FROMUSER_DEV = "team.spprt2019@gmail.com";
-	
+
+	public static final String SERVICE_NOTFOUND_ERRORMSG = "service_notfound_errorMsg";
 
 	private AppConfig() {
 	}

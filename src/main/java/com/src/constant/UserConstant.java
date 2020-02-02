@@ -27,6 +27,8 @@ public class UserConstant {
 	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID = "Inside New Service DAO getUserServiceDetailsByServiceId method";
 	public static final String USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD = "Inside User Service DAO getUserByRecoveryPwd method : get All User Service Details :";
 
+	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILSBYMANAGEID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
+	
 	public static final String USER_DETAILS = "userdetails";
 	public static final String USER_DETAILS_ISRECOVERYPWD = "isrecoverypwd";
 
@@ -42,6 +44,7 @@ public class UserConstant {
 
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final String ISRECOVERYPWD = "isrecoverypwd";
+	
 
 	// Table Mappings
 

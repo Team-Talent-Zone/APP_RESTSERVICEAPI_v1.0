@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -82,5 +84,17 @@ public class NewServiceController extends AbstractRestManager {
 	public ResponseEntity<ArrayList<NewServiceEntity>> getAllServiceDetails() {
 		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
 		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
+	}
+
+	/**
+	 * Get All New Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@RequestMapping(value = "/getAllNewServiceDetailsByManagerId/{managerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServiceHistoryEntity>> getAllNewServiceDetailsByManagerId(
+			@PathVariable(NewServiceConstant.MANAGEID) int managerId) {
+		return new ResponseEntity<ArrayList<NewServiceHistoryEntity>>(
+				newServiceSvc.getAllNewServiceDetailsByManagerId(managerId), HttpStatus.OK);
 	}
 }

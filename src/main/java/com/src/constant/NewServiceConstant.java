@@ -42,6 +42,9 @@ public class NewServiceConstant {
 	public static final String INSIDE_SAVE_FREELANCE_ON_SERVICE_NOTIFICATION = "Inside DAO saveFreeLanceOnServiceNotification method";
 	public static final String CONFIRM_SAVE_FREELANCE_ON_NOTIFICATION = "At saveFreeLanceOnServiceNotification method in DAO:  Saved Use Service Details Succesfully : Free Lance on Service Notification Id :";
 
+	public static final String NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYMANAGERID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
+	public static final String NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYMANAGERID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method : get All Service Details :";
+	
 	public static final String SERVICE_HISTORY = "serviceHistory";
 	public static final String SERVICE_HISTORY_ALIAS = "sHistory";
 	public static final String SERVICE_HISTORY_ALIAS_STATUS = "sHistory.status";
@@ -53,4 +56,10 @@ public class NewServiceConstant {
 	public static final String USER_SERVICE_SVC = "newSVCService";
 	public static final String USER_SERVICE_DETAILS_SERVICE = "userServiceDtls";
 	public static final String FREE_LANCE_ON_SERVICE = "freeLanceOnService";
+	public static final String SERVICE_HISTORY_ALIAS_MANAGERID = "sHistory.managerId";
+	public static final String MANAGEID = "managerId";
+	public static final String OURSERVICEID = "ourserviceId";
+	
+	public static final String SERVICE_HISTORY_ALIAS_MAPPING = "serviceHistorymapping";
+	public static final String SERVICE_HISTORY_MAPPING_OBJ = "serviceHistorymappingObj";
 }

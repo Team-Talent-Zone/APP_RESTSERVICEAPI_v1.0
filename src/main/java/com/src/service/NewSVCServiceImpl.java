@@ -92,4 +92,14 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
 	}
+
+	/**
+	 * Get All User Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@Override
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId) {
+		return newServiceRestDAO.getAllNewServiceDetailsByManagerId(managerId);
+	}
 }

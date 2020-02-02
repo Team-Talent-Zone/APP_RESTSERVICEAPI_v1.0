@@ -114,4 +114,28 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
+	/**
+	 * Get All New Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId) {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYMANAGERID);
+		List<NewServiceHistoryEntity> newServiceHistoryEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING, 
+				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq("serviceHistorymappingObj.managerId", managerId));
+		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newServiceHistoryEntity != null ? newServiceHistoryEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYMANAGERID + size);
+		if (size > 0) {
+			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(AppConfig.SERVICE_NOTFOUND_ERRORMSG) + " for managerId : "
+						+ managerId);
+	}
 }

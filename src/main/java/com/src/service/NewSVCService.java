@@ -55,4 +55,11 @@ public interface NewSVCService {
 	 */
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
 
+	/**
+	 * Get All New Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId);
+
 }
