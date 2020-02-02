@@ -59,4 +59,11 @@ public interface NewServiceDAO {
 	 * @param managerId
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId);
+	
+	/**
+	 * Get All New Service Details by userId.
+	 * 
+	 * @param userId
+	 */
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId);
 }

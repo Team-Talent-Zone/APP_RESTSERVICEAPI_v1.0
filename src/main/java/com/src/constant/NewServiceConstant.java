@@ -43,8 +43,11 @@ public class NewServiceConstant {
 	public static final String CONFIRM_SAVE_FREELANCE_ON_NOTIFICATION = "At saveFreeLanceOnServiceNotification method in DAO:  Saved Use Service Details Succesfully : Free Lance on Service Notification Id :";
 
 	public static final String NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYMANAGERID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
-	public static final String NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYMANAGERID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method : get All Service Details :";
+	public static final String NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYMANAGERID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method : get All Service Details using managerId :";
 	
+	public static final String NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYUSERID = "Inside New Service DAO getAllNewServiceDetailsByUserId method";
+	public static final String NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYUSERID = "Inside New Service DAO getAllNewServiceDetailsByUserId method : get All Service Details using UserId :";
+
 	public static final String SERVICE_HISTORY = "serviceHistory";
 	public static final String SERVICE_HISTORY_ALIAS = "sHistory";
 	public static final String SERVICE_HISTORY_ALIAS_STATUS = "sHistory.status";
@@ -62,4 +65,7 @@ public class NewServiceConstant {
 	
 	public static final String SERVICE_HISTORY_ALIAS_MAPPING = "serviceHistorymapping";
 	public static final String SERVICE_HISTORY_MAPPING_OBJ = "serviceHistorymappingObj";
+	public static final String SERVICE_HISTORY_USING_USERID = "serviceHistorymappingObj.userId";
+	public static final String SERVICE_HISTORY_USING_MANAGERID =  "serviceHistorymappingObj.managerId";
+	public static final String USERID = "userId";
 }
