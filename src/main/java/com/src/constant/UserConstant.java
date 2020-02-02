@@ -41,6 +41,7 @@ public class UserConstant {
 	public static final String SERVICEID = "serviceId";
 
 	public static final String FREELANCER_USER = "FREELANCER_USER";
+	public static final String ISRECOVERYPWD = "isrecoverypwd";
 
 	// Table Mappings
 
