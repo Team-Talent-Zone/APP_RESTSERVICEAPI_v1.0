@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
@@ -43,7 +43,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			LOGGER.info(NewServiceConstant.CONFIRMED_SAVEORUPDATE_NEWSERVICE + newServiceEntity.getOurserviceId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
-					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 
@@ -73,7 +73,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return newServicePackageEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.SERVICE_NOTFOUND_ERRORMSG) + " for managerId : "
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for managerId : "
 						+ managerId);
 	}
 	
@@ -160,7 +160,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.SERVICE_NOTFOUND_ERRORMSG) + " for userId : "
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for userId : "
 						+ userId);
 	}
 }

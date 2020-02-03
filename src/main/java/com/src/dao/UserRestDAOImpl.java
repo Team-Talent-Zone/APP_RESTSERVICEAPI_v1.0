@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
 import com.src.entity.UserEntity;
 import com.src.exception.RestCustomException;
@@ -46,7 +46,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
+				applicationConfigProperties.getProperty(CustomMsgProperties.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
 						+ " for user name :" + username);
 	}
 
@@ -67,7 +67,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
+				applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
 						+ username);
 	}
 
@@ -88,7 +88,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return true;
 		}
 		throw new RestCustomException(HttpStatus.FOUND,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERFOUND_ERRORMSG) + " " + username);
+				applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_USERFOUND_ERRORMSG) + " " + username);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
 
@@ -146,7 +146,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return (ArrayList<UserEntity>) userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return (ArrayList<UserEntity>) userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			LOGGER.info(UserConstant.USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS + userEntity.getUserId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST,
-					applicationConfigProperties.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
+					applicationConfigProperties.getProperty(CustomMsgProperties.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 
@@ -212,11 +212,11 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			}
 			else {
 				throw new RestCustomException(HttpStatus.NO_CONTENT,
-						applicationConfigProperties.getProperty(AppConfig.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+						applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
 			}
 		}
 		else
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
 	}
 }

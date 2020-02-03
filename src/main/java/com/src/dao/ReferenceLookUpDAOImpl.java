@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
@@ -42,7 +42,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpEntity>) referenceLookUpEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :" + key);
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :" + key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -58,7 +58,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpEntity>) lookUpEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_ERRORMSG));
 	}
 
 	@Transactional
@@ -71,7 +71,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return referenceLookUpEntity.getCode().toString();
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
 						+ shortkey);
 
 	}
@@ -92,7 +92,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpMappingEntity>) lookUpMappingEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
 
 	}
 
@@ -113,7 +113,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpMappingSubCategoryEntity>) lookUpMappingSubCategoryEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
 
 	}
 
@@ -127,7 +127,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return lookUpTemplateEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
+				applicationConfigProperties.getProperty(CustomMsgProperties.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
 						+ shortkey);
 
 	}

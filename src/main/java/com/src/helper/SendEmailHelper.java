@@ -10,6 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.velocity.VelocityContext;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +25,16 @@ public class SendEmailHelper {
 	public UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
 
 		VelocityHelper velocityHelper = new VelocityHelper();
-		JSONArray jsonArr = new JSONArray(utilEntity.getArray());
-		VelocityContext velocityContext = velocityHelper.generateVelocityObject(jsonArr);
+		JSONArray jsonarray = new JSONArray();
+
+		if (utilEntity.getArrayfromui() == null) {
+			jsonarray = utilEntity.getJsonarray();
+		} else {
+
+			JSONObject jsonObj = new JSONObject(utilEntity.getArrayfromui());
+			jsonarray.put(jsonObj);
+		}
+		VelocityContext velocityContext = velocityHelper.generateVelocityObject(jsonarray);
 		String htmlFormat = velocityHelper.generateEmailInHtmlFormat(utilEntity.getTemplateurl(), velocityContext);
 		if (htmlFormat != null) {
 			utilEntity.setBody(htmlFormat);
@@ -58,5 +67,4 @@ public class SendEmailHelper {
 		utilEntity.setLastreturncode(t.getLastReturnCode());
 		return utilEntity;
 	}
-
 }

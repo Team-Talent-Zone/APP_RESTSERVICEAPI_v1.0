@@ -2,6 +2,8 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+import org.json.JSONArray;
+
 public class UtilEntity implements Serializable {
 
 	/**
@@ -17,7 +19,9 @@ public class UtilEntity implements Serializable {
 
 	private String body;
 
-	private String[] array;
+	private String arrayfromui;
+	
+	private JSONArray jsonarray;
 
 	private String templateurl;
 	
@@ -57,12 +61,20 @@ public class UtilEntity implements Serializable {
 		this.body = body;
 	}
 
-	public String[] getArray() {
-		return array;
+	public String getArrayfromui() {
+		return arrayfromui;
 	}
 
-	public void setArray(String[] array) {
-		this.array = array;
+	public void setArrayfromui(String arrayfromui) {
+		this.arrayfromui = arrayfromui;
+	}
+
+	public JSONArray getJsonarray() {
+		return jsonarray;
+	}
+
+	public void setJsonarray(JSONArray jsonarray) {
+		this.jsonarray = jsonarray;
 	}
 
 	public String getTemplateurl() {

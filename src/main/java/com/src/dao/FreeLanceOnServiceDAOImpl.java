@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
@@ -43,7 +43,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return freeLanceOnServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 					+ freeLanceOnServiceEntity.getJobId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
-					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 
@@ -74,7 +74,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return freeLanceStarReviewFB;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return freeLanceOnServiceNotification;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return (ArrayList<FreeLanceOnServiceEntity>) freeLanceOnServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return freeLanceOnServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
 

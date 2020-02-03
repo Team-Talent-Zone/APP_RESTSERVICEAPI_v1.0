@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -27,7 +27,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 			return paymentEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 
@@ -41,7 +41,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 			return fuTranscationHistEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 
@@ -55,7 +55,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 			return cbaTranscationHistEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 
@@ -69,7 +69,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 			return refundTranscationHistEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 }
