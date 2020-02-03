@@ -68,6 +68,9 @@ public class UserEntity implements Serializable {
 	@Column(name = "PREFERLANG")
 	private String preferLang;
 	
+	@Column(name = "IPADDRESS")
+	private String ipaddress;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserRoleEntity userroles;
 
@@ -130,8 +133,6 @@ public class UserEntity implements Serializable {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
-	
 
 	public boolean isIsrecoverypwd() {
 		return isrecoverypwd;
@@ -233,12 +234,21 @@ public class UserEntity implements Serializable {
 		this.usermanagerdetailsentity = usermanagerdetailsentity;
 	}
 
-	public String getPreferlang() {
+	public String getPreferLang() {
 		return preferLang;
 	}
 
-	public void setPreferlang(String preferlang) {
-		this.preferLang = preferlang;
+	public void setPreferLang(String preferLang) {
+		this.preferLang = preferLang;
 	}
 
+	public String getIpaddress() {
+		return ipaddress;
+	}
+
+	public void setIpaddress(String ipaddress) {
+		this.ipaddress = ipaddress;
+	}
+
+	
 }
