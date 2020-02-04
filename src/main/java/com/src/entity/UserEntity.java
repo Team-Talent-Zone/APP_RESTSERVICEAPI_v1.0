@@ -66,10 +66,7 @@ public class UserEntity implements Serializable {
 	private String avtarurl;
 
 	@Column(name = "PREFERLANG")
-	private String preferLang;
-	
-	@Column(name = "IPADDRESS")
-	private String ipaddress;
+	private String preferlang;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserRoleEntity userroles;
@@ -234,21 +231,12 @@ public class UserEntity implements Serializable {
 		this.usermanagerdetailsentity = usermanagerdetailsentity;
 	}
 
-	public String getPreferLang() {
-		return preferLang;
+	public String getPreferlang() {
+		return preferlang;
 	}
 
-	public void setPreferLang(String preferLang) {
-		this.preferLang = preferLang;
+	public void setPreferlang(String preferlang) {
+		this.preferlang = preferlang;
 	}
-
-	public String getIpaddress() {
-		return ipaddress;
-	}
-
-	public void setIpaddress(String ipaddress) {
-		this.ipaddress = ipaddress;
-	}
-
 	
 }
