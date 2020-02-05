@@ -35,15 +35,22 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * 
 	 * @param username
 	 */
+	@SuppressWarnings("unused")
 	@Transactional
 	public UserEntity findByUsername(String username) {
 		LOGGER.info(UserConstant.USER_DAO_FINDBYUSERNAME);
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
+
 		userEntity = (UserEntity) criteria.uniqueResult();
-		if (userEntity != null) {
+		if (userEntity != null && userEntity.isIsactive()) {
 			return userEntity;
+		}
+		if(userEntity != null && !userEntity.isIsactive()) {
+			throw new RestCustomException(HttpStatus.FOUND,
+					applicationConfigProperties.getProperty(CustomMsgProperties.FINDBYUSERNAME_USERISNOTACTIVE_ERRORMSG)
+							+ " for user name :" + username);
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)

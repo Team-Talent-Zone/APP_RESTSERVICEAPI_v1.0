@@ -15,6 +15,8 @@ public class CustomMsgProperties {
 
 	public static final String FINDBYUSERNAME_USERNOTFOUND_ERRORMSG = "findByUsername_usernotfound_errorMsg";
 
+	public static final String FINDBYUSERNAME_USERISNOTACTIVE_ERRORMSG = "findByUsername_userisnotactive_errorMsg";
+
 	public static final String GETUSERBYUSERID_USERNOTFOUND_ERRORMSG = "getUserByUserId_usernotfound_errorMsg";
 
 	public static final String GETALLUSERS_NOUSERSFOUND_ERRORMSG = "getAllUsers_nousersfound_errorMsg";

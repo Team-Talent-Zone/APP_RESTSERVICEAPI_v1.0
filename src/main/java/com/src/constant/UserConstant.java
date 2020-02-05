@@ -46,7 +46,6 @@ public class UserConstant {
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
 	public static final String SERVICEID = "serviceId";
-
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final String ISRECOVERYPWD = "isrecoverypwd";
 	
