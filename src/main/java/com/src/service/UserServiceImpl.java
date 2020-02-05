@@ -123,6 +123,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		//Below IF condition is written for forgetPassword recovery 
 		if (userEntity.isIsrecoverypwd()) {
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+			userEntity.setIsrecoverypwd(Boolean.FALSE);
 		}
 
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
@@ -172,7 +173,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		String newPassword = CommonUtilites.genRandomAlphaNumeric();
 		userEntity.setIsrecoverypwd(Boolean.TRUE);
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
-		userEntity.setPassword(encoder.encode(newPassword));
+		userEntity.setPassword(newPassword);
 
 		return userEntity;
 	}
