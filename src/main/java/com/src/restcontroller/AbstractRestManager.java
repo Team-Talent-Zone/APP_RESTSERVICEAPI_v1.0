@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 
 import com.src.helper.SendEmailHelper;
@@ -49,9 +48,6 @@ class AbstractRestManager {
 	@Autowired
 	protected FreeLanceOnServiceSVC freeLanceOnServiceSVC;
 
-	@Autowired
-	protected AuthenticationManager authenticationManager;
-
-	SendEmailHelper emailHelper = new SendEmailHelper();
+ 	SendEmailHelper emailHelper = new SendEmailHelper();
 
 }
