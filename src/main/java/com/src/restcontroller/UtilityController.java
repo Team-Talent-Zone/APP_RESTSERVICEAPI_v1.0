@@ -52,4 +52,13 @@ public class UtilityController extends AbstractRestManager {
 		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/translatetext/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> translateText(@RequestBody String targetLanguage, @RequestBody String targetText)
+			throws Exception {
+		Gson gson = new Gson();
+		String translateText = utilService.translateText(targetLanguage, targetText);
+		return new ResponseEntity<String>(gson.toJson(translateText), HttpStatus.OK);
+
+	}
+
 }

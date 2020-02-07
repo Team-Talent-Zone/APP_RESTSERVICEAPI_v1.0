@@ -28,6 +28,8 @@ public class UtilEntity implements Serializable {
 	private int lastreturncode;
 	
 	private String lastserverresponse;
+	
+	private String preferlang;
 
 	public String getFromuser() {
 		return fromuser;
@@ -99,6 +101,14 @@ public class UtilEntity implements Serializable {
 
 	public void setLastserverresponse(String lastserverresponse) {
 		this.lastserverresponse = lastserverresponse;
+	}
+
+	public String getPreferlang() {
+		return preferlang;
+	}
+
+	public void setPreferlang(String preferlang) {
+		this.preferlang = preferlang;
 	}
 	
 	 

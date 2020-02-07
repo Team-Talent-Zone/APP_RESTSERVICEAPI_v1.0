@@ -39,6 +39,7 @@ public class UserConstant {
 	
 	// Constants
 	public static final String USERNAME = "username";
+	public static final String PASSWORD = "password";
 	public static final String USERID = "userId";
 	public static final String USERROLES = "userroles";
 	public static final String UROLE = "urole";

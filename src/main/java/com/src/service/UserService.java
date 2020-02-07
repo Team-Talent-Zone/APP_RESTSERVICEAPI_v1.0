@@ -20,7 +20,7 @@ public interface UserService {
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username);
+	public UserEntity findByUsername(String username , String password);
 
 	/**
 	 * Save the User Details.
@@ -88,5 +88,6 @@ public interface UserService {
 	 * @return
 	 */
 	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
+	
 
 }

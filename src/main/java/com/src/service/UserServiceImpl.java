@@ -1,7 +1,13 @@
 package com.src.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +39,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public UserEntity checkUsername(String username) {
 		return userRestDAO.checkUsername(username);
 	}
-	
+
 	/**
 	 * Check the UserName from the Database.
 	 * 
@@ -42,7 +48,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public Boolean checkUsernameNotExist(String username) {
 		return userRestDAO.checkUsernameNotExist(username);
 	}
-
 
 	/**
 	 * Get the User Details by UserId.
@@ -120,7 +125,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity saveorupdateUserDetails(UserEntity userEntity) {
 
-		//Below IF condition is written for forgetPassword recovery 
+		// Below IF condition is written for forgetPassword recovery
 		if (userEntity.isIsrecoverypwd()) {
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 			userEntity.setIsrecoverypwd(Boolean.FALSE);
@@ -157,7 +162,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username) {
+	public UserEntity findByUsername(String username, String password) {
+		System.out.println("password" + encoder.encode(password));
 		return userRestDAO.findByUsername(username);
 	}
 
@@ -177,17 +183,16 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		return userEntity;
 	}
-	
+
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
 	 * @param isrecoverypwd
 	 * @return toDAO
 	 */
-	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd)
-	{
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd) {
 		return userRestDAO.getUserByRecoveryPwd(isrecoverypwd);
-		
+
 	}
 
 }

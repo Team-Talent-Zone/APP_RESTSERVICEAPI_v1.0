@@ -38,5 +38,15 @@ public class UtilityConfig {
 	 */
 
 	public final static String EMAIL_SHORTKEY_VERIFYEMAILADDRESS = "eventgen28";
+	
+	public final static String PREFERED_LANGUAGE_TELUGU ="te";
+			
+	public final static String PREFERED_LANGUAGE_HINDI ="hi";
+	
+	public final static String MIME_TYPE_HTML = "html";
+	
+	public final static String MIME_TYPE_TEXT = "text";
+
+			
 
 }

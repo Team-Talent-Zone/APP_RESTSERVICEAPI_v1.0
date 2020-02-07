@@ -1,6 +1,5 @@
 package com.src.helper;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import com.google.cloud.translate.v3.LocationName;
@@ -13,11 +12,13 @@ import com.src.constant.UtilityConfig;
 public class TranslateHelper {
 
 	// Translating Text
-	public String translateText(String targetLanguage, String text, String type) throws IOException {
+	public String translateText(String targetLanguage, String text, String type) throws Exception {
 
-		String mimeType = "text/plain";
-		if (type.equals("html")) {
+		String mimeType = null;
+		if (type.equals(UtilityConfig.MIME_TYPE_HTML)) {
 			mimeType = "text/html";
+		} else {
+			mimeType = "text/plain";
 		}
 
 		String translationText = null;
@@ -46,9 +47,7 @@ public class TranslateHelper {
 
 			// Display the translation for each input text provided
 			for (Translation translation : response.getTranslationsList()) {
-				System.out.printf(locale.getDisplayLanguage() + " Translated text: %s\n",
-						translation.getTranslatedText());
-				translationText = translation.getTranslatedText();
+			 	translationText = translation.getTranslatedText();
 			}
 			return translationText;
 		}

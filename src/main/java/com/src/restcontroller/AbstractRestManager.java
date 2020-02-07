@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 
 import com.src.helper.SendEmailHelper;
@@ -28,7 +29,7 @@ class AbstractRestManager {
 	protected Properties applicationConfigProperties;
 
 	@Autowired
-	protected UserService userService;
+	protected UserService userDetailsService;
 
 	@Autowired
 	protected ReferenceLookUpService referenceLookUpService;
@@ -48,6 +49,8 @@ class AbstractRestManager {
 	@Autowired
 	protected FreeLanceOnServiceSVC freeLanceOnServiceSVC;
 
+	@Autowired
+	protected AuthenticationManager authenticationManager;
 
 	SendEmailHelper emailHelper = new SendEmailHelper();
 

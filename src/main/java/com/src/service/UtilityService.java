@@ -14,4 +14,6 @@ public interface UtilityService {
 
 	public String uploadWidgetPicsInS3(File inputFile, int userid);
 	
+	public String translateText(String targetLanguage , String targetText) throws Exception;
+	
 }

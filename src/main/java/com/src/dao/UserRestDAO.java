@@ -20,7 +20,7 @@ public interface UserRestDAO {
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username);
+	public UserEntity findByUsername(String username );
 
 	/**
 	 * Save the User Details.

@@ -22,7 +22,7 @@ public class SendEmailHelper {
 
 	final Logger logger = LoggerFactory.getLogger(SendEmailHelper.class);
 
-	public UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
+	public UtilEntity prepareEmail(UtilEntity utilEntity) throws Exception {
 
 		VelocityHelper velocityHelper = new VelocityHelper();
 		JSONArray jsonarray = new JSONArray();
@@ -30,20 +30,28 @@ public class SendEmailHelper {
 		if (utilEntity.getArrayfromui() == null) {
 			jsonarray = utilEntity.getJsonarray();
 		} else {
-
 			JSONObject jsonObj = new JSONObject(utilEntity.getArrayfromui());
 			jsonarray.put(jsonObj);
 		}
 		VelocityContext velocityContext = velocityHelper.generateVelocityObject(jsonarray);
 		String htmlFormat = velocityHelper.generateEmailInHtmlFormat(utilEntity.getTemplateurl(), velocityContext);
 		if (htmlFormat != null) {
+			if (utilEntity.getPreferlang().equals(UtilityConfig.PREFERED_LANGUAGE_TELUGU)
+					|| utilEntity.getPreferlang().equals(UtilityConfig.PREFERED_LANGUAGE_HINDI)) {
+				TranslateHelper translateHelper = new TranslateHelper();
+				htmlFormat = translateHelper.translateText(utilEntity.getPreferlang(), htmlFormat,
+						UtilityConfig.MIME_TYPE_HTML);
+				String subject = translateHelper.translateText(utilEntity.getPreferlang(), utilEntity.getSubject(),
+						UtilityConfig.MIME_TYPE_TEXT);
+				utilEntity.setSubject(subject);
+			}
 			utilEntity.setBody(htmlFormat);
-			utilEntity = prepareEmail(utilEntity);
+			utilEntity = sendEmail(utilEntity);
 		}
 		return utilEntity;
 	}
 
-	private UtilEntity prepareEmail(UtilEntity utilEntity) throws Exception {
+	private UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
 		SMTPTransport t = null;
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", UtilityConfig.HOST_DEV_SMTP);

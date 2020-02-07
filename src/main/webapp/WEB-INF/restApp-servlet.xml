@@ -74,7 +74,7 @@
 	</bean>
 
 	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
-	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
+	<bean id="userDetailsService" class="com.src.service.UserServiceImpl"></bean>
 
 	<bean id="newServiceSvc" class="com.src.service.NewSVCServiceImpl"></bean>
 	<bean id="newServiceDAO" class="com.src.dao.NewServiceDAOImpl"></bean>
