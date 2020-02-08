@@ -36,6 +36,7 @@ public class UserConstant {
 	public static final String USER_DETAILS_ISRECOVERYPWD = "isrecoverypwd";
 
 	public static final String FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getFreeLanceOnServiceDetailsByUserId method";
+	public static final String USER_DAO_USERROLE = "Inside USER DAO userRole method";
 	
 	// Constants
 	public static final String USERNAME = "username";
@@ -49,6 +50,10 @@ public class UserConstant {
 	public static final String SERVICEID = "serviceId";
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final String ISRECOVERYPWD = "isrecoverypwd";
+	public static final String ISJOBAVAILABLE = "isJobAvailable";
+	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
+	public static final Object CORE_SERVICE_SUPPORT_TEAM = "CORE_SERVICE_SUPPORT_TEAM";
+	
 	
 
 	// Table Mappings

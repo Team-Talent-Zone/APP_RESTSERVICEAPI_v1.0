@@ -62,7 +62,10 @@ public class CustomMsgProperties {
 	public static final String GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG = "getUserByRecoveryPwd_usernotfound_errorMsg";
 
 	public static final String SERVICE_NOTFOUND_ERRORMSG = "service_notfound_errorMsg";
+	
+	public static final String USERROLE_NOTVALID_ERRORMSG = "userRole_thisrolecantbesaved_errorMsg";
 
+	public static final String GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG ="getUserDetailsByJobAvailable_existingjob_errorMsg";
 
 	private CustomMsgProperties() {
 	}

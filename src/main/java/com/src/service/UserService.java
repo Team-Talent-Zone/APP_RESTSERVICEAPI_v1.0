@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
 
 /**
@@ -20,7 +21,7 @@ public interface UserService {
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username , String password);
+	public UserEntity findByUsername(String username, String password);
 
 	/**
 	 * Save the User Details.
@@ -61,33 +62,47 @@ public interface UserService {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public UserEntity checkUsername(String username) ;
-	
+	public UserEntity checkUsername(String username);
+
 	/**
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public Boolean checkUsernameNotExist(String username) ;
-	
+	public Boolean checkUsernameNotExist(String username);
+
 	/**
 	 * Helps in password recovery.
 	 * 
 	 * @param username
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public UserEntity forgetPassword(String username);
 
-
 	/**
 	 * Gets all the user details if isrecoverypwd is true
+	 * 
 	 * @param isrecoverypwd
 	 * @return
 	 */
 	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
-	
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable);
+
+	/**
+	 * Saves the user details if specific roles are present
+	 * 
+	 * @param userEntityObject
+	 */
+	public UserEntity userRole(UserEntity userEntityObject);
 
 }

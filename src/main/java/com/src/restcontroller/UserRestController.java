@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
 
 /**
@@ -138,6 +139,30 @@ public class UserRestController extends AbstractRestManager {
 			@PathVariable(UserConstant.ISRECOVERYPWD) Boolean isrecoverypwd) throws JSONException {
 		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd(isrecoverypwd);
 		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Details when isJobAvailable is false.
+	 * 
+	 * @param isJobAvailable
+	 * @throws JSONException
+	 */
+	@RequestMapping(value = "/getUserDetailsByJobAvailable/{isJobAvailable}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceEntity>> getUserDetailsByJobAvailable(
+			@PathVariable(UserConstant.ISJOBAVAILABLE) Boolean isJobAvailable) throws JSONException {
+		ArrayList<FreelanceEntity> freelanceEntity = userDetailsService.getUserDetailsByJobAvailable(isJobAvailable);
+		return new ResponseEntity<ArrayList<FreelanceEntity>>(freelanceEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Saves User Details by Specific Roles.
+	 * 
+	 * @param userEntityObject
+	 */
+	@RequestMapping(value = "/getUsersByRole/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> userRole(@RequestBody UserEntity userEntityObject) {
+		UserEntity userEntity = userDetailsService.userRole(userEntityObject);
+		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 }
