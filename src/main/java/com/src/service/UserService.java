@@ -98,11 +98,5 @@ public interface UserService {
 	 */
 	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable);
 
-	/**
-	 * Saves the user details if specific roles are present
-	 * 
-	 * @param userEntityObject
-	 */
-	public UserEntity userRole(UserEntity userEntityObject);
 
 }

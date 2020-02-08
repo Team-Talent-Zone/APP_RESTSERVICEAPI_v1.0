@@ -2,11 +2,9 @@ package com.src.service;
 
 import java.util.ArrayList;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
 import com.src.entity.FreelanceEntity;
 import com.src.entity.FreelancehistoryEntity;
@@ -14,7 +12,6 @@ import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserManagerDetailsEntity;
 import com.src.entity.UserRoleEntity;
-import com.src.exception.RestCustomException;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -90,6 +87,14 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
 		}
 
+		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
+			
+			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
+			usermanagerdetailsentity.setUserdetails(userEntity);
+			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
+			
+		}
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
 
@@ -144,6 +149,15 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
 		}
 
+		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
+			
+			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
+			usermanagerdetailsentity.setUserdetails(userEntity);
+			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
+			
+		}
+		
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
 
@@ -203,35 +217,5 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		return userRestDAO.getUserDetailsByJobAvailable(isJobAvailable);
 	}
 
-	/**
-	 * Saves the user details if specific roles are present
-	 * 
-	 * @param userEntityObject
-	 */
-	public UserEntity userRole(UserEntity userEntityObject) {
-
-		UserRoleEntity userroleentity = userEntityObject.getUserroles();
-
-		if ((userroleentity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
-				|| (userroleentity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
-
-			UserBizEntity userBizEntity = new UserBizEntity();
-			userBizEntity.setUserdetails(userEntityObject);
-			userEntityObject.setUserbizdetails(userBizEntity);
-
-			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
-			usermanagerdetailsentity.setUserdetails(userEntityObject);
-			userEntityObject.setUsermanagerdetailsentity(usermanagerdetailsentity);
-
-			userroleentity.setUserdetails(userEntityObject);
-			userEntityObject.setUserroles(userroleentity);
-
-			return userRestDAO.userRole(userEntityObject);
-		} else {
-			throw new RestCustomException(HttpStatus.NO_CONTENT,
-					applicationConfigProperties.getProperty(CustomMsgProperties.USERROLE_NOTVALID_ERRORMSG));
-		}
-
-	}
 
 }

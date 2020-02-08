@@ -5,7 +5,7 @@
 	<groupId>RestAPI</groupId>
 	<artifactId>RestAPI</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>RestAPI</name>
 	<properties>
 		<org.springframework.version>4.3.1.RELEASE
@@ -172,7 +172,7 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<version>2.1.1</version>
 						<configuration>
-							<warName>RestAPI</warName>
+							<warName>RestAPI-1.1-SNAPSHOT</warName>
 							<failOnMissingWebXml>true</failOnMissingWebXml>
 						</configuration>
 					</plugin>

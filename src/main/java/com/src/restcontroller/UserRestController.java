@@ -85,7 +85,8 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Save the CBA (client business administration and freelance ) User Details.
+	 * Save the User based on the role . Users are CBA , CSST , CSSM and FU ) User
+	 * Details.
 	 * 
 	 * @param userEntityObject
 	 * @return
@@ -152,17 +153,6 @@ public class UserRestController extends AbstractRestManager {
 			@PathVariable(UserConstant.ISJOBAVAILABLE) Boolean isJobAvailable) throws JSONException {
 		ArrayList<FreelanceEntity> freelanceEntity = userDetailsService.getUserDetailsByJobAvailable(isJobAvailable);
 		return new ResponseEntity<ArrayList<FreelanceEntity>>(freelanceEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Saves User Details by Specific Roles.
-	 * 
-	 * @param userEntityObject
-	 */
-	@RequestMapping(value = "/getUsersByRole/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> userRole(@RequestBody UserEntity userEntityObject) {
-		UserEntity userEntity = userDetailsService.userRole(userEntityObject);
-		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 }

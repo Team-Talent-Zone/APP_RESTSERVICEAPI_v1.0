@@ -254,20 +254,5 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 
 	}
 
-	/**
-	 * Saves the user details if specific roles are present
-	 * 
-	 * @param userEntityObject
-	 */
-	public UserEntity userRole(UserEntity userEntityObject) {
-		int userID = (Integer) sessionFactory.getCurrentSession().save(userEntityObject);
-		LOGGER.debug(UserConstant.USER_DAO_USERROLE);
-		if (userID > 0) {
-			return userEntityObject;
-		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.USERROLE_NOTVALID_ERRORMSG));
-
-	}
 
 }
