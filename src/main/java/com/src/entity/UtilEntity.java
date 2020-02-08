@@ -6,54 +6,45 @@ import org.json.JSONArray;
 
 public class UtilEntity implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private String fromUser;
+	private String fromuser;
 
-	private String toUser;
+	private String touser;
 
 	private String subject;
 
 	private String body;
 
-	private JSONArray jsonArray;
-
-	private String templateURL;
+	private String arrayfromui;
 	
-	private boolean isStatus;
+	private JSONArray jsonarray;
+
+	private String templateurl;
 	
-	private String lastServerResponse;
+	private int lastreturncode;
 	
-	public String getLastServerResponse() {
-		return lastServerResponse;
+	private String lastserverresponse;
+	
+	private String preferlang;
+
+	public String getFromuser() {
+		return fromuser;
 	}
 
-	public void setLastServerResponse(String lastServerResponse) {
-		this.lastServerResponse = lastServerResponse;
+	public void setFromuser(String fromuser) {
+		this.fromuser = fromuser;
 	}
 
-	public boolean isStatus() {
-		return isStatus;
+	public String getTouser() {
+		return touser;
 	}
 
-	public void setStatus(boolean isStatus) {
-		this.isStatus = isStatus;
-	}
-
-	public String getFromUser() {
-		return fromUser;
-	}
-
-	public void setFromUser(String fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public String getToUser() {
-		return toUser;
-	}
-
-	public void setToUser(String toUser) {
-		this.toUser = toUser;
+	public void setTouser(String touser) {
+		this.touser = touser;
 	}
 
 	public String getSubject() {
@@ -72,20 +63,53 @@ public class UtilEntity implements Serializable {
 		this.body = body;
 	}
 
-	public JSONArray getJsonArray() {
-		return jsonArray;
+	public String getArrayfromui() {
+		return arrayfromui;
 	}
 
-	public void setJsonArray(JSONArray jsonArray) {
-		this.jsonArray = jsonArray;
+	public void setArrayfromui(String arrayfromui) {
+		this.arrayfromui = arrayfromui;
 	}
 
-	public String getTemplateURL() {
-		return templateURL;
+	public JSONArray getJsonarray() {
+		return jsonarray;
 	}
 
-	public void setTemplateURL(String templateURL) {
-		this.templateURL = templateURL;
+	public void setJsonarray(JSONArray jsonarray) {
+		this.jsonarray = jsonarray;
 	}
 
+	public String getTemplateurl() {
+		return templateurl;
+	}
+
+	public void setTemplateurl(String templateurl) {
+		this.templateurl = templateurl;
+	}
+
+	public int getLastreturncode() {
+		return lastreturncode;
+	}
+
+	public void setLastreturncode(int lastreturncode) {
+		this.lastreturncode = lastreturncode;
+	}
+
+	public String getLastserverresponse() {
+		return lastserverresponse;
+	}
+
+	public void setLastserverresponse(String lastserverresponse) {
+		this.lastserverresponse = lastserverresponse;
+	}
+
+	public String getPreferlang() {
+		return preferlang;
+	}
+
+	public void setPreferlang(String preferlang) {
+		this.preferlang = preferlang;
+	}
+	
+	 
 }

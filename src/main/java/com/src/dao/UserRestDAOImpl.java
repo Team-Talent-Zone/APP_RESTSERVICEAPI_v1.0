@@ -12,8 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
+import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
 import com.src.exception.RestCustomException;
 
@@ -42,11 +43,16 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
 		userEntity = (UserEntity) criteria.uniqueResult();
-		if (userEntity != null) {
+		if (userEntity != null && userEntity.isIsactive()) {
 			return userEntity;
 		}
+		if (userEntity != null && !userEntity.isIsactive()) {
+			throw new RestCustomException(HttpStatus.FOUND,
+					applicationConfigProperties.getProperty(CustomMsgProperties.FINDBYUSERNAME_USERISNOTACTIVE_ERRORMSG)
+							+ " for user name :" + username);
+		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
+				applicationConfigProperties.getProperty(CustomMsgProperties.FINDBYUSERNAME_USERNOTFOUND_ERRORMSG)
 						+ " for user name :" + username);
 	}
 
@@ -67,7 +73,28 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
+				applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
+						+ username);
+	}
+
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean checkUsernameNotExist(String username) {
+		LOGGER.info(UserConstant.USER_DAO_CHECKUSERNAME);
+		UserEntity userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
+		userEntity = (UserEntity) criteria.setMaxResults(1).uniqueResult();
+		if (userEntity == null) {
+			return true;
+		}
+		throw new RestCustomException(HttpStatus.FOUND,
+				applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_USERFOUND_ERRORMSG) + " "
 						+ username);
 	}
 
@@ -87,7 +114,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEUSER_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 	/**
@@ -106,7 +133,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
 
@@ -126,7 +153,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return (ArrayList<UserEntity>) userEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
 	/**
@@ -148,8 +175,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
+		throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+				.getProperty(CustomMsgProperties.GETALLUSERSBYROLE_NOADMINUSERSFOUND_ERRORMSG));
 	}
 
 	/**
@@ -164,8 +191,68 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			sessionFactory.getCurrentSession().saveOrUpdate(userEntity);
 			LOGGER.info(UserConstant.USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS + userEntity.getUserId());
 		} catch (RestCustomException e) {
-			throw new RestCustomException(HttpStatus.BAD_REQUEST,
-					applicationConfigProperties.getProperty(AppConfig.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
+
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * 
+	 * @param isrecoverypwd
+	 * 
+	 */
+	@SuppressWarnings({ "unchecked" })
+	@Transactional
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd) throws RestCustomException {
+		if (isrecoverypwd != null && isrecoverypwd.equals(true)) {
+			LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+			List<UserEntity> userEntity = null;
+			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+			criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
+			userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			int size = userEntity != null ? userEntity.size() : 0;
+			LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+			if (size > 0) {
+				return (ArrayList<UserEntity>) userEntity;
+			} else {
+				throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+						.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+			}
+		} else
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable) throws RestCustomException {
+		if (isJobAvailable.equals(Boolean.FALSE)) {
+			LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
+			List<FreelanceEntity> freelanceEntity = null;
+			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreelanceEntity.class);
+			criteria.add(Restrictions.eq(UserConstant.ISJOBAVAILABLE, false));
+			freelanceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			int size = freelanceEntity != null ? freelanceEntity.size() : 0;
+
+			if (size > 0) {
+				return (ArrayList<FreelanceEntity>) freelanceEntity;
+			} else {
+				throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+						.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
+			}
+		} else {
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
+		}
+
+	}
+
+
 }

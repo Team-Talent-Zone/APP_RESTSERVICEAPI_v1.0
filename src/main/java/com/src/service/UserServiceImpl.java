@@ -10,6 +10,7 @@ import com.src.entity.FreelanceEntity;
 import com.src.entity.FreelancehistoryEntity;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserManagerDetailsEntity;
 import com.src.entity.UserRoleEntity;
 import com.src.utils.CommonUtilites;
 
@@ -35,6 +36,15 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	}
 
 	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 */
+	public Boolean checkUsernameNotExist(String username) {
+		return userRestDAO.checkUsernameNotExist(username);
+	}
+
+	/**
 	 * Get the User Details by UserId.
 	 * 
 	 * @param userId
@@ -55,7 +65,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setIsactive(Boolean.FALSE);
 		userEntity.setIsrecoverypwd(Boolean.FALSE);
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
-		userEntity.setCreatedby(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
 
@@ -76,8 +85,14 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreeLanceDetails(freelanceentity);
 			freelancehistoryEntity.setUserdetails(userEntity);
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
-		}
+		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
 
+			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
+			usermanagerdetailsentity.setUserdetails(userEntity);
+			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
+
+		}
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
 
@@ -111,9 +126,10 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity saveorupdateUserDetails(UserEntity userEntity) {
 
-		//Below IF condition is written for forgetPassword recovery 
+		// Below IF condition is written for forgetPassword recovery
 		if (userEntity.isIsrecoverypwd()) {
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+			userEntity.setIsrecoverypwd(Boolean.FALSE);
 		}
 
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
@@ -129,6 +145,13 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreeLanceDetails(freelanceentity);
 			freelancehistoryEntity.setUserdetails(userEntity);
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
+		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
+
+			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
+			usermanagerdetailsentity.setUserdetails(userEntity);
+			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
+
 		}
 
 		userRoleEntity.setUserdetails(userEntity);
@@ -147,7 +170,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username) {
+	public UserEntity findByUsername(String username, String password) {
+		System.out.println("password" + encoder.encode(password));
 		return userRestDAO.findByUsername(username);
 	}
 
@@ -163,9 +187,30 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		String newPassword = CommonUtilites.genRandomAlphaNumeric();
 		userEntity.setIsrecoverypwd(Boolean.TRUE);
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDate());
-		userEntity.setPassword(encoder.encode(newPassword));
+		userEntity.setPassword(newPassword);
 
 		return userEntity;
+	}
+
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * 
+	 * @param isrecoverypwd
+	 * @return toDAO
+	 */
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd) {
+		return userRestDAO.getUserByRecoveryPwd(isrecoverypwd);
+
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable) {
+		return userRestDAO.getUserDetailsByJobAvailable(isJobAvailable);
 	}
 
 }

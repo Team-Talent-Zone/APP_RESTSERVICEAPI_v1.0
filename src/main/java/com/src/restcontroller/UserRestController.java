@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
 
 /**
@@ -33,11 +34,10 @@ public class UserRestController extends AbstractRestManager {
 	 * @param username
 	 * @throws JSONException
 	 */
-	@RequestMapping(value = "/getUser/{username}", method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> loginUserByUsername(@PathVariable(UserConstant.USERNAME) String username)
-			throws JSONException {
-		UserEntity userEntity = userService.findByUsername(username);
+	@RequestMapping(value = "/findByUsername/{username}/{password}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username,
+			@PathVariable(UserConstant.PASSWORD) String password) throws JSONException {
+		UserEntity userEntity = userDetailsService.findByUsername(username, password);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -46,10 +46,9 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID) int userId) {
-		UserEntity userEntity = userService.getUserByUserId(userId);
+		UserEntity userEntity = userDetailsService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -59,7 +58,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<UserEntity>> manageUsers() {
-		ArrayList<UserEntity> listofAllUsers = userService.getAllUsers();
+		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
 	}
 
@@ -70,7 +69,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getUsersByRole/{role}", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<UserEntity>> getUsersByRole(@PathVariable(UserConstant.ROLE) String role) {
-		ArrayList<UserEntity> listOfBusinessAdminUsers = userService.getUsersByRole(role);
+		ArrayList<UserEntity> listOfBusinessAdminUsers = userDetailsService.getUsersByRole(role);
 		return new ResponseEntity<ArrayList<UserEntity>>(listOfBusinessAdminUsers, HttpStatus.OK);
 	}
 
@@ -79,23 +78,22 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param userEntityObj
 	 */
-	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveorupdateUserDetails(@RequestBody UserEntity userEntityObj) {
-		UserEntity userEntity = userService.saveorupdateUserDetails(userEntityObj);
+		UserEntity userEntity = userDetailsService.saveorupdateUserDetails(userEntityObj);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
 	/**
-	 * Save the CBA (client business administration and freelance ) User Details.
+	 * Save the User based on the role . Users are CBA , CSST , CSSM and FU ) User
+	 * Details.
 	 * 
 	 * @param userEntityObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
-		UserEntity userEntity = userService.saveUser(userEntityObject);
+		UserEntity userEntity = userDetailsService.saveUser(userEntityObject);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -104,21 +102,57 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param username
 	 */
-	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userService.checkUsername(username), HttpStatus.OK);
+		UserEntity userEntity = userDetailsService.checkUsername(username);
+		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
-	
+
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 */
+	@RequestMapping(value = "/checkusernamenotexist/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> checkUsernameNotExist(@PathVariable(UserConstant.USERNAME) String username) {
+		boolean isusernotexist = userDetailsService.checkUsernameNotExist(username);
+		return new ResponseEntity<Boolean>(isusernotexist, HttpStatus.OK);
+	}
+
 	/**
 	 * Saves the new password by encrypting.
 	 * 
 	 * @param username
 	 */
-	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userService.forgetPassword(username), HttpStatus.OK);
+		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
+	}
+
+	/**
+	 * 
+	 * @param isrecoverypwd
+	 * @return
+	 * @throws JSONException
+	 */
+	@RequestMapping(value = "/getUserByRecoveryPwd/{isrecoverypwd}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd(
+			@PathVariable(UserConstant.ISRECOVERYPWD) Boolean isrecoverypwd) throws JSONException {
+		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd(isrecoverypwd);
+		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Details when isJobAvailable is false.
+	 * 
+	 * @param isJobAvailable
+	 * @throws JSONException
+	 */
+	@RequestMapping(value = "/getUserDetailsByJobAvailable/{isJobAvailable}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceEntity>> getUserDetailsByJobAvailable(
+			@PathVariable(UserConstant.ISJOBAVAILABLE) Boolean isJobAvailable) throws JSONException {
+		ArrayList<FreelanceEntity> freelanceEntity = userDetailsService.getUserDetailsByJobAvailable(isJobAvailable);
+		return new ResponseEntity<ArrayList<FreelanceEntity>>(freelanceEntity, HttpStatus.OK);
 	}
 
 }

@@ -22,6 +22,9 @@ import com.src.utils.CommonUtilites;
 @Transactional(rollbackFor = { Exception.class })
 public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCService {
 
+	/**
+	 * To save new service Details.
+	 */
 	@Override
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
 		newServiceEntity.setUpgrade(Boolean.FALSE);
@@ -30,13 +33,16 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 
 		NewServiceHistoryEntity inputHisEnty = newServiceEntity.getServiceHistory();
-		inputHisEnty.setDecisionBy(CommonUtilites.getCurrentDateInNewFormat());
+		inputHisEnty.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
 		inputHisEnty.setLocked(Boolean.FALSE);
 		inputHisEnty.setNewService(newServiceEntity);
 		newServiceEntity.setServiceHistory(inputHisEnty);
 		return newServiceRestDAO.saveNewService(newServiceEntity);
 	}
 
+	/**
+	 * To save or Update New Service Details.
+	 */
 	@Override
 	public NewServiceEntity saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
 		newServiceEntity.setUpdatedBy(CommonUtilites.getCurrentDateInNewFormat());
@@ -49,23 +55,61 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		return newServiceEntity;
 	}
 
+	/**
+	 * To save New Service History Details.
+	 */
 	@Override
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
 		newServiceHistoryEntity.setLocked(Boolean.TRUE);
 		newServiceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
+		NewServiceEntity newServiceEntity = new NewServiceEntity();
+		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());
+		newServiceHistoryEntity.setNewService(newServiceEntity);
 		return newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
 	}
 
+	/**
+	 * To save New Service Package Details.
+	 */
 	@Override
-	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
-		newServicePackageEntity.setActive(Boolean.TRUE);
-		newServicePackageEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		return newServiceRestDAO.saveNewServicePackage(newServicePackageEntity);
+	public ArrayList<NewServicePackageEntity> saveNewServicePackage(
+			ArrayList<NewServicePackageEntity> newServicePackageEntity) {
+
+		ArrayList<NewServicePackageEntity> entities = new ArrayList<NewServicePackageEntity>();
+		for (NewServicePackageEntity packageEntity : newServicePackageEntity) {
+			packageEntity.setActive(Boolean.TRUE);
+			packageEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+			NewServicePackageEntity entity = newServiceRestDAO.saveNewServicePackage(packageEntity);
+			entities.add(entity);
+		}
+		return entities;
 	}
 
+	/**
+	 * To Get All Service Details.
+	 */
 	@Override
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
 	}
 
+	/**
+	 * Get All User Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@Override
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId) {
+		return newServiceRestDAO.getAllNewServiceDetailsByManagerId(managerId);
+	}
+
+	/**
+	 * Get All User Service Details by userId.
+	 * 
+	 * @param userId
+	 */
+	@Override
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId) {
+		return newServiceRestDAO.getAllNewServiceDetailsByUserId(userId);
+	}
 }

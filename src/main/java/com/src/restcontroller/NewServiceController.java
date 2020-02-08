@@ -6,17 +6,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
 
 /**
  * The <code> NewServiceController </code> class defines managed beans which
- * provides back-end functionality or the <code>NewService</code> pages.
+ * provides back-end functionality on the <code>NewService</code> pages.
  * 
  * @author Shanoor
  *
@@ -66,24 +68,46 @@ public class NewServiceController extends AbstractRestManager {
 	 * @param newServiceHistoryObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveNewServicePackage/", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<NewServicePackageEntity> saveNewServicePackage(
-			@RequestBody NewServicePackageEntity newServicePackageObject) {
-		NewServicePackageEntity newServicePackageEntity = newServiceSvc.saveNewServicePackage(newServicePackageObject);
-		return new ResponseEntity<NewServicePackageEntity>(newServicePackageEntity, HttpStatus.OK);
+	@RequestMapping(value = "/saveNewServicePackage/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServicePackageEntity>> saveNewServicePackage(
+			@RequestBody ArrayList<NewServicePackageEntity> servicePackageEntities) {
+		ArrayList<NewServicePackageEntity> packageEntities = newServiceSvc
+				.saveNewServicePackage(servicePackageEntities);
+		return new ResponseEntity<ArrayList<NewServicePackageEntity>>(packageEntities, HttpStatus.OK);
 	}
-	
 
 	/**
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllServiceDetails/", method = RequestMethod.GET,
-	produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<NewServiceEntity>> getAllServiceDetails() {
 		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
 		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
 	}
 
+	/**
+	 * Get All New Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@RequestMapping(value = "/getAllNewServiceDetailsByManagerId/{managerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServiceHistoryEntity>> getAllNewServiceDetailsByManagerId(
+			@PathVariable(NewServiceConstant.MANAGEID) int managerId) {
+		return new ResponseEntity<ArrayList<NewServiceHistoryEntity>>(
+				newServiceSvc.getAllNewServiceDetailsByManagerId(managerId), HttpStatus.OK);
+	}
+	
+	/**
+	 * Get All New Service Details by userId.
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/getAllNewServiceDetailsByUserId/{userId}", 
+			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServiceHistoryEntity>> getAllNewServiceDetailsByUserId(
+			@PathVariable(NewServiceConstant.USERID) int userId) {
+		return new ResponseEntity<ArrayList<NewServiceHistoryEntity>>(
+				newServiceSvc.getAllNewServiceDetailsByUserId(userId), HttpStatus.OK);
+	}
 }

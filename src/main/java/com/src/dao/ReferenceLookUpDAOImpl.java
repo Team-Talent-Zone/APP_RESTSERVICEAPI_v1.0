@@ -12,10 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
+import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.exception.RestCustomException;
 
 @Repository
@@ -41,7 +42,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpEntity>) referenceLookUpEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :" + key);
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :" + key);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -57,7 +58,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpEntity>) lookUpEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_ERRORMSG));
 	}
 
 	@Transactional
@@ -70,7 +71,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return referenceLookUpEntity.getCode().toString();
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
 						+ shortkey);
 
 	}
@@ -91,7 +92,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpMappingEntity>) lookUpMappingEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
 
 	}
 
@@ -100,8 +101,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 
 		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingSubCategoryByMapId method ");
 		List<ReferenceLookUpMappingSubCategoryEntity> lookUpMappingSubCategoryEntities = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(ReferenceLookUpMappingEntity.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpMappingEntity.class);
 		criteria.createAlias("referencelookupmappingsubcategories", "rlookupmappingsubcat", JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq("rlookupmappingsubcat.mapId", mapId));
 		lookUpMappingSubCategoryEntities = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -113,7 +113,22 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpMappingSubCategoryEntity>) lookUpMappingSubCategoryEntities;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
+
+	}
+
+	@Transactional
+	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
+		ReferenceLookUpTemplateEntity lookUpTemplateEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpTemplateEntity.class);
+		criteria.add(Restrictions.eq("shortkey", shortkey));
+		lookUpTemplateEntity = (ReferenceLookUpTemplateEntity) criteria.uniqueResult();
+		if (lookUpTemplateEntity != null) {
+			return lookUpTemplateEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
+						+ shortkey);
 
 	}
 

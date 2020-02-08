@@ -20,7 +20,7 @@ public class LookUpTemplatesController extends AbstractRestManager {
 	@RequestMapping(value = "/getLookupTemplateEntityByShortkey/{shortkey}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReferenceLookUpTemplateEntity> getLookupTemplateEntityByShortkey(
 			@PathVariable("shortkey") String shortkey) {
-		ReferenceLookUpTemplateEntity lookUpTemplates = lookUpTemplateService
+		ReferenceLookUpTemplateEntity lookUpTemplates = referenceLookUpService
 				.getLookupTemplateEntityByShortkey(shortkey);
 		return new ResponseEntity<ReferenceLookUpTemplateEntity>(lookUpTemplates, HttpStatus.OK);
 	}

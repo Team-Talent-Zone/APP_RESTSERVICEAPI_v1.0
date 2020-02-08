@@ -2,7 +2,6 @@ package com.src.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,7 +33,7 @@ public class NewServiceHistoryEntity implements Serializable {
 	@Column(insertable = false, updatable = false, name = "ourserviceId")
 	private int ourserviceId;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
 	private NewServiceEntity newService;

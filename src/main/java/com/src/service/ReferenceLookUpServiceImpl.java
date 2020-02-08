@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.entity.ReferenceLookUpEntity;
 import com.src.entity.ReferenceLookUpMappingEntity;
 import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
+import com.src.entity.ReferenceLookUpTemplateEntity;
 
 @Service("referenceLookUpManager")
 @Transactional(rollbackFor = { Exception.class })
@@ -33,4 +34,7 @@ public class ReferenceLookUpServiceImpl extends AbstractServiceManager implement
 		return referenceLookUpDAO.getReferenceLookupMappingSubCategoryByMapId(mapId);
 	}
 
+	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
+		return referenceLookUpDAO.getLookupTemplateEntityByShortkey(shortkey);
+	}
 }

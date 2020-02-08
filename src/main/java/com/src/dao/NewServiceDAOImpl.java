@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.src.constant.AppConfig;
+import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
@@ -31,6 +31,9 @@ import com.src.exception.RestCustomException;
 public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceDAO {
 	final Logger LOGGER = LoggerFactory.getLogger(NewServiceDAOImpl.class);
 
+	/**
+	 * To save the New Service Details.
+	 */
 	@Transactional
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICE);
@@ -40,9 +43,12 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To save or Update the New Service Details.
+	 */
 	@Transactional
 	public void saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
 		try {
@@ -51,22 +57,28 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			LOGGER.info(NewServiceConstant.CONFIRMED_SAVEORUPDATE_NEWSERVICE + newServiceEntity.getOurserviceId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
-					.getProperty(AppConfig.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
 
+	/**
+	 * To save New Service History Details.
+	 */
 	@Transactional
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY);
 		int serviceHistorySavedID = (Integer) sessionFactory.getCurrentSession().save(newServiceHistoryEntity);
-		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_NEWSERVICEHISTORY + serviceHistorySavedID);
+		LOGGER.debug(NewServiceConstant.INSIDE_SAVENEWSERVICEHISTORY + serviceHistorySavedID);
 		if (serviceHistorySavedID > 0) {
 			return newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To save the service Package Details.
+	 */
 	@Transactional
 	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEPACKAGE);
@@ -76,17 +88,22 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return newServicePackageEntity;
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(AppConfig.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To Get all the Service Details.
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<NewServiceEntity> getAllServiceDetails() {
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
 		List<NewServiceEntity> newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS, JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS, NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
+				JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
+				NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
@@ -94,7 +111,56 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(AppConfig.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
 
+	/**
+	 * Get All New Service Details by managerId.
+	 * 
+	 * @param managerId
+	 */
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId) {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYMANAGERID);
+		List<NewServiceHistoryEntity> newServiceHistoryEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING, 
+				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_USING_MANAGERID, managerId));
+		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newServiceHistoryEntity != null ? newServiceHistoryEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYMANAGERID + size);
+		if (size > 0) {
+			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for managerId : "
+						+ managerId);
+	}
+	
+	/**
+	 * Get All New Service Details by userId.
+	 * 
+	 * @param userId
+	 */
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId) {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYUSERID);
+		List<NewServiceHistoryEntity> newServiceHistoryEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING, 
+				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_USING_USERID, userId));
+		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newServiceHistoryEntity != null ? newServiceHistoryEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYUSERID + size);
+		if (size > 0) {
+			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for userId : "
+						+ userId);
+	}
 }

@@ -22,19 +22,40 @@ public class UserConstant {
 	public static final String USER_DAO_INSIDE_GETUSERSBYROLE = "Inside USER DAO getUsersByRole method : Get All Users By Role :";
 	public static final String USER_DAO_SAVEORUPDATEUSERDETAILS = "Inside USER DAO saveorupdateUserDetails method ";
 	public static final String USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS = "Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :";
+	public static final String USER_DAO_GETUSERSBYRECOVERYPWD = "Inside USER DAO getUserByRecoveryPwd method";
+	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getUserServiceDetailsByUserId method";
+	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID = "Inside New Service DAO getUserServiceDetailsByServiceId method";
+	public static final String USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD = "Inside User Service DAO getUserByRecoveryPwd method : get All User Service Details :";
 
+	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILSBYMANAGEID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
+	
+	public static final String USER_DAO_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method";
+	public static final String USER_DAO_INSIDE_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method : Get All Free Lance On Service :";
+	
+	public static final String USER_DETAILS = "userdetails";
+	public static final String USER_DETAILS_ISRECOVERYPWD = "isrecoverypwd";
+
+	public static final String FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getFreeLanceOnServiceDetailsByUserId method";
+	public static final String USER_DAO_USERROLE = "Inside USER DAO userRole method";
+	
 	// Constants
 	public static final String USERNAME = "username";
+	public static final String PASSWORD = "password";
 	public static final String USERID = "userId";
 	public static final String USERROLES = "userroles";
 	public static final String UROLE = "urole";
 	public static final String UROLE_ROLECODE = "urole.rolecode";
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
-	
+	public static final String SERVICEID = "serviceId";
 	public static final String FREELANCER_USER = "FREELANCER_USER";
+	public static final String ISRECOVERYPWD = "isrecoverypwd";
+	public static final String ISJOBAVAILABLE = "isJobAvailable";
+	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
+	public static final Object CORE_SERVICE_SUPPORT_TEAM = "CORE_SERVICE_SUPPORT_TEAM";
 	
 	
-	//Table Mappings
-	
+
+	// Table Mappings
+
 }

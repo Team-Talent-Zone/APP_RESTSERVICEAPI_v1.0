@@ -2,6 +2,7 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
 
 /**
@@ -61,10 +62,32 @@ public interface UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public UserEntity checkUsername(String username) ;
-	
+	public UserEntity checkUsername(String username);
 
+	/**
+	 * Gives the user details.
+	 * 
+	 * @param isrecoverypwd
+	 * @return
+	 */
+	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
+
+	/**
+	 * Check the UserName from the Database.
+	 * 
+	 * @param username
+	 * @throws Exception
+	 */
+	public boolean checkUsernameNotExist(String username);
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable);
 
 }

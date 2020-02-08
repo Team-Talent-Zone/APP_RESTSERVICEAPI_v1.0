@@ -24,9 +24,9 @@ public class S3AWSHelper {
 		try {
 			logger.debug("Attempting to upload profile picture of user");
 
-			String fileName = getFileNameWithoutExtension(inputFile) + "_userProfile." + fileExtension;
+			String fileName = getFileNameWithoutExtension(inputFile) + "_avatar." + fileExtension;
 			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + userid;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_PROFILES, fileName, s3, inputFile,
+			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_AVATAR, fileName, s3, inputFile,
 					folderToCreate);
 			return docURL;
 
@@ -55,9 +55,8 @@ public class S3AWSHelper {
 		try {
 			logger.debug("Attempting to upload documents relared to background of the freelance user");
 			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
-			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + userid + UtilityConfig.SUFFIX
-					+ UtilityConfig.FOLDER_BG;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_PROFILES, fileName, s3, inputFile,
+			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX + userid;
+ 			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_BG_DOCS, fileName, s3, inputFile,
 					folderToCreate);
 			return docURL;
 
@@ -85,10 +84,9 @@ public class S3AWSHelper {
 		try {
 			logger.debug("Attempting to upload widgets of the new host site for the CBA user");
 			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
-			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + userid + UtilityConfig.SUFFIX
-					+ UtilityConfig.FOLDER_WIDGETS;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_PROFILES, fileName, s3, inputFile,
-					folderToCreate);
+			String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX + userid;
+			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS, fileName, s3,
+					inputFile, folderToCreate);
 			return docURL;
 
 		} catch (AmazonServiceException ase) {
@@ -108,16 +106,17 @@ public class S3AWSHelper {
 		return null;
 	}
 
-	private String createFolderOrUploadObject(String bucketName, String folderName, AmazonS3 client, File inputFile,
-			String fileName) {
+	private String createFolderOrUploadObject(String bucketName, String fileName, AmazonS3 client, File inputFile,
+			String folderName) {
 		logger.debug("Uploading the File to S3");
 		// create meta-data for your folder and set content-length to 0
-		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, folderName + UtilityConfig.SUFFIX + fileName,
-				inputFile).withCannedAcl(CannedAccessControlList.PublicRead);// Making the
-																				// URL
-																				// public to
-																				// access
-																				// it.
+		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
+				folderName + UtilityConfig.SUFFIX + fileName, inputFile)
+						.withCannedAcl(CannedAccessControlList.PublicRead);// Making the
+																			// URL
+																			// public to
+																			// access
+																			// it.
 		// send request to S3 to create folder
 		client.putObject(putObjectRequest);
 		logger.debug("Returning the URL of uploaded document in the S3");

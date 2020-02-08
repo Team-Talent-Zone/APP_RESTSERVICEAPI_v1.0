@@ -74,20 +74,21 @@
 	</bean>
 
 	<bean id="userRestDAO" class="com.src.dao.UserRestDAOImpl"></bean>
-	<bean id="userService" class="com.src.service.UserServiceImpl"></bean>
+	<bean id="userDetailsService" class="com.src.service.UserServiceImpl"></bean>
 
 	<bean id="newServiceSvc" class="com.src.service.NewSVCServiceImpl"></bean>
 	<bean id="newServiceDAO" class="com.src.dao.NewServiceDAOImpl"></bean>
+
+	<bean id="userServiceDetailsSVC" class="com.src.service.UserServiceDetailsSVCImpl"></bean>
+	<bean id="userServiceDetailsDAO" class="com.src.dao.UserServiceDetailsDAOImpl"></bean>
+
+	<bean id="freeLanceOnServiceSVC" class="com.src.service.FreeLanceOnServiceSVCImpl"></bean>
+	<bean id="freeLanceOnServiceDAO" class="com.src.dao.FreeLanceOnServiceDAOImpl"></bean>
 
 	<bean id="referenceLookUpDAO"
 		class="com.src.dao.ReferenceLookUpDAOImpl"></bean>
 	<bean id="referenceLookUpService"
 		class="com.src.service.ReferenceLookUpServiceImpl"></bean>
-
-	<bean id="lookUpTemplateDAO"
-		class="com.src.dao.LookUpTemplateDAOImpl"></bean>
-	<bean id="lookUpTemplateService"
-		class="com.src.service.LookUpTemplateServiceImpl"></bean>
 
 	<bean id="utilService" class="com.src.service.UtilityServiceImpl"></bean>
 

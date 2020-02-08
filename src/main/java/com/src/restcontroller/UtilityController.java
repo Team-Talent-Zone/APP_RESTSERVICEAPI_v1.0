@@ -9,55 +9,56 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.src.entity.UtilEntity;
-import com.src.helper.SendEmailHelper;
 
 @Controller
 public class UtilityController extends AbstractRestManager {
 
 	final Logger logger = LoggerFactory.getLogger(UtilityController.class);
 
-	@RequestMapping(value = "/uploadAvatarsInS3/{inputFile}/{userid}", method = RequestMethod.GET)
-	public ResponseEntity<String> uploadAvatarsInS3(@PathVariable("inputFile") File inputFile,
-			@PathVariable("userid") int userid) {
-		String avatarURL = utilService.uploadAvatarsInS3(inputFile, userid);
-		return new ResponseEntity<String>(avatarURL, HttpStatus.OK);
+	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws Exception {
+		Gson gson = new Gson();
+		String avatarURL = utilService.uploadAvatarsInS3(inputFile, userId);
+		return new ResponseEntity<String>(gson.toJson(avatarURL), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/uploadBgDocsInS3/{inputFile}/{userid}", method = RequestMethod.GET)
-	public ResponseEntity<String> uploadBgDocsInS3(@PathVariable("inputFile") File inputFile,
-			@PathVariable("userid") int userid) {
-		String bgDocURL = utilService.uploadBgDocsInS3(inputFile, userid);
-		return new ResponseEntity<String>(bgDocURL, HttpStatus.OK);
+	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws JSONException {
+		Gson gson = new Gson();
+		String bgDocURL = utilService.uploadBgDocsInS3(inputFile, userId);
+		return new ResponseEntity<String>(gson.toJson(bgDocURL), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/uploadWidgetPicsInS3/{inputFile}/{userid}", method = RequestMethod.GET)
-	public ResponseEntity<String> uploadWidgetPicsInS3(@PathVariable("inputFile") File inputFile,
-			@PathVariable("userid") int userid) {
-		String widgetURL = utilService.uploadWidgetPicsInS3(inputFile, userid);
-		return new ResponseEntity<String>(widgetURL, HttpStatus.OK);
+	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody File inputFile, @RequestBody int userId)
+			throws JSONException {
+		Gson gson = new Gson();
+		String widgetURL = utilService.uploadWidgetPicsInS3(inputFile, userId);
+		return new ResponseEntity<String>(gson.toJson(widgetURL), HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/autoSendEmail/", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UtilEntity> autoSendEmail(@RequestBody UtilEntity utilEntity) throws JSONException {
+	@RequestMapping(value = "/sendemail/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UtilEntity> sendEmail(@RequestBody UtilEntity utilEntity) throws Exception {
 		UtilEntity utilEntityResponse = utilService.sendEmail(utilEntity);
 		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/sendEmail/", method = RequestMethod.PUT)
-	public ResponseEntity<UtilEntity> sendEmail(@RequestBody Object obj, @RequestBody String templateURL,
-			@RequestBody String shortKey) throws JSONException {
+	@RequestMapping(value = "/translatetext/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> translateText(@RequestBody String targetLanguage, @RequestBody String targetText)
+			throws Exception {
+		Gson gson = new Gson();
+		String translateText = utilService.translateText(targetLanguage, targetText);
+		return new ResponseEntity<String>(gson.toJson(translateText), HttpStatus.OK);
 
-		SendEmailHelper emailHelper = new SendEmailHelper();
-		UtilEntity utilEntity = emailHelper.returnUtilEntityObjByShortKey(obj, templateURL, shortKey);
-		UtilEntity utilEntityResponse = utilService.sendEmail(utilEntity);
-		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}
 
 }
