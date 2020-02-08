@@ -74,9 +74,10 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Update or Edit on user Details Screen.
-	 * 
+	 * Update or Edit on user details.
+	 *  
 	 * @param userEntityObj
+	 * @return user details
 	 */
 	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveorupdateUserDetails(@RequestBody UserEntity userEntityObj) {
@@ -85,11 +86,11 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Save the User based on the role . Users are CBA , CSST , CSSM and FU ) User
-	 * Details.
+	 * Save the User based on the role . Roles are (CBA , CSST , CSSM and FU ).
+	 *
 	 * 
 	 * @param userEntityObject
-	 * @return
+	 * @return user details
 	 */
 	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
@@ -98,9 +99,10 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Check the UserName from the Database.
+	 * Check the userName if exist.
 	 * 
 	 * @param username
+	 * @return user details
 	 */
 	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
@@ -109,9 +111,10 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Check the UserName from the Database.
-	 * 
+	 * Check the userName if not exist.
+	 *  
 	 * @param username
+	 * @return boolean
 	 */
 	@RequestMapping(value = "/checkusernamenotexist/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> checkUsernameNotExist(@PathVariable(UserConstant.USERNAME) String username) {
@@ -123,6 +126,7 @@ public class UserRestController extends AbstractRestManager {
 	 * Saves the new password by encrypting.
 	 * 
 	 * @param username
+	 * @return user details
 	 */
 	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
@@ -132,7 +136,7 @@ public class UserRestController extends AbstractRestManager {
 	/**
 	 * 
 	 * @param isrecoverypwd
-	 * @return
+	 * @return list of user details
 	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/getUserByRecoveryPwd/{isrecoverypwd}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -146,6 +150,7 @@ public class UserRestController extends AbstractRestManager {
 	 * Get User Details when isJobAvailable is false.
 	 * 
 	 * @param isJobAvailable
+	 * @return list of user details
 	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/getUserDetailsByJobAvailable/{isJobAvailable}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
