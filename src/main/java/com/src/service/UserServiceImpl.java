@@ -85,15 +85,13 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreeLanceDetails(freelanceentity);
 			freelancehistoryEntity.setUserdetails(userEntity);
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
-		}
-
-		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
-			
+
 			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
-			
+
 		}
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
@@ -147,17 +145,15 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreeLanceDetails(freelanceentity);
 			freelancehistoryEntity.setUserdetails(userEntity);
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
-		}
-
-		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
-			
+
 			UserManagerDetailsEntity usermanagerdetailsentity = new UserManagerDetailsEntity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
-			
+
 		}
-		
+
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
 
@@ -216,6 +212,5 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable) {
 		return userRestDAO.getUserDetailsByJobAvailable(isJobAvailable);
 	}
-
 
 }
