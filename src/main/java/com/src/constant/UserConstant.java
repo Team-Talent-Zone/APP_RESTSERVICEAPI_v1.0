@@ -46,7 +46,7 @@ public class UserConstant {
 	public static final String FREELANCEDETAILS = "freeLanceDetails";
 	public static final String FREELANCEDETAILS_ALIAS = "fUDetails";
 	public static final String FU_NATIONAL_ID = "fUDetails.nationalIdNumber";
-	public static final String FU_UPLOADL_VALID_PHOTO = "fUDetails.uploadValidPhotoidImgUrl";
+	public static final String FU_UPLOAD_VALID_PHOTO = "fUDetails.uploadValidPhotoidImgUrl";
 	public static final String FU_UPLOADADDITIONAL_DOCS = "fUDetails.uploadAdditionalDocZipFileUrl";
 	public static final String FU_EXP_INFIELD = "fUDetails.experienceInField";
 	public static final String FU_ABOUT = "fUDetails.abt";

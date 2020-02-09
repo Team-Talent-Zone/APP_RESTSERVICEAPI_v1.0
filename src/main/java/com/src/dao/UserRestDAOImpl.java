@@ -43,6 +43,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERNAME, username));
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null && userEntity.isIsactive()) {
 			return userEntity;
@@ -129,6 +130,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
@@ -146,8 +148,10 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	@Transactional
 	public ArrayList<UserEntity> getAllUsers() {
 		LOGGER.info(UserConstant.USER_DAO_GETALLUSERS);
-		List<UserEntity> userEntity = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		List<UserEntity> userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
+		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
 		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLUSERS + size);
 		if (size > 0) {
@@ -168,6 +172,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYROLE);
 		List<UserEntity> userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		criteria.createAlias(UserConstant.USERROLES, UserConstant.UROLE, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(UserConstant.UROLE_ROLECODE, role));
 		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -209,6 +214,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(UserConstant.FU_ISJOBAVAILABLE, false));
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
@@ -278,7 +284,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.isNull(UserConstant.FU_NATIONAL_ID));
-		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOADL_VALID_PHOTO));
+		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOAD_VALID_PHOTO));
 		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOADADDITIONAL_DOCS));
 		criteria.add(Restrictions.isNull(UserConstant.FU_EXP_INFIELD));
 		criteria.add(Restrictions.isNull(UserConstant.FU_ABOUT));
