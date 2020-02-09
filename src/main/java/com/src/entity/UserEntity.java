@@ -75,10 +75,10 @@ public class UserEntity implements Serializable {
 	private UserBizEntity userbizdetails;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private FreelanceEntity freeLanceDetails;
+	private FreeLanceEntity freeLanceDetails;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private FreelancehistoryEntity freelancehistoryentity;
+	private FreeLanceHistoryEntity freelancehistoryentity;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserManagerDetailsEntity usermanagerdetailsentity;
@@ -207,19 +207,19 @@ public class UserEntity implements Serializable {
 		this.userbizdetails = userbizdetails;
 	}
 
-	public FreelanceEntity getFreeLanceDetails() {
+	public FreeLanceEntity getFreeLanceDetails() {
 		return freeLanceDetails;
 	}
 
-	public void setFreeLanceDetails(FreelanceEntity freeLanceDetails) {
+	public void setFreeLanceDetails(FreeLanceEntity freeLanceDetails) {
 		this.freeLanceDetails = freeLanceDetails;
 	}
 
-	public FreelancehistoryEntity getFreelancehistoryentity() {
+	public FreeLanceHistoryEntity getFreelancehistoryentity() {
 		return freelancehistoryentity;
 	}
 
-	public void setFreelancehistoryentity(FreelancehistoryEntity freelancehistoryentity) {
+	public void setFreelancehistoryentity(FreeLanceHistoryEntity freelancehistoryentity) {
 		this.freelancehistoryentity = freelancehistoryentity;
 	}
 

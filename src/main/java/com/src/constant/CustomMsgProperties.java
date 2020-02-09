@@ -13,6 +13,8 @@ public class CustomMsgProperties {
 
 	public static final String SAVEUSER_UNABLE_TO_SAVE_ERRORMSG = "saveUser_unabletosave_errorMsg";
 
+	public static final String SAVEUSERNOTIFICATION_UNABLE_TO_SAVE_ERRORMSG = "saveUserNotification_unabletosave_errorMsg";
+
 	public static final String FINDBYUSERNAME_USERNOTFOUND_ERRORMSG = "findByUsername_usernotfound_errorMsg";
 
 	public static final String FINDBYUSERNAME_USERISNOTACTIVE_ERRORMSG = "findByUsername_userisnotactive_errorMsg";
@@ -66,6 +68,8 @@ public class CustomMsgProperties {
 	public static final String USERROLE_NOTVALID_ERRORMSG = "userRole_thisrolecantbesaved_errorMsg";
 
 	public static final String GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG ="getUserDetailsByJobAvailable_existingjob_errorMsg";
+
+	public static final String GETNOTIFICATIONDETAILSBYUSERID_INVAILD_ERRORMSG ="getNotificationDetailsByUseId_existingjob_errorMsg";
 
 	private CustomMsgProperties() {
 	}

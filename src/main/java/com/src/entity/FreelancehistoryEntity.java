@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "freelancehistoryentity")
 @Table(name = "APP_USER_FREELANCE_HISTORY")
-public class FreelancehistoryEntity implements Serializable {
+public class FreeLanceHistoryEntity implements Serializable {
 
 	private static final long serialVersionUID = -1697844064430609298L;
 

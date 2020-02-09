@@ -14,8 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
-import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserNotificationDetailsView;
+import com.src.entity.UserNotificationEntity;
 import com.src.exception.RestCustomException;
 
 /**
@@ -199,54 +200,44 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
-	 * @param isrecoverypwd
 	 * 
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Transactional
-	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd) throws RestCustomException {
-		if (isrecoverypwd != null && isrecoverypwd.equals(true)) {
-			LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
-			List<UserEntity> userEntity = null;
-			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-			criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
-			userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-			int size = userEntity != null ? userEntity.size() : 0;
-			LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
-			if (size > 0) {
-				return (ArrayList<UserEntity>) userEntity;
-			} else {
-				throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-						.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
-			}
-		} else
+	public ArrayList<UserEntity> getUserByRecoveryPwd() {
+
+		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+		List<UserEntity> userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
+		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userEntity != null ? userEntity.size() : 0;
+		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+		if (size > 0) {
+			return (ArrayList<UserEntity>) userEntity;
+		} else {
 			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
 					.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
+		}
 	}
 
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 * 
-	 * @param isJobAvailable
-	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable) throws RestCustomException {
-		if (isJobAvailable.equals(Boolean.FALSE)) {
-			LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
-			List<FreelanceEntity> freelanceEntity = null;
-			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreelanceEntity.class);
-			criteria.add(Restrictions.eq(UserConstant.ISJOBAVAILABLE, false));
-			freelanceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-			int size = freelanceEntity != null ? freelanceEntity.size() : 0;
+	public ArrayList<UserEntity> getUserDetailsByJobAvailable() {
+		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
+		List<UserEntity> freelanceUserEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(UserConstant.FU_ISJOBAVAILABLE, false));
+		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
-			if (size > 0) {
-				return (ArrayList<FreelanceEntity>) freelanceEntity;
-			} else {
-				throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-						.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
-			}
+		if (size > 0) {
+			return (ArrayList<UserEntity>) freelanceUserEntity;
 		} else {
 			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
 					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
@@ -254,5 +245,79 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 
 	}
 
+	/**
+	 * Gets all the notification details based on the user Id
+	 * 
+	 * @param userId
+	 * 
+	 */
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId) {
+
+		LOGGER.info(UserConstant.USER_DAO_GETNOTIFICATIONUSEDETAILSBYUSERID);
+		List<UserNotificationDetailsView> userNotificationDetailsEntityViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserNotificationDetailsView.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		userNotificationDetailsEntityViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userNotificationDetailsEntityViews != null ? userNotificationDetailsEntityViews.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<UserNotificationDetailsView>) userNotificationDetailsEntityViews;
+		} else {
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETNOTIFICATIONDETAILSBYUSERID_INVAILD_ERRORMSG));
+		}
+	}
+
+	/**
+	 * Save the User Notification Details.
+	 * 
+	 * @param userNotificationEntity
+	 * @return
+	 */
+	@Transactional
+	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
+		LOGGER.info(UserConstant.USER_DAO_SAVEUSERNOTIFICATIONS);
+		int savedId = (Integer) sessionFactory.getCurrentSession().save(userNotificationEntity);
+		LOGGER.debug(UserConstant.USER_DAO_SUCCESSFULL_SAVEUSERNOTIFICATION + savedId);
+		if (savedId > 0) {
+			return userNotificationEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+				.getProperty(CustomMsgProperties.SAVEUSERNOTIFICATION_UNABLE_TO_SAVE_ERRORMSG));
+
+	}
+
+	/**
+	 * Gets all the user freelance details when incomplete profile
+	 * 
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile() {
+		LOGGER.info(UserConstant.USER_DAO_GETALLUSERDETAILSWHENPROFILEINCOMPLETED);
+		List<UserEntity> userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
+		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.isNull(UserConstant.FU_NATIONAL_ID));
+		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOADL_VALID_PHOTO));
+		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOADADDITIONAL_DOCS));
+		criteria.add(Restrictions.isNull(UserConstant.FU_EXP_INFIELD));
+		criteria.add(Restrictions.isNull(UserConstant.FU_ABOUT));
+		criteria.add(Restrictions.isNull(UserConstant.FU_CATEGORY));
+		criteria.add(Restrictions.isNull(UserConstant.FU_SUBCATEGORY));
+		criteria.createAlias(UserConstant.USERBIZDETAILS, UserConstant.USERBIZDETAILS_ALIAS, JoinType.INNER_JOIN);
+		criteria.add(Restrictions.isNull(UserConstant.FU_FULLADDRESS));
+		criteria.createAlias(UserConstant.USERMANAGERDETAILS, UserConstant.USERMANAGERDETAILS_ALIAS,
+				JoinType.NONE);
+		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userEntity != null ? userEntity.size() : 0;
+		if (size > 0) {
+			return (ArrayList<UserEntity>) userEntity;
+		}
+		return null;
+	}
 
 }

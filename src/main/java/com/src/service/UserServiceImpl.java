@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.UserConstant;
-import com.src.entity.FreelanceEntity;
-import com.src.entity.FreelancehistoryEntity;
+import com.src.entity.FreeLanceEntity;
+import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserManagerDetailsEntity;
+import com.src.entity.UserNotificationDetailsView;
+import com.src.entity.UserNotificationEntity;
 import com.src.entity.UserRoleEntity;
 import com.src.utils.CommonUtilites;
 
@@ -40,7 +42,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * 
 	 * @param username
 	 */
-	public Boolean checkUsernameNotExist(String username) {
+	public boolean checkUsernameNotExist(String username) {
 		return userRestDAO.checkUsernameNotExist(username);
 	}
 
@@ -73,8 +75,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 
-			FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
-			FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
+			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
+			FreeLanceHistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setBgDone(Boolean.FALSE);
@@ -138,8 +140,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 
-			FreelanceEntity freelanceentity = userEntity.getFreeLanceDetails();
-			FreelancehistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
+			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
+			FreeLanceHistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
@@ -195,11 +197,10 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
-	 * @param isrecoverypwd
-	 * @return toDAO
+	 * @return userEntity
 	 */
-	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd) {
-		return userRestDAO.getUserByRecoveryPwd(isrecoverypwd);
+	public ArrayList<UserEntity> getUserByRecoveryPwd() {
+		return userRestDAO.getUserByRecoveryPwd();
 
 	}
 
@@ -209,8 +210,39 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable) {
-		return userRestDAO.getUserDetailsByJobAvailable(isJobAvailable);
+	public ArrayList<UserEntity> getUserDetailsByJobAvailable() {
+		return userRestDAO.getUserDetailsByJobAvailable();
+	}
+
+	/**
+	 * Gets all the notification details based on the userId
+	 * 
+	 * @param userId
+	 * 
+	 */
+	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId) {
+		return userRestDAO.getNotificationDetailsByUserId(userId);
+	}
+
+	/**
+	 * Save the User Notification Details.
+	 * 
+	 * @param userNotificationEntity
+	 * @return
+	 */
+
+	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
+		userNotificationEntity.setSenton(CommonUtilites.getCurrentDateInNewFormat());
+		return userRestDAO.saveUserNotification(userNotificationEntity);
+	}
+
+	/**
+	 * Gets all the freelance user details when incomplete profile
+	 * 
+	 * 
+	 */
+	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile() {
+		return userRestDAO.getFUUserDetailsWhenInCompleteProfile();
 	}
 
 }

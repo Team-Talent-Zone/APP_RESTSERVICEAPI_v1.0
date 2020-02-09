@@ -2,8 +2,9 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
-import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserNotificationDetailsView;
+import com.src.entity.UserNotificationEntity;
 
 /**
  * The <code> UserRestDAO </code> interface defines a data access object for
@@ -30,6 +31,15 @@ public interface UserRestDAO {
 	 * @return
 	 */
 	public UserEntity saveUser(UserEntity userEntity);
+	
+	/**
+	 * Save the User Notification Details.
+	 * 
+	 * @param userNotificationEntity
+	 * @return
+	 */
+	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity);
+
 
 	/**
 	 * Get All User Details from the List.
@@ -69,10 +79,9 @@ public interface UserRestDAO {
 	/**
 	 * Gives the user details.
 	 * 
-	 * @param isrecoverypwd
 	 * @return
 	 */
-	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
+	public ArrayList<UserEntity> getUserByRecoveryPwd();
 
 	/**
 	 * Check the UserName from the Database.
@@ -85,9 +94,23 @@ public interface UserRestDAO {
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 * 
-	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable);
+	public ArrayList<UserEntity> getUserDetailsByJobAvailable();
+
+	/**
+	 * Gets all the freelance user details when incomplete profile
+	 * 
+	 * 
+	 */
+	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile();
+	
+	/**
+	 * Gets all the notification details based on the user Id
+	 * 
+	 * @param userId
+	 * 
+	 */
+	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
 
 }
