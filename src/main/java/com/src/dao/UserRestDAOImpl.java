@@ -198,30 +198,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	}
 
 	/**
-	 * Gets all the user details if isrecoverypwd is true
-	 * 
-	 * 
-	 */
-	@SuppressWarnings({ "unchecked" })
-	@Transactional
-	public ArrayList<UserEntity> getUserByRecoveryPwd() {
-
-		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
-		List<UserEntity> userEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-		criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
-		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = userEntity != null ? userEntity.size() : 0;
-		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
-		if (size > 0) {
-			return (ArrayList<UserEntity>) userEntity;
-		} else {
-			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-					.getProperty(CustomMsgProperties.GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG));
-		}
-	}
-
-	/**
 	 * Gets all the user details if isJobAvailable is false
 	 * 
 	 */
@@ -292,9 +268,9 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user freelance details when incomplete profile
 	 * 
-	 * 
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile() {
 		LOGGER.info(UserConstant.USER_DAO_GETALLUSERDETAILSWHENPROFILEINCOMPLETED);
 		List<UserEntity> userEntity = null;
@@ -316,9 +292,28 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-				.getProperty(CustomMsgProperties.GETALLUSERDETAILSWHENPROFILEINCOMPLETED_INVAILD_ERRORMSG));
+		return null;
+	}
 
+	/**
+	 * Gets all the user details if isrecoverypwd is true
+	 * 
+	 */
+	@SuppressWarnings({ "unchecked" })
+	@Transactional
+	public ArrayList<UserEntity> getUserByRecoveryPwd() {
+
+		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+		List<UserEntity> userEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true));
+		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userEntity != null ? userEntity.size() : 0;
+		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+		if (size > 0) {
+			return (ArrayList<UserEntity>) userEntity;
+		}
+		return null;
 	}
 
 }
