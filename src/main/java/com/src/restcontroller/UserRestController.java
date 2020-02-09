@@ -101,10 +101,9 @@ public class UserRestController extends AbstractRestManager {
 
 	/**
 	 * Save the User Notification history.
-	 *
 	 * 
 	 * @param userEntityObject
-	 * @return user details
+	 * @return user notificaiton history details
 	 */
 	@RequestMapping(value = "/saveUserNotification/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserNotificationEntity> saveUserNotification(
@@ -148,24 +147,12 @@ public class UserRestController extends AbstractRestManager {
 		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
 	}
 
+	
 	/**
-	 * 
-	 * @param isrecoverypwd
-	 * @return list of user details
-	 * @throws JSONException
-	 */
-	@RequestMapping(value = "/getUserByRecoveryPwd/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd() {
-		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
-		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
-	}
-
-	/*
-	 * @param isrecoverypwd
-	 * 
+	 * Get User Notification Details when userId
+	 * @param userId
 	 * @return list of user details
 	 * 
-	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/getNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserNotificationDetailsView>> getNotificationDetailsByUserId(
@@ -181,7 +168,6 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param isJobAvailable
 	 * @return list of user details
-	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getUserDetailsByJobAvailable() {
@@ -190,11 +176,20 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get User Details when isJobAvailable is false.
 	 * 
-	 * @param isJobAvailable
+	 * @param isrecoverypwd
 	 * @return list of user details
-	 * @throws JSONException
+	 */
+	@RequestMapping(value = "/getUserByRecoveryPwd/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd() {
+		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
+		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get User Freelance Details when incomplete profile.
+	 * 
+	 * @return list of user details
 	 */
 	@RequestMapping(value = "/getFUUserDetailsWhenInCompleteProfile/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getFUUserDetailsWhenInCompleteProfile() {

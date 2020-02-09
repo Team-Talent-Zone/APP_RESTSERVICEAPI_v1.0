@@ -61,8 +61,6 @@ public class CustomMsgProperties {
 
 	public static final String SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentRefundTransDetails_unabletosave_errorMsg";
 
-	public static final String GETUSERBYRECOVERYPWD_USERNOTFOUND_ERRORMSG = "getUserByRecoveryPwd_usernotfound_errorMsg";
-
 	public static final String SERVICE_NOTFOUND_ERRORMSG = "service_notfound_errorMsg";
 	
 	public static final String USERROLE_NOTVALID_ERRORMSG = "userRole_thisrolecantbesaved_errorMsg";
