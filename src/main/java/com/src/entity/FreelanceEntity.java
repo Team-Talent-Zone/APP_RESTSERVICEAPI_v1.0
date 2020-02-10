@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "freeLanceDetails")
 @Table(name = "APP_USER_FREELANCEDETAILS")
-public class FreelanceEntity implements Serializable {
+public class FreeLanceEntity implements Serializable {
 
 	private static final long serialVersionUID = 8431711325791818386L;
 

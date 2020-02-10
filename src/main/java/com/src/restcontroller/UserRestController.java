@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
-import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserNotificationDetailsView;
+import com.src.entity.UserNotificationEntity;
 
 /**
  * The <code> UserRestController </code> class defines managed beans which
@@ -36,7 +37,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/findByUsername/{username}/{password}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username,
-			@PathVariable(UserConstant.PASSWORD) String password) throws JSONException {
+			@PathVariable(UserConstant.PASSWORD) String password) {
 		UserEntity userEntity = userDetailsService.findByUsername(username, password);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
@@ -46,7 +47,7 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getUserByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID) int userId) {
 		UserEntity userEntity = userDetailsService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
@@ -67,7 +68,7 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param role
 	 */
-	@RequestMapping(value = "/getUsersByRole/{role}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUsersByRole/{role}/", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<UserEntity>> getUsersByRole(@PathVariable(UserConstant.ROLE) String role) {
 		ArrayList<UserEntity> listOfBusinessAdminUsers = userDetailsService.getUsersByRole(role);
 		return new ResponseEntity<ArrayList<UserEntity>>(listOfBusinessAdminUsers, HttpStatus.OK);
@@ -75,7 +76,7 @@ public class UserRestController extends AbstractRestManager {
 
 	/**
 	 * Update or Edit on user details.
-	 *  
+	 * 
 	 * @param userEntityObj
 	 * @return user details
 	 */
@@ -99,6 +100,19 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
+	 * Save the User Notification history.
+	 * 
+	 * @param userEntityObject
+	 * @return user notificaiton history details
+	 */
+	@RequestMapping(value = "/saveUserNotification/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserNotificationEntity> saveUserNotification(
+			@RequestBody UserNotificationEntity userNotificationEntity) {
+		UserNotificationEntity notificationEntity = userDetailsService.saveUserNotification(userNotificationEntity);
+		return new ResponseEntity<UserNotificationEntity>(notificationEntity, HttpStatus.OK);
+	}
+
+	/**
 	 * Check the userName if exist.
 	 * 
 	 * @param username
@@ -112,7 +126,7 @@ public class UserRestController extends AbstractRestManager {
 
 	/**
 	 * Check the userName if not exist.
-	 *  
+	 * 
 	 * @param username
 	 * @return boolean
 	 */
@@ -133,17 +147,20 @@ public class UserRestController extends AbstractRestManager {
 		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
 	}
 
+	
 	/**
-	 * 
-	 * @param isrecoverypwd
+	 * Get User Notification Details when userId
+	 * @param userId
 	 * @return list of user details
-	 * @throws JSONException
+	 * 
 	 */
-	@RequestMapping(value = "/getUserByRecoveryPwd/{isrecoverypwd}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd(
-			@PathVariable(UserConstant.ISRECOVERYPWD) Boolean isrecoverypwd) throws JSONException {
-		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd(isrecoverypwd);
-		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
+	@RequestMapping(value = "/getNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserNotificationDetailsView>> getNotificationDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<UserNotificationDetailsView> userNotificationDetailsEntityViews = userDetailsService
+				.getNotificationDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<UserNotificationDetailsView>>(userNotificationDetailsEntityViews,
+				HttpStatus.OK);
 	}
 
 	/**
@@ -151,13 +168,33 @@ public class UserRestController extends AbstractRestManager {
 	 * 
 	 * @param isJobAvailable
 	 * @return list of user details
-	 * @throws JSONException
 	 */
-	@RequestMapping(value = "/getUserDetailsByJobAvailable/{isJobAvailable}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelanceEntity>> getUserDetailsByJobAvailable(
-			@PathVariable(UserConstant.ISJOBAVAILABLE) Boolean isJobAvailable) throws JSONException {
-		ArrayList<FreelanceEntity> freelanceEntity = userDetailsService.getUserDetailsByJobAvailable(isJobAvailable);
-		return new ResponseEntity<ArrayList<FreelanceEntity>>(freelanceEntity, HttpStatus.OK);
+	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getUserDetailsByJobAvailable() {
+		ArrayList<UserEntity> freelanceUserEntity = userDetailsService.getUserDetailsByJobAvailable();
+		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * 
+	 * @param isrecoverypwd
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getUserByRecoveryPwd/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd() {
+		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
+		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get User Freelance Details when incomplete profile.
+	 * 
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getFUUserDetailsWhenInCompleteProfile/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getFUUserDetailsWhenInCompleteProfile() {
+		ArrayList<UserEntity> freelanceUserEntities = userDetailsService.getFUUserDetailsWhenInCompleteProfile();
+		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntities, HttpStatus.OK);
 	}
 
 }

@@ -16,9 +16,9 @@ import com.src.entity.PaymentFUTranscationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 
 @Controller
-public class PaymentsController extends AbstractRestManager {
+public class PaymentController extends AbstractRestManager {
 
-	final Logger logger = LoggerFactory.getLogger(PaymentsController.class);
+	final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
 	@RequestMapping(value = "/savepayments", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PaymentEntity> savepayments(@RequestBody PaymentEntity paymentEntity) {

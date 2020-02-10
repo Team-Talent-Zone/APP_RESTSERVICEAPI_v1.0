@@ -2,8 +2,9 @@ package com.src.service;
 
 import java.util.ArrayList;
 
-import com.src.entity.FreelanceEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserNotificationDetailsView;
+import com.src.entity.UserNotificationEntity;
 
 /**
  * The <code> UserService </code> interface defines a business service for
@@ -31,6 +32,16 @@ public interface UserService {
 	 */
 	public UserEntity saveUser(UserEntity userEntity);
 
+	
+	/**
+	 * Save the User Notification Details.
+	 * 
+	 * @param userNotificationEntity
+	 * @return
+	 */
+	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity);
+
+	
 	/**
 	 * Get All User Details from the List.
 	 * 
@@ -72,7 +83,7 @@ public interface UserService {
 	 * @param username
 	 * @throws Exception
 	 */
-	public Boolean checkUsernameNotExist(String username);
+	public boolean checkUsernameNotExist(String username);
 
 	/**
 	 * Helps in password recovery.
@@ -85,10 +96,8 @@ public interface UserService {
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
-	 * @param isrecoverypwd
-	 * @return
 	 */
-	public ArrayList<UserEntity> getUserByRecoveryPwd(Boolean isrecoverypwd);
+	public ArrayList<UserEntity> getUserByRecoveryPwd();
 
 	/**
 	 * Gets all the user details if isJobAvailable is false
@@ -96,7 +105,22 @@ public interface UserService {
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelanceEntity> getUserDetailsByJobAvailable(Boolean isJobAvailable);
+	public ArrayList<UserEntity> getUserDetailsByJobAvailable();
+
+	/**
+	 * Gets all the freelancer user details when incomplete profile
+	 * 
+	 * 
+	 */
+	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile();
+
+	/**
+	 * Gets all the notification details based on the user Id
+	 * 
+	 * @param userId
+	 * 
+	 */
+	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
 
 
 }
