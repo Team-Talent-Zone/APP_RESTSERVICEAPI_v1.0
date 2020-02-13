@@ -16,7 +16,7 @@ public class VelocityHelper {
 
 	public VelocityContext generateVelocityObject(JSONArray jsonArray) throws Exception {
 		VelocityContext context = new VelocityContext();
-		logger.info("Inside the VelocityHelper Class Of SentEmail Utility  : GenerateVelocityObject method");
+		logger.info("Inside the VelocityHelper Class  : generateVelocityObject method");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject objectInArray = jsonArray.getJSONObject(i);
 			String[] elementNames = JSONObject.getNames(objectInArray);
@@ -30,7 +30,8 @@ public class VelocityHelper {
 
 	public String generateEmailInHtmlFormat(String tempServerURLEmailTemplateName, VelocityContext context) {
 		StringWriter writer = null;
-		logger.debug("Inside generateEmailInHtmlFormat method of SendEmail Utility  of : VelocityHelper Class ");
+		logger.debug("Inside the VelocityHelper Class : generateEmailInHtmlFormat method : templateURL :"
+				+ tempServerURLEmailTemplateName);
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
 		ve.setProperty("runtime.log.logsystem.log4j.category", "velocity");
@@ -40,9 +41,6 @@ public class VelocityHelper {
 		ve.setProperty("url.resource.loader.class", "org.apache.velocity.runtime.resource.loader.URLResourceLoader");
 		ve.setProperty("url.resource.loader.root", (Object) tempServerURLEmailTemplateName.substring(0,
 				tempServerURLEmailTemplateName.lastIndexOf('/') + 1));
-		logger.debug(
-				"Inside GenerateEmailInHtmlFormat method of SendEmail Utility Jar of : AbstractEmailConfig Class : Template URL :  "
-						+ tempServerURLEmailTemplateName);
 		ve.init();
 		Template t = ve.getTemplate(
 				tempServerURLEmailTemplateName.substring(tempServerURLEmailTemplateName.lastIndexOf('/') + 1));

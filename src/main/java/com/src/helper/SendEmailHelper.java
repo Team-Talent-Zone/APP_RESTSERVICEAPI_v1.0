@@ -23,7 +23,7 @@ public class SendEmailHelper {
 	final Logger logger = LoggerFactory.getLogger(SendEmailHelper.class);
 
 	public UtilEntity prepareEmail(UtilEntity utilEntity) throws Exception {
-
+		logger.debug("Inside the SendEmailHelper Class : prepareEmail method");
 		VelocityHelper velocityHelper = new VelocityHelper();
 		JSONArray jsonarray = new JSONArray();
 		JSONObject jsonObj = new JSONObject(utilEntity.getTemplatedynamicdata());
@@ -47,6 +47,7 @@ public class SendEmailHelper {
 	}
 
 	private UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
+		logger.debug("Inside he SendEmailHelper Class : sendEmail method : sending email to : " + utilEntity.getTouser());
 		SMTPTransport t = null;
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", UtilityConfig.HOST_DEV_SMTP);
@@ -64,10 +65,9 @@ public class SendEmailHelper {
 		t = (SMTPTransport) session.getTransport("smtp");
 		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
 		t.sendMessage(msg, msg.getAllRecipients());
-		logger.debug("Inside the prepareEmail method of SendEmailHelper class   : Is Email Sent  "
-				+ t.getLastServerResponse());
 		utilEntity.setLastserverresponse(t.getLastServerResponse());
 		utilEntity.setLastreturncode(t.getLastReturnCode());
+		logger.debug("Inside he SendEmailHelper Class : sendEmail method : service response  " + utilEntity.getLastserverresponse());
 		return utilEntity;
 	}
 }
