@@ -26,13 +26,8 @@ public class SendEmailHelper {
 
 		VelocityHelper velocityHelper = new VelocityHelper();
 		JSONArray jsonarray = new JSONArray();
-
-		if (utilEntity.getArrayfromui() == null) {
-			jsonarray = utilEntity.getJsonarray();
-		} else {
-			JSONObject jsonObj = new JSONObject(utilEntity.getArrayfromui());
-			jsonarray.put(jsonObj);
-		}
+		JSONObject jsonObj = new JSONObject(utilEntity.getTemplatedynamicdata());
+		jsonarray.put(jsonObj);
 		VelocityContext velocityContext = velocityHelper.generateVelocityObject(jsonarray);
 		String htmlFormat = velocityHelper.generateEmailInHtmlFormat(utilEntity.getTemplateurl(), velocityContext);
 		if (htmlFormat != null) {
