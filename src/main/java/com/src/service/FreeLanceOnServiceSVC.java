@@ -3,6 +3,7 @@ package com.src.service;
 import java.util.ArrayList;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
@@ -62,4 +63,7 @@ public interface FreeLanceOnServiceSVC {
 	 * @param userId
 	 */
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
+	
+	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
+	
 }

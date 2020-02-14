@@ -9,6 +9,7 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
+import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.utils.CommonUtilites;
 
@@ -98,6 +99,11 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		userServiceNotfication.setUserServiceDetailsEntity(userServiceDetailsEntity);
 		userServiceDetailsDAO.saveUserServiceNotification(userServiceNotfication);
 		return userServiceNotfication;
+	}
+
+	@Override
+	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
+		return userServiceDetailsDAO.getUserServiceExpirationDetails();
 	}
 
 }

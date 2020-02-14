@@ -3,6 +3,7 @@ package com.src.dao;
 import java.util.ArrayList;
 
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 
 /**
@@ -58,5 +59,7 @@ public interface UserServiceDetailsDAO {
 	 * @return
 	 */
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
+	
+	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
 
 }

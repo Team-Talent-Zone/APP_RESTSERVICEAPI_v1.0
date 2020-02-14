@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 
 /**
@@ -102,5 +103,15 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		UserServiceNotfications userServiceNotficationEntity = userServiceDetailsService
 				.saveUserServiceNotification(userServiceNotficationObject);
 		return new ResponseEntity<UserServiceNotfications>(userServiceNotficationEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Service Details when service end date after 2 days
+	 * 
+	 */
+	@RequestMapping(value = "/getUserServiceExpirationDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceExpirationDetailsView>> getUserServiceExpirationDetails() {
+		ArrayList<UserServiceExpirationDetailsView> listofServiceExpirations = userServiceDetailsService.getUserServiceExpirationDetails();
+		return new ResponseEntity<ArrayList<UserServiceExpirationDetailsView>>(listofServiceExpirations, HttpStatus.OK);
 	}
 }

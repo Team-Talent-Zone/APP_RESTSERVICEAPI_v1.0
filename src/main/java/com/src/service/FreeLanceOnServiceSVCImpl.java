@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.UserServiceDetailsEntity;
@@ -96,6 +97,11 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId) {
 		return freeLanceOnServiceDAO.getFreeLanceOnServiceDetailsByUserId(userId);
+	}
+
+	@Override
+	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
+		return freeLanceOnServiceDAO.getFUOnServiceExpirationDetails();
 	}
 	
 }

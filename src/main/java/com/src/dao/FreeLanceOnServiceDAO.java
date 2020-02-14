@@ -3,6 +3,7 @@ package com.src.dao;
 import java.util.ArrayList;
 
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
@@ -61,4 +62,6 @@ public interface FreeLanceOnServiceDAO {
 	 * @param userId
 	 */
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
+	
+	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
 }

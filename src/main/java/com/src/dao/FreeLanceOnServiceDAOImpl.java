@@ -15,6 +15,7 @@ import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.exception.RestCustomException;
@@ -112,7 +113,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
 	}
-	
+
 	/**
 	 * Get the Free Lance On Service Details by UserId.
 	 * 
@@ -131,6 +132,20 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
+		List<FreeLanceOnServiceExpirationDetailsView> freeLanceOnServiceExpirationDetailsView = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreeLanceOnServiceExpirationDetailsView.class);
+		freeLanceOnServiceExpirationDetailsView = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		if (freeLanceOnServiceExpirationDetailsView != null) {
+			return (ArrayList<FreeLanceOnServiceExpirationDetailsView>) freeLanceOnServiceExpirationDetailsView;
+		}
+		return null;
 	}
 
 }
