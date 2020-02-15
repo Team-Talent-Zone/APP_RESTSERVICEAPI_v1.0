@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
+import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsService </code> interface defines a business
@@ -61,4 +62,7 @@ public interface UserServiceDetailsSVC {
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
+	
+	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
+
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
+import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
@@ -64,4 +65,6 @@ public interface FreeLanceOnServiceDAO {
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
 	
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
+	
+	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
 }

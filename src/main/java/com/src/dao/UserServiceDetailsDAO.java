@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
+import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsDAO </code> interface defines a data access
@@ -61,5 +62,7 @@ public interface UserServiceDetailsDAO {
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 	
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
+
+	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
 
 }

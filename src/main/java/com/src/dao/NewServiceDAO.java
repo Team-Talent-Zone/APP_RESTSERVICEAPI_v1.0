@@ -1,4 +1,5 @@
-package com.src.dao;
+
+ package com.src.dao;
 
 import java.util.ArrayList;
 
@@ -66,4 +67,12 @@ public interface NewServiceDAO {
 	 * @param userId
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId);
+	
+	/**
+	 * To get All Service Details which create a day back.
+	 * 
+	 * @return
+	 */
+	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
+
 }

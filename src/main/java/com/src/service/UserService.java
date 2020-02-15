@@ -32,7 +32,6 @@ public interface UserService {
 	 */
 	public UserEntity saveUser(UserEntity userEntity);
 
-	
 	/**
 	 * Save the User Notification Details.
 	 * 
@@ -41,7 +40,6 @@ public interface UserService {
 	 */
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity);
 
-	
 	/**
 	 * Get All User Details from the List.
 	 * 
@@ -121,6 +119,5 @@ public interface UserService {
 	 * 
 	 */
 	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
-
 
 }

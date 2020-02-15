@@ -68,4 +68,6 @@ public interface NewSVCService {
 	 * @param userId
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId);
+
+	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
 }

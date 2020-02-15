@@ -17,6 +17,7 @@ import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
+import com.src.entity.UserServiceNotificationDetailsView;
 import com.src.exception.RestCustomException;
 
 /**
@@ -148,6 +149,11 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		if (size > 0) {
 			return (ArrayList<UserServiceExpirationDetailsView>) userServiceExpirationDetails;
 		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
 		return null;
 	}
 }

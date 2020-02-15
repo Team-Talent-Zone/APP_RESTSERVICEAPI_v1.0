@@ -29,4 +29,11 @@ public class CommonUtilites {
 			result = result + alphabet.charAt(r.nextInt(n));
 		return result;
 	}
+	
+	public static String getPreviousDate() {
+ 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE,-1);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return dateFormat.format(cal.getTime());
+	}
 }

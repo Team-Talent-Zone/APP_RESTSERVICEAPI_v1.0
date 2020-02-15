@@ -17,6 +17,7 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
+import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.exception.RestCustomException;
 
@@ -144,6 +145,22 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 		if (freeLanceOnServiceExpirationDetailsView != null) {
 			return (ArrayList<FreeLanceOnServiceExpirationDetailsView>) freeLanceOnServiceExpirationDetailsView;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
+		List<FreeLanceOnServiceNotificationDetailsView> freeLanceOnServiceNotificationDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreeLanceOnServiceNotificationDetailsView.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		freeLanceOnServiceNotificationDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
+
+		if (freeLanceOnServiceNotificationDetailsViews != null) {
+			return (ArrayList<FreeLanceOnServiceNotificationDetailsView>) freeLanceOnServiceNotificationDetailsViews;
 		}
 		return null;
 	}

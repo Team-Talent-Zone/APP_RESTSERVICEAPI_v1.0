@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
+import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
@@ -48,7 +49,7 @@ public interface FreeLanceOnServiceSVC {
 	 */
 	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
 			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
-	
+
 	/**
 	 * To Get the all freelance Service Details.
 	 * 
@@ -56,14 +57,15 @@ public interface FreeLanceOnServiceSVC {
 	 */
 	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
 
-
 	/**
 	 * Get the Free Lance on Service Details by UserId.
 	 * 
 	 * @param userId
 	 */
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
-	
+
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
-	
+
+	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
+
 }

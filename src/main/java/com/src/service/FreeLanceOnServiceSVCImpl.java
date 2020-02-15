@@ -9,6 +9,7 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
+import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
@@ -102,6 +103,11 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
 		return freeLanceOnServiceDAO.getFUOnServiceExpirationDetails();
+	}
+
+	@Override
+	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
+		return freeLanceOnServiceDAO.getFUOnServiceNotificationDetailsByUserId(userId);
 	}
 	
 }
