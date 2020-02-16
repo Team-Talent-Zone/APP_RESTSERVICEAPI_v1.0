@@ -37,13 +37,13 @@ public class FreeLanceOnServiceExpirationDetailsView {
 	@Column(name = "PREFERLANG")
 	private String preferlang;
 	
-	@Column(name = "PREFERLANG")
+	@Column(name = "JOBCREATEDON")
 	private String jobcreatedon;
 	
-	@Column(name = "PREFERLANG")
+	@Column(name = "JOBENDEDON")
 	private String jobendedon;
 	
-	@Column(name = "PREFERLANG")
+	@Column(name = "AMOUNTCBAPAIDTOFU")
 	private String amountcbapaidtofu;
 
 	public int getUserId() {
