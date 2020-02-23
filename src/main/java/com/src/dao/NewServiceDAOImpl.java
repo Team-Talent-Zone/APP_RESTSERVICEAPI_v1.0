@@ -18,6 +18,7 @@ import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
 import com.src.exception.RestCustomException;
+import com.src.utils.CommonUtilites;
 
 /**
  * The <code> NewServiceDAOImpl </code> class handles data access operation for
@@ -125,7 +126,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYMANAGERID);
 		List<NewServiceHistoryEntity> newServiceHistoryEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING, 
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING,
 				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_USING_MANAGERID, managerId));
 		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -135,10 +136,10 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for managerId : "
-						+ managerId);
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG)
+						+ " for managerId : " + managerId);
 	}
-	
+
 	/**
 	 * Get All New Service Details by userId.
 	 * 
@@ -150,7 +151,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILSBYUSERID);
 		List<NewServiceHistoryEntity> newServiceHistoryEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING, 
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING,
 				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_USING_USERID, userId));
 		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -160,7 +161,25 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceHistoryEntity>) newServiceHistoryEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG) + " for userId : "
-						+ userId);
+				applicationConfigProperties.getProperty(CustomMsgProperties.SERVICE_NOTFOUND_ERRORMSG)
+						+ " for userId : " + userId);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated() {
+		List<NewServiceEntity> newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.add(Restrictions.eq("createdOn", CommonUtilites.getPreviousDate()));
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
+				JoinType.INNER_JOIN);
+		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
+				NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
+		if (size > 0) {
+			return (ArrayList<NewServiceEntity>) newServiceEntity;
+		}
+		return null;
 	}
 }

@@ -69,6 +69,8 @@ public class CustomMsgProperties {
 
 	public static final String GETNOTIFICATIONDETAILSBYUSERID_INVAILD_ERRORMSG ="getNotificationDetailsByUseId_existingjob_errorMsg";
 	
+	public static final String GETUSERSERVICEEXPIRATIONDETAILS_INVAILD_ERRORMSG ="getUserServiceExpirationDetails_nocontent";
+
 	private CustomMsgProperties() {
 	}
 

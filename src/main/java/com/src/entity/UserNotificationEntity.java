@@ -24,7 +24,7 @@ public class UserNotificationEntity implements Serializable {
 	private int id;
 
 	@Column(name = "USERID")
-	private String userId;
+	private int userid;
 
 	@Column(name = "SENTON")
 	private String senton;
@@ -33,7 +33,7 @@ public class UserNotificationEntity implements Serializable {
 	private String sentby;
 
 	@Column(name = "TEMPLATEID")
-	private int templateId;
+	private int templateid;
 
 	public int getId() {
 		return id;
@@ -41,14 +41,6 @@ public class UserNotificationEntity implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getSenton() {
@@ -67,12 +59,20 @@ public class UserNotificationEntity implements Serializable {
 		this.sentby = sentby;
 	}
 
-	public int getTemplateId() {
-		return templateId;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setTemplateId(int templateId) {
-		this.templateId = templateId;
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public int getTemplateid() {
+		return templateid;
+	}
+
+	public void setTemplateid(int templateid) {
+		this.templateid = templateid;
 	}
 
 }

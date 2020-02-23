@@ -66,6 +66,8 @@ public class UserConstant {
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
 	public static final String SERVICEID = "serviceId";
+
+	public static final String CLIENT_BUSINESS_ADMINISTRATOR = "CLIENT_BUSINESS_ADMINISTRATOR";
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
 	public static final Object CORE_SERVICE_SUPPORT_TEAM = "CORE_SERVICE_SUPPORT_TEAM";

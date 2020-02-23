@@ -15,7 +15,7 @@ public class ReferenceLookUpTemplateEntity implements Serializable {
 
 	@Id
 	@Column(name = "TEMPLATEID")
-	private int templateId;
+	private int templateid;
 
 	@Column(name = "NAME")
 	private String name;
@@ -29,12 +29,12 @@ public class ReferenceLookUpTemplateEntity implements Serializable {
 	@Column(name = "SHORTKEY")
 	private String shortkey;
 	
-	public int getTemplateId() {
-		return templateId;
-	}
+	public int getTemplateid() {
+		return templateid;
+	} 
 
-	public void setTemplateId(int templateId) {
-		this.templateId = templateId;
+	public void setTemplateid(int templateid) {
+		this.templateid = templateid;
 	}
 
 	public String getShortkey() {

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
+import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsController </code> class defines managed beans
@@ -102,5 +104,32 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		UserServiceNotfications userServiceNotficationEntity = userServiceDetailsService
 				.saveUserServiceNotification(userServiceNotficationObject);
 		return new ResponseEntity<UserServiceNotfications>(userServiceNotficationEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Service Details when service end date after 2 days
+	 * 
+	 */
+	@RequestMapping(value = "/getUserServiceExpirationDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceExpirationDetailsView>> getUserServiceExpirationDetails() {
+		ArrayList<UserServiceExpirationDetailsView> listofServiceExpirations = userServiceDetailsService
+				.getUserServiceExpirationDetails();
+		return new ResponseEntity<ArrayList<UserServiceExpirationDetailsView>>(listofServiceExpirations, HttpStatus.OK);
+	}
+
+	/**
+	 * Get UserService Notification Details when userId
+	 * 
+	 * @param userId
+	 * @return list of user details
+	 * 
+	 */
+	@RequestMapping(value = "/getUserServiceNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceNotificationDetailsView>> getUserServiceNotificationDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<UserServiceNotificationDetailsView> userServiceNotificationDetailsViews = userServiceDetailsService
+				.getUserServiceNotificationDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<UserServiceNotificationDetailsView>>(userServiceNotificationDetailsViews,
+				HttpStatus.OK);
 	}
 }

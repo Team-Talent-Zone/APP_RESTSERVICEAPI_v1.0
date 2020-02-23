@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
+import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
 
 /**
@@ -105,6 +107,33 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceSVC
 				.getFreeLanceOnServiceDetailsByUserId(userId);
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
+	}					
+
+	/**
+	 * Get the Free Lancer On Service Details when service end date after 2 days
+	 * 
+	 */
+	@RequestMapping(value = "/getFUOnServiceExpirationDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceOnServiceExpirationDetailsView>> getFUOnServiceExpirationDetails() {
+		ArrayList<FreeLanceOnServiceExpirationDetailsView> listofFUOnServiceExpirations = freeLanceOnServiceSVC
+				.getFUOnServiceExpirationDetails();
+		return new ResponseEntity<ArrayList<FreeLanceOnServiceExpirationDetailsView>>(listofFUOnServiceExpirations,
+				HttpStatus.OK);
 	}
 
+	/**
+	 * Get Free Lance OnService Notification Details when userId
+	 * 
+	 * @param userId
+	 * @return list of user details
+	 * 
+	 */
+	@RequestMapping(value = "/getFUOnServiceNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceOnServiceNotificationDetailsView>> getFUOnServiceNotificationDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<FreeLanceOnServiceNotificationDetailsView> freeLanceOnServiceNotificationDetailsViews = freeLanceOnServiceSVC
+				.getFUOnServiceNotificationDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<FreeLanceOnServiceNotificationDetailsView>>(freeLanceOnServiceNotificationDetailsViews,
+				HttpStatus.OK);
+	}
 }

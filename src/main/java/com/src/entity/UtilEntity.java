@@ -2,8 +2,6 @@ package com.src.entity;
 
 import java.io.Serializable;
 
-import org.json.JSONArray;
-
 public class UtilEntity implements Serializable {
 
 	/**
@@ -19,10 +17,8 @@ public class UtilEntity implements Serializable {
 
 	private String body;
 
-	private String arrayfromui;
+	private String templatedynamicdata;
 	
-	private JSONArray jsonarray;
-
 	private String templateurl;
 	
 	private int lastreturncode;
@@ -30,6 +26,8 @@ public class UtilEntity implements Serializable {
 	private String lastserverresponse;
 	
 	private String preferlang;
+	
+	private String translateresp;
 
 	public String getFromuser() {
 		return fromuser;
@@ -63,20 +61,12 @@ public class UtilEntity implements Serializable {
 		this.body = body;
 	}
 
-	public String getArrayfromui() {
-		return arrayfromui;
+	public String getTemplatedynamicdata() {
+		return templatedynamicdata;
 	}
 
-	public void setArrayfromui(String arrayfromui) {
-		this.arrayfromui = arrayfromui;
-	}
-
-	public JSONArray getJsonarray() {
-		return jsonarray;
-	}
-
-	public void setJsonarray(JSONArray jsonarray) {
-		this.jsonarray = jsonarray;
+	public void setTemplatedynamicdata(String templatedynamicdata) {
+		this.templatedynamicdata = templatedynamicdata;
 	}
 
 	public String getTemplateurl() {
@@ -110,6 +100,13 @@ public class UtilEntity implements Serializable {
 	public void setPreferlang(String preferlang) {
 		this.preferlang = preferlang;
 	}
+
+	public String getTranslateresp() {
+		return translateresp;
+	}
+
+	public void setTranslateresp(String translateresp) {
+		this.translateresp = translateresp;
+	}
 	
-	 
 }

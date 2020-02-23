@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,12 +53,13 @@ public class UtilityController extends AbstractRestManager {
 		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/translatetext/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> translateText(@RequestBody String targetLanguage, @RequestBody String targetText)
+	@RequestMapping(value = "/translatetext/{targetText}/{targetLanguage}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UtilEntity> translateText(@PathVariable String targetLanguage, @PathVariable String targetText)
 			throws Exception {
-		Gson gson = new Gson();
 		String translateText = utilService.translateText(targetLanguage, targetText);
-		return new ResponseEntity<String>(gson.toJson(translateText), HttpStatus.OK);
+		UtilEntity util = new UtilEntity();
+		util.setTranslateresp(translateText);
+		return new ResponseEntity<UtilEntity>(util, HttpStatus.OK);
 
 	}
 

@@ -15,7 +15,9 @@ import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
+import com.src.entity.UserServiceNotificationDetailsView;
 import com.src.exception.RestCustomException;
 
 /**
@@ -134,5 +136,24 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
+		List<UserServiceExpirationDetailsView> userServiceExpirationDetails = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceExpirationDetailsView.class);
+		userServiceExpirationDetails = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userServiceExpirationDetails != null ? userServiceExpirationDetails.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<UserServiceExpirationDetailsView>) userServiceExpirationDetails;
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
+		return null;
 	}
 }
