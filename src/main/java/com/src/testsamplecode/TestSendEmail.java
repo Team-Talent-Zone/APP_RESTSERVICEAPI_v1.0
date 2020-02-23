@@ -31,7 +31,7 @@ public class TestSendEmail {
 		Message msg = new MimeMessage(session);
 
 		msg.setFrom(new InternetAddress("team.spprt2019@gmail.com"));
-		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("komal.singhFU@yahoo.com", false));
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("praveen.kumarFU@yahoo.com", false));
 		msg.setSubject("FeedBack To Azmiri ");
 		msg.setContent("<html><h1><u>Azmiri your doing great JOB</u></h1></html>", "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
