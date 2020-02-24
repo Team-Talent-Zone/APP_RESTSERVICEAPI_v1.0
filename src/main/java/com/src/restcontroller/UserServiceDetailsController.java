@@ -132,4 +132,15 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<UserServiceNotificationDetailsView>>(userServiceNotificationDetailsViews,
 				HttpStatus.OK);
 	}
+	
+	/**
+	 * Get User Service Details when service is pending with payment
+	 * 
+	 */
+	@RequestMapping(value = "/getUserServicePendingPayment/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getUserServicePendingPayment() {
+		ArrayList<UserServiceDetailsEntity> serviceDetailsEntities = userServiceDetailsService
+				.getUserServicePendingPayment();
+		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(serviceDetailsEntities, HttpStatus.OK);
+	}
 }
