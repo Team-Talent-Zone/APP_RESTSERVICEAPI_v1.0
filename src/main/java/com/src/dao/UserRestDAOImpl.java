@@ -132,7 +132,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
