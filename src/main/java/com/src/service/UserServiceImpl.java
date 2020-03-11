@@ -79,7 +79,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			FreeLanceHistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 			freelanceentity.setJobAvailable(Boolean.FALSE);
-			freelanceentity.setIsBgDone(Boolean.FALSE);
+			freelanceentity.setIsbgdone(Boolean.FALSE);
 			freelanceentity.setIsbgstarted(Boolean.FALSE);
 			freelanceentity.setIsprofilecompleted(Boolean.FALSE);
 			freelancehistoryEntity.setIslocked(Boolean.FALSE);
