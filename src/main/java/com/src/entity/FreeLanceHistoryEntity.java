@@ -33,22 +33,22 @@ public class FreeLanceHistoryEntity implements Serializable {
 	private UserEntity userdetails;
 
 	@Column(name = "DECISIONBY")
-	private String decisionBy;
+	private String decisionby;
 
 	@Column(name = "DECISIONON")
-	private String decisionOn;
+	private String decisionon; 
 
 	@Column(name = "BGSTATUS")
-	private String bgStatus;
+	private String bgstatus;
 
 	@Column(name = "BGCOMMENT")
-	private String bgComment;
+	private String bgcomment;
 
 	@Column(name = "ISLOCKED")
-	private boolean isLocked;
+	private boolean islocked;
 
 	@Column(name = "MANAGERID")
-	private Integer managerId;
+	private Integer managerid;
 
 	public Integer getEventId() {
 		return eventId;
@@ -66,36 +66,13 @@ public class FreeLanceHistoryEntity implements Serializable {
 		this.userdetails = userdetails;
 	}
 
-	public String getDecisionBy() {
-		return decisionBy;
+	 
+	public String getBgstatus() {
+		return bgstatus;
 	}
 
-	public void setDecisionBy(String decisionBy) {
-		this.decisionBy = decisionBy;
-	}
-
-	public String getDecisionOn() {
-		return decisionOn;
-	}
-
-	public void setDecisionOn(String decisionOn) {
-		this.decisionOn = decisionOn;
-	}
-
-	public String getBgStatus() {
-		return bgStatus;
-	}
-
-	public void setBgStatus(String bgStatus) {
-		this.bgStatus = bgStatus;
-	}
-
-	public String getBgComment() {
-		return bgComment;
-	}
-
-	public void setBgComment(String bgComment) {
-		this.bgComment = bgComment;
+	public void setBgstatus(String bgstatus) {
+		this.bgstatus = bgstatus;
 	}
 
 	public Integer getUserId() {
@@ -106,20 +83,47 @@ public class FreeLanceHistoryEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public boolean isLocked() {
-		return isLocked;
+	 
+
+	public boolean isIslocked() {
+		return islocked;
 	}
 
-	public void setLocked(boolean isLocked) {
-		this.isLocked = isLocked;
+	public void setIslocked(boolean islocked) {
+		this.islocked = islocked;
 	}
 
-	public Integer getManagerId() {
-		return managerId;
+	public String getDecisionby() {
+		return decisionby;
 	}
 
-	public void setManagerId(Integer managerId) {
-		this.managerId = managerId;
+	public void setDecisionby(String decisionby) {
+		this.decisionby = decisionby;
 	}
+
+	public String getDecisionon() {
+		return decisionon;
+	}
+
+	public void setDecisionon(String decisionon) {
+		this.decisionon = decisionon;
+	}
+
+	public String getBgcomment() {
+		return bgcomment;
+	}
+
+	public void setBgcomment(String bgcomment) {
+		this.bgcomment = bgcomment;
+	}
+
+	public Integer getManagerid() {
+		return managerid;
+	}
+
+	public void setManagerid(Integer managerid) {
+		this.managerid = managerid;
+	}
+ 
 
 }
