@@ -45,14 +45,7 @@ public class UserConstant {
 	public static final String ISACTIVE = "isactive";
 	public static final String FREELANCEDETAILS = "freeLanceDetails";
 	public static final String FREELANCEDETAILS_ALIAS = "fUDetails";
-	public static final String FU_NATIONAL_ID = "fUDetails.nationalIdNumber";
-	public static final String FU_UPLOAD_VALID_PHOTO = "fUDetails.uploadValidPhotoidImgUrl";
-	public static final String FU_UPLOADADDITIONAL_DOCS = "fUDetails.uploadAdditionalDocZipFileUrl";
-	public static final String FU_EXP_INFIELD = "fUDetails.experienceInField";
-	public static final String FU_ABOUT = "fUDetails.abt";
-	public static final String FU_HOURLYRATE = "fUDetails.hourlyRate";
-	public static final String FU_CATEGORY = "fUDetails.category";
-	public static final String FU_SUBCATEGORY = "fUDetails.subCategory";
+	public static final String FU_IS_PROFILE_COMPLETED = "fUDetails.isprofilecompleted";
 	public static final String FU_ISJOBAVAILABLE = "fUDetails.isJobAvailable";
 	public static final String USERBIZDETAILS = "userbizdetails";
 	public static final String USERBIZDETAILS_ALIAS = "BizDetails";

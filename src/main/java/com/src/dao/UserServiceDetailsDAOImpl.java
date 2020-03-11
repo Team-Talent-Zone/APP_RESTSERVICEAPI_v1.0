@@ -152,8 +152,33 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
+		List<UserServiceNotificationDetailsView> userServiceNotificationDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceNotificationDetailsView.class);
+		userServiceNotificationDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userServiceNotificationDetailsViews != null ? userServiceNotificationDetailsViews.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<UserServiceNotificationDetailsView>) userServiceNotificationDetailsViews;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment() {
+		List<UserServiceDetailsEntity> newUserServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_ISACTIVE, true));
+		criteria.add(Restrictions.eq("status", "PAYMENT_PENDING"));
+		newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+		if (size > 0) {
+			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
+		}
 		return null;
 	}
 }

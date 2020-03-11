@@ -42,18 +42,17 @@ public class FreeLanceEntity implements Serializable {
 	@JsonIgnore
 	private UserEntity userdetails;
 
-	
-	@Column(name = "NATIONALIDNUMBER")
-	private String nationalIdNumber;
-
 	@Column(name = "UPLOADVALIDPHOTOIDIMGURL")
 	private String uploadValidPhotoidImgUrl;
 
 	@Column(name = "ISBGDONE")
 	private boolean isBgDone;
 
+	@Column(name = "ISPROFILECOMPLETED")
+	private boolean isprofilecompleted;
+	
 	@Column(name = "ISBGSTARTED")
-	private boolean isBgStarted;
+	private boolean isbgstarted;
 
 	@Column(name = "UPLOADADDITIONALDOCZIPFILEURL")
 	private String uploadAdditionalDocZipFileUrl;
@@ -95,14 +94,6 @@ public class FreeLanceEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getNationalIdNumber() {
-		return nationalIdNumber;
-	}
-
-	public void setNationalIdNumber(String nationalIdNumber) {
-		this.nationalIdNumber = nationalIdNumber;
-	}
-
 	public String getUploadValidPhotoidImgUrl() {
 		return uploadValidPhotoidImgUrl;
 	}
@@ -115,17 +106,26 @@ public class FreeLanceEntity implements Serializable {
 		return isBgDone;
 	}
 
-	public void setBgDone(boolean isBgDone) {
+	public void setIsBgDone(boolean isBgDone) {
 		this.isBgDone = isBgDone;
 	}
 
-	public boolean isBgStarted() {
-		return isBgStarted;
+	 
+	public boolean isIsprofilecompleted() {
+		return isprofilecompleted;
 	}
 
-	public void setBgStarted(boolean isBgStarted) {
-		this.isBgStarted = isBgStarted;
+	public void setIsprofilecompleted(boolean isprofilecompleted) {
+		this.isprofilecompleted = isprofilecompleted;
 	}
+
+	public boolean isIsbgstarted() {
+		return isbgstarted;
+	}
+
+	public void setIsbgstarted(boolean isbgstarted) {
+		this.isbgstarted = isbgstarted;
+	} 
 
 	public String getUploadAdditionalDocZipFileUrl() {
 		return uploadAdditionalDocZipFileUrl;

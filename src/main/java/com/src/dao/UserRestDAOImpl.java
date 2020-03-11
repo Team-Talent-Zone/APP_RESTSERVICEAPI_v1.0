@@ -132,7 +132,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null) {
 			return userEntity;
@@ -285,15 +284,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
-		criteria.add(Restrictions.isNull(UserConstant.FU_NATIONAL_ID));
-		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOAD_VALID_PHOTO));
-		criteria.add(Restrictions.isNull(UserConstant.FU_UPLOADADDITIONAL_DOCS));
-		criteria.add(Restrictions.isNull(UserConstant.FU_EXP_INFIELD));
-		criteria.add(Restrictions.isNull(UserConstant.FU_ABOUT));
-		criteria.add(Restrictions.isNull(UserConstant.FU_CATEGORY));
-		criteria.add(Restrictions.isNull(UserConstant.FU_SUBCATEGORY));
-		criteria.createAlias(UserConstant.USERBIZDETAILS, UserConstant.USERBIZDETAILS_ALIAS, JoinType.INNER_JOIN);
-		criteria.add(Restrictions.isNull(UserConstant.FU_FULLADDRESS));
+		criteria.add(Restrictions.eq(UserConstant.FU_IS_PROFILE_COMPLETED , false));
 		criteria.createAlias(UserConstant.USERMANAGERDETAILS, UserConstant.USERMANAGERDETAILS_ALIAS, JoinType.NONE);
 		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;

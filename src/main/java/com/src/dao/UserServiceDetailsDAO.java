@@ -64,5 +64,7 @@ public interface UserServiceDetailsDAO {
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
 
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
+	
+	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
 
 }

@@ -79,9 +79,10 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			FreeLanceHistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
 
 			freelanceentity.setJobAvailable(Boolean.FALSE);
-			freelanceentity.setBgDone(Boolean.FALSE);
-			freelanceentity.setBgStarted(Boolean.FALSE);
-			freelancehistoryEntity.setLocked(Boolean.FALSE);
+			freelanceentity.setIsBgDone(Boolean.FALSE);
+			freelanceentity.setIsbgstarted(Boolean.FALSE);
+			freelanceentity.setIsprofilecompleted(Boolean.FALSE);
+			freelancehistoryEntity.setIslocked(Boolean.FALSE);
 
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
@@ -142,9 +143,9 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			FreeLanceHistoryEntity freelancehistoryEntity = userEntity.getFreelancehistoryentity();
-
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
+			freelancehistoryEntity.setDecisionon(CommonUtilites.getCurrentDate());
 			freelancehistoryEntity.setUserdetails(userEntity);
 			userEntity.setFreelancehistoryentity(freelancehistoryEntity);
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
