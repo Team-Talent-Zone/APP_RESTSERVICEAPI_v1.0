@@ -76,7 +76,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
-
+ 
 	/**
 	 * To save the service Package Details.
 	 */

@@ -59,6 +59,14 @@ public class UserConstant {
 	public static final String USER_MANAGER = "userManager";
 	public static final String ROLE = "role";
 	public static final String SERVICEID = "serviceId";
+	public static final String FREELANCEHIST = "freelancehis";
+	public static final String FREELANCEHISOTRY = "freelancehistoryentity";
+	public static final String FHISTORY_ISLOCKED = "freelancehis.islocked";
+	public static final String FHISTORY_BGSTATUS = "freelancehis.bgstatus";
+	public static final String FHISTORY_BGSTATUS_CSSM = "BG_SENTTOCSSM";
+	public static final String FHISTORY_BGSTATUS_CSST = "BG_SENTTOCSST";
+
+
 
 	public static final String CLIENT_BUSINESS_ADMINISTRATOR = "CLIENT_BUSINESS_ADMINISTRATOR";
 	public static final String FREELANCER_USER = "FREELANCER_USER";

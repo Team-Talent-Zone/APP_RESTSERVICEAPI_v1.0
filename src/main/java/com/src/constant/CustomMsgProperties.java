@@ -70,6 +70,9 @@ public class CustomMsgProperties {
 	public static final String GETNOTIFICATIONDETAILSBYUSERID_INVAILD_ERRORMSG ="getNotificationDetailsByUseId_existingjob_errorMsg";
 	
 	public static final String GETUSERSERVICEEXPIRATIONDETAILS_INVAILD_ERRORMSG ="getUserServiceExpirationDetails_nocontent";
+	
+	public static final String FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG = "freelancehistory_unabletosave_errorMsg";
+
 
 	private CustomMsgProperties() {
 	}

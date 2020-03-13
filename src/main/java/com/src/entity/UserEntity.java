@@ -1,6 +1,7 @@
 package com.src.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -77,8 +79,8 @@ public class UserEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private FreeLanceEntity freeLanceDetails;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
-	private FreeLanceHistoryEntity freelancehistoryentity;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private Set<FreeLanceHistoryEntity> freelancehistoryentity;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserManagerDetailsEntity usermanagerdetailsentity;
@@ -215,11 +217,11 @@ public class UserEntity implements Serializable {
 		this.freeLanceDetails = freeLanceDetails;
 	}
 
-	public FreeLanceHistoryEntity getFreelancehistoryentity() {
+	public Set<FreeLanceHistoryEntity> getFreelancehistoryentity() {
 		return freelancehistoryentity;
 	}
 
-	public void setFreelancehistoryentity(FreeLanceHistoryEntity freelancehistoryentity) {
+	public void setFreelancehistoryentity(Set<FreeLanceHistoryEntity> freelancehistoryentity) {
 		this.freelancehistoryentity = freelancehistoryentity;
 	}
 

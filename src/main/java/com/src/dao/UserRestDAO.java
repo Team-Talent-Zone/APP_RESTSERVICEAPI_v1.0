@@ -2,6 +2,7 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -112,5 +113,7 @@ public interface UserRestDAO {
 	 * 
 	 */
 	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
+	
+	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity);
 
 }
