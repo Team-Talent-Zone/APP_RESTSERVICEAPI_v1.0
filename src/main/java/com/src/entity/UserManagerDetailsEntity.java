@@ -37,7 +37,7 @@ public class UserManagerDetailsEntity implements Serializable {
 	private Integer Id;
 	
 	@Column(name = "MANAGERID")
-	private Integer managerId;
+	private int managerid;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
@@ -60,12 +60,12 @@ public class UserManagerDetailsEntity implements Serializable {
 		Id = id;
 	}
 
-	public Integer getManagerId() {
-		return managerId;
+	public int getManagerid() {
+		return managerid;
 	}
 
-	public void setManagerId(Integer managerId) {
-		this.managerId = managerId;
+	public void setManagerid(int managerid) {
+		this.managerid = managerid;
 	}
 
 	public UserEntity getUserdetails() {
