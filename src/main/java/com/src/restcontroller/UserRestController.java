@@ -58,8 +58,8 @@ public class UserRestController extends AbstractRestManager {
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<UserEntity>> manageUsers() {
+	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getAllUsers() {
 		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
 	}

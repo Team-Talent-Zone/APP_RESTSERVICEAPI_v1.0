@@ -25,7 +25,7 @@ public class FreeLanceHistoryEntity implements Serializable {
 	private Integer eventId;
 	
 	@Column(insertable = false, updatable = false, name = "USERID")
-	private Integer userId;
+	private Integer userid;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
@@ -49,6 +49,9 @@ public class FreeLanceHistoryEntity implements Serializable {
 
 	@Column(name = "MANAGERID")
 	private Integer managerid;
+	
+	@Column(name = "CSSTID")
+	private Integer csstid;
 
 	public Integer getEventId() {
 		return eventId;
@@ -75,15 +78,21 @@ public class FreeLanceHistoryEntity implements Serializable {
 		this.bgstatus = bgstatus;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getUserid() {
+		return userid;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
-	 
+	public Integer getCsstid() {
+		return csstid;
+	}
+
+	public void setCsstid(Integer csstid) {
+		this.csstid = csstid;
+	}
 
 	public boolean isIslocked() {
 		return islocked;

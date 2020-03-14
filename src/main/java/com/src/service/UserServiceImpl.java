@@ -259,7 +259,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		freeLanceHistoryEntity.setDecisionon(CommonUtilites.getCurrentDateInNewFormat());
 		UserEntity userdetails = new UserEntity();
-		userdetails.setUserId(freeLanceHistoryEntity.getUserId());
+		userdetails.setUserId(freeLanceHistoryEntity.getUserid());
 		freeLanceHistoryEntity.setUserdetails(userdetails);
 		return userRestDAO.saveFreeLanceHistory(freeLanceHistoryEntity);
 	}
