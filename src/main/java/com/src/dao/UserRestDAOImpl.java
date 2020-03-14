@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -148,15 +149,15 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<UserEntity> getAllUsers() {
+		List<UserEntity> userEntityList = null;
 		LOGGER.info(UserConstant.USER_DAO_GETALLUSERS);
-		List<UserEntity> userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
-		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = userEntity != null ? userEntity.size() : 0;
+		userEntityList = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = userEntityList != null ? userEntityList.size() : 0;
 		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLUSERS + size);
 		if (size > 0) {
-			return (ArrayList<UserEntity>) userEntity;
+			return (ArrayList<UserEntity>) userEntityList;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
@@ -284,7 +285,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq(UserConstant.FU_IS_PROFILE_COMPLETED , false));
+		criteria.add(Restrictions.eq(UserConstant.FU_IS_PROFILE_COMPLETED, false));
 		criteria.createAlias(UserConstant.USERMANAGERDETAILS, UserConstant.USERMANAGERDETAILS_ALIAS, JoinType.NONE);
 		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
@@ -318,6 +319,17 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			return (ArrayList<UserEntity>) userEntity;
 		}
 		return null;
+	}
+
+	@Transactional
+	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
+		int serviceHistorySavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceHistoryEntity);
+		if (serviceHistorySavedID > 0) {
+			return freeLanceHistoryEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(CustomMsgProperties.FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG));
+
 	}
 
 }

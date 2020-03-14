@@ -7,13 +7,6 @@ import java.util.Random;
 
 public class CommonUtilites {
 
-	public static String getCurrentDate() {
-		DateFormat dateFormat = null;
-		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		return dateFormat.format(cal.getTime());
-	}
-
 	public static String getCurrentDateInNewFormat() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();

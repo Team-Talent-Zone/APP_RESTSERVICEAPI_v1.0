@@ -46,7 +46,7 @@ public class FreeLanceEntity implements Serializable {
 	private String uploadValidPhotoidImgUrl;
 
 	@Column(name = "ISBGDONE")
-	private boolean isBgDone;
+	private boolean isbgdone;
 
 	@Column(name = "ISPROFILECOMPLETED")
 	private boolean isprofilecompleted;
@@ -102,15 +102,14 @@ public class FreeLanceEntity implements Serializable {
 		this.uploadValidPhotoidImgUrl = uploadValidPhotoidImgUrl;
 	}
 
-	public boolean isBgDone() {
-		return isBgDone;
+	public boolean isIsbgdone() {
+		return isbgdone;
 	}
 
-	public void setIsBgDone(boolean isBgDone) {
-		this.isBgDone = isBgDone;
+	public void setIsbgdone(boolean isbgdone) {
+		this.isbgdone = isbgdone;
 	}
 
-	 
 	public boolean isIsprofilecompleted() {
 		return isprofilecompleted;
 	}

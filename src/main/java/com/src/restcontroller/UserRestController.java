@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -57,8 +58,8 @@ public class UserRestController extends AbstractRestManager {
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<UserEntity>> manageUsers() {
+	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserEntity>> getAllUsers() {
 		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
 	}
@@ -195,6 +196,19 @@ public class UserRestController extends AbstractRestManager {
 	public ResponseEntity<ArrayList<UserEntity>> getFUUserDetailsWhenInCompleteProfile() {
 		ArrayList<UserEntity> freelanceUserEntities = userDetailsService.getFUUserDetailsWhenInCompleteProfile();
 		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntities, HttpStatus.OK);
+	}
+	
+	/**
+	 * Method is to save FreeLancer History.
+	 * 
+	 * @param freeLanceHistoryEntityO
+	 * @return
+	 */
+	@RequestMapping(value = "/saveFreeLanceHistory/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceHistoryEntity> saveFreeLanceHistory(
+			@RequestBody FreeLanceHistoryEntity freeLanceHistoryEntity) {
+		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
+		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
 	}
 
 }
