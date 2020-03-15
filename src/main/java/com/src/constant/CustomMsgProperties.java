@@ -73,6 +73,7 @@ public class CustomMsgProperties {
 	
 	public static final String FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG = "freelancehistory_unabletosave_errorMsg";
 
+	public static final String FREELANCEDOC_UNABLE_TO_SAVE_ERRORMSG = "freelancedocs_unabletosave_errorMsg";
 
 	private CustomMsgProperties() {
 	}

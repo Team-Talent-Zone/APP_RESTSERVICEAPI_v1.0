@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserBizEntity;
@@ -84,6 +85,11 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
 			}
+			Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
+			for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
+				freeLanceDocumentEntities.add(docentity);
+				docentity.setUserdetails(userEntity);
+			}
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setIsbgdone(Boolean.FALSE);
 			freelanceentity.setIsbgstarted(Boolean.FALSE);
@@ -92,6 +98,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
+			userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
 			
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
@@ -139,25 +146,28 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 			userEntity.setIsrecoverypwd(Boolean.FALSE);
 		}
-
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
-
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			Set<FreeLanceHistoryEntity> freeLanceHistoryEntities = new HashSet<FreeLanceHistoryEntity>();
-
 			for (FreeLanceHistoryEntity entity : userEntity.getFreelancehistoryentity()) {
 				entity.setDecisionon(CommonUtilites.getCurrentDateInNewFormat());
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
 			}
+			Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
+			for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
+				freeLanceDocumentEntities.add(docentity);
+				docentity.setUserdetails(userEntity);
+			}
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
-			
+			userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
+
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
 
@@ -262,6 +272,13 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userdetails.setUserId(freeLanceHistoryEntity.getUserid());
 		freeLanceHistoryEntity.setUserdetails(userdetails);
 		return userRestDAO.saveFreeLanceHistory(freeLanceHistoryEntity);
+	}
+
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		UserEntity userdetails = new UserEntity();
+		userdetails.setUserId(freeLanceDocumentsEntity.getUserid());
+		freeLanceDocumentsEntity.setUserdetails(userdetails);
+		return userRestDAO.saveFreeLanceDocument(freeLanceDocumentsEntity);
 	}
 
 }

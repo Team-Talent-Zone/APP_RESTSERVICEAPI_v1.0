@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -209,6 +210,19 @@ public class UserRestController extends AbstractRestManager {
 			@RequestBody FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
 		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Method is to save FreeLancer Documents.
+	 * 
+	 * @param freeLanceDocumentsEntity
+	 * @return
+	 */
+	@RequestMapping(value = "/saveFreeLanceDocument/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceDocumentsEntity> saveFreeLanceDocument(
+			@RequestBody FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		FreeLanceDocumentsEntity docEntity = userDetailsService.saveFreeLanceDocument(freeLanceDocumentsEntity);
+		return new ResponseEntity<FreeLanceDocumentsEntity>(docEntity, HttpStatus.OK);
 	}
 
 }

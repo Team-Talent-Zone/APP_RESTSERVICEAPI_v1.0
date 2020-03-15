@@ -9,8 +9,6 @@ public class UploadUtilEntity implements Serializable {
 
 	private int userid;
 	
-	private String fileextension;
-
 	public String getBase64image() {
 		return base64image;
 	}
@@ -27,19 +25,5 @@ public class UploadUtilEntity implements Serializable {
 		this.userid = userid;
 	}
 
-	public String getFileextension() {
-		return fileextension;
-	}
-
-	public void setFileextension(String fileextension) {
-		this.fileextension = fileextension;
-	}
-	
-	
-
-	 
-
-	 
-	
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -330,6 +331,16 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG));
 
+	}
+
+	@Transactional
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		int serviceDocSavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceDocumentsEntity);
+		if (serviceDocSavedID > 0) {
+			return freeLanceDocumentsEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(CustomMsgProperties.FREELANCEDOC_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 }

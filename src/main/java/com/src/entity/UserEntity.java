@@ -82,6 +82,9 @@ public class UserEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private Set<FreeLanceHistoryEntity> freelancehistoryentity;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
+	private Set<FreeLanceDocumentsEntity> freelancedocumententity;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserManagerDetailsEntity usermanagerdetailsentity;
 
@@ -240,5 +243,14 @@ public class UserEntity implements Serializable {
 	public void setPreferlang(String preferlang) {
 		this.preferlang = preferlang;
 	}
+
+	public Set<FreeLanceDocumentsEntity> getFreelancedocumententity() {
+		return freelancedocumententity;
+	}
+
+	public void setFreelancedocumententity(Set<FreeLanceDocumentsEntity> freelancedocumententity) {
+		this.freelancedocumententity = freelancedocumententity;
+	}
+	
 	
 }

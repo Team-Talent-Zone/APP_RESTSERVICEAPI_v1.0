@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -122,5 +123,7 @@ public interface UserService {
 	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
 	
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity);
+	
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity);
 
 }

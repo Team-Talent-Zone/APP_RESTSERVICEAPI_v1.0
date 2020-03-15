@@ -41,7 +41,7 @@ public class UtilityController extends AbstractRestManager {
 			throws Exception {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + "_bgDocs."+uploadUtilEntity.getFileextension());
+		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + "_bgDoc.pdf");
 		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 		Gson gson = new Gson();
 		String bgDocURL = utilService.uploadBgDocsInS3(tempFile, uploadUtilEntity.getUserid());
