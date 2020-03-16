@@ -37,6 +37,9 @@ public class FreeLanceDocumentsEntity implements Serializable{
 	
 	@Column(name = "DOCURL")
 	private String docurl;
+	
+	@Column(name = "UPLOADDATE")
+	private String uploaddate;
 
 	public Integer getId() {
 		return Id;
@@ -77,6 +80,13 @@ public class FreeLanceDocumentsEntity implements Serializable{
 	public void setDocurl(String docurl) {
 		this.docurl = docurl;
 	}
-	
+
+	public String getUploaddate() {
+		return uploaddate;
+	}
+
+	public void setUploaddate(String uploaddate) {
+		this.uploaddate = uploaddate;
+	}
 	
 }

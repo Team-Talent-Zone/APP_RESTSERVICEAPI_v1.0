@@ -77,7 +77,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
-
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			Set<FreeLanceHistoryEntity> freeLanceHistoryEntities = new HashSet<FreeLanceHistoryEntity>();
 			for (FreeLanceHistoryEntity entity : userEntity.getFreelancehistoryentity()) {
@@ -85,10 +84,13 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
 			}
-			Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
-			for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
-				freeLanceDocumentEntities.add(docentity);
-				docentity.setUserdetails(userEntity);
+			if( userEntity.getFreelancedocumententity() != null) {
+				Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
+				for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
+					freeLanceDocumentEntities.add(docentity);
+					docentity.setUserdetails(userEntity);
+				}
+				userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
 			}
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setIsbgdone(Boolean.FALSE);
@@ -98,7 +100,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
-			userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
 			
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
@@ -275,6 +276,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	}
 
 	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		freeLanceDocumentsEntity.setUploaddate(CommonUtilites.getCurrentDateInNewFormat());
 		UserEntity userdetails = new UserEntity();
 		userdetails.setUserId(freeLanceDocumentsEntity.getUserid());
 		freeLanceDocumentsEntity.setUserdetails(userdetails);
