@@ -125,5 +125,7 @@ public interface UserService {
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity);
 	
 	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity);
+	
+	public UserEntity prepareAdminToSignUp(String username);
 
 }

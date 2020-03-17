@@ -225,4 +225,14 @@ public class UserRestController extends AbstractRestManager {
 		return new ResponseEntity<FreeLanceDocumentsEntity>(docEntity, HttpStatus.OK);
 	}
 
+	/**
+	 * Saves the new password by encrypting for admin signup.
+	 * 
+	 * @param username
+	 * @return user details
+	 */
+	@RequestMapping(value = "/prepareAdminToSignUp/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> prepareAdminToSignUp(@PathVariable(UserConstant.USERNAME) String username) {
+		return new ResponseEntity<UserEntity>(userDetailsService.prepareAdminToSignUp(username), HttpStatus.OK);
+	}
 }

@@ -67,7 +67,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 	public UserEntity saveUser(UserEntity userEntity) {
 
-		userEntity.setIsactive(Boolean.FALSE);
 		userEntity.setIsrecoverypwd(Boolean.FALSE);
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
@@ -77,6 +76,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
+			userEntity.setIsactive(Boolean.FALSE);
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			Set<FreeLanceHistoryEntity> freeLanceHistoryEntities = new HashSet<FreeLanceHistoryEntity>();
 			for (FreeLanceHistoryEntity entity : userEntity.getFreelancehistoryentity()) {
@@ -101,9 +101,15 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
 			
-		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+		} 
+		else
+		if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+			userEntity.setIsactive(Boolean.FALSE);
+		}
+		else
+		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
-
+			userEntity.setIsactive(Boolean.TRUE);
 			UserManagerDetailsEntity usermanagerdetailsentity = userEntity.getUsermanagerdetailsentity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
@@ -213,6 +219,25 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(newPassword);
 
+		return userEntity;
+	}
+	
+	/**
+	 * Helps in setting new password for admin.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public UserEntity prepareAdminToSignUp(String username) {
+
+		UserEntity userEntity = new UserEntity();
+		boolean checkUsernameNotExist = userRestDAO.checkUsernameNotExist(username);
+		if(checkUsernameNotExist) {
+			String newPassword = CommonUtilites.genRandomAlphaNumeric();
+			userEntity.setIsactive(Boolean.TRUE);
+			userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			userEntity.setPassword(newPassword);
+		}
 		return userEntity;
 	}
 
