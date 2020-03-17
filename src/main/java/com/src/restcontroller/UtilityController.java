@@ -28,7 +28,7 @@ public class UtilityController extends AbstractRestManager {
 	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws Exception {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + "_avatar.png");
+		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
 		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 
 		Gson gson = new Gson();
@@ -37,23 +37,22 @@ public class UtilityController extends AbstractRestManager {
 	}
 
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity)
-			throws Exception {
+	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws Exception {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + "_bgDoc.pdf");
+		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
 		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 		Gson gson = new Gson();
 		String bgDocURL = utilService.uploadBgDocsInS3(tempFile, uploadUtilEntity.getUserid());
 		return new ResponseEntity<String>(gson.toJson(bgDocURL), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody UploadUtilEntity uploadUtilEntity)
 			throws Exception {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + "_widget.png");
+		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
 		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 		Gson gson = new Gson();
 		String widgetURL = utilService.uploadWidgetPicsInS3(tempFile, uploadUtilEntity.getUserid());

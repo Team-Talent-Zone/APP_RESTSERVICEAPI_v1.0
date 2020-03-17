@@ -9,6 +9,16 @@ public class UploadUtilEntity implements Serializable {
 
 	private int userid;
 	
+	private String filename;
+	
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 	public String getBase64image() {
 		return base64image;
 	}
