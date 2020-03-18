@@ -25,6 +25,7 @@ import com.src.utils.CommonUtilites;
  * <code>New Service</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Repository
@@ -34,7 +35,11 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 
 	/**
 	 * To save the New Service Details.
+	 * 
+	 * @param newServiceEntity
+	 * @throw RestCustomException
 	 */
+
 	@Transactional
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
 		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICE);
@@ -49,6 +54,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 
 	/**
 	 * To save or Update the New Service Details.
+	 * 
+	 * @param newServiceEntity
+	 * @throw RestCustomException
 	 */
 	@Transactional
 	public void saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
@@ -64,6 +72,9 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 
 	/**
 	 * To save New Service History Details.
+	 * 
+	 * @param newServiceHistoryEntity
+	 * @throw RestCustomException
 	 */
 	@Transactional
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
@@ -76,9 +87,12 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
- 
+
 	/**
 	 * To save the service Package Details.
+	 * 
+	 * @param newServicePackageEntity
+	 * @throw RestCustomException
 	 */
 	@Transactional
 	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
@@ -94,6 +108,8 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 
 	/**
 	 * To Get all the Service Details.
+	 * 
+	 * @throw RestCustomException
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -117,6 +133,8 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 
 	/**
 	 * Get All New Service Details by managerId.
+	 * 
+	 * @throw RestCustomException
 	 * 
 	 * @param managerId
 	 */
@@ -143,6 +161,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	/**
 	 * Get All New Service Details by userId.
 	 * 
+	 * @throw RestCustomException
 	 * @param userId
 	 */
 	@Transactional
@@ -165,6 +184,11 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 						+ " for userId : " + userId);
 	}
 
+	/**
+	 * Get New Service Details created.
+	 * 
+	 * @throw RestCustomException
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated() {

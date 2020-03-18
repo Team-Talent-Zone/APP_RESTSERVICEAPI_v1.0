@@ -19,12 +19,24 @@ import com.src.entity.ReferenceLookUpMappingSubCategoryEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.exception.RestCustomException;
 
+/**
+ * This <code>ReferenceLookUpDAOImpl </code>class is written to get Reference
+ * Lookup Details.
+ * 
+ * @author Ishaq.
+ *
+ */
 @Repository
 @Transactional(rollbackFor = { Exception.class })
 public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements ReferenceLookUpDAO {
-
 	final Logger logger = LoggerFactory.getLogger(ReferenceLookUpDAOImpl.class);
 
+	/**
+	 * This method is to get Reference Lookup details by Key.
+	 * 
+	 * @param key
+	 * @throws RestCustomException
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<ReferenceLookUpEntity> getReferenceLookupByKey(String key) {
@@ -42,9 +54,15 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return (ArrayList<ReferenceLookUpEntity>) referenceLookUpEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :" + key);
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for key :"
+						+ key);
 	}
 
+	/**
+	 * This method is to get Reference Lookup details.
+	 * 
+	 * @throws RestCustomException
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public ArrayList<ReferenceLookUpEntity> getAllReferenceLookupData() {
@@ -61,6 +79,12 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_ERRORMSG));
 	}
 
+	/**
+	 * This method is to get Reference Lookup details by short key.
+	 * 
+	 * @param ShortKey
+	 * @throws RestCustomException
+	 */
 	@Transactional
 	public String getReferenceLookupByShortKey(String shortkey) {
 		ReferenceLookUpEntity referenceLookUpEntity = null;
@@ -71,14 +95,18 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return referenceLookUpEntity.getCode().toString();
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG) + " for short key :"
-						+ shortkey);
-
+				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUP_KEY_ERRORMSG)
+						+ " for short key :" + shortkey);
 	}
 
+	/**
+	 * This method is to get Reference Lookup details by Ref id.
+	 * 
+	 * @param refId
+	 * @throws RestCustomException
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<ReferenceLookUpMappingEntity> getReferenceLookupMappingByRefId(int refId) {
-
 		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingByRefId method ");
 		List<ReferenceLookUpMappingEntity> lookUpMappingEntities = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
@@ -93,12 +121,16 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPING_REFID_ERRORMSG));
-
 	}
 
+	/**
+	 * This method is to get Reference Lookup details by sub category by map id.
+	 * 
+	 * @param mapId
+	 * @throws RestCustomException
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<ReferenceLookUpMappingSubCategoryEntity> getReferenceLookupMappingSubCategoryByMapId(int mapId) {
-
 		logger.info("Inside REFERENCE LOOKUP DAO getReferenceLookupMappingSubCategoryByMapId method ");
 		List<ReferenceLookUpMappingSubCategoryEntity> lookUpMappingSubCategoryEntities = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpMappingEntity.class);
@@ -112,11 +144,17 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		if (size > 0) {
 			return (ArrayList<ReferenceLookUpMappingSubCategoryEntity>) lookUpMappingSubCategoryEntities;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
+		throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+				.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
 
 	}
 
+	/**
+	 * This method is to get Lookup Template details by short key.
+	 * 
+	 * @param shortkey
+	 * @throws RestCustomException
+	 */
 	@Transactional
 	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
 		ReferenceLookUpTemplateEntity lookUpTemplateEntity = null;
@@ -127,9 +165,8 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 			return lookUpTemplateEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.LOOKUPTEMPALTE_NAME_ERRORMSG) + " for name :"
-						+ shortkey);
-
+				applicationConfigProperties.getProperty(CustomMsgProperties.LOOKUPTEMPALTE_NAME_ERRORMSG)
+						+ " for name :" + shortkey);
 	}
 
 }

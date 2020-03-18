@@ -13,12 +13,25 @@ import com.src.entity.PaymentFUTranscationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.exception.RestCustomException;
 
+/**
+ * This <code> PaymentDAOImpl </code> class handles data access operation for
+ * Payments Details.
+ * 
+ * @author Ishaq.
+ *
+ */
 @Repository
 @Transactional(rollbackFor = { Exception.class })
 public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 
 	final Logger logger = LoggerFactory.getLogger(PaymentDAOImpl.class);
 
+	/**
+	 * This method savepayments is to save the payment details.
+	 * 
+	 * @throws RestCustomException
+	 * @param paymentEntity
+	 */
 	@Transactional
 	public PaymentEntity savepayments(PaymentEntity paymentEntity) {
 		int savedId = (Integer) sessionFactory.getCurrentSession().save(paymentEntity);
@@ -31,6 +44,12 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 
 	}
 
+	/**
+	 * This method savepaymentsfutranscations is to save the FU Transaction details.
+	 * 
+	 * @throws RestCustomException
+	 * @param fuTranscationHistEntity
+	 */
 	@Transactional
 	public PaymentFUTranscationHistEntity savepaymentsfutranscations(
 			PaymentFUTranscationHistEntity fuTranscationHistEntity) {
@@ -40,11 +59,18 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		if (savedId > 0) {
 			return fuTranscationHistEntity;
 		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+		throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+				.getProperty(CustomMsgProperties.SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 
+	/**
+	 * This method savepaymentscbatranscations is to save the CBA Transaction
+	 * details.
+	 * 
+	 * @throws RestCustomException
+	 * @param cbaTranscationHistEntity
+	 */
 	@Transactional
 	public PaymentCBATranscationHistEntity savepaymentscbatranscations(
 			PaymentCBATranscationHistEntity cbaTranscationHistEntity) {
@@ -54,11 +80,18 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		if (savedId > 0) {
 			return cbaTranscationHistEntity;
 		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+		throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+				.getProperty(CustomMsgProperties.SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 
+	/**
+	 * This method savepaymentsrefundtranscations is to save the payment Refund
+	 * Transaction details.
+	 * 
+	 * @throws RestCustomException
+	 * @param refundTranscationHistEntity
+	 */
 	@Transactional
 	public PaymentRefundTranscationHistEntity savepaymentsrefundtranscations(
 			PaymentRefundTranscationHistEntity refundTranscationHistEntity) {
@@ -68,8 +101,8 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		if (savedId > 0) {
 			return refundTranscationHistEntity;
 		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
+		throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+				.getProperty(CustomMsgProperties.SAVEPAYMENTREFUNDTRANSDETAILS_UNABLETOSAVE_ERRORMSG));
 
 	}
 }

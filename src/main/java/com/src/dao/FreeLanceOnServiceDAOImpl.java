@@ -26,6 +26,7 @@ import com.src.exception.RestCustomException;
  * operation for <code>Free Lance On Service</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Repository
@@ -34,7 +35,10 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	final Logger LOGGER = LoggerFactory.getLogger(FreeLanceOnServiceDAOImpl.class);
 
 	/**
-	 * To save the freelance on Service.
+	 * To save the freelancer on Service.
+	 * 
+	 * @param freeLanceOnServiceEntity
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
@@ -50,6 +54,9 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	/**
 	 * To save or Update the New Service Details.
+	 * 
+	 * @param freeLanceOnServiceEntity
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
@@ -66,6 +73,9 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	/**
 	 * To Save Free Lance Star Review Feedback Details.
+	 * 
+	 * @param freeLanceStarReviewFB
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
@@ -81,6 +91,9 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	/**
 	 * To Save Free Lance On Service Notification.
+	 * 
+	 * @param freeLanceOnServiceNotification
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
@@ -98,6 +111,8 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	/**
 	 * To get Free Lance on Service Details.
+	 * 
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
@@ -118,6 +133,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	/**
 	 * Get the Free Lance On Service Details by UserId.
 	 * 
+	 * @throws RestCustomException
 	 * @param userId
 	 */
 	@Transactional
@@ -135,6 +151,9 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 						+ " for user Id : " + userId);
 	}
 
+	/**
+	 * To Get the FU on Service Expiration Details.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
@@ -149,6 +168,11 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		return null;
 	}
 
+	/**
+	 * To Get the FU on Service Notification Details by UserId.
+	 * 
+	 * @param userId
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {

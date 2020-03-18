@@ -13,6 +13,7 @@ import com.src.entity.FreeLanceStarReviewFBEntity;
  * object for retrieving <code>Free Lance on Service</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 public interface FreeLanceOnServiceDAO {
@@ -21,7 +22,6 @@ public interface FreeLanceOnServiceDAO {
 	 * To save Free Lance on Service.
 	 * 
 	 * @param FreeLanceOnServiceEntity
-	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
@@ -29,7 +29,6 @@ public interface FreeLanceOnServiceDAO {
 	 * To edit and Update the Free Lance on Service.
 	 * 
 	 * @param freeLanceOnServiceEntity
-	 * @return
 	 */
 	public void saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
@@ -37,23 +36,19 @@ public interface FreeLanceOnServiceDAO {
 	 * To save Free Lance Review FeedBack.
 	 * 
 	 * @param freeLanceStarReviewFB
-	 * @return
 	 */
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB);
 
 	/**
 	 * To save Free Lance on Service Notification.
 	 * 
-	 * @param saveFreeLanceOnServiceNotification
-	 * @return
+	 * @param freeLanceOnServiceNotification
 	 */
 	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
 			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
 
 	/**
 	 * To get All Free LanceService Details.
-	 * 
-	 * @return
 	 */
 	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
 
@@ -63,8 +58,18 @@ public interface FreeLanceOnServiceDAO {
 	 * @param userId
 	 */
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
-	
+
+	/**
+	 * Get the FU on Service Expiration Details.
+	 * 
+	 */
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
-	
+
+	/**
+	 * Get the FU on Service Notification Details by UserId.
+	 * 
+	 * @param userId
+	 * 
+	 */
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
 }

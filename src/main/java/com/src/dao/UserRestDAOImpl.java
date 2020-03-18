@@ -27,7 +27,7 @@ import com.src.exception.RestCustomException;
  * The <code> UserRestDAOImpl </code> class handles data access operation for
  * <code>UserDetails</code>.
  * 
- * @author azmiri.
+ * @author Azmiri.
  * @version 1.0
  * 
  */
@@ -39,6 +39,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get the User Details by UserName.
 	 * 
+	 * @throws RestCustomException
 	 * @param username
 	 */
 	@Transactional
@@ -66,7 +67,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public UserEntity checkUsername(String username) {
@@ -87,7 +88,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public boolean checkUsernameNotExist(String username) {
@@ -107,8 +108,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Save the User Details.
 	 * 
+	 * @throws RestCustomException
 	 * @param userEntityObject
-	 * @return
 	 */
 	@Transactional
 	public UserEntity saveUser(UserEntity userEntity) {
@@ -126,6 +127,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get the User Details by UserId.
 	 * 
+	 * @throws RestCustomException
 	 * @param userId
 	 */
 	@Transactional
@@ -146,6 +148,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get All User Details from the List.
 	 * 
+	 * @throws RestCustomException
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -167,6 +170,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get User Details by the Role.
 	 * 
+	 * @throws RestCustomException
 	 * @param role
 	 */
 	@SuppressWarnings("unchecked")
@@ -191,6 +195,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Update or Edit on user Details Screen.
 	 * 
+	 * @throws RestCustomException
 	 * @param userEntityObj
 	 */
 	@Transactional
@@ -208,6 +213,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 * 
+	 * @throws RestCustomException
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -233,6 +239,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the notification details based on the user Id
 	 * 
+	 * @throws RestCustomException
 	 * @param userId
 	 * 
 	 */
@@ -258,8 +265,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Save the User Notification Details.
 	 * 
+	 * @throws RestCustomException
 	 * @param userNotificationEntity
-	 * @return
 	 */
 	@Transactional
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
@@ -277,6 +284,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user freelance details when incomplete profile
 	 * 
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -299,6 +307,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
+	 * @throws Exception
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Transactional
@@ -322,6 +331,13 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		return null;
 	}
 
+	/**
+	 * To Save Free Lancer History Details.
+	 * 
+	 * @throws RestCustomException
+	 * @param FreeLanceHistoryEntity freeLanceHistoryEntity
+	 * @return freeLanceHistoryEntity
+	 */
 	@Transactional
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		int serviceHistorySavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceHistoryEntity);
@@ -333,6 +349,13 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 
 	}
 
+	/**
+	 * To Save Free Lancer Document Details.
+	 * 
+	 * @throws RestCustomException
+	 * @param FreeLanceHistoryEntity freeLanceHistoryEntity
+	 * @return freeLanceHistoryEntity
+	 */
 	@Transactional
 	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
 		int serviceDocSavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceDocumentsEntity);
