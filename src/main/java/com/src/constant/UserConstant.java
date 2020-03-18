@@ -9,10 +9,11 @@ package com.src.constant;
  * 
  */
 public class UserConstant {
-	
+
 	private UserConstant() {
 		super();
 	}
+
 	// Logger Message
 	public static final String USER_DAO_FINDBYUSERNAME = "Inside USER DAO findByUsername method";
 	public static final String USER_DAO_CHECKUSERNAME = "Inside User DAO CheckUsername method";
@@ -40,8 +41,6 @@ public class UserConstant {
 	public static final String USER_DETAILS_ISRECOVERYPD = "isrecoverypwd";
 	public static final String FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getFreeLanceOnServiceDetailsByUserId method";
 	public static final String USER_DAO_USERROLE = "Inside USER DAO userRole method";
-	
-	// Constants
 	public static final String USERNAME = "username";
 	public static final String USERPSWD = "password";
 	public static final String USERID = "userId";
@@ -55,7 +54,6 @@ public class UserConstant {
 	public static final String FU_FULLADDRESS = "BizDetails.fulladdress";
 	public static final String USERMANAGERDETAILS = "usermanagerdetailsentity";
 	public static final String USERMANAGERDETAILS_ALIAS = "usermanager";
-	
 	public static final String UROLE = "urole";
 	public static final String USERROLES = "userroles";
 	public static final String UROLE_ROLECODE = "urole.rolecode";
@@ -68,7 +66,6 @@ public class UserConstant {
 	public static final String FHISTORY_BGSTATUS = "freelancehis.bgstatus";
 	public static final String FHISTORY_BGSTATUS_CSSM = "BG_SENTTOCSSM";
 	public static final String FHISTORY_BGSTATUS_CSST = "BG_SENTTOCSST";
-
 	public static final String CLIENT_BUSINESS_ADMINISTRATOR = "CLIENT_BUSINESS_ADMINISTRATOR";
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
