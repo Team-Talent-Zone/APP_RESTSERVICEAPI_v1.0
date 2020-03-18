@@ -39,7 +39,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/findByUsername/{username}/{password}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username,
-			@PathVariable(UserConstant.PASSWORD) String password) {
+			@PathVariable(UserConstant.USERPSWD) String password) {
 		UserEntity userEntity = userDetailsService.findByUsername(username, password);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}

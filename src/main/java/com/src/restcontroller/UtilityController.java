@@ -1,6 +1,7 @@
 package com.src.restcontroller;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class UtilityController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(UtilityController.class);
 
 	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws Exception {
+	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
 		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
@@ -37,7 +38,7 @@ public class UtilityController extends AbstractRestManager {
 	}
 
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws Exception {
+	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
 		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
@@ -49,7 +50,7 @@ public class UtilityController extends AbstractRestManager {
 
 	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody UploadUtilEntity uploadUtilEntity)
-			throws Exception {
+			throws IOException {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
 		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
 		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());

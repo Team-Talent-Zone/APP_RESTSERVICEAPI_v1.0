@@ -304,10 +304,10 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	@Transactional
 	public ArrayList<UserEntity> getUserByRecoveryPwd() {
 
-		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPD);
 		List<UserEntity> userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-		Criterion isRecoveryPwd = Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true);
+		Criterion isRecoveryPwd = Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPD, true);
 		Criterion isActive = Restrictions.eq(UserConstant.ISACTIVE, false);
 		criteria.add(Restrictions.or(isRecoveryPwd, isActive));
 		criteria.createAlias(UserConstant.USERROLES, UserConstant.UROLE, JoinType.INNER_JOIN);
@@ -315,7 +315,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 				Arrays.asList(UserConstant.FREELANCER_USER, UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)));
 		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
-		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPD + size);
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}

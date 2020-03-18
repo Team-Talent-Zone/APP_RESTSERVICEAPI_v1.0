@@ -9,7 +9,10 @@ package com.src.constant;
  * 
  */
 public class UserConstant {
-
+	
+	private UserConstant() {
+		super();
+	}
 	// Logger Message
 	public static final String USER_DAO_FINDBYUSERNAME = "Inside USER DAO findByUsername method";
 	public static final String USER_DAO_CHECKUSERNAME = "Inside User DAO CheckUsername method";
@@ -25,22 +28,22 @@ public class UserConstant {
 	public static final String USER_DAO_INSIDE_GETUSERSBYROLE = "Inside USER DAO getUsersByRole method : Get All Users By Role :";
 	public static final String USER_DAO_SAVEORUPDATEUSERDETAILS = "Inside USER DAO saveorupdateUserDetails method ";
 	public static final String USER_DAO_INSIDE_SAVEORUPDATEUSERDETAILS = "Inside DAO saveorupdateUserDetails method : User Details Updated for UserId :";
-	public static final String USER_DAO_GETUSERSBYRECOVERYPWD = "Inside USER DAO getUserByRecoveryPwd method";
+	public static final String USER_DAO_GETUSERSBYRECOVERYPD = "Inside USER DAO getUserByRecoveryPwd method";
 	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getUserServiceDetailsByUserId method";
 	public static final String USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID = "Inside New Service DAO getUserServiceDetailsByServiceId method";
-	public static final String USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD = "Inside User Service DAO getUserByRecoveryPwd method : get All User Service Details :";
+	public static final String USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPD = "Inside User Service DAO getUserByRecoveryPwd method : get All User Service Details :";
 	public static final String USER_DAO_GETNOTIFICATIONUSEDETAILSBYUSERID = "Inside USER DAO getNotificationDetailsByUserId method";
 	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILSBYMANAGEID = "Inside New Service DAO getAllNewServiceDetailsByManagerId method";
 	public static final String USER_DAO_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method";
 	public static final String USER_DAO_INSIDE_GETALLFREELANCEONSERVICE = "Inside USER DAO getAllFreelanceOnServiceDetails method : Get All Free Lance On Service :";
 	public static final String USER_DETAILS = "userdetails";
-	public static final String USER_DETAILS_ISRECOVERYPWD = "isrecoverypwd";
+	public static final String USER_DETAILS_ISRECOVERYPD = "isrecoverypwd";
 	public static final String FREELANCE_ON_SERVICE_DAO_GETUSERSERVICEBYUSERID = "Inside New Service DAO getFreeLanceOnServiceDetailsByUserId method";
 	public static final String USER_DAO_USERROLE = "Inside USER DAO userRole method";
 	
 	// Constants
 	public static final String USERNAME = "username";
-	public static final String PASSWORD = "password";
+	public static final String USERPSWD = "password";
 	public static final String USERID = "userId";
 	public static final String ISACTIVE = "isactive";
 	public static final String FREELANCEDETAILS = "freeLanceDetails";
@@ -65,8 +68,6 @@ public class UserConstant {
 	public static final String FHISTORY_BGSTATUS = "freelancehis.bgstatus";
 	public static final String FHISTORY_BGSTATUS_CSSM = "BG_SENTTOCSSM";
 	public static final String FHISTORY_BGSTATUS_CSST = "BG_SENTTOCSST";
-
-
 
 	public static final String CLIENT_BUSINESS_ADMINISTRATOR = "CLIENT_BUSINESS_ADMINISTRATOR";
 	public static final String FREELANCER_USER = "FREELANCER_USER";

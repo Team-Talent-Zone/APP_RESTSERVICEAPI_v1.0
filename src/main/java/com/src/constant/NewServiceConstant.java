@@ -8,7 +8,7 @@ package com.src.constant;
  *
  */
 public class NewServiceConstant {
-
+	
 	// Logger Messages
 	public static final String INSIDE_SAVENEWSERVICE = "Inside DAO saveNewService method";
 	public static final String CONFIRM_SAVE_NEWSERVICE = "At saveNewService method in DAO:  Saved New Service Details Succesfully : New Service Id :";
@@ -68,4 +68,7 @@ public class NewServiceConstant {
 	public static final String SERVICE_HISTORY_USING_USERID = "serviceHistorymappingObj.userId";
 	public static final String SERVICE_HISTORY_USING_MANAGERID =  "serviceHistorymappingObj.managerId";
 	public static final String USERID = "userId";
+	
+	private  NewServiceConstant() {
+	}
 }
