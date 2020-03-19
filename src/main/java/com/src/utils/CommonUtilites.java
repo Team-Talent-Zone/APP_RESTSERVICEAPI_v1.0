@@ -10,7 +10,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * The <code> CommonUtilites </code> class defines Common
  * <code>Utilities</code>.
@@ -21,10 +20,10 @@ import org.slf4j.LoggerFactory;
  */
 public class CommonUtilites {
 	public static final Logger logger = LoggerFactory.getLogger(CommonUtilites.class);
-	
-	 private CommonUtilites() {
-		    throw new IllegalStateException("Common Utilites Class");
-		  }
+
+	private CommonUtilites() {
+		throw new IllegalStateException("Common Utilites Class");
+	}
 
 	/**
 	 * getCurrentDateInNewFormat- To get the Current Date in New Format.
