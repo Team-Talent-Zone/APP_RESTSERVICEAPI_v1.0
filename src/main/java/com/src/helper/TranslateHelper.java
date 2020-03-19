@@ -9,9 +9,24 @@ import com.google.cloud.translate.v3.Translation;
 import com.google.cloud.translate.v3.TranslationServiceClient;
 import com.src.constant.UtilityConfig;
 
+/**
+ * The <code> TranslateHelper </code> class defines to translate the text
+ * message.
+ * 
+ * @author Ishaq.
+ * @version 1.0
+ *
+ */
 public class TranslateHelper {
 
-	// Translating Text
+	/**
+	 * This method is for Translating Text.
+	 * 
+	 * @param targetLanguage
+	 * @param text
+	 * @param type
+	 * @throws Exception
+	 */
 	public String translateText(String targetLanguage, String text, String type) throws Exception {
 
 		String mimeType = null;
@@ -47,7 +62,7 @@ public class TranslateHelper {
 
 			// Display the translation for each input text provided
 			for (Translation translation : response.getTranslationsList()) {
-			 	translationText = translation.getTranslatedText();
+				translationText = translation.getTranslatedText();
 			}
 			return translationText;
 		}

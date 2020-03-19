@@ -3,6 +3,13 @@ package com.src.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * This <code> RestCustomException</code> Class defines Custom Exceptions.
+ * 
+ * @author Ishaq.
+ * @version 1.0
+ *
+ */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class RestCustomException extends RuntimeException {
 
