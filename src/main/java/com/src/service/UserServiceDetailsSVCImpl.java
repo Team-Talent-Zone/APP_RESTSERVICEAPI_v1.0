@@ -20,6 +20,7 @@ import com.src.utils.CommonUtilites;
  * interface.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Service(NewServiceConstant.USER_SERVICE_DETAILS_SERVICE)
@@ -33,11 +34,9 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
 		userServiceDetailsEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceDetailsEntity.setActive(Boolean.TRUE);
-
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-
 		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
 		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
@@ -53,7 +52,6 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-
 		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
 		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
@@ -102,19 +100,27 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceNotfication;
 	}
 
+	/**
+	 * To get the user service Expiration Details.
+	 */
 	@Override
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
 		return userServiceDetailsDAO.getUserServiceExpirationDetails();
 	}
-	
+
+	/**
+	 * To get User service Notification Details by user id.
+	 */
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
 		return userServiceDetailsDAO.getUserServiceNotificationDetailsByUserId(userId);
 	}
 
+	/**
+	 * To get User Service pending payments.
+	 */
 	@Override
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment() {
 		return userServiceDetailsDAO.getUserServicePendingPayment();
 	}
-
 
 }

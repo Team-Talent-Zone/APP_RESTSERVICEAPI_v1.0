@@ -16,6 +16,7 @@ import com.src.utils.CommonUtilites;
  * the <code>New Service</code> related business interface.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Service(NewServiceConstant.NEW_SERVICE_SVC)
@@ -115,7 +116,6 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 
 	/**
 	 * Get All New Service Details created today - 1
-	 * 
 	 */
 	@Override
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated() {

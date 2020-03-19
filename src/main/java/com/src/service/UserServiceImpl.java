@@ -84,7 +84,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
 			}
-			if( userEntity.getFreelancedocumententity() != null) {
+			if (userEntity.getFreelancedocumententity() != null) {
 				Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
 				for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
 					freeLanceDocumentEntities.add(docentity);
@@ -100,14 +100,10 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
-			
-		} 
-		else
-		if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+
+		} else if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
 			userEntity.setIsactive(Boolean.FALSE);
-		}
-		else
-		if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
+		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
 			userEntity.setIsactive(Boolean.TRUE);
 			UserManagerDetailsEntity usermanagerdetailsentity = userEntity.getUsermanagerdetailsentity();
@@ -221,7 +217,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		return userEntity;
 	}
-	
+
 	/**
 	 * Helps in setting new password for admin.
 	 * 
@@ -232,7 +228,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		UserEntity userEntity = new UserEntity();
 		boolean checkUsernameNotExist = userRestDAO.checkUsernameNotExist(username);
-		if(checkUsernameNotExist) {
+		if (checkUsernameNotExist) {
 			String newPassword = CommonUtilites.genRandomAlphaNumeric();
 			userEntity.setIsactive(Boolean.TRUE);
 			userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
@@ -275,7 +271,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * Save the User Notification Details.
 	 * 
 	 * @param userNotificationEntity
-	 * @return
 	 */
 
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
@@ -284,14 +279,15 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	}
 
 	/**
-	 * Gets all the freelance user details when incomplete profile
-	 * 
-	 * 
+	 * Gets all the freelance user details when incomplete profile.
 	 */
 	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile() {
 		return userRestDAO.getFUUserDetailsWhenInCompleteProfile();
 	}
 
+	/**
+	 * This method is for Saving Free Lancer History Details.
+	 */
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		freeLanceHistoryEntity.setDecisionon(CommonUtilites.getCurrentDateInNewFormat());
 		UserEntity userdetails = new UserEntity();
@@ -300,6 +296,9 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		return userRestDAO.saveFreeLanceHistory(freeLanceHistoryEntity);
 	}
 
+	/**
+	 * This method is for Saving Free Lancer Document Details.
+	 */
 	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
 		freeLanceDocumentsEntity.setUploaddate(CommonUtilites.getCurrentDateInNewFormat());
 		UserEntity userdetails = new UserEntity();

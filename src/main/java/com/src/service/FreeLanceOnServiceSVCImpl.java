@@ -20,6 +20,7 @@ import com.src.utils.CommonUtilites;
  * interface.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Service(NewServiceConstant.FREE_LANCE_ON_SERVICE)
@@ -81,7 +82,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceNotification.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
 		return freeLanceOnServiceDAO.saveFreeLanceOnServiceNotification(freeLanceOnServiceNotification);
 	}
-	
+
 	/**
 	 * To Get All Free Lance Service Details.
 	 */
@@ -89,7 +90,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
 		return freeLanceOnServiceDAO.getAllFreelanceOnServiceDetails();
 	}
-	
+
 	/**
 	 * Get the Free Lance on Service Details by UserId.
 	 * 
@@ -100,14 +101,20 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getFreeLanceOnServiceDetailsByUserId(userId);
 	}
 
+	/**
+	 * To get FU on service Expiration Details.
+	 */
 	@Override
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
 		return freeLanceOnServiceDAO.getFUOnServiceExpirationDetails();
 	}
 
+	/**
+	 * To Get FU Service Notification Details By UserId.
+	 */
 	@Override
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
 		return freeLanceOnServiceDAO.getFUOnServiceNotificationDetailsByUserId(userId);
 	}
-	
+
 }
