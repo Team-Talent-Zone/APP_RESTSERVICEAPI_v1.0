@@ -13,11 +13,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> PaymentNotificationHistEntity </code> class defines managed beans which provides
+ * functionality on the <code>Payment Notification History Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "paymentsNotifHistory")
 @Table(name = "APP_PAYMENTS_NOTIFICATION_HISTORY")
 public class PaymentNotificationHistEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7248859776417761151L;
 
 	@Id
 	@Column(name = "Id")

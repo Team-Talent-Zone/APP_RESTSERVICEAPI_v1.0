@@ -7,6 +7,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
+/**
+ * The <code> FreeLanceOnServiceNotificationDetailsView </code> class defines
+ * managed beans which provides functionality on the
+ * <code>FreeLance On Service Notification Details View</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity
 @Immutable
 @Table(name = "APP_FUSER_ONSERVICE_NOTIFICATION_DETAILS_VW")
@@ -35,8 +44,8 @@ public class FreeLanceOnServiceNotificationDetailsView {
 	private String firstname;
 
 	@Column(name = "DESCRIPTION")
-	private String description; 
-	
+	private String description;
+
 	public int getUserId() {
 		return userId;
 	}
@@ -100,5 +109,5 @@ public class FreeLanceOnServiceNotificationDetailsView {
 	public void setTemplateId(int templateId) {
 		this.templateId = templateId;
 	}
-	
+
 }

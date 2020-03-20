@@ -18,6 +18,7 @@ import javax.persistence.Table;
  * back-end functionality for the <code>New Service Adding</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "newService")
@@ -77,8 +78,8 @@ public class NewServiceEntity implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
 	private NewServiceHistoryEntity serviceHistory;
-	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "newService")
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
 	private Set<NewServiceHistoryEntity> serviceHistorymapping;
 
 	public Integer getOurserviceId() {
@@ -225,5 +226,4 @@ public class NewServiceEntity implements Serializable {
 		this.serviceHistorymapping = serviceHistorymapping;
 	}
 
-	
 }

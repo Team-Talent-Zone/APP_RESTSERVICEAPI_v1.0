@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * <code>Free Lance On Service Notification.</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "freeLanceOnServiceNotification")

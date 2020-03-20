@@ -16,11 +16,19 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> ReferenceLookUpMappingEntity </code> class defines managed beans
+ * which provides functionality on the
+ * <code>Reference LookUp Mapping Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "referencelookupmapping")
 @Table(name = "APP_REFERENCELOOKUP_MAPPING")
 public class ReferenceLookUpMappingEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2366470155939421771L;
 
 	@Id
 	@Column(name = "MAPId")
@@ -43,54 +51,45 @@ public class ReferenceLookUpMappingEntity implements Serializable {
 	@JoinColumn(name = "refId", nullable = false)
 	@JsonIgnore
 	private ReferenceLookUpEntity referencelookup;
-	
+
 	@Column(insertable = false, updatable = false, name = "refId")
 	private int refId;
 
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "referencelookupmapping")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "referencelookupmapping")
 	private Set<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories;
 
-	
 	public Set<ReferenceLookUpMappingSubCategoryEntity> getReferencelookupmappingsubcategories() {
 		return referencelookupmappingsubcategories;
 	}
-
 
 	public void setReferencelookupmappingsubcategories(
 			Set<ReferenceLookUpMappingSubCategoryEntity> referencelookupmappingsubcategories) {
 		this.referencelookupmappingsubcategories = referencelookupmappingsubcategories;
 	}
 
-
 	public ReferenceLookUpEntity getReferencelookup() {
 		return referencelookup;
 	}
-
 
 	public void setReferencelookup(ReferenceLookUpEntity referencelookup) {
 		this.referencelookup = referencelookup;
 	}
 
-
 	public int getRefId() {
 		return refId;
 	}
-
 
 	public void setRefId(int refId) {
 		this.refId = refId;
 	}
 
-
 	public Integer getMapId() {
 		return mapId;
 	}
 
-
 	public void setMapId(Integer mapId) {
 		this.mapId = mapId;
 	}
-
 
 	public String getCode() {
 		return code;

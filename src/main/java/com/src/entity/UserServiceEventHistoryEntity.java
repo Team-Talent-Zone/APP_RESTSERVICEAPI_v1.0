@@ -15,9 +15,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The <code> UserServiceEventHistory </code> class defines a POJO that provides
- * back-end functionality for the <code>User service Event History</code>.
+ * back-end functionality for the <code>User Service Event History</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "userServiceEventHistory")

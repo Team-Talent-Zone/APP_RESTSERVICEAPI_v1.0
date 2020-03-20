@@ -7,11 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * The <code> ReferenceLookUpTemplateEntity </code> class defines managed beans
+ * which provides functionality on the <code>Reference LookUp Template Entity</code>
+ * Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "lookuptemplates")
 @Table(name = "APP_REFERENCELOOKUP_TEMPLATES")
 public class ReferenceLookUpTemplateEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7821990018500690486L;
 
 	@Id
 	@Column(name = "TEMPLATEID")

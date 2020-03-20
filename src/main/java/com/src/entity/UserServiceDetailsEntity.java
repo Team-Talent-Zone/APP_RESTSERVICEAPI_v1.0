@@ -16,10 +16,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * The <code> UserServiceDetailsEntity </code> class defines a POJO that provides
- * back-end functionality for the <code> User Service Details.</code>.
+ * The <code> UserServiceDetailsEntity </code> class defines a POJO that
+ * provides back-end functionality for the <code> User Service Details.</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "userServiceDetailsEntity")

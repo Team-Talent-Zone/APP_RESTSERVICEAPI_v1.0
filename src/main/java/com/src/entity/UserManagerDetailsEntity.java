@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The <code> UserManagerDetailsEntity </code> class defines a POJO that provides back-end
- * functionality for the <code>UserDetails</code> pages.
+ * functionality for the <code>User Details</code> pages.
  * 
  * @author azmiri.
  * @version 1.0
@@ -75,6 +75,5 @@ public class UserManagerDetailsEntity implements Serializable {
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
 	}
-	
 	
 }

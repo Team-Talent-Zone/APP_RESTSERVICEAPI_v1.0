@@ -8,15 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * The <code> UserNotificationEntity </code> class defines managed beans which
+ * provides functionality on the <code>User Notification Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "usernotificationentity")
 @Table(name = "APP_USER_NOTIFICATIONS")
-
 public class UserNotificationEntity implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3773216179034536522L;
 
 	@Id
 	@Column(name = "ID")

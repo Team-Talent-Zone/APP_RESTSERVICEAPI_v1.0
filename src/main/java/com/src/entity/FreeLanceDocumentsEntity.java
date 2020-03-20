@@ -13,17 +13,26 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@SuppressWarnings("serial")
+/**
+ * The <code> FreeLanceDocumentsEntity </code> class defines managed beans which
+ * provides functionality on the <code>FreeLance Documents Entity</code>
+ * Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "freelancedocumententity")
 @Table(name = "APP_USER_FREELANCER_DOCUMENTS")
 
-public class FreeLanceDocumentsEntity implements Serializable{
+public class FreeLanceDocumentsEntity implements Serializable {
+	private static final long serialVersionUID = 2730114734003812188L;
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue
 	private Integer Id;
-	
+
 	@Column(insertable = false, updatable = false, name = "USERID")
 	private Integer userid;
 
@@ -34,10 +43,10 @@ public class FreeLanceDocumentsEntity implements Serializable{
 
 	@Column(name = "DOCNAME")
 	private String docname;
-	
+
 	@Column(name = "DOCURL")
 	private String docurl;
-	
+
 	@Column(name = "UPLOADDATE")
 	private String uploaddate;
 
@@ -88,5 +97,5 @@ public class FreeLanceDocumentsEntity implements Serializable{
 	public void setUploaddate(String uploaddate) {
 		this.uploaddate = uploaddate;
 	}
-	
+
 }

@@ -2,15 +2,20 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+/**
+ * The <code> UploadUtilEntity </code> class defines managed beans which
+ * provides functionality on the <code>Upload Util Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @SuppressWarnings("serial")
 public class UploadUtilEntity implements Serializable {
-	
 	private String base64image;
-
 	private int userid;
-	
 	private String filename;
-	
+
 	public String getFilename() {
 		return filename;
 	}
@@ -35,5 +40,4 @@ public class UploadUtilEntity implements Serializable {
 		this.userid = userid;
 	}
 
-	
 }

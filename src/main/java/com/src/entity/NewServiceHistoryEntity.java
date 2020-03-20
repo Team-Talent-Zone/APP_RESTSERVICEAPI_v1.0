@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * back-end functionality for the <code>New Service History</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "serviceHistory")
