@@ -1,6 +1,8 @@
 package com.src.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +34,18 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		newServiceEntity.setActive(Boolean.FALSE);
 		newServiceEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		
+		Set<NewServiceHistoryEntity> newServiceHistoryEntities = new HashSet<NewServiceHistoryEntity>();
 
-		NewServiceHistoryEntity inputHisEnty = newServiceEntity.getServiceHistory();
-		inputHisEnty.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
-		inputHisEnty.setLocked(Boolean.FALSE);
-		inputHisEnty.setNewService(newServiceEntity);
-		newServiceEntity.setServiceHistory(inputHisEnty);
+		if(newServiceEntity.getServiceHistory() != null) {
+			for (NewServiceHistoryEntity serviceHistoryEntity : newServiceEntity.getServiceHistory()) {
+				serviceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
+				serviceHistoryEntity.setLocked(Boolean.FALSE);
+				newServiceHistoryEntities.add(serviceHistoryEntity);
+				serviceHistoryEntity.setNewService(newServiceEntity);
+			}
+			newServiceEntity.setServiceHistory(newServiceHistoryEntities);
+		}
 		return newServiceRestDAO.saveNewService(newServiceEntity);
 	}
 
@@ -47,11 +55,18 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	@Override
 	public NewServiceEntity saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
 		newServiceEntity.setUpdatedBy(CommonUtilites.getCurrentDateInNewFormat());
-		NewServiceHistoryEntity inputHisEnty = newServiceEntity.getServiceHistory();
-		inputHisEnty.setLocked(Boolean.FALSE);
-		inputHisEnty.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
-		inputHisEnty.setNewService(newServiceEntity);
-		newServiceEntity.setServiceHistory(inputHisEnty);
+
+		Set<NewServiceHistoryEntity> newServiceHistoryEntities = new HashSet<NewServiceHistoryEntity>();
+
+		if(newServiceEntity.getServiceHistory() != null) {
+			for (NewServiceHistoryEntity serviceHistoryEntity : newServiceEntity.getServiceHistory()) {
+				serviceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
+				newServiceHistoryEntities.add(serviceHistoryEntity);
+				serviceHistoryEntity.setNewService(newServiceEntity);
+			}
+			newServiceEntity.setServiceHistory(newServiceHistoryEntities);
+		}
+		
 		newServiceRestDAO.saveOrUpdateNewService(newServiceEntity);
 		return newServiceEntity;
 	}

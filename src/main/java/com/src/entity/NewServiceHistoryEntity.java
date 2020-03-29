@@ -34,7 +34,7 @@ public class NewServiceHistoryEntity implements Serializable {
 	@Column(insertable = false, updatable = false, name = "ourserviceId")
 	private int ourserviceId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
 	private NewServiceEntity newService;
