@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserBizEntity;
@@ -66,7 +67,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 	public UserEntity saveUser(UserEntity userEntity) {
 
-		userEntity.setIsactive(Boolean.FALSE);
 		userEntity.setIsrecoverypwd(Boolean.FALSE);
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
@@ -76,13 +76,21 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
-
+			userEntity.setIsactive(Boolean.FALSE);
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			Set<FreeLanceHistoryEntity> freeLanceHistoryEntities = new HashSet<FreeLanceHistoryEntity>();
 			for (FreeLanceHistoryEntity entity : userEntity.getFreelancehistoryentity()) {
 				entity.setIslocked(Boolean.FALSE);
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
+			}
+			if (userEntity.getFreelancedocumententity() != null) {
+				Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
+				for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
+					freeLanceDocumentEntities.add(docentity);
+					docentity.setUserdetails(userEntity);
+				}
+				userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
 			}
 			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setIsbgdone(Boolean.FALSE);
@@ -92,10 +100,12 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
-			
+
+		} else if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+			userEntity.setIsactive(Boolean.FALSE);
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
-
+			userEntity.setIsactive(Boolean.TRUE);
 			UserManagerDetailsEntity usermanagerdetailsentity = userEntity.getUsermanagerdetailsentity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
@@ -139,25 +149,28 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 			userEntity.setIsrecoverypwd(Boolean.FALSE);
 		}
-
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
-
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
 			Set<FreeLanceHistoryEntity> freeLanceHistoryEntities = new HashSet<FreeLanceHistoryEntity>();
-
 			for (FreeLanceHistoryEntity entity : userEntity.getFreelancehistoryentity()) {
 				entity.setDecisionon(CommonUtilites.getCurrentDateInNewFormat());
 				freeLanceHistoryEntities.add(entity);
 				entity.setUserdetails(userEntity);
 			}
+			Set<FreeLanceDocumentsEntity> freeLanceDocumentEntities = new HashSet<FreeLanceDocumentsEntity>();
+			for (FreeLanceDocumentsEntity docentity : userEntity.getFreelancedocumententity()) {
+				freeLanceDocumentEntities.add(docentity);
+				docentity.setUserdetails(userEntity);
+			}
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
-			
+			userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
+
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
 
@@ -206,6 +219,25 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	}
 
 	/**
+	 * Helps in setting new password for admin.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public UserEntity prepareAdminToSignUp(String username) {
+
+		UserEntity userEntity = new UserEntity();
+		boolean checkUsernameNotExist = userRestDAO.checkUsernameNotExist(username);
+		if (checkUsernameNotExist) {
+			String newPassword = CommonUtilites.genRandomAlphaNumeric();
+			userEntity.setIsactive(Boolean.TRUE);
+			userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			userEntity.setPassword(newPassword);
+		}
+		return userEntity;
+	}
+
+	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
 	 * @return userEntity
@@ -239,7 +271,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * Save the User Notification Details.
 	 * 
 	 * @param userNotificationEntity
-	 * @return
 	 */
 
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
@@ -248,20 +279,32 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	}
 
 	/**
-	 * Gets all the freelance user details when incomplete profile
-	 * 
-	 * 
+	 * Gets all the freelance user details when incomplete profile.
 	 */
 	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile() {
 		return userRestDAO.getFUUserDetailsWhenInCompleteProfile();
 	}
 
+	/**
+	 * This method is for Saving Free Lancer History Details.
+	 */
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		freeLanceHistoryEntity.setDecisionon(CommonUtilites.getCurrentDateInNewFormat());
 		UserEntity userdetails = new UserEntity();
 		userdetails.setUserId(freeLanceHistoryEntity.getUserid());
 		freeLanceHistoryEntity.setUserdetails(userdetails);
 		return userRestDAO.saveFreeLanceHistory(freeLanceHistoryEntity);
+	}
+
+	/**
+	 * This method is for Saving Free Lancer Document Details.
+	 */
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		freeLanceDocumentsEntity.setUploaddate(CommonUtilites.getCurrentDateInNewFormat());
+		UserEntity userdetails = new UserEntity();
+		userdetails.setUserId(freeLanceDocumentsEntity.getUserid());
+		freeLanceDocumentsEntity.setUserdetails(userdetails);
+		return userRestDAO.saveFreeLanceDocument(freeLanceDocumentsEntity);
 	}
 
 }

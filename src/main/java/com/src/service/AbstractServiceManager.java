@@ -16,7 +16,7 @@ import com.src.dao.UserRestDAO;
 import com.src.dao.UserServiceDetailsDAO;
 
 /**
- * The <code> AbstractServiceManager </code>interface used to provides
+ * The <code> AbstractServiceManager </code>class used to provides service
  * functionality details.
  *
  */

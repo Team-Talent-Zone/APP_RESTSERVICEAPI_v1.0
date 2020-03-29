@@ -7,6 +7,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
+/**
+ * The <code> UserServiceNotificationDetailsView </code> class defines managed
+ * beans which provides functionality on the
+ * <code>User Service Notification Details View</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity
 @Immutable
 @Table(name = "APP_USERSERVICE_NOTIFICATION_DETAILS_VW")
@@ -35,8 +44,8 @@ public class UserServiceNotificationDetailsView {
 	private String firstname;
 
 	@Column(name = "DESCRIPTION")
-	private String description; 
-	
+	private String description;
+
 	public int getUserId() {
 		return userId;
 	}
@@ -100,5 +109,5 @@ public class UserServiceNotificationDetailsView {
 	public void setTemplateId(int templateId) {
 		this.templateId = templateId;
 	}
-	
+
 }

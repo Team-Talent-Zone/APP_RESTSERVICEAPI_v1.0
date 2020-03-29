@@ -13,11 +13,19 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> PaymentCBATranscationHistEntity </code> class defines managed
+ * beans which provides functionality on the
+ * <code>Payment CBA Transaction History Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "paymentsCBATrans")
 @Table(name = "APP_PAYMENTS_CBA_TRANSACTION_HISTORY")
 public class PaymentCBATranscationHistEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8450356345036184958L;
 
 	@Id
 	@Column(name = "Id")

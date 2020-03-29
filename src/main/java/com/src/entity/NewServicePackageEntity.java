@@ -13,6 +13,7 @@ import javax.persistence.Table;
  * back-end functionality for the <code>New Service Package</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "servicePackage")
@@ -45,7 +46,7 @@ public class NewServicePackageEntity implements Serializable {
 
 	@Column(insertable = true, updatable = false, name = "ourserviceId")
 	private Integer ourserviceId;
- 
+
 	public Integer getServicePackId() {
 		return servicePackId;
 	}
@@ -109,6 +110,5 @@ public class NewServicePackageEntity implements Serializable {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
 
 }

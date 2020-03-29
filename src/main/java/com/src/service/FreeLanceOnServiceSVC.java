@@ -21,7 +21,6 @@ public interface FreeLanceOnServiceSVC {
 	 * To save Free Lance on Service.
 	 * 
 	 * @param FreeLanceOnServiceEntity
-	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
@@ -29,7 +28,6 @@ public interface FreeLanceOnServiceSVC {
 	 * To edit and Update the Free Lance on Service.
 	 * 
 	 * @param freeLanceOnServiceEntity
-	 * @return
 	 */
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
@@ -37,7 +35,6 @@ public interface FreeLanceOnServiceSVC {
 	 * To save Free Lance Star Review FeedBack.
 	 * 
 	 * @param freeLanceStarReviewFB
-	 * @return
 	 */
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB);
 
@@ -45,15 +42,12 @@ public interface FreeLanceOnServiceSVC {
 	 * To save Free Lance on Service Notification.
 	 * 
 	 * @param saveFreeLanceOnServiceNotification
-	 * @return
 	 */
 	public FreeLanceOnServiceNotification saveFreeLanceOnServiceNotification(
 			FreeLanceOnServiceNotification freeLanceOnServiceNotification);
 
 	/**
-	 * To Get the all freelance Service Details.
-	 * 
-	 * @return
+	 * To Get the all free lance Service Details.
 	 */
 	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
 
@@ -64,8 +58,16 @@ public interface FreeLanceOnServiceSVC {
 	 */
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
 
+	/**
+	 * To get FU Service Expiration Details.
+	 */
 	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
 
+	/**
+	 * To get FU on Service Notifications by user id.
+	 * 
+	 * @param userId
+	 */
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
 
 }

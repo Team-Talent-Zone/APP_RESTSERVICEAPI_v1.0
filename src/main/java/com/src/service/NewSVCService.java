@@ -11,6 +11,7 @@ import com.src.entity.NewServicePackageEntity;
  * retrieving <code>New Service</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 public interface NewSVCService {
@@ -69,5 +70,8 @@ public interface NewSVCService {
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId);
 
+	/**
+	 * To get New Service Details Created.
+	 */
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
 }

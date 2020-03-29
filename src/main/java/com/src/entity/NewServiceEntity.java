@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +17,7 @@ import javax.persistence.Table;
  * back-end functionality for the <code>New Service Adding</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "newService")
@@ -75,11 +75,8 @@ public class NewServiceEntity implements Serializable {
 	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
-	private NewServiceHistoryEntity serviceHistory;
-	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "newService")
-	private Set<NewServiceHistoryEntity> serviceHistorymapping;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
+	private Set<NewServiceHistoryEntity> serviceHistory;
 
 	public Integer getOurserviceId() {
 		return ourserviceId;
@@ -209,21 +206,14 @@ public class NewServiceEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public NewServiceHistoryEntity getServiceHistory() {
+	public Set<NewServiceHistoryEntity> getServiceHistory() {
 		return serviceHistory;
 	}
 
-	public void setServiceHistory(NewServiceHistoryEntity serviceHistory) {
+	public void setServiceHistory(Set<NewServiceHistoryEntity> serviceHistory) {
 		this.serviceHistory = serviceHistory;
 	}
 
-	public Set<NewServiceHistoryEntity> getServiceHistorymapping() {
-		return serviceHistorymapping;
-	}
+	 
 
-	public void setServiceHistorymapping(Set<NewServiceHistoryEntity> serviceHistorymapping) {
-		this.serviceHistorymapping = serviceHistorymapping;
-	}
-
-	
 }

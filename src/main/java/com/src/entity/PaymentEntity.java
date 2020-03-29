@@ -13,11 +13,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> PaymentEntity </code> class defines managed beans which provides
+ * functionality on the <code>Payment Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "payments")
 @Table(name = "APP_PAYMENTS")
 public class PaymentEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7209943163282301311L;
 
 	@Id
 	@Column(name = "paymentId")

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -26,7 +27,7 @@ import com.src.exception.RestCustomException;
  * The <code> UserRestDAOImpl </code> class handles data access operation for
  * <code>UserDetails</code>.
  * 
- * @author azmiri.
+ * @author Azmiri.
  * @version 1.0
  * 
  */
@@ -38,6 +39,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get the User Details by UserName.
 	 * 
+	 * @throws RestCustomException
 	 * @param username
 	 */
 	@Transactional
@@ -65,7 +67,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public UserEntity checkUsername(String username) {
@@ -86,7 +88,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * Check the UserName from the Database.
 	 * 
 	 * @param username
-	 * @throws Exception
+	 * @throws RestCustomException
 	 */
 	@Transactional
 	public boolean checkUsernameNotExist(String username) {
@@ -106,8 +108,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Save the User Details.
 	 * 
+	 * @throws RestCustomException
 	 * @param userEntityObject
-	 * @return
 	 */
 	@Transactional
 	public UserEntity saveUser(UserEntity userEntity) {
@@ -125,6 +127,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get the User Details by UserId.
 	 * 
+	 * @throws RestCustomException
 	 * @param userId
 	 */
 	@Transactional
@@ -145,6 +148,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get All User Details from the List.
 	 * 
+	 * @throws RestCustomException
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -166,6 +170,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Get User Details by the Role.
 	 * 
+	 * @throws RestCustomException
 	 * @param role
 	 */
 	@SuppressWarnings("unchecked")
@@ -190,6 +195,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Update or Edit on user Details Screen.
 	 * 
+	 * @throws RestCustomException
 	 * @param userEntityObj
 	 */
 	@Transactional
@@ -207,6 +213,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 * 
+	 * @throws RestCustomException
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -232,6 +239,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the notification details based on the user Id
 	 * 
+	 * @throws RestCustomException
 	 * @param userId
 	 * 
 	 */
@@ -257,8 +265,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Save the User Notification Details.
 	 * 
+	 * @throws RestCustomException
 	 * @param userNotificationEntity
-	 * @return
 	 */
 	@Transactional
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity) {
@@ -276,6 +284,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user freelance details when incomplete profile
 	 * 
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -298,15 +307,16 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	/**
 	 * Gets all the user details if isrecoverypwd is true
 	 * 
+	 * @throws Exception
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Transactional
 	public ArrayList<UserEntity> getUserByRecoveryPwd() {
 
-		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPWD);
+		LOGGER.info(UserConstant.USER_DAO_GETUSERSBYRECOVERYPD);
 		List<UserEntity> userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-		Criterion isRecoveryPwd = Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPWD, true);
+		Criterion isRecoveryPwd = Restrictions.eq(UserConstant.USER_DETAILS_ISRECOVERYPD, true);
 		Criterion isActive = Restrictions.eq(UserConstant.ISACTIVE, false);
 		criteria.add(Restrictions.or(isRecoveryPwd, isActive));
 		criteria.createAlias(UserConstant.USERROLES, UserConstant.UROLE, JoinType.INNER_JOIN);
@@ -314,13 +324,20 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 				Arrays.asList(UserConstant.FREELANCER_USER, UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)));
 		userEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntity != null ? userEntity.size() : 0;
-		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPWD + size);
+		LOGGER.debug(UserConstant.USER_SERVICE_DAO_INSIDE_GETUSERBYRECOVERYPD + size);
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntity;
 		}
 		return null;
 	}
 
+	/**
+	 * To Save Free Lancer History Details.
+	 * 
+	 * @throws RestCustomException
+	 * @param FreeLanceHistoryEntity freeLanceHistoryEntity
+	 * @return freeLanceHistoryEntity
+	 */
 	@Transactional
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity) {
 		int serviceHistorySavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceHistoryEntity);
@@ -330,6 +347,23 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG));
 
+	}
+
+	/**
+	 * To Save Free Lancer Document Details.
+	 * 
+	 * @throws RestCustomException
+	 * @param FreeLanceHistoryEntity freeLanceHistoryEntity
+	 * @return freeLanceHistoryEntity
+	 */
+	@Transactional
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		int serviceDocSavedID = (Integer) sessionFactory.getCurrentSession().save(freeLanceDocumentsEntity);
+		if (serviceDocSavedID > 0) {
+			return freeLanceDocumentsEntity;
+		}
+		throw new RestCustomException(HttpStatus.BAD_REQUEST,
+				applicationConfigProperties.getProperty(CustomMsgProperties.FREELANCEDOC_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
 }

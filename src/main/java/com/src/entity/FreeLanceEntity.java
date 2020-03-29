@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name = "freeLanceDetails")
 @Table(name = "APP_USER_FREELANCEDETAILS")
 public class FreeLanceEntity implements Serializable {
-
 	private static final long serialVersionUID = 8431711325791818386L;
 
 	@Id
@@ -53,9 +52,6 @@ public class FreeLanceEntity implements Serializable {
 	
 	@Column(name = "ISBGSTARTED")
 	private boolean isbgstarted;
-
-	@Column(name = "UPLOADADDITIONALDOCZIPFILEURL")
-	private String uploadAdditionalDocZipFileUrl;
 
 	@Column(name = "ISJOBAVAILABLE")
 	private boolean isJobAvailable;
@@ -125,14 +121,6 @@ public class FreeLanceEntity implements Serializable {
 	public void setIsbgstarted(boolean isbgstarted) {
 		this.isbgstarted = isbgstarted;
 	} 
-
-	public String getUploadAdditionalDocZipFileUrl() {
-		return uploadAdditionalDocZipFileUrl;
-	}
-
-	public void setUploadAdditionalDocZipFileUrl(String uploadAdditionalDocZipFileUrl) {
-		this.uploadAdditionalDocZipFileUrl = uploadAdditionalDocZipFileUrl;
-	}
 
 	public boolean isJobAvailable() {
 		return isJobAvailable;

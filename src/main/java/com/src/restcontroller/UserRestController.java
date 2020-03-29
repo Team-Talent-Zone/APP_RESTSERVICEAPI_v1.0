@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -38,7 +39,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/findByUsername/{username}/{password}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username,
-			@PathVariable(UserConstant.PASSWORD) String password) {
+			@PathVariable(UserConstant.USERPSWD) String password) {
 		UserEntity userEntity = userDetailsService.findByUsername(username, password);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
@@ -210,5 +211,28 @@ public class UserRestController extends AbstractRestManager {
 		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
 		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
 	}
+	
+	/**
+	 * Method is to save FreeLancer Documents.
+	 * 
+	 * @param freeLanceDocumentsEntity
+	 * @return
+	 */
+	@RequestMapping(value = "/saveFreeLanceDocument/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceDocumentsEntity> saveFreeLanceDocument(
+			@RequestBody FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
+		FreeLanceDocumentsEntity docEntity = userDetailsService.saveFreeLanceDocument(freeLanceDocumentsEntity);
+		return new ResponseEntity<FreeLanceDocumentsEntity>(docEntity, HttpStatus.OK);
+	}
 
+	/**
+	 * Saves the new password by encrypting for admin signup.
+	 * 
+	 * @param username
+	 * @return user details
+	 */
+	@RequestMapping(value = "/prepareAdminToSignUp/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> prepareAdminToSignUp(@PathVariable(UserConstant.USERNAME) String username) {
+		return new ResponseEntity<UserEntity>(userDetailsService.prepareAdminToSignUp(username), HttpStatus.OK);
+	}
 }

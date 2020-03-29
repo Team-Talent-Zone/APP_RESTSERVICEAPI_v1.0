@@ -13,11 +13,19 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> PaymentRefundTranscationHistEntity </code> class defines managed
+ * beans which provides functionality on the
+ * <code>Payment Refund Transaction History Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "paymentsRefundTrans")
 @Table(name = "APP_PAYMENTS_REFUND_TRANSACTION_HISTORY")
 public class PaymentRefundTranscationHistEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4593932159884822009L;
 
 	@Id
 	@Column(name = "Id")

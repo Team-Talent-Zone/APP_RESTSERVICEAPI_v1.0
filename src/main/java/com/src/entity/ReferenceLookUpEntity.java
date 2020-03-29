@@ -12,11 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * The <code> ReferenceLookUpEntity </code> class defines managed beans which
+ * provides functionality on the <code>Reference LookUp Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "referencelookup")
 @Table(name = "APP_REFERENCELOOKUP")
 public class ReferenceLookUpEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8939996134537444064L;
 
 	@Id
 	@Column(name = "REFId")
@@ -34,10 +41,9 @@ public class ReferenceLookUpEntity implements Serializable {
 
 	@Column(name = "SHORTKEY")
 	private String shortkey;
-	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "referencelookup")
-	private Set<ReferenceLookUpMappingEntity> referencelookupmapping;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "referencelookup")
+	private Set<ReferenceLookUpMappingEntity> referencelookupmapping;
 
 	public Set<ReferenceLookUpMappingEntity> getReferencelookupmapping() {
 		return referencelookupmapping;

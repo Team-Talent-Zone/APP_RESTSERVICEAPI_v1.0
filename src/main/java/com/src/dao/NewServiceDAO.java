@@ -1,5 +1,5 @@
 
- package com.src.dao;
+package com.src.dao;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ import com.src.entity.NewServicePackageEntity;
  * retrieving <code>NewService</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 public interface NewServiceDAO {
@@ -20,7 +21,6 @@ public interface NewServiceDAO {
 	 * To save New Service details.
 	 * 
 	 * @param newServiceEntity
-	 * @return
 	 */
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity);
 
@@ -35,7 +35,6 @@ public interface NewServiceDAO {
 	 * To save the New Service History Details.
 	 * 
 	 * @param newServiceHistoryEntity
-	 * @return
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
@@ -43,14 +42,12 @@ public interface NewServiceDAO {
 	 * To Save the New Service Package Details.
 	 * 
 	 * @param newServicePackageEntity
-	 * @return
 	 */
 	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity);
 
 	/**
 	 * To get All Service Details.
 	 * 
-	 * @return
 	 */
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
 
@@ -60,18 +57,17 @@ public interface NewServiceDAO {
 	 * @param managerId
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByManagerId(int managerId);
-	
+
 	/**
 	 * Get All New Service Details by userId.
 	 * 
 	 * @param userId
 	 */
 	public ArrayList<NewServiceHistoryEntity> getAllNewServiceDetailsByUserId(int userId);
-	
+
 	/**
 	 * To get All Service Details which create a day back.
 	 * 
-	 * @return
 	 */
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
 

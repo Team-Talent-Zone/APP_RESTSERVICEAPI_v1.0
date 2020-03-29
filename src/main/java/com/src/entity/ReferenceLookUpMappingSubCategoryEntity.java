@@ -13,11 +13,19 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> ReferenceLookUpMappingSubCategoryEntity </code> class defines
+ * managed beans which provides functionality on the
+ * <code>Reference LookUp Mapping Sub Category Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "referencelookupmappingsubcategories")
 @Table(name = "APP_REFERENCELOOKUP_MAPPING_SUBCATEGORIES")
 public class ReferenceLookUpMappingSubCategoryEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4091877317851339980L;
 
 	@Id
 	@Column(name = "Id")

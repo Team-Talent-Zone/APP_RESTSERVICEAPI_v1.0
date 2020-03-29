@@ -36,7 +36,7 @@ public class TestSendEmail {
 		msg.setContent("<html><h1><u>Azmiri your doing great JOB</u></h1></html>", "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
 		t = (SMTPTransport) session.getTransport("smtp");
-		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
+		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PSWD_DEV_SMTP);
 		t.sendMessage(msg, msg.getAllRecipients());
 		System.out.println("Inside the prepareEmail method of MSEmailSend class Of AWS_MS_Utility Jar : Is Email Sent  "
 				+ t.getLastServerResponse());

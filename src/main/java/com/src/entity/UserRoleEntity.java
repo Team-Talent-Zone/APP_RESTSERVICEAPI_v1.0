@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * The <code> UserRoleEntity </code> class defines a POJO that provides back-end
  * functionality for the <code>UserDetails</code> pages.
  * 
- * @author azmiri.
+ * @author Azmiri.
  * @version 1.0
  * 
  */
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "APP_USER_ROLE")
 public class UserRoleEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8593563355013644985L;
 
 	@Id
 	@Column(name = "ROLEID")

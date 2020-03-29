@@ -7,6 +7,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
+/**
+ * The <code> UserServiceExpirationDetailsView </code> class defines managed
+ * beans which provides functionality on the
+ * <code>User Service Expiration Details View</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity
 @Immutable
 @Table(name = "APP_USERSERVICE_EXPIRATION_DETAILS_VW")

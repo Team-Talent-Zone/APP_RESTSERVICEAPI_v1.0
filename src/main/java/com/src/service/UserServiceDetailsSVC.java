@@ -12,6 +12,7 @@ import com.src.entity.UserServiceNotificationDetailsView;
  * service for retrieving <code>User Service Details.</code>.
  * 
  * @author Shanoor
+ * @version 1.0.
  *
  */
 public interface UserServiceDetailsSVC {
@@ -61,10 +62,21 @@ public interface UserServiceDetailsSVC {
 	 */
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 
+	/**
+	 * To get User Service Expiration Details.
+	 */
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
-	
+
+	/**
+	 * To Get User Service Notification Details by User Id.
+	 * 
+	 * @param userId
+	 */
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
-	
+
+	/**
+	 * To get user Service Pending payments.
+	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
 
 }

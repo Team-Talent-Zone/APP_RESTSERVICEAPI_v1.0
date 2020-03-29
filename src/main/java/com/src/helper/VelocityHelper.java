@@ -10,10 +10,23 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The <code> VelocityHelper </code> class defines email service auto
+ * scheduling.
+ * 
+ * @author Ishaq.
+ * @version 1.0
+ *
+ */
 public class VelocityHelper {
-
 	final Logger logger = LoggerFactory.getLogger(VelocityHelper.class);
 
+	/**
+	 * This method will generate email via velocity object.
+	 * 
+	 * @param jsonArray
+	 * @throws Exception
+	 */
 	public VelocityContext generateVelocityObject(JSONArray jsonArray) throws Exception {
 		VelocityContext context = new VelocityContext();
 		logger.info("Inside the VelocityHelper Class  : generateVelocityObject method");
@@ -28,6 +41,12 @@ public class VelocityHelper {
 		return context;
 	}
 
+	/**
+	 * This method is to generate Email in HTML Format.
+	 * 
+	 * @param tempServerURLEmailTemplateName
+	 * @param context
+	 */
 	public String generateEmailInHtmlFormat(String tempServerURLEmailTemplateName, VelocityContext context) {
 		StringWriter writer = null;
 		logger.debug("Inside the VelocityHelper Class : generateEmailInHtmlFormat method : templateURL :"

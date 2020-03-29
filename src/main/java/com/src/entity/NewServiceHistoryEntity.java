@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * back-end functionality for the <code>New Service History</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "serviceHistory")
@@ -33,7 +34,7 @@ public class NewServiceHistoryEntity implements Serializable {
 	@Column(insertable = false, updatable = false, name = "ourserviceId")
 	private int ourserviceId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ourserviceId", nullable = false)
 	@JsonIgnore
 	private NewServiceEntity newService;

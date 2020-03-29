@@ -25,6 +25,7 @@ import com.src.exception.RestCustomException;
  * operation for <code>User Service Details.</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Repository
@@ -138,11 +139,15 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To get the User Expiration Details Notification.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
 		List<UserServiceExpirationDetailsView> userServiceExpirationDetails = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceExpirationDetailsView.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(UserServiceExpirationDetailsView.class);
 		userServiceExpirationDetails = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userServiceExpirationDetails != null ? userServiceExpirationDetails.size() : 0;
 
@@ -152,11 +157,15 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		return null;
 	}
 
+	/**
+	 * To get the User Service Details Notification by User id.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
 		List<UserServiceNotificationDetailsView> userServiceNotificationDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceNotificationDetailsView.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(UserServiceNotificationDetailsView.class);
 		userServiceNotificationDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userServiceNotificationDetailsViews != null ? userServiceNotificationDetailsViews.size() : 0;
 
@@ -167,6 +176,9 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
+	/**
+	 * To get the User Service Details Pending Payments Notification.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment() {

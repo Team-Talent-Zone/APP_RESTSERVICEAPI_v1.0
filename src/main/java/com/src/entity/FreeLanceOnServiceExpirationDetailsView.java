@@ -7,6 +7,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
+/**
+ * The <code> FreeLanceOnServiceExpirationDetailsView </code> class defines
+ * managed beans which provides functionality on the
+ * <code>FreeLance On Service Expiration Details View</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity
 @Immutable
 @Table(name = "APP_FU_ONSERVICE_JOB_EXPIRATION_DETAILS_VW")
@@ -36,13 +45,13 @@ public class FreeLanceOnServiceExpirationDetailsView {
 
 	@Column(name = "PREFERLANG")
 	private String preferlang;
-	
+
 	@Column(name = "JOBCREATEDON")
 	private String jobcreatedon;
-	
+
 	@Column(name = "JOBENDEDON")
 	private String jobendedon;
-	
+
 	@Column(name = "AMOUNTCBAPAIDTOFU")
 	private String amountcbapaidtofu;
 

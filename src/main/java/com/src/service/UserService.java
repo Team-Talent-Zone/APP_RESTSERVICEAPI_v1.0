@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
@@ -21,7 +22,6 @@ public interface UserService {
 	 * Get the User Details by UserName.
 	 * 
 	 * @param username
-	 * @return
 	 */
 	public UserEntity findByUsername(String username, String password);
 
@@ -29,7 +29,6 @@ public interface UserService {
 	 * Save the User Details.
 	 * 
 	 * @param userEntityObject
-	 * @return
 	 */
 	public UserEntity saveUser(UserEntity userEntity);
 
@@ -37,13 +36,11 @@ public interface UserService {
 	 * Save the User Notification Details.
 	 * 
 	 * @param userNotificationEntity
-	 * @return
 	 */
 	public UserNotificationEntity saveUserNotification(UserNotificationEntity userNotificationEntity);
 
 	/**
 	 * Get All User Details from the List.
-	 * 
 	 */
 	public ArrayList<UserEntity> getAllUsers();
 
@@ -120,7 +117,26 @@ public interface UserService {
 	 * 
 	 */
 	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
-	
+
+	/**
+	 * To Save the Free Lancer History.
+	 * 
+	 * @param freeLanceHistoryEntity
+	 */
 	public FreeLanceHistoryEntity saveFreeLanceHistory(FreeLanceHistoryEntity freeLanceHistoryEntity);
+
+	/**
+	 * To save Free lancer Document.
+	 * 
+	 * @param freeLanceDocumentsEntity
+	 */
+	public FreeLanceDocumentsEntity saveFreeLanceDocument(FreeLanceDocumentsEntity freeLanceDocumentsEntity);
+
+	/**
+	 * To prepare Admin to Signup.
+	 * 
+	 * @param username
+	 */
+	public UserEntity prepareAdminToSignUp(String username);
 
 }

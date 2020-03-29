@@ -15,9 +15,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The <code> UserServiceNotfication </code> class defines a POJO that provides
- * back-end functionality for the <code>User service Notification.</code>.
+ * back-end functionality for the <code>User Service Notification.</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 @Entity(name = "userServiceNotfications")
@@ -107,5 +108,4 @@ public class UserServiceNotfications implements Serializable {
 		this.templateId = templateId;
 	}
 
-	
 }

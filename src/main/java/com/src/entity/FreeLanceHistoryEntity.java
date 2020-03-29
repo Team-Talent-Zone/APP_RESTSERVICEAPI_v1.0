@@ -13,17 +13,24 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The <code> FreeLanceHistoryEntity </code> class defines managed beans which
+ * provides functionality on the <code>FreeLance History Entity</code> Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "freelancehistoryentity")
 @Table(name = "APP_USER_FREELANCE_HISTORY")
 public class FreeLanceHistoryEntity implements Serializable {
-
 	private static final long serialVersionUID = -1697844064430609298L;
 
 	@Id
 	@Column(name = "EVENTID")
 	@GeneratedValue
 	private Integer eventId;
-	
+
 	@Column(insertable = false, updatable = false, name = "USERID")
 	private Integer userid;
 
@@ -36,7 +43,7 @@ public class FreeLanceHistoryEntity implements Serializable {
 	private String decisionby;
 
 	@Column(name = "DECISIONON")
-	private String decisionon; 
+	private String decisionon;
 
 	@Column(name = "BGSTATUS")
 	private String bgstatus;
@@ -49,7 +56,7 @@ public class FreeLanceHistoryEntity implements Serializable {
 
 	@Column(name = "MANAGERID")
 	private Integer managerid;
-	
+
 	@Column(name = "CSSTID")
 	private Integer csstid;
 
@@ -69,7 +76,6 @@ public class FreeLanceHistoryEntity implements Serializable {
 		this.userdetails = userdetails;
 	}
 
-	 
 	public String getBgstatus() {
 		return bgstatus;
 	}
@@ -133,6 +139,5 @@ public class FreeLanceHistoryEntity implements Serializable {
 	public void setManagerid(Integer managerid) {
 		this.managerid = managerid;
 	}
- 
 
 }

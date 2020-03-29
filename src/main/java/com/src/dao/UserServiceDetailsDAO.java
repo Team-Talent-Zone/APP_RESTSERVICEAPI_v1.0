@@ -12,6 +12,7 @@ import com.src.entity.UserServiceNotificationDetailsView;
  * object for retrieving <code>User Service Details</code>.
  * 
  * @author Shanoor
+ * @version 1.0
  *
  */
 public interface UserServiceDetailsDAO {
@@ -52,19 +53,29 @@ public interface UserServiceDetailsDAO {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
-	
+
 	/**
 	 * To save User Service Notificaton.
 	 * 
 	 * @param saveUserServiceNotification
-	 * @return
 	 */
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
-	
+
+	/**
+	 * To get the User Expiration Details Notification.
+	 */
 	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
 
+	/**
+	 * To get the User Service Details Notification by User id.
+	 * 
+	 * @param userId
+	 */
 	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
-	
+
+	/**
+	 * To get the User Service Details Pending Payments Notification.
+	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
 
 }

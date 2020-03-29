@@ -18,10 +18,23 @@ import com.src.constant.UtilityConfig;
 import com.src.entity.UtilEntity;
 import com.sun.mail.smtp.SMTPTransport;
 
+/**
+ * This <code>SendEmailHelper</code>defines preparing and sending emails.
+ * 
+ * @author Ishaq.
+ * @version 1.0
+ *
+ */
 public class SendEmailHelper {
 
 	final Logger logger = LoggerFactory.getLogger(SendEmailHelper.class);
 
+	/**
+	 * This method is to prepare email.
+	 * 
+	 * @param utilEntity
+	 * @throws Exception
+	 */
 	public UtilEntity prepareEmail(UtilEntity utilEntity) throws Exception {
 		logger.debug("Inside the SendEmailHelper Class : prepareEmail method");
 		VelocityHelper velocityHelper = new VelocityHelper();
@@ -46,8 +59,15 @@ public class SendEmailHelper {
 		return utilEntity;
 	}
 
+	/**
+	 * This method is for Sending Emails.
+	 * 
+	 * @param utilEntity
+	 * @throws Exception
+	 */
 	private UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
-		logger.debug("Inside he SendEmailHelper Class : sendEmail method : sending email to : " + utilEntity.getTouser());
+		logger.debug(
+				"Inside he SendEmailHelper Class : sendEmail method : sending email to : " + utilEntity.getTouser());
 		SMTPTransport t = null;
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", UtilityConfig.HOST_DEV_SMTP);
@@ -63,11 +83,12 @@ public class SendEmailHelper {
 		msg.setContent(utilEntity.getBody(), "text/html; charset=utf-8");
 		msg.setSentDate(new Date());
 		t = (SMTPTransport) session.getTransport("smtp");
-		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PASSWORD_DEV_SMTP);
+		t.connect(UtilityConfig.HOST_DEV_SMTP, UtilityConfig.USERNAME_DEV_SMTP, UtilityConfig.PSWD_DEV_SMTP);
 		t.sendMessage(msg, msg.getAllRecipients());
 		utilEntity.setLastserverresponse(t.getLastServerResponse());
 		utilEntity.setLastreturncode(t.getLastReturnCode());
-		logger.debug("Inside he SendEmailHelper Class : sendEmail method : service response  " + utilEntity.getLastserverresponse());
+		logger.debug("Inside he SendEmailHelper Class : sendEmail method : service response  "
+				+ utilEntity.getLastserverresponse());
 		return utilEntity;
 	}
 }

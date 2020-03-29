@@ -8,12 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/**
+ * The <code> ReferenceStaticDataEntity </code> class defines managed beans
+ * which provides functionality on the <code>Reference Static Data Entity</code>
+ * Details.
+ * 
+ * @author Ishaq
+ * @version 1.0
+ *
+ */
 @Entity(name = "referencestaticdata")
 @Table(name = "APP_REFERENCE_STATIC_DATA")
 public class ReferenceStaticDataEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2246765437553431986L;
 
 	@Id
 	@Column(name = "ID")
@@ -22,7 +29,7 @@ public class ReferenceStaticDataEntity implements Serializable {
 
 	@Column(name = "KEY")
 	private String key;
-	
+
 	@Column(name = "CONTENT")
 	private String content;
 
@@ -49,7 +56,5 @@ public class ReferenceStaticDataEntity implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	 
 
 }
