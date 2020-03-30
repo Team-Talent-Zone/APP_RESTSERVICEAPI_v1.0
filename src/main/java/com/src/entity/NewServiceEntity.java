@@ -40,7 +40,7 @@ public class NewServiceEntity implements Serializable {
 	private String category;
 
 	@Column(name = "ISACTIVE")
-	private boolean isActive;
+	private boolean  active;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -111,11 +111,11 @@ public class NewServiceEntity implements Serializable {
 	}
 
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public String getDescription() {

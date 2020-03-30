@@ -28,7 +28,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	/**
 	 * To save new service Details.
 	 */
-	@Override
+	@Override 
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
 		newServiceEntity.setUpgrade(Boolean.FALSE);
 		newServiceEntity.setActive(Boolean.FALSE);
