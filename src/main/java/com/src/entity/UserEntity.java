@@ -27,7 +27,7 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 428235307895292984L;
 
 	@Id
-	@Column(name = "USERID")
+	@Column(name = "USERID") 
 	@GeneratedValue
 	private Integer userId;
 
@@ -45,6 +45,9 @@ public class UserEntity implements Serializable {
 
 	@Column(name = "LASTNAME")
 	private String lastname;
+	
+	@Column(name = "FULLNAME")
+	private String fullname;
 
 	@Column(name = "ISRECOVERYPWD")
 	private boolean isrecoverypwd;
@@ -251,6 +254,13 @@ public class UserEntity implements Serializable {
 	public void setFreelancedocumententity(Set<FreeLanceDocumentsEntity> freelancedocumententity) {
 		this.freelancedocumententity = freelancedocumententity;
 	}
-	
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 	
 }

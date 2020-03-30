@@ -40,7 +40,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		if(newServiceEntity.getServiceHistory() != null) {
 			for (NewServiceHistoryEntity serviceHistoryEntity : newServiceEntity.getServiceHistory()) {
 				serviceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
-				serviceHistoryEntity.setLocked(Boolean.FALSE);
+				serviceHistoryEntity.setLocked(Boolean.TRUE);
 				newServiceHistoryEntities.add(serviceHistoryEntity);
 				serviceHistoryEntity.setNewService(newServiceEntity);
 			}

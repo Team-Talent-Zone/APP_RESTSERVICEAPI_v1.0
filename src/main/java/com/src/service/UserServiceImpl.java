@@ -71,7 +71,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-
+		userEntity.setFullname(userEntity.getFirstname() + " " + userEntity.getLastname());
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 
@@ -144,6 +144,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity saveorupdateUserDetails(UserEntity userEntity) {
 
+		userEntity.setFullname(userEntity.getFirstname() + " " + userEntity.getLastname());
 		// Below IF condition is written for forgetPassword recovery
 		if (userEntity.isIsrecoverypwd()) {
 			userEntity.setPassword(encoder.encode(userEntity.getPassword()));
