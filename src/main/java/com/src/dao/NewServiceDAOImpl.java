@@ -117,10 +117,12 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
 		List<NewServiceEntity> newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
-				JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
-				NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		/*
+		 * criteria.createAlias(NewServiceConstant.SERVICE_HISTORY,
+		 * NewServiceConstant.SERVICE_HISTORY_ALIAS, JoinType.INNER_JOIN);
+		 * criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
+		 * NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		 */
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
