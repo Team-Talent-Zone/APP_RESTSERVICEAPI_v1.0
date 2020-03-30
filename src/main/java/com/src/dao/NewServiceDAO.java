@@ -70,5 +70,8 @@ public interface NewServiceDAO {
 	 * 
 	 */
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
+	
+	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename);
+
 
 }

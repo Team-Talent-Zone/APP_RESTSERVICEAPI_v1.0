@@ -27,6 +27,7 @@ public class CustomMsgProperties {
 	public static final String REFERNCELOOKUP_STATICCONTENT_KEY_ERRORMSG = "referencelookupstaticcontent_key_errorMsg";
 	public static final String REFERNCELOOKUP_STATICCONTENT_ERRORMSG = "referencelookupstaticcontent_errorMsg";
 	public static final String LOOKUPTEMPALTE_NAME_ERRORMSG = "lookuptemplate_name_errorMsg";
+	public static final String NEWSERVICE_NOTFOUND_ERRORMSG = "newservice_notfound_errorMsg";
 	public static final String NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG = "newservice_unabletosave_errorMsg";
 	public static final String GETBYSERVICEID_USERNOTFOUND_ERRORMSG = "getByOurServiceId_usernotfound_errorMsg";
 	public static final String GETBYSERVICEPACKID_ERRORMSG = "getByOurServicePackId_usernotfound_errorMsg";

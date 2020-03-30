@@ -53,6 +53,7 @@ public class NewServiceConstant {
 	public static final String FREE_LANCE_ON_SERVICE = "freeLanceOnService";
 	public static final String SERVICE_HISTORY_ALIAS_MANAGERID = "sHistory.managerId";
 	public static final String MANAGEID = "managerId";
+	public static final String NAME = "name";
 	public static final String OURSERVICEID = "ourserviceId";
 	public static final String SERVICE_HISTORY_ALIAS_MAPPING = "serviceHistorymapping";
 	public static final String SERVICE_HISTORY_MAPPING_OBJ = "serviceHistorymappingObj";

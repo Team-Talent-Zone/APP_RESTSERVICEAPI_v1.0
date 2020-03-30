@@ -189,7 +189,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	 * 
 	 * @throw RestCustomException
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") 
 	@Override
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated() {
 		List<NewServiceEntity> newServiceEntity = null;
@@ -205,5 +205,20 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		return null;
+	}
+
+	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename) {
+
+		NewServiceEntity newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.NAME, servicename));
+		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
+		if (newServiceEntity != null) {
+			return newServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_NOTFOUND_ERRORMSG) + " "
+						+ newServiceEntity);
+	
 	}
 }

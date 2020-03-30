@@ -44,6 +44,9 @@ public class FreeLanceHistoryEntity implements Serializable {
 
 	@Column(name = "DECISIONON")
 	private String decisionon;
+	
+	@Column(name = "DECISIONBYEMAILID")
+	private String decisionbyemailid;
 
 	@Column(name = "BGSTATUS")
 	private String bgstatus;
@@ -138,6 +141,16 @@ public class FreeLanceHistoryEntity implements Serializable {
 
 	public void setManagerid(Integer managerid) {
 		this.managerid = managerid;
+	} 
+
+	public String getDecisionbyemailid() {
+		return decisionbyemailid;
 	}
+
+	public void setDecisionbyemailid(String decisionbyemailid) {
+		this.decisionbyemailid = decisionbyemailid;
+	}
+	
+	
 
 }

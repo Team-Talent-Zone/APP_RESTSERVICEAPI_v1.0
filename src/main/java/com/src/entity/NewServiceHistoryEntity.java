@@ -44,6 +44,9 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	@Column(name = "DECISIONBY")
 	private String decisionBy;
+	
+	@Column(name = "DECISIONBYEMAILID")
+	private String decisionbyemailid;
 
 	@Column(name = "DECISIONON")
 	private String decisionOn;
@@ -147,5 +150,15 @@ public class NewServiceHistoryEntity implements Serializable {
 	public void setOurserviceId(int ourserviceId) {
 		this.ourserviceId = ourserviceId;
 	}
+
+	public String getDecisionbyemailid() {
+		return decisionbyemailid;
+	}
+
+	public void setDecisionbyemailid(String decisionbyemailid) {
+		this.decisionbyemailid = decisionbyemailid;
+	}
+	
+	
 
 }

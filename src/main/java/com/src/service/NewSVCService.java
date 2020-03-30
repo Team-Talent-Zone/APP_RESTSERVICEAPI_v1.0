@@ -55,6 +55,13 @@ public interface NewSVCService {
 	 * @return
 	 */
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
+	
+	/**
+	 * To Get the all Service Details by service name.
+	 * 
+	 * @return
+	 */
+	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename);
 
 	/**
 	 * Get All New Service Details by managerId.

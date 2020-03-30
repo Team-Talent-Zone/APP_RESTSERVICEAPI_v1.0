@@ -77,13 +77,24 @@ public class NewServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get All User Details from the List.
+	 * Get All New Service Details from the List.
 	 * 
 	 */
 	@RequestMapping(value = "/getAllNewServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<NewServiceEntity>> getAllServiceDetails() {
 		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
 		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
+	}
+
+	/**
+	 * Get New Service Details by service name.
+	 * 
+	 */
+	@RequestMapping(value = "/getNewServiceDetailsByServiceName/{name}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NewServiceEntity> getNewServiceDetailsByServiceName(
+			@PathVariable(NewServiceConstant.NAME) String name) {
+		NewServiceEntity services = newServiceSvc.getNewServiceDetailsByServiceName(name);
+		return new ResponseEntity<NewServiceEntity>(services, HttpStatus.OK);
 	}
 
 	/**
