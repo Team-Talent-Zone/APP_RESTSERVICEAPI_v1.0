@@ -138,7 +138,12 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	}
 
 	@Override
-	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename) {
-		return newServiceRestDAO.getNewServiceDetailsByServiceName(servicename);
+	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId) {
+		return newServiceRestDAO.getNewServiceDetailsByServiceId(ourserviceId);
+	}
+	
+	@Override
+	public boolean checkNewServiceIsExist(String servicename) {
+		return newServiceRestDAO.checkNewServiceIsExist(servicename);
 	}
 }

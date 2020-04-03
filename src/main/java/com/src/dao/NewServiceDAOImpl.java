@@ -207,13 +207,25 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		return null;
-	}
+	} 
 
-	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename) {
+	public boolean checkNewServiceIsExist(String servicename) {
 
 		NewServiceEntity newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
 		criteria.add(Restrictions.eq(NewServiceConstant.NAME, servicename));
+		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
+		if (newServiceEntity != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId) {
+
+		NewServiceEntity newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.OURSERVICEID, ourserviceId));
 		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
 		if (newServiceEntity != null) {
 			return newServiceEntity;

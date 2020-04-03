@@ -87,14 +87,25 @@ public class NewServiceController extends AbstractRestManager {
 	}
 
 	/**
+	 * Get New Service Details by service id.
+	 * 
+	 */
+	@RequestMapping(value = "/getNewServiceDetailsByServiceId/{ourserviceId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NewServiceEntity> getNewServiceDetailsByServiceId(
+			@PathVariable(NewServiceConstant.OURSERVICEID) int ourserviceId) {
+		NewServiceEntity services = newServiceSvc.getNewServiceDetailsByServiceId(ourserviceId);
+		return new ResponseEntity<NewServiceEntity>(services, HttpStatus.OK);
+	}
+
+	/**
 	 * Get New Service Details by service name.
 	 * 
 	 */
-	@RequestMapping(value = "/getNewServiceDetailsByServiceName/{name}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<NewServiceEntity> getNewServiceDetailsByServiceName(
+	@RequestMapping(value = "/checkNewServiceIsExist/{name}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public  ResponseEntity<Boolean>  checkNewServiceIsExist(
 			@PathVariable(NewServiceConstant.NAME) String name) {
-		NewServiceEntity services = newServiceSvc.getNewServiceDetailsByServiceName(name);
-		return new ResponseEntity<NewServiceEntity>(services, HttpStatus.OK);
+		boolean isusernotexist  = newServiceSvc.checkNewServiceIsExist(name);
+		return new ResponseEntity<Boolean>(isusernotexist, HttpStatus.OK);
 	}
 
 	/**

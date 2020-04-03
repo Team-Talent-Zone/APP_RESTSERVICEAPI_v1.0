@@ -57,11 +57,19 @@ public interface NewSVCService {
 	public ArrayList<NewServiceEntity> getAllServiceDetails();
 	
 	/**
-	 * To Get the all Service Details by service name.
+	 * To check if the service name is exist by passing service name.
 	 * 
 	 * @return
 	 */
-	public NewServiceEntity getNewServiceDetailsByServiceName(String servicename);
+	public boolean checkNewServiceIsExist(String servicename);
+	
+	/**
+	 * To Get the all Service Details by service id.
+	 * 
+	 * @return
+	 */
+	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId);
+
 
 	/**
 	 * Get All New Service Details by managerId.
