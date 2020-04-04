@@ -30,7 +30,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	 */
 	@Override 
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {
-		newServiceEntity.setUpgrade(Boolean.FALSE);
+		newServiceEntity.setIsupgrade(Boolean.FALSE);
 		newServiceEntity.setActive(Boolean.FALSE);
 		newServiceEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
 		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
@@ -40,7 +40,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		if(newServiceEntity.getServiceHistory() != null) {
 			for (NewServiceHistoryEntity serviceHistoryEntity : newServiceEntity.getServiceHistory()) {
 				serviceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
-				serviceHistoryEntity.setLocked(Boolean.TRUE);
+				serviceHistoryEntity.setIslocked(Boolean.TRUE);
 				newServiceHistoryEntities.add(serviceHistoryEntity);
 				serviceHistoryEntity.setNewService(newServiceEntity);
 			}
@@ -54,8 +54,10 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	 */
 	@Override
 	public NewServiceEntity saveOrUpdateNewService(NewServiceEntity newServiceEntity) {
-		newServiceEntity.setUpdatedBy(CommonUtilites.getCurrentDateInNewFormat());
-
+		newServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		if(newServiceEntity.isIsupgrade()) {
+			newServiceEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		}
 		Set<NewServiceHistoryEntity> newServiceHistoryEntities = new HashSet<NewServiceHistoryEntity>();
 
 		if(newServiceEntity.getServiceHistory() != null) {
@@ -76,7 +78,7 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	 */
 	@Override
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
-		newServiceHistoryEntity.setLocked(Boolean.TRUE);
+		newServiceHistoryEntity.setIslocked(Boolean.TRUE);
 		newServiceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());

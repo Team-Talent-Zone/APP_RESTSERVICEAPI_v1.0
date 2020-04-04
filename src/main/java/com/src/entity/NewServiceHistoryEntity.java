@@ -58,7 +58,7 @@ public class NewServiceHistoryEntity implements Serializable {
 	private String comment;
 
 	@Column(name = "ISLOCKED")
-	private boolean isLocked;
+	private boolean islocked;
 
 	@Column(name = "MANAGERID")
 	private Integer managerId;
@@ -119,12 +119,12 @@ public class NewServiceHistoryEntity implements Serializable {
 		this.comment = comment;
 	}
 
-	public boolean isLocked() {
-		return isLocked;
+	public boolean isIslocked() {
+		return islocked;
 	}
 
-	public void setLocked(boolean isLocked) {
-		this.isLocked = isLocked;
+	public void setIslocked(boolean islocked) {
+		this.islocked = islocked;
 	}
 
 	public NewServiceEntity getNewService() {

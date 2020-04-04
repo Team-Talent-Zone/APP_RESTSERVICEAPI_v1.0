@@ -62,9 +62,12 @@ public class NewServiceEntity implements Serializable {
 
 	@Column(name = "UPDATEDBY")
 	private String updatedBy;
+	
+	@Column(name = "CURRENTSTATUS")
+	private String currentstatus;
 
 	@Column(name = "ISUPGRADE")
-	private boolean isUpgrade;
+	private boolean isupgrade;
 
 	@Column(name = "VALIDPERIOD")
 	private String validPeriod;
@@ -88,6 +91,14 @@ public class NewServiceEntity implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCurrentstatus() {
+		return currentstatus;
+	}
+ 
+	public void setCurrentstatus(String currentstatus) {
+		this.currentstatus = currentstatus;
 	}
 
 	public void setName(String name) {
@@ -174,12 +185,13 @@ public class NewServiceEntity implements Serializable {
 		this.updatedBy = updatedBy;
 	}
 
-	public boolean isUpgrade() {
-		return isUpgrade;
+ 
+	public boolean isIsupgrade() {
+		return isupgrade;
 	}
 
-	public void setUpgrade(boolean isUpgrade) {
-		this.isUpgrade = isUpgrade;
+	public void setIsupgrade(boolean isupgrade) {
+		this.isupgrade = isupgrade;
 	}
 
 	public String getValidPeriod() {
