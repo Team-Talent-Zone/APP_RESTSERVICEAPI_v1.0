@@ -62,6 +62,9 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	@Column(name = "MANAGERID")
 	private Integer managerId;
+	
+	@Column(name = "PREVIOUSDECISIONBY")
+	private String previousdecisionby;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +72,16 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+
+	public String getPreviousdecisionby() {
+		return previousdecisionby;
+	}
+
+	public void setPreviousdecisionby(String previousdecisionby) {
+		this.previousdecisionby = previousdecisionby;
 	}
 
 	public Integer getOurserviceId() {

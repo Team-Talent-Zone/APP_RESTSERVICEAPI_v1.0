@@ -78,7 +78,6 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	 */
 	@Override
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity) {
-		newServiceHistoryEntity.setIslocked(Boolean.TRUE);
 		newServiceHistoryEntity.setDecisionOn(CommonUtilites.getCurrentDateInNewFormat());
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());
