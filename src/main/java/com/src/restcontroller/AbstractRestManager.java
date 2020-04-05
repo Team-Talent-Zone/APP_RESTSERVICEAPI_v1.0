@@ -15,6 +15,7 @@ import com.src.service.ReferenceLookUpService;
 import com.src.service.UserService;
 import com.src.service.UserServiceDetailsSVC;
 import com.src.service.UtilityService;
+import com.src.service.WidgetService;
 
 /**
  * The <code> AbstractRestManager </code>interface used to provides
@@ -48,6 +49,9 @@ class AbstractRestManager {
 	@Autowired
 	protected FreeLanceOnServiceSVC freeLanceOnServiceSVC;
 
+	@Autowired
+	protected WidgetService widgetService;
+	
  	SendEmailHelper emailHelper = new SendEmailHelper();
 
 }
