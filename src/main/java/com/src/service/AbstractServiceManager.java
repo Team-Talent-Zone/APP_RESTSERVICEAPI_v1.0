@@ -14,6 +14,7 @@ import com.src.dao.PaymentDAO;
 import com.src.dao.ReferenceLookUpDAO;
 import com.src.dao.UserRestDAO;
 import com.src.dao.UserServiceDetailsDAO;
+import com.src.dao.WidgetDAO;
 
 /**
  * The <code> AbstractServiceManager </code>class used to provides service
@@ -48,5 +49,8 @@ public class AbstractServiceManager {
 
 	@Autowired
 	protected FreeLanceOnServiceDAO freeLanceOnServiceDAO;
+	
+	@Autowired
+	protected WidgetDAO widgetDAO;
 
 }

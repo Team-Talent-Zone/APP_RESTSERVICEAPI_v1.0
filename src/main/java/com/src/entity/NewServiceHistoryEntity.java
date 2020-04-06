@@ -44,6 +44,9 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	@Column(name = "DECISIONBY")
 	private String decisionBy;
+	
+	@Column(name = "DECISIONBYEMAILID")
+	private String decisionbyemailid;
 
 	@Column(name = "DECISIONON")
 	private String decisionOn;
@@ -55,10 +58,13 @@ public class NewServiceHistoryEntity implements Serializable {
 	private String comment;
 
 	@Column(name = "ISLOCKED")
-	private boolean isLocked;
+	private boolean islocked;
 
 	@Column(name = "MANAGERID")
 	private Integer managerId;
+	
+	@Column(name = "PREVIOUSDECISIONBY")
+	private String previousdecisionby;
 
 	public Integer getId() {
 		return id;
@@ -66,6 +72,16 @@ public class NewServiceHistoryEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+
+	public String getPreviousdecisionby() {
+		return previousdecisionby;
+	}
+
+	public void setPreviousdecisionby(String previousdecisionby) {
+		this.previousdecisionby = previousdecisionby;
 	}
 
 	public Integer getOurserviceId() {
@@ -116,12 +132,12 @@ public class NewServiceHistoryEntity implements Serializable {
 		this.comment = comment;
 	}
 
-	public boolean isLocked() {
-		return isLocked;
+	public boolean isIslocked() {
+		return islocked;
 	}
 
-	public void setLocked(boolean isLocked) {
-		this.isLocked = isLocked;
+	public void setIslocked(boolean islocked) {
+		this.islocked = islocked;
 	}
 
 	public NewServiceEntity getNewService() {
@@ -147,5 +163,15 @@ public class NewServiceHistoryEntity implements Serializable {
 	public void setOurserviceId(int ourserviceId) {
 		this.ourserviceId = ourserviceId;
 	}
+
+	public String getDecisionbyemailid() {
+		return decisionbyemailid;
+	}
+
+	public void setDecisionbyemailid(String decisionbyemailid) {
+		this.decisionbyemailid = decisionbyemailid;
+	}
+	
+	
 
 }

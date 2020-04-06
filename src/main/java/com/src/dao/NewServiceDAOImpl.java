@@ -117,10 +117,12 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
 		List<NewServiceEntity> newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
-				JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
-				NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		/*
+		 * criteria.createAlias(NewServiceConstant.SERVICE_HISTORY,
+		 * NewServiceConstant.SERVICE_HISTORY_ALIAS, JoinType.INNER_JOIN);
+		 * criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
+		 * NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
+		 */
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
@@ -189,7 +191,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	 * 
 	 * @throw RestCustomException
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") 
 	@Override
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated() {
 		List<NewServiceEntity> newServiceEntity = null;
@@ -205,5 +207,32 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		return null;
+	} 
+
+	public boolean checkNewServiceIsExist(String servicename) {
+
+		NewServiceEntity newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.NAME, servicename));
+		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
+		if (newServiceEntity != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId) {
+
+		NewServiceEntity newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.OURSERVICEID, ourserviceId));
+		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
+		if (newServiceEntity != null) {
+			return newServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_NOTFOUND_ERRORMSG) + " "
+						+ newServiceEntity);
+	
 	}
 }

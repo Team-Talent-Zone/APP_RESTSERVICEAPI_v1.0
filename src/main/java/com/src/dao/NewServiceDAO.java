@@ -70,5 +70,22 @@ public interface NewServiceDAO {
 	 * 
 	 */
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
+	
+	/**
+	 * To check if the service name is exist by passing service name.
+	 * 
+	 * @return
+	 */
+	public boolean checkNewServiceIsExist(String servicename);
+	
+	/**
+	 * To Get the all Service Details by service id.
+	 * 
+	 * @return
+	 */
+	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId);
+
+
+
 
 }
