@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * which provides functionality on the
  * <code>Payment FU Transaction History Entity</code> Details.
  * 
- * @author Ishaq
+ * @author Shanoor
  * @version 1.0
  *
  */
@@ -32,36 +31,6 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 	@GeneratedValue
 	private Integer Id;
 
-	@Column(name = "amount")
-	private float amount;
-
-	@Column(name = "createdon")
-	private String createdon;
-
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "status")
-	private String status;
-
-	@Column(name = "payuMoneyId")
-	private String payuMoneyId;
-
-	@Column(name = "mode")
-	private String mode;
-
-	@Column(name = "hash")
-	private String hash;
-
-	@Column(name = "mobile")
-	private String mobile;
-
-	@Column(name = "txnid")
-	private String txnid;
-
-	@Column(insertable = false, updatable = false, name = "freelanceId")
-	private int freelanceId;
-
 	@Column(insertable = false, updatable = false, name = "paymentId")
 	private int paymentId;
 
@@ -71,12 +40,42 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 	private PaymentEntity payments;
 
 	@Column(insertable = false, updatable = false, name = "userId")
-	private String userId;
+	private int userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
 	private UserEntity userdetails;
+
+	@Column(insertable = true, updatable = false, name = "freelanceId")
+	private int freelanceId;
+
+	@Column(name = "createdon")
+	private String createdon;
+
+	@Column(name = "txnid")
+	private String txnid;
+
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "amount")
+	private float amount;
+
+	@Column(name = "hash")
+	private String hash;
+
+	@Column(name = "mobile")
+	private String mobile;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "payuMoneyId")
+	private String payuMoneyId;
+
+	@Column(name = "mode")
+	private String mode;
 
 	public Integer getId() {
 		return Id;
@@ -84,86 +83,6 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 
 	public void setId(Integer id) {
 		Id = id;
-	}
-
-	public float getAmount() {
-		return amount;
-	}
-
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
-
-	public String getCreatedon() {
-		return createdon;
-	}
-
-	public void setCreatedon(String createdon) {
-		this.createdon = createdon;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getPayuMoneyId() {
-		return payuMoneyId;
-	}
-
-	public void setPayuMoneyId(String payuMoneyId) {
-		this.payuMoneyId = payuMoneyId;
-	}
-
-	public String getMode() {
-		return mode;
-	}
-
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
-
-	public String getHash() {
-		return hash;
-	}
-
-	public void setHash(String hash) {
-		this.hash = hash;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getTxnid() {
-		return txnid;
-	}
-
-	public void setTxnid(String txnid) {
-		this.txnid = txnid;
-	}
-
-	public int getFreelanceId() {
-		return freelanceId;
-	}
-
-	public void setFreelanceId(int freelanceId) {
-		this.freelanceId = freelanceId;
 	}
 
 	public int getPaymentId() {
@@ -182,11 +101,11 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 		this.payments = payments;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -196,6 +115,86 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
+	}
+
+	public int getFreelanceId() {
+		return freelanceId;
+	}
+
+	public void setFreelanceId(int freelanceId) {
+		this.freelanceId = freelanceId;
+	}
+
+	public String getCreatedon() {
+		return createdon;
+	}
+
+	public void setCreatedon(String createdon) {
+		this.createdon = createdon;
+	}
+
+	public String getTxnid() {
+		return txnid;
+	}
+
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPayuMoneyId() {
+		return payuMoneyId;
+	}
+
+	public void setPayuMoneyId(String payuMoneyId) {
+		this.payuMoneyId = payuMoneyId;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 }
