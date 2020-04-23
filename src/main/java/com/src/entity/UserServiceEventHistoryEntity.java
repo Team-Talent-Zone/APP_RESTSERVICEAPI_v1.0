@@ -40,16 +40,16 @@ public class UserServiceEventHistoryEntity implements Serializable {
 	private UserServiceDetailsEntity userServiceDetailsEntity;
 
 	@Column(name = "EVENTNAME")
-	private String eventName;
+	private String eventname;
 
 	@Column(name = "EVENTCODE")
-	private String eventCode;
+	private String eventcode;
 
 	@Column(name = "UPDATEDBY")
-	private String updatedBy;
+	private String updatedby;
 
 	@Column(name = "UPDATEDON")
-	private String updatedOn;
+	private String updatedon;
 
 	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
@@ -78,36 +78,36 @@ public class UserServiceEventHistoryEntity implements Serializable {
 		this.userServiceDetailsEntity = userServiceDetailsEntity;
 	}
 
-	public String getEventName() {
-		return eventName;
+	public String getEventname() {
+		return eventname;
 	}
 
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+	public void setEventname(String eventname) {
+		this.eventname = eventname;
 	}
 
-	public String getEventCode() {
-		return eventCode;
+	public String getEventcode() {
+		return eventcode;
 	}
 
-	public void setEventCode(String eventCode) {
-		this.eventCode = eventCode;
+	public void setEventcode(String eventcode) {
+		this.eventcode = eventcode;
 	}
 
-	public String getUpdatedBy() {
-		return updatedBy;
+	public String getUpdatedby() {
+		return updatedby;
 	}
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
 	}
 
-	public String getUpdatedOn() {
-		return updatedOn;
+	public String getUpdatedon() {
+		return updatedon;
 	}
 
-	public void setUpdatedOn(String updatedOn) {
-		this.updatedOn = updatedOn;
+	public void setUpdatedon(String updatedon) {
+		this.updatedon = updatedon;
 	}
 
 	public Integer getUserId() {
@@ -118,4 +118,5 @@ public class UserServiceEventHistoryEntity implements Serializable {
 		this.userId = userId;
 	}
 
+	
 }

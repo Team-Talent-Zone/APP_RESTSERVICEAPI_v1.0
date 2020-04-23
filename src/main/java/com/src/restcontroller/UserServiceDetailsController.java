@@ -34,12 +34,13 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	 * @param newServiceHistoryObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserServiceDetailsEntity> saveUserServiceDetails(
 			@RequestBody UserServiceDetailsEntity userServiceDetailsObject) {
-		UserServiceDetailsEntity UserServiceDetailsEntity = userServiceDetailsService
+		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
 				.saveUserServiceDetails(userServiceDetailsObject);
-		return new ResponseEntity<UserServiceDetailsEntity>(UserServiceDetailsEntity, HttpStatus.OK);
+		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
 	}
 
 	/**
