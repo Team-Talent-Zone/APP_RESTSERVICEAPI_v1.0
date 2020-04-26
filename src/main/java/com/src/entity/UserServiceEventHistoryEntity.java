@@ -39,9 +39,6 @@ public class UserServiceEventHistoryEntity implements Serializable {
 	@JsonIgnore
 	private UserServiceDetailsEntity userServiceDetailsEntity;
 
-	@Column(name = "EVENTNAME")
-	private String eventname;
-
 	@Column(name = "EVENTCODE")
 	private String eventcode;
 
@@ -80,14 +77,6 @@ public class UserServiceEventHistoryEntity implements Serializable {
 
 	public void setUserServiceDetailsEntity(UserServiceDetailsEntity userServiceDetailsEntity) {
 		this.userServiceDetailsEntity = userServiceDetailsEntity;
-	}
-
-	public String getEventname() {
-		return eventname;
-	}
-
-	public void setEventname(String eventname) {
-		this.eventname = eventname;
 	}
 
 	public String getEventcode() {

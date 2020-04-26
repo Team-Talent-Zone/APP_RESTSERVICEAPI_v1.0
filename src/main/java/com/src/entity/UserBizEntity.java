@@ -55,6 +55,21 @@ public class UserBizEntity implements Serializable {
 	@Column(name = "FULLADDRESS")
 	private String fulladdress;
 
+	@Column(name = "ROUTE")
+	private String route;
+	
+	@Column(name = "CITY")
+	private String city;
+	
+	@Column(name = "STATE")
+	private String state;
+	
+	@Column(name = "COUNTRY")
+	private String country;
+	
+	@Column(name = "SHORTADDRESS")
+	private String shortaddress;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
@@ -66,6 +81,46 @@ public class UserBizEntity implements Serializable {
 
 	public void setId(Integer id) {
 		Id = id;
+	}
+	
+	public String getRoute() {
+		return route;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getShortaddress() {
+		return shortaddress;
+	}
+
+	public void setShortaddress(String shortaddress) {
+		this.shortaddress = shortaddress;
 	}
 
 	public int getUserId() {
