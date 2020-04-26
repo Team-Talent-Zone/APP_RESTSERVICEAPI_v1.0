@@ -15,6 +15,7 @@ import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -192,5 +193,15 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
 		}
 		return null;
+	}
+
+	@Transactional
+	public void saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(eventHistoryEntity);
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
 	}
 }

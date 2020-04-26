@@ -32,7 +32,7 @@ public class UserServiceEventHistoryEntity implements Serializable {
 	private Integer id;
 
 	@Column(insertable = false, updatable = false, name = "SERVICEID")
-	private Integer serviceId;
+	private int serviceId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "serviceId", nullable = false)
@@ -51,8 +51,8 @@ public class UserServiceEventHistoryEntity implements Serializable {
 	@Column(name = "UPDATEDON")
 	private String updatedon;
 
-	@Column(insertable = true, updatable = false, name = "userId")
-	private Integer userId;
+	@Column(name = "USERID")
+	private int userId;
 
 	public Integer getId() {
 		return id;
@@ -62,12 +62,16 @@ public class UserServiceEventHistoryEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getServiceId() {
+	public int getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(Integer serviceId) {
+	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public UserServiceDetailsEntity getUserServiceDetailsEntity() {

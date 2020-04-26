@@ -29,7 +29,6 @@ import com.src.utils.CommonUtilites;
 @Transactional(rollbackFor = { Exception.class })
 public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements UserServiceDetailsSVC {
 
-	
 	/**
 	 * To Save User Service Details.
 	 */
@@ -39,19 +38,19 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		userServiceDetailsEntity.setIsactive(Boolean.TRUE);
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
-		//newServiceEntity.setUserId(userServiceDetailsEntity.getUserid());
+		newServiceEntity.setUserId(userServiceDetailsEntity.getUserid());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-		
+
 		Set<UserServiceEventHistoryEntity> userServiceEventHistory = new HashSet<UserServiceEventHistoryEntity>();
-		for(UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory())
-		{
+		for (UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory()) {
 			eventHistoryEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
 			userServiceEventHistory.add(eventHistoryEntity);
 			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
+
 		}
-		
-		
+		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
+
 		return userServiceDetailsDAO.saveUserServiceDetails(userServiceDetailsEntity);
 	}
 
@@ -63,16 +62,27 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-		Set<UserServiceEventHistoryEntity> userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
-		for(UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory())
-		{
+		Set<UserServiceEventHistoryEntity> userServiceEventHistory = userServiceDetailsEntity
+				.getUserServiceEventHistory();
+		for (UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory()) {
 			eventHistoryEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
 			userServiceEventHistory.add(eventHistoryEntity);
 			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
 		}
+		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
+
 		userServiceDetailsDAO.saveOrUpdateUserSVCDetails(userServiceDetailsEntity);
 		return userServiceDetailsEntity;
+	}
+
+	@Override
+	public UserServiceEventHistoryEntity saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity) {
+		UserServiceDetailsEntity detailsEntity = new UserServiceDetailsEntity();
+		detailsEntity.setServiceId(eventHistoryEntity.getServiceId());
+		eventHistoryEntity.setUserServiceDetailsEntity(detailsEntity);
+		userServiceDetailsDAO.saveUserServiceEventHistory(eventHistoryEntity);
+		return eventHistoryEntity;
 	}
 
 	/**

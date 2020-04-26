@@ -3,6 +3,7 @@ package com.src.dao;
 import java.util.ArrayList;
 
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -25,6 +26,16 @@ public interface UserServiceDetailsDAO {
 	 */
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 
+
+	/**
+	 * To save User Service Event History Details.
+	 * 
+	 * @param UserServiceEventHistoryEntity
+	 * @return
+	 */
+	public void saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity);
+
+	
 	/**
 	 * To edit and update the user Service details.
 	 * 

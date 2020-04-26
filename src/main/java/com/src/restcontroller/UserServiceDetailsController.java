@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -34,13 +35,27 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	 * @param newServiceHistoryObject
 	 * @return
 	 */
-	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserServiceDetailsEntity> saveUserServiceDetails(
 			@RequestBody UserServiceDetailsEntity userServiceDetailsObject) {
 		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
 				.saveUserServiceDetails(userServiceDetailsObject);
 		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
+	}
+
+	/*
+	 * Method is to save User Service History.
+	 * 
+	 * @param newServiceHistoryObject
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/saveUserServiceEventHistory/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserServiceEventHistoryEntity> saveUserServiceEventHistory(
+			@RequestBody UserServiceEventHistoryEntity eventHistoryEntity) {
+		UserServiceEventHistoryEntity newServiceHistoryEntity = userServiceDetailsService
+				.saveUserServiceEventHistory(eventHistoryEntity);
+		return new ResponseEntity<UserServiceEventHistoryEntity>(newServiceHistoryEntity, HttpStatus.OK);
 	}
 
 	/**
@@ -133,7 +148,7 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<UserServiceNotificationDetailsView>>(userServiceNotificationDetailsViews,
 				HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get User Service Details when service is pending with payment
 	 * 

@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -43,11 +42,11 @@ public class UserServiceDetailsEntity implements Serializable {
 	@JsonIgnore
 	private NewServiceEntity newService;
 
-	@Column(insertable = true, updatable = false, name = "USERID")
-	private Integer userId;
+	@Column(name = "USERID")
+	private int userid;
 
 	@Column(name = "CREATEDBY")
-	private String createdby;
+	private String createdby; 
 
 	@Column(name = "CREATEDON")
 	private String createdon;
@@ -97,12 +96,12 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.newService = newService;
 	}
 
-	public Integer getUserid() {
-		return userId;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userId = userid;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getCreatedby() {
@@ -181,7 +180,7 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.reasonofunsubscribe = reasonofunsubscribe;
 	}
 
-	public void setUserServiceEventHistory(HashSet<UserServiceEventHistoryEntity> userServiceEventHistory) {
+	public void setUserServiceEventHistory(Set<UserServiceEventHistoryEntity> userServiceEventHistory) {
 		this.userServiceEventHistory = userServiceEventHistory;
 	}
 
