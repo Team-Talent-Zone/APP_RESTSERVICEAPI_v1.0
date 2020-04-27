@@ -88,5 +88,10 @@ public interface UserServiceDetailsDAO {
 	 * To get the User Service Details Pending Payments Notification.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
+	
+	/**
+	 * To get the User Service Details by userId.
+	 */
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId);
 
 }

@@ -62,6 +62,13 @@ public interface UserServiceDetailsSVC {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
+	
+	/**
+	 * To Get the all User Service Details by userId.
+	 * 
+	 * @return Get All User Service Details.
+	 */
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId);
 
 	/**
 	 * To save User Service Notificaton.

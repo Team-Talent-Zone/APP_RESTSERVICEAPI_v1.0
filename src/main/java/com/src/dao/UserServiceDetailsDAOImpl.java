@@ -204,4 +204,22 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
+		List<UserServiceDetailsEntity> newUserServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_ISACTIVE, true));
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_USERID, userId));
+		newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
+		if (size > 0) {
+			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERSERVICES_NOUSERSSERVICESFOUND_ERRORMSG));
+	}
 }

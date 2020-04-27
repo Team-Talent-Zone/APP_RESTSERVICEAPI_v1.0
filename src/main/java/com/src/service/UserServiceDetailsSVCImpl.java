@@ -148,4 +148,9 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceDetailsDAO.getUserServicePendingPayment();
 	}
 
+	@Override
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
+		return userServiceDetailsDAO.getAllUserServiceDetailsByUserId(userId);
+	}
+
 }
