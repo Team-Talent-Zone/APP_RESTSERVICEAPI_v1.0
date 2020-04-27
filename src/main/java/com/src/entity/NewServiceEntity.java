@@ -74,11 +74,14 @@ public class NewServiceEntity implements Serializable {
 
 	@Column(name = "AMOUNT")
 	private Float amount;
+	
+	@Column(name = "PACKWITHOTHEROURSERVICEID")
+	private String packwithotherourserviceid;
 
 	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "newService")
 	private Set<NewServiceHistoryEntity> serviceHistory;
 
 	public Integer getOurserviceId() {
@@ -226,6 +229,12 @@ public class NewServiceEntity implements Serializable {
 		this.serviceHistory = serviceHistory;
 	}
 
-	 
+	public String getPackwithotherourserviceid() {
+		return packwithotherourserviceid;
+	}
+
+	public void setPackwithotherourserviceid(String packwithotherourserviceid) {
+		this.packwithotherourserviceid = packwithotherourserviceid;
+	}
 
 }

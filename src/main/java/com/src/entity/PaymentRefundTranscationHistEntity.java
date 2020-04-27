@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * beans which provides functionality on the
  * <code>Payment Refund Transaction History Entity</code> Details.
  * 
- * @author Ishaq
+ * @author Shanoor
  * @version 1.0
  *
  */
@@ -62,6 +62,14 @@ public class PaymentRefundTranscationHistEntity implements Serializable {
 	@Column(name = "refundrequestamount")
 	private float refundrequestamount;
 
+	@Column(insertable = false, updatable = false, name = "userId")
+	private int userId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", nullable = false)
+	@JsonIgnore
+	private UserEntity userdetails;
+
 	@Column(insertable = false, updatable = false, name = "paymentId")
 	private int paymentId;
 
@@ -69,14 +77,6 @@ public class PaymentRefundTranscationHistEntity implements Serializable {
 	@JoinColumn(name = "paymentId", nullable = false)
 	@JsonIgnore
 	private PaymentEntity payments;
-
-	@Column(insertable = false, updatable = false, name = "userId")
-	private String userId;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId", nullable = false)
-	@JsonIgnore
-	private UserEntity userdetails;
 
 	public Integer getId() {
 		return Id;
@@ -166,6 +166,22 @@ public class PaymentRefundTranscationHistEntity implements Serializable {
 		this.refundrequestamount = refundrequestamount;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public UserEntity getUserdetails() {
+		return userdetails;
+	}
+
+	public void setUserdetails(UserEntity userdetails) {
+		this.userdetails = userdetails;
+	}
+
 	public int getPaymentId() {
 		return paymentId;
 	}
@@ -180,22 +196,6 @@ public class PaymentRefundTranscationHistEntity implements Serializable {
 
 	public void setPayments(PaymentEntity payments) {
 		this.payments = payments;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public UserEntity getUserdetails() {
-		return userdetails;
-	}
-
-	public void setUserdetails(UserEntity userdetails) {
-		this.userdetails = userdetails;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.src.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,15 +34,23 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	 */
 	@Override
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
-		userServiceDetailsEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		userServiceDetailsEntity.setActive(Boolean.TRUE);
+		userServiceDetailsEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+		userServiceDetailsEntity.setIsactive(Boolean.TRUE);
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
+		newServiceEntity.setUserId(userServiceDetailsEntity.getUserid());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
-		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
+
+		Set<UserServiceEventHistoryEntity> userServiceEventHistory = new HashSet<UserServiceEventHistoryEntity>();
+		for (UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory()) {
+			eventHistoryEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
+			userServiceEventHistory.add(eventHistoryEntity);
+			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
+
+		}
 		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
+
 		return userServiceDetailsDAO.saveUserServiceDetails(userServiceDetailsEntity);
 	}
 
@@ -52,12 +62,27 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		NewServiceEntity newServiceEntity = new NewServiceEntity();
 		newServiceEntity.setOurserviceId(userServiceDetailsEntity.getOurserviceId());
 		userServiceDetailsEntity.setNewService(newServiceEntity);
-		UserServiceEventHistoryEntity userServiceEventHistory = userServiceDetailsEntity.getUserServiceEventHistory();
-		userServiceEventHistory.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		userServiceEventHistory.setUserServiceDetailsEntity(userServiceDetailsEntity);
+		Set<UserServiceEventHistoryEntity> userServiceEventHistory = userServiceDetailsEntity
+				.getUserServiceEventHistory();
+		for (UserServiceEventHistoryEntity eventHistoryEntity : userServiceDetailsEntity.getUserServiceEventHistory()) {
+			eventHistoryEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
+			userServiceEventHistory.add(eventHistoryEntity);
+			eventHistoryEntity.setUserServiceDetailsEntity(userServiceDetailsEntity);
+		}
 		userServiceDetailsEntity.setUserServiceEventHistory(userServiceEventHistory);
+
 		userServiceDetailsDAO.saveOrUpdateUserSVCDetails(userServiceDetailsEntity);
 		return userServiceDetailsEntity;
+	}
+
+	@Override
+	public UserServiceEventHistoryEntity saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity) {
+		UserServiceDetailsEntity detailsEntity = new UserServiceDetailsEntity();
+		detailsEntity.setServiceId(eventHistoryEntity.getServiceId());
+		eventHistoryEntity.setUserServiceDetailsEntity(detailsEntity);
+		userServiceDetailsDAO.saveUserServiceEventHistory(eventHistoryEntity);
+		return eventHistoryEntity;
 	}
 
 	/**
@@ -121,6 +146,11 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	@Override
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment() {
 		return userServiceDetailsDAO.getUserServicePendingPayment();
+	}
+
+	@Override
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
+		return userServiceDetailsDAO.getAllUserServiceDetailsByUserId(userId);
 	}
 
 }

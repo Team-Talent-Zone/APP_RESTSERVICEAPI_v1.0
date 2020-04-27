@@ -1,7 +1,7 @@
 package com.src.entity;
 
 import java.io.Serializable;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,14 +18,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * The <code> PaymentEntity </code> class defines managed beans which provides
  * functionality on the <code>Payment Entity</code> Details.
  * 
- * @author Ishaq
+ * @author Shanoor
  * @version 1.0
  *
  */
 @Entity(name = "payments")
 @Table(name = "APP_PAYMENTS")
 public class PaymentEntity implements Serializable {
-	private static final long serialVersionUID = 7209943163282301311L;
+	private static final long serialVersionUID = 8210479559609264715L;
 
 	@Id
 	@Column(name = "paymentId")
@@ -58,9 +59,6 @@ public class PaymentEntity implements Serializable {
 	@Column(name = "productinfo")
 	private String productinfo;
 
-	@Column(insertable = false, updatable = false, name = "serviceId")
-	private int serviceId;
-
 	@Column(name = "service_provider")
 	private String service_provider;
 
@@ -71,12 +69,27 @@ public class PaymentEntity implements Serializable {
 	private String txnid;
 
 	@Column(insertable = false, updatable = false, name = "userId")
-	private String userId;
+	private int userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
 	private UserEntity userdetails;
+
+	@Column(insertable = true, updatable = false, name = "serviceId")
+	private int serviceId;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
+	private PaymentFUTranscationHistEntity paymentsFUTrans;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
+	private PaymentCBATranscationHistEntity paymentsCBATrans;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
+	private PaymentRefundTranscationHistEntity paymentsRefundTrans;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
+	private PaymentNotificationHistEntity paymentsNotifHistory;
 
 	public Integer getPaymentId() {
 		return paymentId;
@@ -158,14 +171,6 @@ public class PaymentEntity implements Serializable {
 		this.productinfo = productinfo;
 	}
 
-	public int getServiceId() {
-		return serviceId;
-	}
-
-	public void setServiceId(int serviceId) {
-		this.serviceId = serviceId;
-	}
-
 	public String getService_provider() {
 		return service_provider;
 	}
@@ -190,11 +195,11 @@ public class PaymentEntity implements Serializable {
 		this.txnid = txnid;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -204,6 +209,46 @@ public class PaymentEntity implements Serializable {
 
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
+	}
+
+	public int getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(int serviceId) {
+		this.serviceId = serviceId;
+	}
+
+	public PaymentFUTranscationHistEntity getPaymentsFUTrans() {
+		return paymentsFUTrans;
+	}
+
+	public void setPaymentsFUTrans(PaymentFUTranscationHistEntity paymentsFUTrans) {
+		this.paymentsFUTrans = paymentsFUTrans;
+	}
+
+	public PaymentCBATranscationHistEntity getPaymentsCBATrans() {
+		return paymentsCBATrans;
+	}
+
+	public void setPaymentsCBATrans(PaymentCBATranscationHistEntity paymentsCBATrans) {
+		this.paymentsCBATrans = paymentsCBATrans;
+	}
+
+	public PaymentRefundTranscationHistEntity getPaymentsRefundTrans() {
+		return paymentsRefundTrans;
+	}
+
+	public void setPaymentsRefundTrans(PaymentRefundTranscationHistEntity paymentsRefundTrans) {
+		this.paymentsRefundTrans = paymentsRefundTrans;
+	}
+
+	public PaymentNotificationHistEntity getPaymentsNotifHistory() {
+		return paymentsNotifHistory;
+	}
+
+	public void setPaymentsNotifHistory(PaymentNotificationHistEntity paymentsNotifHistory) {
+		this.paymentsNotifHistory = paymentsNotifHistory;
 	}
 
 }

@@ -40,6 +40,8 @@ public interface NewSVCService {
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
+	
+	
 	/**
 	 * To save Service Package Details.
 	 * 

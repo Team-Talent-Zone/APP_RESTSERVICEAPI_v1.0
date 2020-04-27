@@ -26,7 +26,7 @@ import com.src.utils.CommonUtilites;
 public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCService {
 
 	/**
-	 * To save new service Details.
+	 * To save new service Details. 
 	 */
 	@Override 
 	public NewServiceEntity saveNewService(NewServiceEntity newServiceEntity) {

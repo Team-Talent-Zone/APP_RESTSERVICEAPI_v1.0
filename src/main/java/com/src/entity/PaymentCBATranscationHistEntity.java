@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * beans which provides functionality on the
  * <code>Payment CBA Transaction History Entity</code> Details.
  * 
- * @author Ishaq
+ * @author Shanoor
  * @version 1.0
  *
  */
@@ -59,7 +59,7 @@ public class PaymentCBATranscationHistEntity implements Serializable {
 	@Column(name = "txnid")
 	private String txnid;
 
-	@Column(insertable = false, updatable = false, name = "serviceId")
+	@Column(insertable = true, updatable = false, name = "serviceId")
 	private int serviceId;
 
 	@Column(insertable = false, updatable = false, name = "paymentId")
@@ -71,7 +71,7 @@ public class PaymentCBATranscationHistEntity implements Serializable {
 	private PaymentEntity payments;
 
 	@Column(insertable = false, updatable = false, name = "userId")
-	private String userId;
+	private int userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
@@ -182,11 +182,11 @@ public class PaymentCBATranscationHistEntity implements Serializable {
 		this.payments = payments;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

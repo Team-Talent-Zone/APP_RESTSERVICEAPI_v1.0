@@ -3,6 +3,7 @@ package com.src.service;
 import java.util.ArrayList;
 
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -24,6 +25,14 @@ public interface UserServiceDetailsSVC {
 	 * @return
 	 */
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+
+	/**
+	 * To save New User Service History Details.
+	 * 
+	 * @param newServiceHistoryEntity
+	 * @return
+	 */
+	public UserServiceEventHistoryEntity saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity);
 
 	/**
 	 * To edit and update the user Service details.
@@ -53,6 +62,13 @@ public interface UserServiceDetailsSVC {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
+	
+	/**
+	 * To Get the all User Service Details by userId.
+	 * 
+	 * @return Get All User Service Details.
+	 */
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId);
 
 	/**
 	 * To save User Service Notificaton.

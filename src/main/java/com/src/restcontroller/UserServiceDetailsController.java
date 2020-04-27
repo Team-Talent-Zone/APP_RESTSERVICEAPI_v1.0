@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -37,9 +38,24 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	@RequestMapping(value = "/saveUserServiceDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserServiceDetailsEntity> saveUserServiceDetails(
 			@RequestBody UserServiceDetailsEntity userServiceDetailsObject) {
-		UserServiceDetailsEntity UserServiceDetailsEntity = userServiceDetailsService
+		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
 				.saveUserServiceDetails(userServiceDetailsObject);
-		return new ResponseEntity<UserServiceDetailsEntity>(UserServiceDetailsEntity, HttpStatus.OK);
+		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
+	}
+
+	/*
+	 * Method is to save User Service History.
+	 * 
+	 * @param newServiceHistoryObject
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/saveUserServiceEventHistory/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserServiceEventHistoryEntity> saveUserServiceEventHistory(
+			@RequestBody UserServiceEventHistoryEntity eventHistoryEntity) {
+		UserServiceEventHistoryEntity newServiceHistoryEntity = userServiceDetailsService
+				.saveUserServiceEventHistory(eventHistoryEntity);
+		return new ResponseEntity<UserServiceEventHistoryEntity>(newServiceHistoryEntity, HttpStatus.OK);
 	}
 
 	/**
@@ -67,6 +83,18 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsService
 				.getUserServiceDetailsByUserId(userId);
 		return new ResponseEntity<UserServiceDetailsEntity>(userServiceDetailsEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get the List of all User Service Details by UserId.
+	 * 
+	 * @param userId
+	 */
+ 
+	@RequestMapping(value = "/getAllUserServiceDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getAllUserServiceDetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<UserServiceDetailsEntity> listofAllUserService = userServiceDetailsService.getAllUserServiceDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(listofAllUserService, HttpStatus.OK);
 	}
 
 	/**
@@ -132,7 +160,7 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<UserServiceNotificationDetailsView>>(userServiceNotificationDetailsViews,
 				HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get User Service Details when service is pending with payment
 	 * 

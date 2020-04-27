@@ -15,6 +15,7 @@ import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
 import com.src.entity.UserServiceNotificationDetailsView;
@@ -192,5 +193,33 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
 		}
 		return null;
+	}
+
+	@Transactional
+	public void saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(eventHistoryEntity);
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
+		List<UserServiceDetailsEntity> newUserServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_ISACTIVE, true));
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_USERID, userId));
+		newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
+		if (size > 0) {
+			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERSERVICES_NOUSERSSERVICESFOUND_ERRORMSG));
 	}
 }

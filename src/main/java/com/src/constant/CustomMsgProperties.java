@@ -44,6 +44,7 @@ public class CustomMsgProperties {
 	public static final String GETUSERSERVICEEXPIRATIONDETAILS_INVAILD_ERRORMSG = "getUserServiceExpirationDetails_nocontent";
 	public static final String FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG = "freelancehistory_unabletosave_errorMsg";
 	public static final String FREELANCEDOC_UNABLE_TO_SAVE_ERRORMSG = "freelancedocs_unabletosave_errorMsg";
+	public static final String GETALLUSERSERVICES_NOUSERSSERVICESFOUND_ERRORMSG = "getAllUserService_nouserservicefound_errorMsg";
 
 	private CustomMsgProperties() {
 	}

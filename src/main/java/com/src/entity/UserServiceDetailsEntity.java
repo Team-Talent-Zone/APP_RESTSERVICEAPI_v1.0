@@ -1,6 +1,7 @@
 package com.src.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,35 +42,35 @@ public class UserServiceDetailsEntity implements Serializable {
 	@JsonIgnore
 	private NewServiceEntity newService;
 
-	@Column(insertable = true, updatable = false, name = "USERID")
-	private Integer userId;
+	@Column(name = "USERID")
+	private int userid;
 
 	@Column(name = "CREATEDBY")
-	private String createdBy;
+	private String createdby; 
 
 	@Column(name = "CREATEDON")
-	private String createdOn;
+	private String createdon;
 
 	@Column(name = "ISACTIVE")
-	private boolean isActive;
+	private boolean isactive;
 
 	@Column(name = "REASONOFUNSUBSCRIBE")
-	private String reasonOfUnSubscribe;
+	private String reasonofunsubscribe;
 
 	@Column(name = "SERVICEPACKNAME")
-	private String servicePackName;
+	private String servicepackname;
 
 	@Column(name = "STATUS")
 	private String status;
 
 	@Column(name = "SERVICESTARTON")
-	private String serviceStartOn;
+	private String servicestarton;
 
 	@Column(name = "SERVICEENDON")
-	private String serviceEndOn;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
-	private UserServiceEventHistoryEntity userServiceEventHistory;
+	private String serviceendon;
+		
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
+	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
 
 	public Integer getServiceId() {
 		return serviceId;
@@ -95,52 +96,52 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.newService = newService;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCreatedby() {
+		return createdby;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
 	}
 
-	public String getCreatedOn() {
-		return createdOn;
+	public String getCreatedon() {
+		return createdon;
 	}
 
-	public void setCreatedOn(String createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedon(String createdon) {
+		this.createdon = createdon;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public boolean isIsactive() {
+		return isactive;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setIsactive(boolean isactive) {
+		this.isactive = isactive;
 	}
 
-	public String getReasonOfUnSubscribe() {
-		return reasonOfUnSubscribe;
+	public String getReasonOfunsubscribe() {
+		return reasonofunsubscribe;
 	}
 
-	public void setReasonOfUnSubscribe(String reasonOfUnSubscribe) {
-		this.reasonOfUnSubscribe = reasonOfUnSubscribe;
+	public void setReasonOfunsubscribe(String reasonOfunsubscribe) {
+		this.reasonofunsubscribe = reasonOfunsubscribe;
 	}
 
-	public String getServicePackName() {
-		return servicePackName;
+	public String getServicepackname() {
+		return servicepackname;
 	}
 
-	public void setServicePackName(String servicePackName) {
-		this.servicePackName = servicePackName;
+	public void setServicepackname(String servicepackname) {
+		this.servicepackname = servicepackname;
 	}
 
 	public String getStatus() {
@@ -151,28 +152,38 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.status = status;
 	}
 
-	public String getServiceStartOn() {
-		return serviceStartOn;
+	public String getServicestarton() {
+		return servicestarton;
 	}
 
-	public void setServiceStartOn(String serviceStartOn) {
-		this.serviceStartOn = serviceStartOn;
+	public void setServicestarton(String servicestarton) {
+		this.servicestarton = servicestarton;
 	}
 
-	public String getServiceEndOn() {
-		return serviceEndOn;
+	public String getServiceendon() {
+		return serviceendon;
 	}
 
-	public void setServiceEndOn(String serviceEndOn) {
-		this.serviceEndOn = serviceEndOn;
+	public void setServiceendon(String serviceendon) {
+		this.serviceendon = serviceendon;
 	}
 
-	public UserServiceEventHistoryEntity getUserServiceEventHistory() {
+	public Set<UserServiceEventHistoryEntity> getUserServiceEventHistory() {
 		return userServiceEventHistory;
 	}
 
-	public void setUserServiceEventHistory(UserServiceEventHistoryEntity userServiceEventHistory) {
+	public String getReasonofunsubscribe() {
+		return reasonofunsubscribe;
+	}
+
+	public void setReasonofunsubscribe(String reasonofunsubscribe) {
+		this.reasonofunsubscribe = reasonofunsubscribe;
+	}
+
+	public void setUserServiceEventHistory(Set<UserServiceEventHistoryEntity> userServiceEventHistory) {
 		this.userServiceEventHistory = userServiceEventHistory;
 	}
+
+	
 
 }
