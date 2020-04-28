@@ -223,6 +223,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(UserConstant.FU_ISJOBAVAILABLE, false));
+		criteria.add(Restrictions.eq(UserConstant.FU_ISBGDONE, true));
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;

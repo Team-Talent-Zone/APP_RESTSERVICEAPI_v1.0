@@ -49,6 +49,7 @@ public class UserConstant {
 	public static final String FREELANCEDETAILS_ALIAS = "fUDetails";
 	public static final String FU_IS_PROFILE_COMPLETED = "fUDetails.isprofilecompleted";
 	public static final String FU_ISJOBAVAILABLE = "fUDetails.isJobAvailable";
+	public static final String FU_ISBGDONE = "fUDetails.isbgdone";
 	public static final String USERBIZDETAILS = "userbizdetails";
 	public static final String USERBIZDETAILS_ALIAS = "BizDetails";
 	public static final String FU_FULLADDRESS = "BizDetails.fulladdress";
