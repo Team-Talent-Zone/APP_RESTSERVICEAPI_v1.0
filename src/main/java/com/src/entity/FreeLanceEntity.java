@@ -46,7 +46,10 @@ public class FreeLanceEntity implements Serializable {
 
 	@Column(name = "ISBGDONE")
 	private boolean isbgdone;
-
+	
+	@Column(name = "ISREGDONE")
+	private boolean isregdone;
+	
 	@Column(name = "ISPROFILECOMPLETED")
 	private boolean isprofilecompleted;
 	
@@ -185,5 +188,15 @@ public class FreeLanceEntity implements Serializable {
 	public void setPercentageDeduct(float percentageDeduct) {
 		this.percentageDeduct = percentageDeduct;
 	}
+
+	public boolean isIsregdone() {
+		return isregdone;
+	}
+
+	public void setIsregdone(boolean isregdone) {
+		this.isregdone = isregdone;
+	}
+	
+	
 
 }
