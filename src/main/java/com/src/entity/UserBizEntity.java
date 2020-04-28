@@ -70,6 +70,12 @@ public class UserBizEntity implements Serializable {
 	@Column(name = "SHORTADDRESS")
 	private String shortaddress;
 	
+	@Column(name = "LAT")
+	private Float lat;
+	
+	@Column(name = "LNG")
+	private Float lng;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
@@ -194,9 +200,22 @@ public class UserBizEntity implements Serializable {
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+ 
+	public Float getLat() {
+		return lat;
 	}
 
-}
+	public void setLat(Float lat) {
+		this.lat = lat;
+	}
+
+	public void setLng(Float lng) {
+		this.lng = lng;
+	}
+
+	public Float getLng() {
+		return lng;
+	}
+	
+
+} 
