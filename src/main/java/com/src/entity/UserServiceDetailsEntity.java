@@ -57,8 +57,8 @@ public class UserServiceDetailsEntity implements Serializable {
 	@Column(name = "REASONOFUNSUBSCRIBE")
 	private String reasonofunsubscribe;
 
-	@Column(name = "SERVICEPACKNAME")
-	private String servicepackname;
+	@Column(name = "ISSERVICEPACK")
+	private boolean isservicepack;
 
 	@Column(name = "STATUS")
 	private String status;
@@ -136,12 +136,12 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.reasonofunsubscribe = reasonOfunsubscribe;
 	}
 
-	public String getServicepackname() {
-		return servicepackname;
+	public boolean isIsservicepack() {
+		return isservicepack;
 	}
 
-	public void setServicepackname(String servicepackname) {
-		this.servicepackname = servicepackname;
+	public void setIsservicepack(boolean isservicepack) {
+		this.isservicepack = isservicepack;
 	}
 
 	public String getStatus() {
