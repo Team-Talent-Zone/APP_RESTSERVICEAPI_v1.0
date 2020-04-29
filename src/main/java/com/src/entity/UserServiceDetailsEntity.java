@@ -44,6 +44,9 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "USERID")
 	private int userid;
+	
+	@Column(name = "CHILDSERVICEPKGSERVICEID")
+	private Integer childservicepkgserviceid;
 
 	@Column(name = "CREATEDBY")
 	private String createdby; 
@@ -71,6 +74,15 @@ public class UserServiceDetailsEntity implements Serializable {
 		
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
+
+	
+	public Integer getChildservicepkgserviceid() {
+		return childservicepkgserviceid;
+	}
+
+	public void setChildservicepkgserviceid(Integer childservicepkgserviceid) {
+		this.childservicepkgserviceid = childservicepkgserviceid;
+	}
 
 	public Integer getServiceId() {
 		return serviceId;

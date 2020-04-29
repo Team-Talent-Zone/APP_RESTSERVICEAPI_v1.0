@@ -64,6 +64,22 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
+	
+	/**
+	 * To delete the New Service Details.
+	 */
+	@Transactional
+	public void deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		try {
+			LOGGER.info(NewServiceConstant.CONFIRMED_DELETE_USERSERVICEDETAILS);
+			sessionFactory.getCurrentSession().delete(userServiceDetailsEntity);
+			LOGGER.info(NewServiceConstant.CONFIRMED_DELETE_USERSERVICEDETAILS
+					+ userServiceDetailsEntity.getServiceId());
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.DELETESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
+	}
 
 	/**
 	 * Get the User Service Details by UserId.

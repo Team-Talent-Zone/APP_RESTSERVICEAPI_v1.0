@@ -29,6 +29,7 @@ public class NewServiceConstant {
 	public static final String INSIDE_SAVEORUPDATE_USERSERVICEDETAILS = "Inside Serive DAO saveOrUpdateUserSVCDetails method.";
 	public static final String CONFIRMED_SAVEORUPDATE_USERSERVICEDETAILS = "Inside DAO saveOrUpdateUserSVCDetails method : Service Details Updated for Service Id :";
 	public static final String INSIDE_SAVEORUPDATE_FREELANCE_ON_SERVICE = "Inside Serive DAO saveOrUpdateFreeLanceOnService method.";
+	public static final String CONFIRMED_DELETE_USERSERVICEDETAILS = "Inside DAO DeleteeUserSVCDetails method : Service Details Deleted for Service Id :";
 	public static final String CONFIRMED_SAVEORUPDATE_FREELANCE_ON_SERVICE = "Inside DAO saveOrUpdateFreeLanceOnService method : Service Details Updated for job Id :";
 	public static final String NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method";
 	public static final String NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS = "Inside New Service DAO getAllUserServiceDetails method : get All User Service Details :";

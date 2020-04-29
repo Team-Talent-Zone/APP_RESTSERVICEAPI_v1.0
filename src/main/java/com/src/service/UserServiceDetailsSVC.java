@@ -94,5 +94,12 @@ public interface UserServiceDetailsSVC {
 	 * To get user Service Pending payments.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
+	
+	
+	/**
+	 * To delete the User Service Details.
+	 */
+	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+
 
 }
