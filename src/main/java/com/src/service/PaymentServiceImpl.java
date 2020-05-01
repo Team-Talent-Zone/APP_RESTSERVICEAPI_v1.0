@@ -13,6 +13,7 @@ import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
 import com.src.utils.CommonUtilites;
+import com.src.utils.PaymentUtil;
 
 /**
  * The <code> PaymentServiceImpl </code> class defines Payment Service Details.
@@ -35,8 +36,13 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 
 		UserEntity userEntity = new UserEntity();
 		userEntity.setUserId(paymentEntity.getUserId());
-		paymentEntity.setUserdetails(userEntity);
-		return paymentDAO.savePayments(paymentEntity);
+		paymentEntity.setUserdetails(userEntity); 
+		
+		 PaymentUtil paymentUtil = new PaymentUtil();
+		 paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity);
+	         
+		return paymentEntity;
+		//paymentDAO.savePayments(paymentEntity);
 	}
 
 	/**
