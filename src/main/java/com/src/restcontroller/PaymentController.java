@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
+import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 
@@ -52,6 +55,17 @@ public class PaymentController extends AbstractRestManager {
 		PaymentFUTranscationHistEntity paymentEnityRespObj = paymentService
 				.savePaymentsFUTranscations(fuTranscationHistEntity);
 		return new ResponseEntity<PaymentFUTranscationHistEntity>(paymentEnityRespObj, HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/payment-response", method = RequestMethod.POST)
+	public @ResponseBody String payuCallback(@RequestParam String mihpayid, @RequestParam String status,
+			@RequestParam PaymentMode mode, @RequestParam String txnid, @RequestParam String hash) {
+		System.out.println("mihpayid" + mihpayid);
+		System.out.println("txnid" + txnid);
+		System.out.println("mode" + mode);
+		System.out.println("hash" + hash);
+		System.out.println("status" + status);
+		return null;
 	}
 
 	/**
@@ -103,25 +117,27 @@ public class PaymentController extends AbstractRestManager {
 		PaymentEntity paymentEntity = paymentService.getPaymentDetailsByUserId(userId);
 		return new ResponseEntity<PaymentEntity>(paymentEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get the FU Payment Details by UserId.
 	 * 
 	 * @param userId
 	 */
 	@RequestMapping(value = "/getPaymentFUDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentFUTranscationHistEntity> getPaymentFUDetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
+	public ResponseEntity<PaymentFUTranscationHistEntity> getPaymentFUDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
 		PaymentFUTranscationHistEntity paymentEntity = paymentService.getPaymentFUDetailsByUserId(userId);
 		return new ResponseEntity<PaymentFUTranscationHistEntity>(paymentEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get the CBA Payment Details by UserId.
 	 * 
 	 * @param userId
 	 */
 	@RequestMapping(value = "/getPaymentCBADetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentCBATranscationHistEntity> getPaymentCBADetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
+	public ResponseEntity<PaymentCBATranscationHistEntity> getPaymentCBADetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
 		PaymentCBATranscationHistEntity paymentEntity = paymentService.getPaymentCBADetailsByUserId(userId);
 		return new ResponseEntity<PaymentCBATranscationHistEntity>(paymentEntity, HttpStatus.OK);
 	}
@@ -132,7 +148,8 @@ public class PaymentController extends AbstractRestManager {
 	 * @param userId
 	 */
 	@RequestMapping(value = "/getPaymentRefundTranHistByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentRefundTranscationHistEntity> getPaymentRefundTranHistByUserId(@PathVariable(UserConstant.USERID) int userId) {
+	public ResponseEntity<PaymentRefundTranscationHistEntity> getPaymentRefundTranHistByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
 		PaymentRefundTranscationHistEntity paymentEntity = paymentService.getPaymentRefundTranHistByUserId(userId);
 		return new ResponseEntity<PaymentRefundTranscationHistEntity>(paymentEntity, HttpStatus.OK);
 	}

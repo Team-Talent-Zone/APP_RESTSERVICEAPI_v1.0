@@ -33,6 +33,7 @@ public class CustomMsgProperties {
 	public static final String GETBYSERVICEPACKID_ERRORMSG = "getByOurServicePackId_usernotfound_errorMsg";
 	public static final String SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG = "saveorupdateServiceDetails_unabletoupdate_errorMsg";
 	public static final String GETBYSERVICEHISTORYID_USERNOTFOUND_ERRORMSG = "getByOurServiceHistory_usernotfound_errorMsg";
+	public static final String DELETESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG = "deleteServiceDetails_unabletodelete_errorMsg";
 	public static final String SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentDetails_unabletosave_errorMsg";
 	public static final String SAVEPAYMENTFUTRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentFUTransDetails_unabletosave_errorMsg";
 	public static final String SAVEPAYMENTCBATRANSDETAILS_UNABLETOSAVE_ERRORMSG = "savePaymentCBATransDetails_unabletosave_errorMsg";

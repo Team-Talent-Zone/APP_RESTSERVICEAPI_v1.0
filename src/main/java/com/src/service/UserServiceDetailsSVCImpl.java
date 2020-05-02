@@ -153,4 +153,13 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceDetailsDAO.getAllUserServiceDetailsByUserId(userId);
 	}
 
+	@Override
+	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
+		userServiceDetailsDAO.deleteUserSVCDetails(userServiceDetailsEntity);
+		if (userServiceDetailsEntity.getServiceId() > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

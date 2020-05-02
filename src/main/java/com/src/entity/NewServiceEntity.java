@@ -76,7 +76,7 @@ public class NewServiceEntity implements Serializable {
 	private Float amount;
 	
 	@Column(name = "PACKWITHOTHEROURSERVICEID")
-	private String packwithotherourserviceid;
+	private Integer packwithotherourserviceid;
 
 	@Column(insertable = true, updatable = false, name = "userId")
 	private Integer userId;
@@ -229,11 +229,11 @@ public class NewServiceEntity implements Serializable {
 		this.serviceHistory = serviceHistory;
 	}
 
-	public String getPackwithotherourserviceid() {
+	public Integer getPackwithotherourserviceid() {
 		return packwithotherourserviceid;
 	}
 
-	public void setPackwithotherourserviceid(String packwithotherourserviceid) {
+	public void setPackwithotherourserviceid(Integer packwithotherourserviceid) {
 		this.packwithotherourserviceid = packwithotherourserviceid;
 	}
 

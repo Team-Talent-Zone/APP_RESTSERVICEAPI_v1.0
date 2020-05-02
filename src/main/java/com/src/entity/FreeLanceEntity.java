@@ -46,7 +46,10 @@ public class FreeLanceEntity implements Serializable {
 
 	@Column(name = "ISBGDONE")
 	private boolean isbgdone;
-
+	
+	@Column(name = "ISREGFEEDONE")
+	private boolean isregfeedone;
+	
 	@Column(name = "ISPROFILECOMPLETED")
 	private boolean isprofilecompleted;
 	
@@ -73,6 +76,9 @@ public class FreeLanceEntity implements Serializable {
 	
 	@Column(name = "PERCENTAGEDEDUCT")
 	private float percentageDeduct;
+	
+	@Column(name = "BGCURRENTSTATUS")
+	private String bgCurrentStatus;
 
 	public Integer getFreeLanceId() {
 		return freeLanceId;
@@ -185,5 +191,25 @@ public class FreeLanceEntity implements Serializable {
 	public void setPercentageDeduct(float percentageDeduct) {
 		this.percentageDeduct = percentageDeduct;
 	}
+
+	public boolean isIsregfeedone() {
+		return isregfeedone;
+	}
+
+	public void setIsregfeedone(boolean isregfeedone) {
+		this.isregfeedone = isregfeedone;
+	}
+
+	public String getBgCurrentStatus() {
+		return bgCurrentStatus;
+	}
+
+	public void setBgCurrentStatus(String bgCurrentStatus) {
+		this.bgCurrentStatus = bgCurrentStatus;
+	}
+
+	
+	
+	
 
 }

@@ -44,7 +44,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		logger.debug(PaymentConstant.SAVE_PAYMENT + paymentId);
 		if (paymentId > 0) {
 			return paymentEntity;
-		}
+		} 
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG));
 

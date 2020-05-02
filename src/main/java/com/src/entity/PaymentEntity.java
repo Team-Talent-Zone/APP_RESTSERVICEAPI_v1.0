@@ -33,25 +33,25 @@ public class PaymentEntity implements Serializable {
 	private Integer paymentId;
 
 	@Column(name = "amount")
-	private float amount;
+	private String amount;
+	
+	@Column(name = "key")
+	private String key;
 
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "createdon")
 	private String createdon;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "firstname")
-	private String firstname;
-
 	@Column(name = "furl")
 	private String furl;
 
 	@Column(name = "hash")
 	private String hash;
-
-	@Column(name = "merchantkey")
-	private String merchantkey;
 
 	@Column(name = "phone")
 	private String phone;
@@ -91,6 +91,15 @@ public class PaymentEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
 	private PaymentNotificationHistEntity paymentsNotifHistory;
 
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Integer getPaymentId() {
 		return paymentId;
 	}
@@ -99,11 +108,19 @@ public class PaymentEntity implements Serializable {
 		this.paymentId = paymentId;
 	}
 
-	public float getAmount() {
+	public String  getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -123,14 +140,6 @@ public class PaymentEntity implements Serializable {
 		this.email = email;
 	}
 
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
 	public String getFurl() {
 		return furl;
 	}
@@ -145,14 +154,6 @@ public class PaymentEntity implements Serializable {
 
 	public void setHash(String hash) {
 		this.hash = hash;
-	}
-
-	public String getMerchantkey() {
-		return merchantkey;
-	}
-
-	public void setMerchantkey(String merchantkey) {
-		this.merchantkey = merchantkey;
 	}
 
 	public String getPhone() {

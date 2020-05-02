@@ -44,6 +44,9 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "USERID")
 	private int userid;
+	
+	@Column(name = "CHILDSERVICEPKGSERVICEID")
+	private Integer childservicepkgserviceid;
 
 	@Column(name = "CREATEDBY")
 	private String createdby; 
@@ -57,8 +60,8 @@ public class UserServiceDetailsEntity implements Serializable {
 	@Column(name = "REASONOFUNSUBSCRIBE")
 	private String reasonofunsubscribe;
 
-	@Column(name = "SERVICEPACKNAME")
-	private String servicepackname;
+	@Column(name = "ISSERVICEPACK")
+	private boolean isservicepack;
 
 	@Column(name = "STATUS")
 	private String status;
@@ -71,6 +74,15 @@ public class UserServiceDetailsEntity implements Serializable {
 		
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
+
+	
+	public Integer getChildservicepkgserviceid() {
+		return childservicepkgserviceid;
+	}
+
+	public void setChildservicepkgserviceid(Integer childservicepkgserviceid) {
+		this.childservicepkgserviceid = childservicepkgserviceid;
+	}
 
 	public Integer getServiceId() {
 		return serviceId;
@@ -136,12 +148,12 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.reasonofunsubscribe = reasonOfunsubscribe;
 	}
 
-	public String getServicepackname() {
-		return servicepackname;
+	public boolean isIsservicepack() {
+		return isservicepack;
 	}
 
-	public void setServicepackname(String servicepackname) {
-		this.servicepackname = servicepackname;
+	public void setIsservicepack(boolean isservicepack) {
+		this.isservicepack = isservicepack;
 	}
 
 	public String getStatus() {
