@@ -78,7 +78,7 @@ public class FreeLanceEntity implements Serializable {
 	private float percentageDeduct;
 	
 	@Column(name = "BGCURRENTSTATUS")
-	private String bgCurrentStatus;
+	private String bgcurrentstatus;
 
 	public Integer getFreeLanceId() {
 		return freeLanceId;
@@ -200,16 +200,14 @@ public class FreeLanceEntity implements Serializable {
 		this.isregfeedone = isregfeedone;
 	}
 
-	public String getBgCurrentStatus() {
-		return bgCurrentStatus;
+	public String getBgcurrentstatus() {
+		return bgcurrentstatus;
 	}
 
-	public void setBgCurrentStatus(String bgCurrentStatus) {
-		this.bgCurrentStatus = bgCurrentStatus;
+	public void setBgcurrentstatus(String bgcurrentstatus) {
+		this.bgcurrentstatus = bgcurrentstatus;
 	}
 
-	
-	
 	
 
 }
