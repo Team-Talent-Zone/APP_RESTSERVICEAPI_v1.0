@@ -62,6 +62,9 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "ISSERVICEPACK")
 	private boolean isservicepack;
+	
+	@Column(name = "ISSERVICEPURCHASED")
+	private boolean isservicepurchased;
 
 	@Column(name = "STATUS")
 	private String status;
@@ -76,6 +79,14 @@ public class UserServiceDetailsEntity implements Serializable {
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
 
 	
+	public boolean isIsservicepurchased() {
+		return isservicepurchased;
+	}
+
+	public void setIsservicepurchased(boolean isservicepurchased) {
+		this.isservicepurchased = isservicepurchased;
+	}
+
 	public Integer getChildservicepkgserviceid() {
 		return childservicepkgserviceid;
 	}
