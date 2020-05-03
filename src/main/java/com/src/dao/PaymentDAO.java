@@ -84,5 +84,14 @@ public interface PaymentDAO {
 	 * @param userId
 	 */
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId);
+	
+	/**
+	 * Get the Payment Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	public PaymentEntity getPaymentDetailsByTxnId(String txnid);
+	
+	public void saveorupdatePayments(PaymentEntity paymentEntity);
 
 }

@@ -44,6 +44,7 @@ public class UserConstant {
 	public static final String USERNAME = "username";
 	public static final String USERPSWD = "password";
 	public static final String USERID = "userId";
+	public static final String TXTID = "txnid";
 	public static final String ISACTIVE = "isactive";
 	public static final String FREELANCEDETAILS = "freeLanceDetails";
 	public static final String FREELANCEDETAILS_ALIAS = "fUDetails";

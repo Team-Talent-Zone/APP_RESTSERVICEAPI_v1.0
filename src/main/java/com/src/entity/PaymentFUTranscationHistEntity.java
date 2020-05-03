@@ -46,9 +46,7 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
 	private UserEntity userdetails;
-
-	@Column(insertable = true, updatable = false, name = "freelanceId")
-	private int freelanceId;
+ 
 
 	@Column(name = "createdon")
 	private String createdon;
@@ -115,14 +113,6 @@ public class PaymentFUTranscationHistEntity implements Serializable {
 
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
-	}
-
-	public int getFreelanceId() {
-		return freelanceId;
-	}
-
-	public void setFreelanceId(int freelanceId) {
-		this.freelanceId = freelanceId;
 	}
 
 	public String getCreatedon() {

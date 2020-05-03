@@ -44,7 +44,7 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		logger.debug(PaymentConstant.SAVE_PAYMENT + paymentId);
 		if (paymentId > 0) {
 			return paymentEntity;
-		} 
+		}
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG));
 
@@ -135,6 +135,26 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 	 * @param userId
 	 */
 	@Transactional
+	public PaymentEntity getPaymentDetailsByTxnId(String txnid) {
+		logger.info(PaymentConstant.PAYMENT_GETPAYMENT_DETAILSBYUSERID);
+		PaymentEntity paymentEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PaymentEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.TXTID, txnid));
+		paymentEntity = (PaymentEntity) criteria.uniqueResult();
+		if (paymentEntity != null) {
+			return paymentEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
+						+ " for txnid  : " + txnid);
+	}
+
+	/**
+	 * Get the Payment Details by UserId.
+	 * 
+	 * @param userId
+	 */
+	@Transactional
 	public PaymentEntity getPaymentDetailsByUserId(int userId) {
 		logger.info(PaymentConstant.PAYMENT_GETPAYMENT_DETAILSBYUSERID);
 		PaymentEntity paymentEntity = null;
@@ -210,5 +230,16 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
+	}
+
+	@Transactional
+	public void saveorupdatePayments(PaymentEntity paymentEntity) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(paymentEntity);
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.SAVEPAYMENTDETAILS_UNABLETOSAVE_ERRORMSG));
+		}
+
 	}
 }
