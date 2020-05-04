@@ -14,6 +14,7 @@ import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 import com.src.utils.PaymentUtil;
 
@@ -74,18 +75,15 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 
 	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status) {
 		PaymentEntity paymentEntity = paymentDAO.getPaymentDetailsByTxnId(txnid);
-		String message;
+		String message = null;
 		if (paymentEntity != null) {
 			String paymentStatus = null;
 			if (status.equals("failure")) {
 				paymentStatus = "Failed";
-				message ="<html><h4>Transction Failed . Please try again . <a [routerLink]=\"['/dashboard']\"> Go Back to dashboard </a></h4></html>";
+				message = "<html><h4>Transction Failed . Please try again . <a [routerLink]=\"['/dashboard']\"> Go Back to dashboard </a></h4></html>";
 			} else if (status.equals("success")) {
 				paymentStatus = "Success";
-				message ="<html><h4>Transction Success . <a [routerLink]=\"['/paymenthistory']\"> Go Back to Payment Details Page </a></h4></html>";
-			} else {
-				paymentStatus = "Pending";
-				message ="<html><h4>Transction Pending . <a [routerLink]=\"['/paymenthistory']\"> Go Back to Payment History Page for the status check </a></h4></html>";
+				message = "<html><h4>Transction Success . <a [routerLink]=\"['/paymenthistory']\"> Go Back to Payment Details Page </a></h4></html>";
 			}
 			UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
@@ -109,6 +107,37 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 				paymentEntity.setPaymentsCBATrans(cbaTranscationHistEntity);
 			}
 			paymentDAO.saveorupdatePayments(paymentEntity);
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
+				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null) {
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+						userEntity.getFreeLanceDetails().setIsregfeedone(true);
+					}
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+						userEntity.getFreeLanceDetails().setIsregfeedone(true);
+					}
+					userRestDAO.saveorupdateUserDetails(userEntity);
+				}
+			}
+
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null
+						&& paymentEntity.getServiceids() != null) {
+					String[] serviceIds = paymentEntity.getServiceids().split("|");
+					for (String serviceid : serviceIds) {
+						UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsDAO
+								.getUserServiceDetailsByUserId(Integer.parseInt(serviceid));
+						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+							userServiceDetailsEntity.setIsservicepurchased(true);
+							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
+						}
+						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+							userServiceDetailsEntity.setIsservicepurchased(false);
+							userServiceDetailsEntity.setStatus("PAYMENT_FAILED");
+						}
+					}
+				}
+
+			}
 			return message;
 		}
 		return null;

@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -56,7 +57,7 @@ public interface NewSVCService {
 	 * 
 	 * @return
 	 */
-	public ArrayList<NewServiceEntity> getAllServiceDetails();
+	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails();
 	
 	/**
 	 * To check if the service name is exist by passing service name.

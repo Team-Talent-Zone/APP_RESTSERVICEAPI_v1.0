@@ -8,11 +8,16 @@ public class TestCode {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		String compactJson = "{\"playerID\":1234,\"name\":\"Test\",\"itemList\":[{\"itemID\":1,\"name\":\"Axe\",\"atk\":12,\"def\":0},{\"itemID\":2,\"name\":\"Sword\",\"atk\":5,\"def\":5},{\"itemID\":3,\"name\":\"Shield\",\"atk\":0,\"def\":10}]}";
-		JSONArray jsonarray = new JSONArray();
-		JSONObject jsonObj = new JSONObject(compactJson);
-		jsonarray.put(jsonObj);
-		generateVelocityObject(jsonarray);
+		String dil ="|303|499|";
+	    String pipeDelimited = "|Google|Amazon|Microsoft|Facebook|";
+
+	    String phone = " ;3456789";
+	    String[] output = phone.split(";");
+		System.out.println(output.length);
+
+		for (String serviceid : output) {
+			System.out.println(serviceid);
+		}
 	}
 	public static VelocityContext generateVelocityObject(JSONArray jsonArray) throws Exception {
 		VelocityContext context = new VelocityContext();

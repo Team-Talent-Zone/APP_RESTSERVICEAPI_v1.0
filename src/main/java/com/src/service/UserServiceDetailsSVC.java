@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
@@ -68,7 +69,7 @@ public interface UserServiceDetailsSVC {
 	 * 
 	 * @return Get All User Service Details.
 	 */
-	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId);
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
 
 	/**
 	 * To save User Service Notificaton.
