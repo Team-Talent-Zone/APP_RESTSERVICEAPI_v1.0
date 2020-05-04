@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.entity.NewServiceEntity;
+import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
@@ -149,7 +150,7 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	}
 
 	@Override
-	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId) {
 		return userServiceDetailsDAO.getAllUserServiceDetailsByUserId(userId);
 	}
 

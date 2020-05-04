@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.NewServiceConstant;
+import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -81,14 +82,14 @@ public class NewServiceController extends AbstractRestManager {
 	 * 
 	 */
 	@RequestMapping(value = "/getAllNewServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<NewServiceEntity>> getAllServiceDetails() {
-		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllServiceDetails();
-		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
+	public ResponseEntity<ArrayList<AllActiveNewSeviceDetailsView>> getAllServiceDetails() {
+		ArrayList<AllActiveNewSeviceDetailsView> listofAllServices = newServiceSvc.getAllServiceDetails();
+		return new ResponseEntity<ArrayList<AllActiveNewSeviceDetailsView>>(listofAllServices, HttpStatus.OK);
 	}
 
 	/**
 	 * Get New Service Details by service id.
-	 * 
+	 *  
 	 */
 	@RequestMapping(value = "/getNewServiceDetailsByServiceId/{ourserviceId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NewServiceEntity> getNewServiceDetailsByServiceId(

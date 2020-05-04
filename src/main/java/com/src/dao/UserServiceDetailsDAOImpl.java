@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
@@ -64,7 +65,7 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 					.getProperty(CustomMsgProperties.SAVEORUPDATESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
-	
+
 	/**
 	 * To delete the New Service Details.
 	 */
@@ -73,8 +74,8 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		try {
 			LOGGER.info(NewServiceConstant.CONFIRMED_DELETE_USERSERVICEDETAILS);
 			sessionFactory.getCurrentSession().delete(userServiceDetailsEntity);
-			LOGGER.info(NewServiceConstant.CONFIRMED_DELETE_USERSERVICEDETAILS
-					+ userServiceDetailsEntity.getServiceId());
+			LOGGER.info(
+					NewServiceConstant.CONFIRMED_DELETE_USERSERVICEDETAILS + userServiceDetailsEntity.getServiceId());
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(CustomMsgProperties.DELETESERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
@@ -223,20 +224,22 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId) {
-		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
-		List<UserServiceDetailsEntity> newUserServiceEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserServiceDetailsEntity.class);
-		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_ISACTIVE, true));
-		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_USERID, userId));
-		newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
-		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
-		if (size > 0) {
-			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId) {
+		try {
+			LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
+			List<UserServiceActiveDetailsView> newUserServiceEntity = null;
+			Criteria criteria = this.sessionFactory.getCurrentSession()
+					.createCriteria(UserServiceActiveDetailsView.class);
+			criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_USERID, userId));
+			newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+			LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
+			if (size > 0) {
+				return (ArrayList<UserServiceActiveDetailsView>) newUserServiceEntity;
+			}
+		} catch (Exception e) {
+			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 		return null;
-		//throw new RestCustomException(HttpStatus.NO_CONTENT,
-			//	applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERSERVICES_NOUSERSSERVICESFOUND_ERRORMSG));
 	}
 }

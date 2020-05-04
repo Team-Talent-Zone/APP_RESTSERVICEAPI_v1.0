@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
@@ -92,11 +93,11 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	 */
 
 	@RequestMapping(value = "/getAllUserServiceDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceDetailsEntity>> getAllUserServiceDetailsByUserId(
+	public ResponseEntity<ArrayList<UserServiceActiveDetailsView>> getAllUserServiceDetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<UserServiceDetailsEntity> listofAllUserService = userServiceDetailsService
+		ArrayList<UserServiceActiveDetailsView> listofAllUserService = userServiceDetailsService
 				.getAllUserServiceDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<UserServiceDetailsEntity>>(listofAllUserService, HttpStatus.OK);
+		return new ResponseEntity<ArrayList<UserServiceActiveDetailsView>>(listofAllUserService, HttpStatus.OK);
 	}
 
 	/**

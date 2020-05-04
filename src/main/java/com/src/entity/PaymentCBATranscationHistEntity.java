@@ -59,9 +59,7 @@ public class PaymentCBATranscationHistEntity implements Serializable {
 	@Column(name = "txnid")
 	private String txnid;
 
-	@Column(insertable = true, updatable = false, name = "serviceId")
-	private int serviceId;
-
+ 
 	@Column(insertable = false, updatable = false, name = "paymentId")
 	private int paymentId;
 
@@ -156,14 +154,6 @@ public class PaymentCBATranscationHistEntity implements Serializable {
 
 	public void setTxnid(String txnid) {
 		this.txnid = txnid;
-	}
-
-	public int getServiceId() {
-		return serviceId;
-	}
-
-	public void setServiceId(int serviceId) {
-		this.serviceId = serviceId;
 	}
 
 	public int getPaymentId() {

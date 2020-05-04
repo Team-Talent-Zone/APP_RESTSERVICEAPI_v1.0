@@ -3,6 +3,7 @@ package com.src.service;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
+import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 
@@ -81,5 +82,7 @@ public interface PaymentService {
 	 * @param userId
 	 */
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId);
+
+	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status);
 
 }

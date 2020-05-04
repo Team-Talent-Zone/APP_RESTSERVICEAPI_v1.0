@@ -32,15 +32,21 @@ public class PaymentEntity implements Serializable {
 	@GeneratedValue
 	private Integer paymentId;
 
-	@Column(name = "amount")
+	@Column(name = "amount") 
 	private String amount;
-	
-	@Column(name = "key")
+
+	@Column(name = "serviceIds")
+	private String serviceids;
+
+	@Column(name = "jobIds")
+	private String jobids;
+
+	@Column(name = "payukey")
 	private String key;
 
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "createdon")
 	private String createdon;
 
@@ -76,9 +82,6 @@ public class PaymentEntity implements Serializable {
 	@JsonIgnore
 	private UserEntity userdetails;
 
-	@Column(insertable = true, updatable = false, name = "serviceId")
-	private int serviceId;
-
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
 	private PaymentFUTranscationHistEntity paymentsFUTrans;
 
@@ -91,7 +94,6 @@ public class PaymentEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "payments")
 	private PaymentNotificationHistEntity paymentsNotifHistory;
 
-	
 	public String getName() {
 		return name;
 	}
@@ -108,7 +110,7 @@ public class PaymentEntity implements Serializable {
 		this.paymentId = paymentId;
 	}
 
-	public String  getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
@@ -187,7 +189,7 @@ public class PaymentEntity implements Serializable {
 	public void setSurl(String surl) {
 		this.surl = surl;
 	}
-
+ 
 	public String getTxnid() {
 		return txnid;
 	}
@@ -210,14 +212,6 @@ public class PaymentEntity implements Serializable {
 
 	public void setUserdetails(UserEntity userdetails) {
 		this.userdetails = userdetails;
-	}
-
-	public int getServiceId() {
-		return serviceId;
-	}
-
-	public void setServiceId(int serviceId) {
-		this.serviceId = serviceId;
 	}
 
 	public PaymentFUTranscationHistEntity getPaymentsFUTrans() {
@@ -251,5 +245,23 @@ public class PaymentEntity implements Serializable {
 	public void setPaymentsNotifHistory(PaymentNotificationHistEntity paymentsNotifHistory) {
 		this.paymentsNotifHistory = paymentsNotifHistory;
 	}
+
+	public String getServiceids() {
+		return serviceids;
+	}
+
+	public void setServiceids(String serviceids) {
+		this.serviceids = serviceids;
+	}
+
+	public String getJobids() {
+		return jobids;
+	}
+
+	public void setJobids(String jobids) {
+		this.jobids = jobids;
+	}
+
+	 
 
 }

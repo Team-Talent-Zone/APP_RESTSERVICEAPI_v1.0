@@ -60,12 +60,7 @@ public class PaymentController extends AbstractRestManager {
 	@RequestMapping(path = "/payment-response", method = RequestMethod.POST)
 	public @ResponseBody String payuCallback(@RequestParam String mihpayid, @RequestParam String status,
 			@RequestParam PaymentMode mode, @RequestParam String txnid, @RequestParam String hash) {
-		System.out.println("mihpayid" + mihpayid);
-		System.out.println("txnid" + txnid);
-		System.out.println("mode" + mode);
-		System.out.println("hash" + hash);
-		System.out.println("status" + status);
-		return null;
+        return paymentService.payuCallback(mihpayid,txnid,mode,hash,status);
 	}
 
 	/**

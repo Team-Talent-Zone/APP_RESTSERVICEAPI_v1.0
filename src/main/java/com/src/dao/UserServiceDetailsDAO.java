@@ -2,6 +2,7 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
+import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
 import com.src.entity.UserServiceExpirationDetailsView;
@@ -92,7 +93,7 @@ public interface UserServiceDetailsDAO {
 	/**
 	 * To get the User Service Details by userId.
 	 */
-	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetailsByUserId(int userId);
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
 	
 	/**
 	 * To delete the User Service Details.

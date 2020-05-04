@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
+import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.entity.NewServicePackageEntity;
@@ -113,21 +114,16 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public ArrayList<NewServiceEntity> getAllServiceDetails() {
+	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails() {
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
-		List<NewServiceEntity> newServiceEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-		/*
-		 * criteria.createAlias(NewServiceConstant.SERVICE_HISTORY,
-		 * NewServiceConstant.SERVICE_HISTORY_ALIAS, JoinType.INNER_JOIN);
-		 * criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
-		 * NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
-		 */
+		List<AllActiveNewSeviceDetailsView> newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllActiveNewSeviceDetailsView.class);
+	 
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
 		if (size > 0) {
-			return (ArrayList<NewServiceEntity>) newServiceEntity;
+			return (ArrayList<AllActiveNewSeviceDetailsView>) newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));

@@ -14,9 +14,9 @@ public class PaymentUtil {
 	
 	private static final String serviceProvider = "payu_paisa"; 
 
-	private static final String sUrl = "http://localhost:8080/payment/payment-response";
+	private static final String sUrl = "http://localhost:8080/RestAPI/payment-response";
 
-	private static final String fUrl = "http://localhost:8080/payment/payment-response";
+	private static final String fUrl = "http://localhost:8080/RestAPI/payment-response";
 
 	public PaymentEntity populatePaymentDetail(PaymentEntity paymentDetail) {
 		String hashString = "";

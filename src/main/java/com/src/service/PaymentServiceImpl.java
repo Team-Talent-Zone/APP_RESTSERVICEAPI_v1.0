@@ -5,13 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
+import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
+import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 import com.src.utils.PaymentUtil;
 
@@ -34,15 +37,110 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	public PaymentEntity savePayments(PaymentEntity paymentEntity) {
 		paymentEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 
-		UserEntity userEntity = new UserEntity();
+		UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 		userEntity.setUserId(paymentEntity.getUserId());
-		paymentEntity.setUserdetails(userEntity); 
-		
-		 PaymentUtil paymentUtil = new PaymentUtil();
-		 paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity);
-	         
-		return paymentEntity;
-		//paymentDAO.savePayments(paymentEntity);
+		paymentEntity.setUserdetails(userEntity);
+
+		PaymentUtil paymentUtil = new PaymentUtil();
+		paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity);
+		if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
+			PaymentFUTranscationHistEntity fuTranscationHistEntity = new PaymentFUTranscationHistEntity();
+			fuTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));
+			fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			fuTranscationHistEntity.setEmail(paymentEntity.getEmail());
+			fuTranscationHistEntity.setMobile(paymentEntity.getPhone());
+			fuTranscationHistEntity.setPayments(paymentEntity);
+			fuTranscationHistEntity.setUserId(paymentEntity.getUserId());
+			fuTranscationHistEntity.setHash(paymentEntity.getHash());
+			fuTranscationHistEntity.setTxnid(paymentEntity.getTxnid());
+			fuTranscationHistEntity.setUserdetails(userEntity);
+			paymentEntity.setPaymentsFUTrans(fuTranscationHistEntity);
+		}
+		if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+			PaymentCBATranscationHistEntity cbaTranscationHistEntity = new PaymentCBATranscationHistEntity();
+			cbaTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));
+			cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			cbaTranscationHistEntity.setEmail(paymentEntity.getEmail());
+			cbaTranscationHistEntity.setMobile(paymentEntity.getPhone());
+			cbaTranscationHistEntity.setPayments(paymentEntity);
+			cbaTranscationHistEntity.setUserId(paymentEntity.getUserId());
+			cbaTranscationHistEntity.setHash(paymentEntity.getHash());
+			cbaTranscationHistEntity.setTxnid(paymentEntity.getTxnid());
+			cbaTranscationHistEntity.setUserdetails(userEntity);
+			paymentEntity.setPaymentsCBATrans(cbaTranscationHistEntity);
+		}
+
+		return paymentDAO.savePayments(paymentEntity);
+	}
+
+	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status) {
+		PaymentEntity paymentEntity = paymentDAO.getPaymentDetailsByTxnId(txnid);
+		String message = null;
+		if (paymentEntity != null) {
+			String paymentStatus = null;
+			if (status.equals("failure")) {
+				paymentStatus = "Failed";
+				message = "<html><h4>Transction Failed . Please try again . <a [routerLink]=\"['/dashboard']\"> Go Back to dashboard </a></h4></html>";
+			} else if (status.equals("success")) {
+				paymentStatus = "Success";
+				message = "<html><h4>Transction Success . <a [routerLink]=\"['/paymenthistory']\"> Go Back to Payment Details Page </a></h4></html>";
+			}
+			UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
+				PaymentFUTranscationHistEntity fuTranscationHistEntity = paymentEntity.getPaymentsFUTrans();
+				fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+				fuTranscationHistEntity.setHash(hash);
+				fuTranscationHistEntity.setMode(mode.name());
+				fuTranscationHistEntity.setPayuMoneyId(mihpayid);
+				fuTranscationHistEntity.setStatus(paymentStatus);
+				fuTranscationHistEntity.setTxnid(txnid);
+				paymentEntity.setPaymentsFUTrans(fuTranscationHistEntity);
+			}
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+				PaymentCBATranscationHistEntity cbaTranscationHistEntity = paymentEntity.getPaymentsCBATrans();
+				cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+				cbaTranscationHistEntity.setHash(hash);
+				cbaTranscationHistEntity.setMode(mode.name());
+				cbaTranscationHistEntity.setPayuMoneyId(mihpayid);
+				cbaTranscationHistEntity.setStatus(paymentStatus);
+				cbaTranscationHistEntity.setTxnid(txnid);
+				paymentEntity.setPaymentsCBATrans(cbaTranscationHistEntity);
+			}
+			paymentDAO.saveorupdatePayments(paymentEntity);
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
+				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null) {
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+						userEntity.getFreeLanceDetails().setIsregfeedone(true);
+					}
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+						userEntity.getFreeLanceDetails().setIsregfeedone(true);
+					}
+					userRestDAO.saveorupdateUserDetails(userEntity);
+				}
+			}
+
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null
+						&& paymentEntity.getServiceids() != null) {
+					String[] serviceIds = paymentEntity.getServiceids().split("|");
+					for (String serviceid : serviceIds) {
+						UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsDAO
+								.getUserServiceDetailsByUserId(Integer.parseInt(serviceid));
+						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+							userServiceDetailsEntity.setIsservicepurchased(true);
+							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
+						}
+						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+							userServiceDetailsEntity.setIsservicepurchased(false);
+							userServiceDetailsEntity.setStatus("PAYMENT_FAILED");
+						}
+					}
+				}
+
+			}
+			return message;
+		}
+		return null;
 	}
 
 	/**
@@ -159,4 +257,5 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId) {
 		return paymentDAO.getPaymentRefundTranHistByUserId(userId);
 	}
+
 }
