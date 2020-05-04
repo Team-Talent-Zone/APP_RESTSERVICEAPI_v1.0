@@ -1,11 +1,17 @@
 package com.src.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.NewServiceEntity;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -122,18 +128,40 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
 				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null
 						&& paymentEntity.getServiceids() != null) {
-					String[] serviceIds = paymentEntity.getServiceids().split("|");
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+					String[] serviceIds = paymentEntity.getServiceids().split(",");
 					for (String serviceid : serviceIds) {
+						Calendar cal = Calendar.getInstance();
 						UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsDAO
-								.getUserServiceDetailsByUserId(Integer.parseInt(serviceid));
+								.getUserServiceDetailsByServiceId(Integer.parseInt(serviceid));
+						NewServiceEntity newServiceEntity = newServiceRestDAO
+								.getNewServiceDetailsByServiceId(userServiceDetailsEntity.getOurserviceId());
 						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
+							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
+							if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_3M)) {
+								cal.add(Calendar.MONTH, 3);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_1MF)) {
+								cal.add(Calendar.MONTH, 1);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_6M)) {
+								cal.add(Calendar.MONTH, 6);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_1Y)) {
+								cal.add(Calendar.MONTH, 12);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							}
 						}
 						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
 							userServiceDetailsEntity.setIsservicepurchased(false);
 							userServiceDetailsEntity.setStatus("PAYMENT_FAILED");
+							userServiceDetailsEntity.setServicestarton(null);
+							userServiceDetailsEntity.setServiceendon(null);
 						}
+						userServiceDetailsDAO.saveUserServiceDetails(userServiceDetailsEntity);
 					}
 				}
 

@@ -8,12 +8,9 @@ public class TestCode {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		String dil ="|303|499|";
-	    String pipeDelimited = "|Google|Amazon|Microsoft|Facebook|";
-
-	    String phone = " ;3456789";
-	    String[] output = phone.split(";");
-		System.out.println(output.length);
+		 
+	    String phone = "345,6789,";
+	    String[] output = phone.split(",");
 
 		for (String serviceid : output) {
 			System.out.println(serviceid);

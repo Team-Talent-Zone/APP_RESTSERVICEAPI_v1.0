@@ -72,7 +72,6 @@ public class UserServiceDetailsEntity implements Serializable {
 	@Column(name = "amount")
 	private Float amount; 
 
-
 	@Column(name = "SERVICESTARTON")
 	private String servicestarton;
 
