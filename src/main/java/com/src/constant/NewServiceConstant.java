@@ -9,7 +9,7 @@ package com.src.constant;
  *
  */
 public class NewServiceConstant {
-	
+
 	public static final String INSIDE_SAVENEWSERVICE = "Inside DAO saveNewService method";
 	public static final String CONFIRM_SAVE_NEWSERVICE = "At saveNewService method in DAO:  Saved New Service Details Succesfully : New Service Id :";
 	public static final String INSIDE_SAVEORUPDATE_NEWSERVICE = "Inside Serive DAO saveorupdateNewService method.";
@@ -60,8 +60,13 @@ public class NewServiceConstant {
 	public static final String SERVICE_HISTORY_ALIAS_MAPPING = "serviceHistorymapping";
 	public static final String SERVICE_HISTORY_MAPPING_OBJ = "serviceHistorymappingObj";
 	public static final String SERVICE_HISTORY_USING_USERID = "serviceHistorymappingObj.userId";
-	public static final String SERVICE_HISTORY_USING_MANAGERID =  "serviceHistorymappingObj.managerId";
+	public static final String SERVICE_HISTORY_USING_MANAGERID = "serviceHistorymappingObj.managerId";
 	public static final String USERID = "userId";
-	private  NewServiceConstant() {
+	public static final String SERVICE_TERM_3M = "3_M";
+	public static final String SERVICE_TERM_1MF = "1_MF";
+	public static final String SERVICE_TERM_6M = "6_M";
+	public static final String SERVICE_TERM_1Y = "1_Y";
+
+	private NewServiceConstant() {
 	}
 }

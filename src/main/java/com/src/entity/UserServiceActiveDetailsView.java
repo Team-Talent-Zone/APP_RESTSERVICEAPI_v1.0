@@ -56,8 +56,8 @@ public class UserServiceActiveDetailsView {
 	@Column(name = "validdays")
 	private String validdays; 
 	
-	@Column(name = "validPeriod")
-	private String validPeriod; 
+	@Column(name = "validPeriodLabel")
+	private String validPeriodLabel; 
 
 	@Column(name = "amount")
 	private Float amount; 
@@ -174,13 +174,12 @@ public class UserServiceActiveDetailsView {
 		this.validdays = validdays;
 	}
 
-	 
-	public String getValidPeriod() {
-		return validPeriod;
+	public String getValidPeriodLabel() {
+		return validPeriodLabel;
 	}
 
-	public void setValidPeriod(String validPeriod) {
-		this.validPeriod = validPeriod;
+	public void setValidPeriodLabel(String validPeriodLabel) {
+		this.validPeriodLabel = validPeriodLabel;
 	}
 
 	public Float getAmount() {

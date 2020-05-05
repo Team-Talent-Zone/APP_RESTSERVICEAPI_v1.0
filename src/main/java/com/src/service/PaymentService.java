@@ -84,5 +84,8 @@ public interface PaymentService {
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId);
 
 	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status);
+	
+	public PaymentEntity getPaymentDetailsByTxnId(String txnid);
+
 
 }
