@@ -78,20 +78,29 @@ public class UserServiceDetailsEntity implements Serializable {
 	@Column(name = "SERVICEENDON")
 	private String serviceendon;
 	
-	@Column(name = "VALIDPERIOD")
-	private String validPeriod;
+	@Column(name = "validPeriodLabel")
+	private String validPeriodLabel;
+	
+	@Column(name = "validPeriodCode")
+	private String validPeriodCode;
 		
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
 
-	
-	
-	public String getValidPeriod() {
-		return validPeriod;
+	public String getValidPeriodLabel() {
+		return validPeriodLabel;
 	}
 
-	public void setValidPeriod(String validPeriod) {
-		this.validPeriod = validPeriod;
+	public void setValidPeriodLabel(String validPeriodLabel) {
+		this.validPeriodLabel = validPeriodLabel;
+	}
+
+	public String getValidPeriodCode() {
+		return validPeriodCode;
+	}
+
+	public void setValidPeriodCode(String validPeriodCode) {
+		this.validPeriodCode = validPeriodCode;
 	}
 
 	public boolean isIsservicepurchased() {

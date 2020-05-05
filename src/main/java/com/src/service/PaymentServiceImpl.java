@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
-import com.src.entity.NewServiceEntity;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -129,28 +128,25 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null
 						&& paymentEntity.getServiceids() != null) {
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 					String[] serviceIds = paymentEntity.getServiceids().split(",");
 					for (String serviceid : serviceIds) {
 						Calendar cal = Calendar.getInstance();
 						UserServiceDetailsEntity userServiceDetailsEntity = userServiceDetailsDAO
 								.getUserServiceDetailsByServiceId(Integer.parseInt(serviceid));
-						NewServiceEntity newServiceEntity = newServiceRestDAO
-								.getNewServiceDetailsByServiceId(userServiceDetailsEntity.getOurserviceId());
 						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
 							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
-							if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_3M)) {
+							if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_3M)) {
 								cal.add(Calendar.MONTH, 3);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_1MF)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_1MF)) {
 								cal.add(Calendar.MONTH, 1);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_6M)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_6M)) {
 								cal.add(Calendar.MONTH, 6);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (newServiceEntity.getValidPeriod().equals(NewServiceConstant.SERVICE_TERM_1Y)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_1Y)) {
 								cal.add(Calendar.MONTH, 12);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
 							}
