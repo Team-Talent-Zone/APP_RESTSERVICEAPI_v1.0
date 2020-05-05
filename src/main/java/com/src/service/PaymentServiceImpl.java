@@ -78,24 +78,27 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		return paymentDAO.savePayments(paymentEntity);
 	}
 
+	public PaymentEntity getPaymentDetailsByTxnId(String txnid) {
+		return paymentDAO.getPaymentDetailsByTxnId(txnid);
+	}
+
 	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status) {
 		PaymentEntity paymentEntity = paymentDAO.getPaymentDetailsByTxnId(txnid);
-		String message = null;
 		if (paymentEntity != null) {
 			String paymentStatus = null;
 			if (status.equals("failure")) {
 				paymentStatus = "Failed";
-				message = "<html><h4>Transction Failed . Please try again . <a [routerLink]=\"['/dashboard']\"> Go Back to dashboard </a></h4></html>";
 			} else if (status.equals("success")) {
 				paymentStatus = "Success";
-				message = "<html><h4>Transction Success . <a [routerLink]=\"['/paymenthistory']\"> Go Back to Payment Details Page </a></h4></html>";
 			}
 			UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
 				PaymentFUTranscationHistEntity fuTranscationHistEntity = paymentEntity.getPaymentsFUTrans();
 				fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 				fuTranscationHistEntity.setHash(hash);
-				fuTranscationHistEntity.setMode(mode.name());
+				if (mode != null) {
+					fuTranscationHistEntity.setMode(mode.name());
+				}
 				fuTranscationHistEntity.setPayuMoneyId(mihpayid);
 				fuTranscationHistEntity.setStatus(paymentStatus);
 				fuTranscationHistEntity.setTxnid(txnid);
@@ -105,7 +108,9 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 				PaymentCBATranscationHistEntity cbaTranscationHistEntity = paymentEntity.getPaymentsCBATrans();
 				cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 				cbaTranscationHistEntity.setHash(hash);
-				cbaTranscationHistEntity.setMode(mode.name());
+				if (mode != null) {
+					cbaTranscationHistEntity.setMode(mode.name());
+				}
 				cbaTranscationHistEntity.setPayuMoneyId(mihpayid);
 				cbaTranscationHistEntity.setStatus(paymentStatus);
 				cbaTranscationHistEntity.setTxnid(txnid);
@@ -137,16 +142,20 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
 							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
-							if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_3M)) {
+							if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_3M)) {
 								cal.add(Calendar.MONTH, 3);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_1MF)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_1MF)) {
 								cal.add(Calendar.MONTH, 1);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_6M)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_6M)) {
 								cal.add(Calendar.MONTH, 6);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
-							} else if (userServiceDetailsEntity.getValidPeriodCode().equals(NewServiceConstant.SERVICE_TERM_1Y)) {
+							} else if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_1Y)) {
 								cal.add(Calendar.MONTH, 12);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
 							}
@@ -162,7 +171,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 				}
 
 			}
-			return message;
+			return txnid;
 		}
 		return null;
 	}

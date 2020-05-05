@@ -1,5 +1,9 @@
 package com.src.restcontroller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -58,9 +62,15 @@ public class PaymentController extends AbstractRestManager {
 	}
 
 	@RequestMapping(path = "/payment-response", method = RequestMethod.POST)
-	public @ResponseBody String payuCallback(@RequestParam String mihpayid, @RequestParam String status,
-			@RequestParam PaymentMode mode, @RequestParam String txnid, @RequestParam String hash) {
-        return paymentService.payuCallback(mihpayid,txnid,mode,hash,status);
+	public @ResponseBody void payuCallback(@RequestParam String mihpayid, @RequestParam String status,
+			@RequestParam PaymentMode mode, @RequestParam String txnid, @RequestParam String hash,
+			HttpServletResponse res) throws IOException {
+		if (mihpayid != null) {
+			String transcationid = paymentService.payuCallback(mihpayid, txnid, mode, hash, status);
+			res.sendRedirect("http://localhost:4200/dashboard/" + transcationid);
+		} else {
+			res.sendRedirect("http://localhost:4200/dashboard/");
+		}
 	}
 
 	/**
@@ -110,6 +120,12 @@ public class PaymentController extends AbstractRestManager {
 	@RequestMapping(value = "/getPaymentDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PaymentEntity> getPaymentDetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
 		PaymentEntity paymentEntity = paymentService.getPaymentDetailsByUserId(userId);
+		return new ResponseEntity<PaymentEntity>(paymentEntity, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPaymentDetailsByTxnId/{txnid}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PaymentEntity> getPaymentDetailsByTxnId(@PathVariable String txnid) {
+		PaymentEntity paymentEntity = paymentService.getPaymentDetailsByTxnId(txnid);
 		return new ResponseEntity<PaymentEntity>(paymentEntity, HttpStatus.OK);
 	}
 
