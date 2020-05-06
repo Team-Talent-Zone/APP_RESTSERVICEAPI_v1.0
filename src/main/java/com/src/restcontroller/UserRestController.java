@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -172,9 +173,9 @@ public class UserRestController extends AbstractRestManager {
 	 * @return list of user details
 	 */
 	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserEntity>> getUserDetailsByJobAvailable() {
-		ArrayList<UserEntity> freelanceUserEntity = userDetailsService.getUserDetailsByJobAvailable();
-		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntity, HttpStatus.OK);
+	public ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>> getUserDetailsByJobAvailable() {
+		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = userDetailsService.getUserDetailsByJobAvailable();
+		return new ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
 	/**

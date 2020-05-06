@@ -11,6 +11,7 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceEntity;
 import com.src.entity.FreeLanceHistoryEntity;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserManagerDetailsEntity;
@@ -255,7 +256,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable() {
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
 		return userRestDAO.getUserDetailsByJobAvailable();
 	}
 

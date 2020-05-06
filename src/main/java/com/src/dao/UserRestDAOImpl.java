@@ -18,6 +18,7 @@ import com.src.constant.CustomMsgProperties;
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -219,19 +220,15 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable() {
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
 		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
-		List<UserEntity> freelanceUserEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
-		criteria.createAlias(UserConstant.FREELANCEDETAILS, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.INNER_JOIN);
-		criteria.add(Restrictions.eq(UserConstant.FU_ISJOBAVAILABLE, false));
-		criteria.add(Restrictions.eq(UserConstant.FU_ISBGDONE, true));
-		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
+		List<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreelanceOnServiceAvailableForJobView.class);
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
 		if (size > 0) {
-			return (ArrayList<UserEntity>) freelanceUserEntity;
+			return (ArrayList<FreelanceOnServiceAvailableForJobView>) freelanceUserEntity;
 		} else {
 			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
 					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));

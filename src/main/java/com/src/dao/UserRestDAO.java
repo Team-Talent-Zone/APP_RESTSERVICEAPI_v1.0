@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -88,7 +89,7 @@ public interface UserRestDAO {
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 */
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable();
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
 
 	/**
 	 * Gets all the freelance user details when incomplete profile
