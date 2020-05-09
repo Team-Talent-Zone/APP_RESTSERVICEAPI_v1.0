@@ -103,6 +103,17 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "LNG")
 	private Float lng;
 	
+	@Column(name = "jobdescription")
+	private String jobdescription;
+	
+	public String getJobdescription() {
+		return jobdescription;
+	}
+
+	public void setJobdescription(String jobdescription) {
+		this.jobdescription = jobdescription;
+	}
+
 	public Integer getJobId() {
 		return jobId;
 	}
