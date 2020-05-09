@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
-import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -165,33 +163,6 @@ public class UserRestController extends AbstractRestManager {
 				.getNotificationDetailsByUserId(userId);
 		return new ResponseEntity<ArrayList<UserNotificationDetailsView>>(userNotificationDetailsEntityViews,
 				HttpStatus.OK);
-	}
-
-	/**
-	 * Get User Details when isJobAvailable is false.
-	 * 
-	 * @param isJobAvailable
-	 * @return list of user details
-	 */
-	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>> getUserDetailsByJobAvailable() {
-		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = userDetailsService
-				.getUserDetailsByJobAvailable();
-		return new ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>>(freelanceUserEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Get User Details when isJobAvailable is false and start on.
-	 * 
-	 * @param isJobAvailable
-	 * @return list of user details
-	 */
-	@RequestMapping(value = "/getUserDetailsByJobAvailableByCreateOn/{jobCreatedOn}/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>> getUserDetailsByJobAvailableByCreateOn(
-			@PathVariable(UserConstant.JOB_CREATED_ON) String jobcreatedon , @PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
-		ArrayList<FreelancerAvailableStartDateStoreProc> freelanceUserEntity = userDetailsService
-				.getUserDetailsByJobAvailableByCreateOn(jobcreatedon,scategory);
-		return new ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
 	/**

@@ -73,8 +73,20 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "AMOUNT")
 	private Float amount;
 
-	@Column(name = "isjobamtpaid")
-	private boolean isjobamtpaid;
+	@Column(name = "tocompanyamount")
+	private Float tocompanyamount;
+
+	@Column(name = "tofreelanceamount")
+	private Float tofreelanceamount;
+
+	@Column(name = "isjobamtpaidtofu")
+	private boolean isjobamtpaidtofu;
+
+	@Column(name = "isjobcompleted")
+	private boolean isjobcompleted;
+
+	@Column(name = "isjobamtpaidtocompany")
+	private boolean isjobamtpaidtocompany;
 
 	@Column(name = "ISJOBCANCEL")
 	private boolean isjobcancel;
@@ -87,25 +99,25 @@ public class FreeLanceOnServiceEntity implements Serializable {
 
 	@Column(name = "ROUTE")
 	private String route;
-	
+
 	@Column(name = "CITY")
 	private String city;
-	
+
 	@Column(name = "STATE")
 	private String state;
-	
+
 	@Column(name = "COUNTRY")
 	private String country;
-	
+
 	@Column(name = "LAT")
 	private Float lat;
-	
+
 	@Column(name = "LNG")
 	private Float lng;
-	
+
 	@Column(name = "jobdescription")
 	private String jobdescription;
-	
+
 	public String getJobdescription() {
 		return jobdescription;
 	}
@@ -282,12 +294,28 @@ public class FreeLanceOnServiceEntity implements Serializable {
 		this.amount = amount;
 	}
 
-	public boolean isIsjobamtpaid() {
-		return isjobamtpaid;
+	public boolean isIsjobamtpaidtofu() {
+		return isjobamtpaidtofu;
 	}
 
-	public void setIsjobamtpaid(boolean isjobamtpaid) {
-		this.isjobamtpaid = isjobamtpaid;
+	public void setIsjobamtpaidtofu(boolean isjobamtpaidtofu) {
+		this.isjobamtpaidtofu = isjobamtpaidtofu;
+	}
+
+	public boolean isIsjobcompleted() {
+		return isjobcompleted;
+	}
+
+	public void setIsjobcompleted(boolean isjobcompleted) {
+		this.isjobcompleted = isjobcompleted;
+	}
+
+	public boolean isIsjobamtpaidtocompany() {
+		return isjobamtpaidtocompany;
+	}
+
+	public void setIsjobamtpaidtocompany(boolean isjobamtpaidtocompany) {
+		this.isjobamtpaidtocompany = isjobamtpaidtocompany;
 	}
 
 	public boolean isIsjobcancel() {
@@ -305,7 +333,21 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	public void setSubcategory(String subcategory) {
 		this.subcategory = subcategory;
 	}
- 
 
+	public Float getTocompanyamount() {
+		return tocompanyamount;
+	}
+
+	public void setTocompanyamount(Float tocompanyamount) {
+		this.tocompanyamount = tocompanyamount;
+	}
+
+	public Float getTofreelanceamount() {
+		return tofreelanceamount;
+	}
+
+	public void setTofreelanceamount(Float tofreelanceamount) {
+		this.tofreelanceamount = tofreelanceamount;
+	}
 	
 }

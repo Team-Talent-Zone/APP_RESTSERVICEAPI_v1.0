@@ -11,6 +11,9 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreelanceOnServiceAllJobView;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 
@@ -28,13 +31,36 @@ import com.src.utils.CommonUtilites;
 public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements FreeLanceOnServiceSVC {
 
 	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
+		return freeLanceOnServiceDAO.getUserDetailsByJobAvailable();
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false and createdon
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton,
+			String scategory) {
+		return freeLanceOnServiceDAO.getUserDetailsByJobAvailableByJobStartOn(jobstarton, scategory);
+	}
+
+	/**
 	 * To save Free Lance On Service Details.
 	 */
 	@Override
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		freeLanceOnServiceEntity.setIsjobaccepted(Boolean.FALSE);
-		freeLanceOnServiceEntity.setIsjobamtpaid(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobamtpaidtofu(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobcompleted(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
 		freeLanceOnServiceEntity.setJobstartedon(CommonUtilites.getCurrentDateInNewFormat());
@@ -115,6 +141,15 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
 		return freeLanceOnServiceDAO.getFUOnServiceNotificationDetailsByUserId(userId);
+	}
+
+	/**
+	 * To Get FU user job details.
+	 */
+
+	@Override
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetails() {
+		return freeLanceOnServiceDAO.getUserAllJobDetails();
 	}
 
 }
