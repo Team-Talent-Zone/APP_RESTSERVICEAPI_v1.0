@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
@@ -19,6 +20,7 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -223,12 +225,37 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
 		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
 		List<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreelanceOnServiceAvailableForJobView.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceAvailableForJobView.class);
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
 		if (size > 0) {
 			return (ArrayList<FreelanceOnServiceAvailableForJobView>) freelanceUserEntity;
+		} else {
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
+		}
+
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @throws RestCustomException
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByJobStartOn(
+			String jobstartonval , String scategory) {
+		List<FreelancerAvailableStartDateStoreProc> availableStartDateStoreProcs = null; 
+		Query query = this.sessionFactory.getCurrentSession().getNamedQuery("callGetFreelancerNotAvbBetweenStartDate")
+				.setParameter("jobstarton", jobstartonval).setParameter("scategory", scategory);
+		availableStartDateStoreProcs = query.list();
+		int size = availableStartDateStoreProcs != null ? availableStartDateStoreProcs.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<FreelancerAvailableStartDateStoreProc>) availableStartDateStoreProcs;
 		} else {
 			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
 					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));

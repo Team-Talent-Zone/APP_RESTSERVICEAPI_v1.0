@@ -73,6 +73,9 @@ public class UserEntity implements Serializable {
 	@Column(name = "PREFERLANG")
 	private String preferlang;
 	
+	@Column(name = "PHONENO")
+	private String phoneno;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserRoleEntity userroles;
 
@@ -262,5 +265,15 @@ public class UserEntity implements Serializable {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+
+	public String getPhoneno() {
+		return phoneno;
+	}
+
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
+	}
+	
+	
 	
 }

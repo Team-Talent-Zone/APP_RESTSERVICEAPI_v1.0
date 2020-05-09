@@ -12,6 +12,7 @@ import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserManagerDetailsEntity;
@@ -258,6 +259,17 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
 		return userRestDAO.getUserDetailsByJobAvailable();
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false and createdon
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton,
+			String scategory) {
+		return userRestDAO.getUserDetailsByJobAvailableByJobStartOn(jobstarton, scategory);
 	}
 
 	/**

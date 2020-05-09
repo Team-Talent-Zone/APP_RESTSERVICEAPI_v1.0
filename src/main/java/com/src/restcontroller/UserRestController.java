@@ -16,6 +16,7 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -60,7 +61,7 @@ public class UserRestController extends AbstractRestManager {
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getAllUsers() {
 		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
@@ -150,9 +151,9 @@ public class UserRestController extends AbstractRestManager {
 		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
 	}
 
-	
 	/**
 	 * Get User Notification Details when userId
+	 * 
 	 * @param userId
 	 * @return list of user details
 	 * 
@@ -174,8 +175,23 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>> getUserDetailsByJobAvailable() {
-		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = userDetailsService.getUserDetailsByJobAvailable();
+		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = userDetailsService
+				.getUserDetailsByJobAvailable();
 		return new ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Details when isJobAvailable is false and start on.
+	 * 
+	 * @param isJobAvailable
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getUserDetailsByJobAvailableByCreateOn/{jobCreatedOn}/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>> getUserDetailsByJobAvailableByCreateOn(
+			@PathVariable(UserConstant.JOB_CREATED_ON) String jobcreatedon , @PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
+		ArrayList<FreelancerAvailableStartDateStoreProc> freelanceUserEntity = userDetailsService
+				.getUserDetailsByJobAvailableByCreateOn(jobcreatedon,scategory);
+		return new ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
 	/**
@@ -188,7 +204,7 @@ public class UserRestController extends AbstractRestManager {
 		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
 		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get User Freelance Details when incomplete profile.
 	 * 
@@ -199,7 +215,7 @@ public class UserRestController extends AbstractRestManager {
 		ArrayList<UserEntity> freelanceUserEntities = userDetailsService.getFUUserDetailsWhenInCompleteProfile();
 		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntities, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Method is to save FreeLancer History.
 	 * 
@@ -212,7 +228,7 @@ public class UserRestController extends AbstractRestManager {
 		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
 		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Method is to save FreeLancer Documents.
 	 * 

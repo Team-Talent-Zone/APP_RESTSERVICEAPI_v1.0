@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
@@ -103,6 +104,14 @@ public interface UserService {
 	 * 
 	 */
 	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
+
+	/**
+	 * Gets all the user details passing jobstarton
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton , String scategory);
 
 	/**
 	 * Gets all the freelancer user details when incomplete profile
