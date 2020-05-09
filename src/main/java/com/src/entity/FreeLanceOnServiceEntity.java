@@ -82,12 +82,89 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "subcategory")
 	private String subcategory;
 
+	@Column(name = "joblocation")
+	private String joblocation;
+
+	@Column(name = "ROUTE")
+	private String route;
+	
+	@Column(name = "CITY")
+	private String city;
+	
+	@Column(name = "STATE")
+	private String state;
+	
+	@Column(name = "COUNTRY")
+	private String country;
+	
+	@Column(name = "LAT")
+	private Float lat;
+	
+	@Column(name = "LNG")
+	private Float lng;
+	
 	public Integer getJobId() {
 		return jobId;
 	}
 
 	public void setJobId(Integer jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getJoblocation() {
+		return joblocation;
+	}
+
+	public void setJoblocation(String joblocation) {
+		this.joblocation = joblocation;
+	}
+
+	public String getRoute() {
+		return route;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Float getLat() {
+		return lat;
+	}
+
+	public void setLat(Float lat) {
+		this.lat = lat;
+	}
+
+	public Float getLng() {
+		return lng;
+	}
+
+	public void setLng(Float lng) {
+		this.lng = lng;
 	}
 
 	public int getServiceId() {

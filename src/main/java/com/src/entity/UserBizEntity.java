@@ -76,6 +76,8 @@ public class UserBizEntity implements Serializable {
 	@Column(name = "LNG")
 	private Float lng;
 	
+	
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
@@ -88,6 +90,7 @@ public class UserBizEntity implements Serializable {
 	public void setId(Integer id) {
 		Id = id;
 	}
+	
 	
 	public String getRoute() {
 		return route;
