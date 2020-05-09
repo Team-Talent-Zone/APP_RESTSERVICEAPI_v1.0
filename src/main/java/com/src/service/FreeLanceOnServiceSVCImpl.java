@@ -32,12 +32,12 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 	@Override
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
-		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		freeLanceOnServiceEntity.setJobAccepted(Boolean.FALSE);
-		freeLanceOnServiceEntity.setOutStandingAmtPaid(Boolean.FALSE);
-		freeLanceOnServiceEntity.setJobCancel(Boolean.FALSE);
-		freeLanceOnServiceEntity.setJobActive(Boolean.FALSE);
-		freeLanceOnServiceEntity.setJobCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceOnServiceEntity.setIsjobaccepted(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobamtpaid(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE);
+		freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
+		freeLanceOnServiceEntity.setJobstartedon(CommonUtilites.getCurrentDateInNewFormat());
 		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
 		userServiceDetailsEntity.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetailsEntity);
@@ -49,7 +49,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 	@Override
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
-		freeLanceOnServiceEntity.setUpdatedOn(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 
 		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
 		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
