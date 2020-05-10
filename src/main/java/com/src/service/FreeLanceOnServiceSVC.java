@@ -94,7 +94,7 @@ public interface FreeLanceOnServiceSVC {
 	 * 
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetails();
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
 
 
 }

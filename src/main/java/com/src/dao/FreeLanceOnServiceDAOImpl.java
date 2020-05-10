@@ -243,10 +243,11 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetails() {
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory) {
 		List<FreelanceOnServiceAllJobView> freelanceOnServiceAllJobViews = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceAllJobView.class);
+		criteria.add(Restrictions.eq(UserConstant.JOB_SUBCATEGORY, scategory));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {

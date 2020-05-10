@@ -148,8 +148,8 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 
 	@Override
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetails() {
-		return freeLanceOnServiceDAO.getUserAllJobDetails();
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory) {
+		return freeLanceOnServiceDAO.getUserAllJobDetailsBySubCategory(scategory);
 	}
 
 }

@@ -47,7 +47,7 @@ public class FreelanceOnServiceAllJobView {
 	private String city;
 
 	@Column(name = "SUBCATEGORY")
-	private String subCategory;
+	private String scategory;
 
 	@Column(name = "EXPERIENCEINFIELD")
 	private Integer experienceInField;
@@ -162,12 +162,12 @@ public class FreelanceOnServiceAllJobView {
 		this.city = city;
 	}
 
-	public String getSubCategory() {
-		return subCategory;
+	public String getScategory() {
+		return scategory;
 	}
 
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
+	public void setScategory(String scategory) {
+		this.scategory = scategory;
 	}
 
 	public Integer getExperienceInField() {

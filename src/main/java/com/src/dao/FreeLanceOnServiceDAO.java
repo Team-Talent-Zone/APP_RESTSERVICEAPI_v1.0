@@ -91,6 +91,6 @@ public interface FreeLanceOnServiceDAO {
 	 * Gets all the user details job details
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetails();
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
 
 }
