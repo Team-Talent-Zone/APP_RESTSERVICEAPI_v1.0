@@ -118,11 +118,11 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 			}
 			paymentDAO.saveorupdatePayments(paymentEntity);
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
-				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null) {
-					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+				if (paymentEntity.getPaymentsFUTrans().getPayuMoneyId() != null) {
+					if (paymentEntity.getPaymentsFUTrans().getStatus().equals("Success")) {
 						userEntity.getFreeLanceDetails().setIsregfeedone(true);
 					}
-					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+					if (paymentEntity.getPaymentsFUTrans().getStatus().equals("Failed")) {
 						userEntity.getFreeLanceDetails().setIsregfeedone(true);
 					}
 					userRestDAO.saveorupdateUserDetails(userEntity);
