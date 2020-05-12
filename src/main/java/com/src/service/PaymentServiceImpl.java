@@ -123,7 +123,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 						userEntity.getFreeLanceDetails().setIsregfeedone(true);
 					}
 					if (paymentEntity.getPaymentsFUTrans().getStatus().equals("Failed")) {
-						userEntity.getFreeLanceDetails().setIsregfeedone(true);
+						userEntity.getFreeLanceDetails().setIsregfeedone(false);
 					}
 					userRestDAO.saveorupdateUserDetails(userEntity);
 				}
