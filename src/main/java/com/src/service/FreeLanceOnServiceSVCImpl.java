@@ -62,8 +62,8 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcompleted(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE);
-		freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
-		freeLanceOnServiceEntity.setJobstartedon(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceOnServiceEntity.setIsjobactive(Boolean.TRUE);
+		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.TRUE);
 		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
 		userServiceDetailsEntity.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetailsEntity);

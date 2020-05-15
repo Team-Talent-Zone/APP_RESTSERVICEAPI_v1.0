@@ -46,7 +46,7 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(insertable = true, updatable = false, name = "USERID")
 	private Integer userId;
 
-	@Column(name = "JOBCREATEDON")
+	@Column(name = "JOBSTARTEDON")
 	private String jobstartedon;
 
 	@Column(name = "JOBENDEDON")
