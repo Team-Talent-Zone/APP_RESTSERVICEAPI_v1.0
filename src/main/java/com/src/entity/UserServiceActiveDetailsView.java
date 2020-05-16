@@ -78,6 +78,18 @@ public class UserServiceActiveDetailsView {
 	private boolean isservicepack;
 	
 	
+	@Column(name = "txnid")
+	private String txnid; 
+	
+	
+	public String getTxnid() {
+		return txnid;
+	}
+
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+
 	public Integer getChildservicepkgserviceid() {
 		return childservicepkgserviceid;
 	}

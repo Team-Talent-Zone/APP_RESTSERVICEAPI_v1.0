@@ -7,6 +7,9 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreelanceOnServiceAllJobView;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
  * The <code> FreeLanceOnServiceSVC </code> interface defines a business service
@@ -69,5 +72,29 @@ public interface FreeLanceOnServiceSVC {
 	 * @param userId
 	 */
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
+
+	/**
+	 * Gets all the user details passing jobstarton
+	 * 
+	 * @param isJobAvailable
+	 * 
+	 */
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton , String scategory);
+
+	/**
+	 * Gets all the user details job details
+	 * 
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
+
 
 }

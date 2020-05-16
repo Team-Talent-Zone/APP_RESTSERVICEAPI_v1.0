@@ -86,11 +86,6 @@ public interface UserRestDAO {
 	public boolean checkUsernameNotExist(String username);
 
 	/**
-	 * Gets all the user details if isJobAvailable is false
-	 */
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable();
-
-	/**
 	 * Gets all the freelance user details when incomplete profile
 	 */
 	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile();

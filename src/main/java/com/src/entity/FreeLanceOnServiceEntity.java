@@ -40,44 +40,91 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@JsonIgnore
 	private UserServiceDetailsEntity userServiceDetails;
 
+	@Column(name = "freelanceuserId")
+	private Integer freelanceuserId;
+
 	@Column(insertable = true, updatable = false, name = "USERID")
 	private Integer userId;
 
-	@Column(name = "JOBCREATEDON")
-	private String jobCreatedOn;
+	@Column(name = "JOBSTARTEDON")
+	private String jobstartedon;
 
 	@Column(name = "JOBENDEDON")
-	private String jobEndedOn;
+	private String jobendedon;
 
 	@Column(name = "STATUS")
 	private String status;
 
 	@Column(name = "ISJOBACCEPTED")
-	private boolean isJobAccepted;
+	private boolean isjobaccepted;
 
 	@Column(name = "UPDATEDON")
-	private String updatedOn;
+	private String updatedon;
 
 	@Column(name = "UPDATEDBY")
-	private String updatedBy;
+	private String updatedby;
 
 	@Column(name = "ISJOBACTIVE")
-	private boolean isJobActive;
+	private boolean isjobactive;
 
 	@Column(name = "TOTALHOURSOFJOB")
-	private Float totalHoursOfJob;
+	private Float totalhoursofjob;
 
-	@Column(name = "AMOUNTCBAPAIDTOFU")
-	private Float amountCbaPaidToFu;
+	@Column(name = "AMOUNT")
+	private Float amount;
 
-	@Column(name = "OUTSTANDINGAMTOPAYTOCOMPANY")
-	private Float outStandingAmtoPayToCompany;
+	@Column(name = "tocompanyamount")
+	private Float tocompanyamount;
 
-	@Column(name = "ISOUTSTANDINGAMTPAID")
-	private boolean isOutStandingAmtPaid;
+	@Column(name = "tofreelanceamount")
+	private Float tofreelanceamount;
+
+	@Column(name = "isjobamtpaidtofu")
+	private boolean isjobamtpaidtofu;
+
+	@Column(name = "isjobcompleted")
+	private boolean isjobcompleted;
+
+	@Column(name = "isjobamtpaidtocompany")
+	private boolean isjobamtpaidtocompany;
 
 	@Column(name = "ISJOBCANCEL")
-	private boolean isJobCancel;
+	private boolean isjobcancel;
+
+	@Column(name = "subcategory")
+	private String subcategory;
+
+	@Column(name = "joblocation")
+	private String joblocation;
+
+	@Column(name = "ROUTE")
+	private String route;
+
+	@Column(name = "CITY")
+	private String city;
+
+	@Column(name = "STATE")
+	private String state;
+
+	@Column(name = "COUNTRY")
+	private String country;
+
+	@Column(name = "LAT")
+	private Float lat;
+
+	@Column(name = "LNG")
+	private Float lng;
+
+	@Column(name = "jobdescription")
+	private String jobdescription;
+
+	public String getJobdescription() {
+		return jobdescription;
+	}
+
+	public void setJobdescription(String jobdescription) {
+		this.jobdescription = jobdescription;
+	}
 
 	public Integer getJobId() {
 		return jobId;
@@ -85,6 +132,62 @@ public class FreeLanceOnServiceEntity implements Serializable {
 
 	public void setJobId(Integer jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getJoblocation() {
+		return joblocation;
+	}
+
+	public void setJoblocation(String joblocation) {
+		this.joblocation = joblocation;
+	}
+
+	public String getRoute() {
+		return route;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Float getLat() {
+		return lat;
+	}
+
+	public void setLat(Float lat) {
+		this.lat = lat;
+	}
+
+	public Float getLng() {
+		return lng;
+	}
+
+	public void setLng(Float lng) {
+		this.lng = lng;
 	}
 
 	public int getServiceId() {
@@ -103,6 +206,14 @@ public class FreeLanceOnServiceEntity implements Serializable {
 		this.userServiceDetails = userServiceDetails;
 	}
 
+	public Integer getFreelanceuserId() {
+		return freelanceuserId;
+	}
+
+	public void setFreelanceuserId(Integer freelanceuserId) {
+		this.freelanceuserId = freelanceuserId;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -111,20 +222,20 @@ public class FreeLanceOnServiceEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getJobCreatedOn() {
-		return jobCreatedOn;
+	public String getJobstartedon() {
+		return jobstartedon;
 	}
 
-	public void setJobCreatedOn(String jobCreatedOn) {
-		this.jobCreatedOn = jobCreatedOn;
+	public void setJobstartedon(String jobstartedon) {
+		this.jobstartedon = jobstartedon;
 	}
 
-	public String getJobEndedOn() {
-		return jobEndedOn;
+	public String getJobendedon() {
+		return jobendedon;
 	}
 
-	public void setJobEndedOn(String jobEndedOn) {
-		this.jobEndedOn = jobEndedOn;
+	public void setJobendedon(String jobendedon) {
+		this.jobendedon = jobendedon;
 	}
 
 	public String getStatus() {
@@ -135,76 +246,108 @@ public class FreeLanceOnServiceEntity implements Serializable {
 		this.status = status;
 	}
 
-	public boolean isJobAccepted() {
-		return isJobAccepted;
+	public boolean isIsjobaccepted() {
+		return isjobaccepted;
 	}
 
-	public void setJobAccepted(boolean isJobAccepted) {
-		this.isJobAccepted = isJobAccepted;
+	public void setIsjobaccepted(boolean isjobaccepted) {
+		this.isjobaccepted = isjobaccepted;
 	}
 
-	public String getUpdatedOn() {
-		return updatedOn;
+	public String getUpdatedon() {
+		return updatedon;
 	}
 
-	public void setUpdatedOn(String updatedOn) {
-		this.updatedOn = updatedOn;
+	public void setUpdatedon(String updatedon) {
+		this.updatedon = updatedon;
 	}
 
-	public String getUpdatedBy() {
-		return updatedBy;
+	public String getUpdatedby() {
+		return updatedby;
 	}
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
 	}
 
-	public boolean isJobActive() {
-		return isJobActive;
+	public boolean isIsjobactive() {
+		return isjobactive;
 	}
 
-	public void setJobActive(boolean isJobActive) {
-		this.isJobActive = isJobActive;
+	public void setIsjobactive(boolean isjobactive) {
+		this.isjobactive = isjobactive;
 	}
 
-	public Float getTotalHoursOfJob() {
-		return totalHoursOfJob;
+	public Float getTotalhoursofjob() {
+		return totalhoursofjob;
 	}
 
-	public void setTotalHoursOfJob(Float totalHoursOfJob) {
-		this.totalHoursOfJob = totalHoursOfJob;
+	public void setTotalhoursofjob(Float totalhoursofjob) {
+		this.totalhoursofjob = totalhoursofjob;
 	}
 
-	public Float getAmountCbaPaidToFu() {
-		return amountCbaPaidToFu;
+	public Float getAmount() {
+		return amount;
 	}
 
-	public void setAmountCbaPaidToFu(Float amountCbaPaidToFu) {
-		this.amountCbaPaidToFu = amountCbaPaidToFu;
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
-	public Float getOutStandingAmtoPayToCompany() {
-		return outStandingAmtoPayToCompany;
+	public boolean isIsjobamtpaidtofu() {
+		return isjobamtpaidtofu;
 	}
 
-	public void setOutStandingAmtoPayToCompany(Float outStandingAmtoPayToCompany) {
-		this.outStandingAmtoPayToCompany = outStandingAmtoPayToCompany;
+	public void setIsjobamtpaidtofu(boolean isjobamtpaidtofu) {
+		this.isjobamtpaidtofu = isjobamtpaidtofu;
 	}
 
-	public boolean isOutStandingAmtPaid() {
-		return isOutStandingAmtPaid;
+	public boolean isIsjobcompleted() {
+		return isjobcompleted;
 	}
 
-	public void setOutStandingAmtPaid(boolean isOutStandingAmtPaid) {
-		this.isOutStandingAmtPaid = isOutStandingAmtPaid;
+	public void setIsjobcompleted(boolean isjobcompleted) {
+		this.isjobcompleted = isjobcompleted;
 	}
 
-	public boolean isJobCancel() {
-		return isJobCancel;
+	public boolean isIsjobamtpaidtocompany() {
+		return isjobamtpaidtocompany;
 	}
 
-	public void setJobCancel(boolean isJobCancel) {
-		this.isJobCancel = isJobCancel;
+	public void setIsjobamtpaidtocompany(boolean isjobamtpaidtocompany) {
+		this.isjobamtpaidtocompany = isjobamtpaidtocompany;
 	}
 
+	public boolean isIsjobcancel() {
+		return isjobcancel;
+	}
+
+	public void setIsjobcancel(boolean isjobcancel) {
+		this.isjobcancel = isjobcancel;
+	}
+
+	public String getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public Float getTocompanyamount() {
+		return tocompanyamount;
+	}
+
+	public void setTocompanyamount(Float tocompanyamount) {
+		this.tocompanyamount = tocompanyamount;
+	}
+
+	public Float getTofreelanceamount() {
+		return tofreelanceamount;
+	}
+
+	public void setTofreelanceamount(Float tofreelanceamount) {
+		this.tofreelanceamount = tofreelanceamount;
+	}
+	
 }

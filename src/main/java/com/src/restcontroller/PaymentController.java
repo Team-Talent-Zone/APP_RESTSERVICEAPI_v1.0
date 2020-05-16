@@ -1,6 +1,7 @@
 package com.src.restcontroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,8 @@ import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
+import com.src.entity.PaymentHistoryCBAView;
+import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
@@ -133,12 +136,12 @@ public class PaymentController extends AbstractRestManager {
 	 * Get the FU Payment Details by UserId.
 	 * 
 	 * @param userId
-	 */
-	@RequestMapping(value = "/getPaymentFUDetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentFUTranscationHistEntity> getPaymentFUDetailsByUserId(
+	 */ 
+	@RequestMapping(value = "/getPaymentFUDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<PaymentHistoryFUView>> getPaymentFUDetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
-		PaymentFUTranscationHistEntity paymentEntity = paymentService.getPaymentFUDetailsByUserId(userId);
-		return new ResponseEntity<PaymentFUTranscationHistEntity>(paymentEntity, HttpStatus.OK);
+		ArrayList<PaymentHistoryFUView> paymentEntity = paymentService.getPaymentFUDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<PaymentHistoryFUView>>(paymentEntity, HttpStatus.OK);
 	}
 
 	/**
@@ -146,11 +149,11 @@ public class PaymentController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/getPaymentCBADetailsByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentCBATranscationHistEntity> getPaymentCBADetailsByUserId(
+	@RequestMapping(value = "/getPaymentCBADetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<PaymentHistoryCBAView>> getPaymentCBADetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
-		PaymentCBATranscationHistEntity paymentEntity = paymentService.getPaymentCBADetailsByUserId(userId);
-		return new ResponseEntity<PaymentCBATranscationHistEntity>(paymentEntity, HttpStatus.OK);
+		ArrayList<PaymentHistoryCBAView> paymentEntity = paymentService.getPaymentCBADetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<PaymentHistoryCBAView>>(paymentEntity, HttpStatus.OK);
 	}
 
 	/**

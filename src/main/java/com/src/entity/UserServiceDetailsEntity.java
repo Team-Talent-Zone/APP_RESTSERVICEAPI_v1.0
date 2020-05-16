@@ -50,6 +50,9 @@ public class UserServiceDetailsEntity implements Serializable {
 
 	@Column(name = "CREATEDBY")
 	private String createdby; 
+	
+	@Column(name = "txnid")
+	private String txnid; 
 
 	@Column(name = "CREATEDON")
 	private String createdon;
@@ -230,7 +233,14 @@ public class UserServiceDetailsEntity implements Serializable {
 	public void setUserServiceEventHistory(Set<UserServiceEventHistoryEntity> userServiceEventHistory) {
 		this.userServiceEventHistory = userServiceEventHistory;
 	}
+	
+	public String getTxnid() {
+		return txnid;
+	}
 
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
 
 	public Float getAmount() {
 		return amount;

@@ -94,15 +94,6 @@ public interface UserService {
 	 * 
 	 */
 	public ArrayList<UserEntity> getUserByRecoveryPwd();
-
-	/**
-	 * Gets all the user details if isJobAvailable is false
-	 * 
-	 * @param isJobAvailable
-	 * 
-	 */
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable();
-
 	/**
 	 * Gets all the freelancer user details when incomplete profile
 	 * 

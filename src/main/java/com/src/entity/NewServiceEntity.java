@@ -78,10 +78,10 @@ public class NewServiceEntity implements Serializable {
 	@Column(name = "PACKWITHOTHEROURSERVICEID")
 	private Integer packwithotherourserviceid;
 
-	@Column(insertable = true, updatable = false, name = "userId")
+	@Column(insertable = true, updatable = false, name = "userId") 
 	private Integer userId;
 
-	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "newService")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "newService")
 	private Set<NewServiceHistoryEntity> serviceHistory;
 
 	public Integer getOurserviceId() {

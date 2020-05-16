@@ -59,7 +59,7 @@ public class UserRestController extends AbstractRestManager {
 	 * Get All User Details from the List.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getAllUsers() {
 		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
@@ -149,9 +149,9 @@ public class UserRestController extends AbstractRestManager {
 		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
 	}
 
-	
 	/**
 	 * Get User Notification Details when userId
+	 * 
 	 * @param userId
 	 * @return list of user details
 	 * 
@@ -166,18 +166,6 @@ public class UserRestController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get User Details when isJobAvailable is false.
-	 * 
-	 * @param isJobAvailable
-	 * @return list of user details
-	 */
-	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserEntity>> getUserDetailsByJobAvailable() {
-		ArrayList<UserEntity> freelanceUserEntity = userDetailsService.getUserDetailsByJobAvailable();
-		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntity, HttpStatus.OK);
-	}
-
-	/**
 	 * 
 	 * @param isrecoverypwd
 	 * @return list of user details
@@ -187,7 +175,7 @@ public class UserRestController extends AbstractRestManager {
 		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
 		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get User Freelance Details when incomplete profile.
 	 * 
@@ -198,7 +186,7 @@ public class UserRestController extends AbstractRestManager {
 		ArrayList<UserEntity> freelanceUserEntities = userDetailsService.getFUUserDetailsWhenInCompleteProfile();
 		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntities, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Method is to save FreeLancer History.
 	 * 
@@ -211,7 +199,7 @@ public class UserRestController extends AbstractRestManager {
 		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
 		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Method is to save FreeLancer Documents.
 	 * 

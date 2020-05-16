@@ -17,7 +17,6 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
-import com.src.entity.NewServicePackageEntity;
 import com.src.exception.RestCustomException;
 import com.src.utils.CommonUtilites;
 
@@ -90,24 +89,6 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 	}
 
 	/**
-	 * To save the service Package Details.
-	 * 
-	 * @param newServicePackageEntity
-	 * @throw RestCustomException
-	 */
-	@Transactional
-	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity) {
-		LOGGER.info(NewServiceConstant.INSIDE_SAVENEWSERVICEPACKAGE);
-		int servicePackageSavedID = (Integer) sessionFactory.getCurrentSession().save(newServicePackageEntity);
-		LOGGER.debug(NewServiceConstant.CONFIRM_SAVE_NEWSERVICEPACKAGE + servicePackageSavedID);
-		if (servicePackageSavedID > 0) {
-			return newServicePackageEntity;
-		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
-	}
-
-	/**
 	 * To Get all the Service Details.
 	 * 
 	 * @throw RestCustomException
@@ -124,6 +105,29 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
 		if (size > 0) {
 			return (ArrayList<AllActiveNewSeviceDetailsView>) newServiceEntity;
+		}
+		throw new RestCustomException(HttpStatus.NO_CONTENT,
+				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+	}
+	
+
+	/**
+	 * To Get all the Service Details.
+	 * 
+	 * @throw RestCustomException
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<NewServiceEntity> getAllNewServices() {
+		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
+		List<NewServiceEntity> newServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
+	 
+		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
+		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
+		if (size > 0) {
+			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));

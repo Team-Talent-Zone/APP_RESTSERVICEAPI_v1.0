@@ -7,6 +7,9 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreelanceOnServiceAllJobView;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
  * The <code> FreeLanceOnServiceDAO </code> interface defines a data access
@@ -72,4 +75,22 @@ public interface FreeLanceOnServiceDAO {
 	 * 
 	 */
 	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 */
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
+
+	/**
+	 * Gets all the user details if isJobAvailable is false and by job start on
+	 */
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByJobStartOn(String jobstarton,
+			String scategory);
+
+	/**
+	 * Gets all the user details job details
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
+
 }

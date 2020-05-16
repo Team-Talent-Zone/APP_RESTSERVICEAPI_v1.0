@@ -17,6 +17,9 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreelanceOnServiceAllJobView;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
  * The <code> FreeLanceOnServiceController </code> class defines managed beans
@@ -107,7 +110,7 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceSVC
 				.getFreeLanceOnServiceDetailsByUserId(userId);
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
-	}					
+	}
 
 	/**
 	 * Get the Free Lancer On Service Details when service end date after 2 days
@@ -133,7 +136,46 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 			@PathVariable(UserConstant.USERID) int userId) {
 		ArrayList<FreeLanceOnServiceNotificationDetailsView> freeLanceOnServiceNotificationDetailsViews = freeLanceOnServiceSVC
 				.getFUOnServiceNotificationDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<FreeLanceOnServiceNotificationDetailsView>>(freeLanceOnServiceNotificationDetailsViews,
-				HttpStatus.OK);
+		return new ResponseEntity<ArrayList<FreeLanceOnServiceNotificationDetailsView>>(
+				freeLanceOnServiceNotificationDetailsViews, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Details when isJobAvailable is false.
+	 * 
+	 * @param isJobAvailable
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>> getUserDetailsByJobAvailable() {
+		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = freeLanceOnServiceSVC
+				.getUserDetailsByJobAvailable();
+		return new ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get User Details when isJobAvailable is false and start on.
+	 * 
+	 * @param isJobAvailable
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getUserDetailsByJobAvailableByCreateOn/{jobCreatedOn}/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>> getUserDetailsByJobAvailableByCreateOn(
+			@PathVariable(UserConstant.JOB_CREATED_ON) String jobcreatedon,
+			@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
+		ArrayList<FreelancerAvailableStartDateStoreProc> freelanceUserEntity = freeLanceOnServiceSVC
+				.getUserDetailsByJobAvailableByCreateOn(jobcreatedon, scategory);
+		return new ResponseEntity<ArrayList<FreelancerAvailableStartDateStoreProc>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get All FU User Job Details
+	 */
+	
+	@RequestMapping(value = "/getUserAllJobDetailsBySubCategory/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceOnServiceAllJobView>> getUserAllJobDetails(@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
+		ArrayList<FreelanceOnServiceAllJobView> freelanceUserEntity = freeLanceOnServiceSVC
+				.getUserAllJobDetailsBySubCategory(scategory);
+		return new ResponseEntity<ArrayList<FreelanceOnServiceAllJobView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 }

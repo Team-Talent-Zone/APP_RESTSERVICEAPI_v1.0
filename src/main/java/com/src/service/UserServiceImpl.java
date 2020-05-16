@@ -248,17 +248,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		return userRestDAO.getUserByRecoveryPwd();
 
 	}
-
-	/**
-	 * Gets all the user details if isJobAvailable is false
-	 * 
-	 * @param isJobAvailable
-	 * 
-	 */
-	public ArrayList<UserEntity> getUserDetailsByJobAvailable() {
-		return userRestDAO.getUserDetailsByJobAvailable();
-	}
-
 	/**
 	 * Gets all the notification details based on the userId
 	 * 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreelanceOnServiceAllJobView;
+import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.exception.RestCustomException;
 
 /**
@@ -33,6 +37,54 @@ import com.src.exception.RestCustomException;
 @Transactional(rollbackFor = { Exception.class })
 public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements FreeLanceOnServiceDAO {
 	final Logger LOGGER = LoggerFactory.getLogger(FreeLanceOnServiceDAOImpl.class);
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @throws RestCustomException
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
+		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
+		List<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceAvailableForJobView.class);
+		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<FreelanceOnServiceAvailableForJobView>) freelanceUserEntity;
+		} else {
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
+		}
+
+	}
+
+	/**
+	 * Gets all the user details if isJobAvailable is false
+	 * 
+	 * @throws RestCustomException
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByJobStartOn(
+			String jobstartonval, String scategory) {
+		List<FreelancerAvailableStartDateStoreProc> availableStartDateStoreProcs = null;
+		Query query = this.sessionFactory.getCurrentSession().getNamedQuery("callGetFreelancerNotAvbBetweenStartDate")
+				.setParameter("jobstarton", jobstartonval).setParameter("scategory", scategory);
+		availableStartDateStoreProcs = query.list();
+		int size = availableStartDateStoreProcs != null ? availableStartDateStoreProcs.size() : 0;
+
+		if (size > 0) {
+			return (ArrayList<FreelancerAvailableStartDateStoreProc>) availableStartDateStoreProcs;
+		} else {
+			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
+					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
+		}
+
+	}
 
 	/**
 	 * To save the freelancer on Service.
@@ -185,6 +237,21 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 		if (freeLanceOnServiceNotificationDetailsViews != null) {
 			return (ArrayList<FreeLanceOnServiceNotificationDetailsView>) freeLanceOnServiceNotificationDetailsViews;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory) {
+		List<FreelanceOnServiceAllJobView> freelanceOnServiceAllJobViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceAllJobView.class);
+		criteria.add(Restrictions.eq(UserConstant.JOB_SUBCATEGORY, scategory));
+		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		if (freelanceOnServiceAllJobViews != null) {
+			return (ArrayList<FreelanceOnServiceAllJobView>) freelanceOnServiceAllJobViews;
 		}
 		return null;
 	}
