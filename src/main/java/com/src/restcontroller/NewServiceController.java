@@ -15,7 +15,6 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
-import com.src.entity.NewServicePackageEntity;
 
 /**
  * The <code> NewServiceController </code> class defines managed beans which
@@ -64,19 +63,15 @@ public class NewServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Method is to save New Service History.
+	 * Get All New Service Details from the List.
 	 * 
-	 * @param newServiceHistoryObject
-	 * @return
 	 */
-	@RequestMapping(value = "/saveNewServicePackage/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<NewServicePackageEntity>> saveNewServicePackage(
-			@RequestBody ArrayList<NewServicePackageEntity> servicePackageEntities) {
-		ArrayList<NewServicePackageEntity> packageEntities = newServiceSvc
-				.saveNewServicePackage(servicePackageEntities);
-		return new ResponseEntity<ArrayList<NewServicePackageEntity>>(packageEntities, HttpStatus.OK);
+	@RequestMapping(value = "/getAllNewServices/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<NewServiceEntity>> getAllNewServices() {
+		ArrayList<NewServiceEntity> listofAllServices = newServiceSvc.getAllNewServices();
+		return new ResponseEntity<ArrayList<NewServiceEntity>>(listofAllServices, HttpStatus.OK);
 	}
-
+	
 	/**
 	 * Get All New Service Details from the List.
 	 * 

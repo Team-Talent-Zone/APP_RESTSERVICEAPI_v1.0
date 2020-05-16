@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
-import com.src.entity.NewServicePackageEntity;
 
 /**
  * The <code> NewServiceDAO </code> interface defines a data access object for
@@ -39,18 +38,18 @@ public interface NewServiceDAO {
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
-	/**
-	 * To Save the New Service Package Details.
-	 * 
-	 * @param newServicePackageEntity
-	 */
-	public NewServicePackageEntity saveNewServicePackage(NewServicePackageEntity newServicePackageEntity);
-
+ 
 	/**
 	 * To get All Service Details.
 	 * 
 	 */
 	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails();
+
+	/**
+	 * To get All Service Details.
+	 * 
+	 */
+	public ArrayList<NewServiceEntity> getAllNewServices();
 
 	/**
 	 * Get All New Service Details by managerId.
@@ -71,22 +70,19 @@ public interface NewServiceDAO {
 	 * 
 	 */
 	public ArrayList<NewServiceEntity> getNewServiceDetailsCreated();
-	
+
 	/**
 	 * To check if the service name is exist by passing service name.
 	 * 
 	 * @return
 	 */
 	public boolean checkNewServiceIsExist(String servicename);
-	
+
 	/**
 	 * To Get the all Service Details by service id.
 	 * 
 	 * @return
 	 */
 	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId);
-
-
-
 
 }

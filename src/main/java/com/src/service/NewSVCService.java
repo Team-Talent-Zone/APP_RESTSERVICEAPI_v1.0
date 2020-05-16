@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
-import com.src.entity.NewServicePackageEntity;
 
 /**
  * The <code> NewSVCService </code> interface defines a business service for
@@ -41,23 +40,19 @@ public interface NewSVCService {
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
-	
-	
 	/**
-	 * To save Service Package Details.
-	 * 
-	 * @param newServicePackageEntity
-	 * @return
-	 */
-	public ArrayList<NewServicePackageEntity> saveNewServicePackage(
-			ArrayList<NewServicePackageEntity> newServicePackageEntity);
-
-	/**
-	 * To Get the all Service Details.
+	 * To Get the all Service Details for CBA.
 	 * 
 	 * @return
 	 */
 	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails();
+	
+	/**
+	 * To Get the all Service Details for Manage Services.
+	 * 
+	 * @return
+	 */
+	public ArrayList<NewServiceEntity> getAllNewServices();
 	
 	/**
 	 * To check if the service name is exist by passing service name.

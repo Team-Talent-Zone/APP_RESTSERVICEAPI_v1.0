@@ -11,7 +11,6 @@ import com.src.constant.NewServiceConstant;
 import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
-import com.src.entity.NewServicePackageEntity;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -87,28 +86,19 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 	}
 
 	/**
-	 * To save New Service Package Details.
-	 */
-	@Override
-	public ArrayList<NewServicePackageEntity> saveNewServicePackage(
-			ArrayList<NewServicePackageEntity> newServicePackageEntity) {
-
-		ArrayList<NewServicePackageEntity> entities = new ArrayList<NewServicePackageEntity>();
-		for (NewServicePackageEntity packageEntity : newServicePackageEntity) {
-			packageEntity.setActive(Boolean.TRUE);
-			packageEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-			NewServicePackageEntity entity = newServiceRestDAO.saveNewServicePackage(packageEntity);
-			entities.add(entity);
-		}
-		return entities;
-	}
-
-	/**
 	 * To Get All Service Details.
 	 */
 	@Override
 	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails() {
 		return newServiceRestDAO.getAllServiceDetails();
+	}
+	
+	/**
+	 * To Get All Service Details for Manage New Service Tab.
+	 */
+	@Override
+	public ArrayList<NewServiceEntity> getAllNewServices() {
+		return newServiceRestDAO.getAllNewServices();
 	}
 
 	/**
