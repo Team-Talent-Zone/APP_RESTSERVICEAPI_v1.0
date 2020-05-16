@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
+import com.src.entity.PaymentHistoryCBAView;
+import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
@@ -141,6 +144,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 						if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
+							userServiceDetailsEntity.setTxnid(paymentEntity.getTxnid());
 							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
 							if (userServiceDetailsEntity.getValidPeriodCode()
 									.equals(NewServiceConstant.SERVICE_TERM_3M)) {
@@ -267,7 +271,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public PaymentFUTranscationHistEntity getPaymentFUDetailsByUserId(int userId) {
+	public  ArrayList<PaymentHistoryFUView> getPaymentFUDetailsByUserId(int userId) {
 		return paymentDAO.getPaymentFUDetailsByUserId(userId);
 	}
 
@@ -277,7 +281,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public PaymentCBATranscationHistEntity getPaymentCBADetailsByUserId(int userId) {
+	public  ArrayList<PaymentHistoryCBAView> getPaymentCBADetailsByUserId(int userId) {
 		return paymentDAO.getPaymentCBADetailsByUserId(userId);
 	}
 
