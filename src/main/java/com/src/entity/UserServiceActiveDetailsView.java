@@ -77,6 +77,8 @@ public class UserServiceActiveDetailsView {
 	@Column(name = "ISSERVICEPACK")
 	private boolean isservicepack;
 	
+	@Column(name = "publishedlinkurl")
+	private String publishedlinkurl;
 	
 	@Column(name = "txnid")
 	private String txnid; 
@@ -210,7 +212,13 @@ public class UserServiceActiveDetailsView {
 		this.packwithotherourserviceid = packwithotherourserviceid;
 	}
 
-	 
+	public String getPublishedlinkurl() {
+		return publishedlinkurl;
+	}
+
+	public void setPublishedlinkurl(String publishedlinkurl) {
+		this.publishedlinkurl = publishedlinkurl;
+	}
 
 	public Integer getUserid() {
 		return userid;
