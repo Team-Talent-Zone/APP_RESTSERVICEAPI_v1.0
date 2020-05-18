@@ -86,7 +86,7 @@ public class UserServiceDetailsEntity implements Serializable {
 	
 	@Column(name = "validPeriodCode")
 	private String validPeriodCode;
-		
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
 

@@ -18,8 +18,8 @@ import org.hibernate.annotations.Immutable;
  */
 @Entity
 @Immutable
-@Table(name = "APP_FREELANCER_ONSERVICE_AVAIABLEFORJOB_VW")
-public class FreelanceOnServiceAvailableForJobView {
+@Table(name = "APP_FU_ONSERVICE_SEARCH_VW")
+public class FreelanceOnServiceSearchView {
 
  
 	@Id
@@ -69,6 +69,8 @@ public class FreelanceOnServiceAvailableForJobView {
 	
 	@Column(name = "feedbackcomment")
 	private String feedBackComment;
+	
+	
 	
 	public Integer getUserId() {
 		return userId;
@@ -190,6 +192,5 @@ public class FreelanceOnServiceAvailableForJobView {
 		this.feedBackComment = feedBackComment;
 	}
 
-	
-	
+
 }

@@ -76,6 +76,9 @@ public class UserEntity implements Serializable {
 	@Column(name = "PHONENO")
 	private String phoneno;
 	
+	@Column(name = "uniqueIdentificationCode")
+	private String uniqueidentificationcode;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userdetails")
 	private UserRoleEntity userroles;
 
@@ -272,6 +275,14 @@ public class UserEntity implements Serializable {
 
 	public void setPhoneno(String phoneno) {
 		this.phoneno = phoneno;
+	}
+
+	public String getUniqueidentificationcode() {
+		return uniqueidentificationcode;
+	}
+
+	public void setUniqueidentificationcode(String uniqueidentificationcode) {
+		this.uniqueidentificationcode = uniqueidentificationcode;
 	}
 	
 	

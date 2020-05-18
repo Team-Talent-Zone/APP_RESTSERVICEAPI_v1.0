@@ -18,8 +18,8 @@ import org.hibernate.annotations.Immutable;
  */
 @Entity
 @Immutable
-@Table(name = "APP_FREELANCER_ONSERVICE_ALLJOBS_VW")
-public class FreelanceOnServiceAllJobView {
+@Table(name = "APP_FU_ONSERVICE_JOB_POSTED_VW")
+public class FreelanceOnServiceJobPostedView {
 
 	@Id
 	@Column(name = "jobId")
@@ -105,6 +105,51 @@ public class FreelanceOnServiceAllJobView {
 
 	@Column(name = "isupcoming")
 	private String isupcoming;
+
+	@Column(name = "fuphoneno")
+	private String fuphoneno;
+	
+	@Column(name = "cbausername")
+	private String cbausername;
+	
+	@Column(name = "cbafullname")
+	private String cbafullname;
+	
+	@Column(name = "cbaphoneno")
+	private String cbaphoneno;
+	
+	
+	public String getFuphoneno() {
+		return fuphoneno;
+	}
+
+	public void setFuphoneno(String fuphoneno) {
+		this.fuphoneno = fuphoneno;
+	}
+
+	public String getCbausername() {
+		return cbausername;
+	}
+
+	public void setCbausername(String cbausername) {
+		this.cbausername = cbausername;
+	}
+
+	public String getCbafullname() {
+		return cbafullname;
+	}
+
+	public void setCbafullname(String cbafullname) {
+		this.cbafullname = cbafullname;
+	}
+
+	public String getCbaphoneno() {
+		return cbaphoneno;
+	}
+
+	public void setCbaphoneno(String cbaphoneno) {
+		this.cbaphoneno = cbaphoneno;
+	}
 
 	public Integer getFreelanceuserId() {
 		return freelanceuserId;

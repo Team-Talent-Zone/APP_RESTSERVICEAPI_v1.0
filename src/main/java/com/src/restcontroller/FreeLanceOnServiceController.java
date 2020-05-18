@@ -17,8 +17,8 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreelanceOnServiceAllJobView;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelanceOnServiceJobPostedView;
+import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
@@ -147,10 +147,10 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	 * @return list of user details
 	 */
 	@RequestMapping(value = "/getUserDetailsByJobAvailable/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>> getUserDetailsByJobAvailable() {
-		ArrayList<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = freeLanceOnServiceSVC
+	public ResponseEntity<ArrayList<FreelanceOnServiceSearchView>> getUserDetailsByJobAvailable() {
+		ArrayList<FreelanceOnServiceSearchView> freelanceUserEntity = freeLanceOnServiceSVC
 				.getUserDetailsByJobAvailable();
-		return new ResponseEntity<ArrayList<FreelanceOnServiceAvailableForJobView>>(freelanceUserEntity, HttpStatus.OK);
+		return new ResponseEntity<ArrayList<FreelanceOnServiceSearchView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
 	/**
@@ -173,9 +173,9 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	 */
 	
 	@RequestMapping(value = "/getUserAllJobDetailsBySubCategory/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelanceOnServiceAllJobView>> getUserAllJobDetails(@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
-		ArrayList<FreelanceOnServiceAllJobView> freelanceUserEntity = freeLanceOnServiceSVC
+	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllJobDetails(@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
+		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC
 				.getUserAllJobDetailsBySubCategory(scategory);
-		return new ResponseEntity<ArrayList<FreelanceOnServiceAllJobView>>(freelanceUserEntity, HttpStatus.OK);
+		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 }

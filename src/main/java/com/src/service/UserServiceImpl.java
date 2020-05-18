@@ -103,6 +103,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
 
 		} else if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+			userEntity.setUniqueidentificationcode(CommonUtilites.genRandomAlphaNumeric());
 			userEntity.setIsactive(Boolean.FALSE);
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
@@ -110,7 +111,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			UserManagerDetailsEntity usermanagerdetailsentity = userEntity.getUsermanagerdetailsentity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
-
 		}
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
@@ -248,6 +248,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		return userRestDAO.getUserByRecoveryPwd();
 
 	}
+
 	/**
 	 * Gets all the notification details based on the userId
 	 * 

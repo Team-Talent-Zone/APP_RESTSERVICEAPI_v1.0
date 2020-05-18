@@ -18,7 +18,7 @@ import org.hibernate.annotations.Immutable;
  */
 @Entity
 @Immutable
-@Table(name = "APP_PAYMENTS_HISTORY_FU")
+@Table(name = "APP_FU_PAYMENTS_HISTORY_VW")
 public class PaymentHistoryFUView {
 
 	@Id

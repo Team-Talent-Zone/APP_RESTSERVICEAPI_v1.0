@@ -20,8 +20,8 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreelanceOnServiceAllJobView;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelanceOnServiceJobPostedView;
+import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.exception.RestCustomException;
 
@@ -45,16 +45,16 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
+	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable() {
 		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
-		List<FreelanceOnServiceAvailableForJobView> freelanceUserEntity = null;
+		List<FreelanceOnServiceSearchView> freelanceUserEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceAvailableForJobView.class);
+				.createCriteria(FreelanceOnServiceSearchView.class);
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
 		if (size > 0) {
-			return (ArrayList<FreelanceOnServiceAvailableForJobView>) freelanceUserEntity;
+			return (ArrayList<FreelanceOnServiceSearchView>) freelanceUserEntity;
 		} else {
 			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
 					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
@@ -79,10 +79,8 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 		if (size > 0) {
 			return (ArrayList<FreelancerAvailableStartDateStoreProc>) availableStartDateStoreProcs;
-		} else {
-			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
-		}
+		} 
+		return null;
 
 	}
 
@@ -243,15 +241,15 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory) {
-		List<FreelanceOnServiceAllJobView> freelanceOnServiceAllJobViews = null;
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory) {
+		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceAllJobView.class);
+				.createCriteria(FreelanceOnServiceJobPostedView.class);
 		criteria.add(Restrictions.eq(UserConstant.JOB_SUBCATEGORY, scategory));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceAllJobView>) freelanceOnServiceAllJobViews;
+			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
 		}
 		return null;
 	}

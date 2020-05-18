@@ -7,8 +7,8 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreelanceOnServiceAllJobView;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelanceOnServiceJobPostedView;
+import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
@@ -79,7 +79,7 @@ public interface FreeLanceOnServiceSVC {
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
+	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable();
 
 	/**
 	 * Gets all the user details passing jobstarton
@@ -94,7 +94,7 @@ public interface FreeLanceOnServiceSVC {
 	 * 
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
 
 
 }

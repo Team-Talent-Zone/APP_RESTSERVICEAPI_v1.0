@@ -11,8 +11,8 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreelanceOnServiceAllJobView;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelanceOnServiceJobPostedView;
+import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
@@ -36,7 +36,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable() {
+	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable() {
 		return freeLanceOnServiceDAO.getUserDetailsByJobAvailable();
 	}
 
@@ -148,7 +148,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 
 	@Override
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory) {
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory) {
 		return freeLanceOnServiceDAO.getUserAllJobDetailsBySubCategory(scategory);
 	}
 
