@@ -76,8 +76,6 @@ public class UserBizEntity implements Serializable {
 	@Column(name = "LNG")
 	private Float lng;
 	
-	
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
@@ -219,6 +217,5 @@ public class UserBizEntity implements Serializable {
 	public Float getLng() {
 		return lng;
 	}
-	
 
 } 

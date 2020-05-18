@@ -87,9 +87,6 @@ public class UserServiceDetailsEntity implements Serializable {
 	@Column(name = "validPeriodCode")
 	private String validPeriodCode;
 	
-	@Column(name = "publishedlinkurl")
-	private String publishedlinkurl;
-		
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userServiceDetailsEntity")
 	private Set<UserServiceEventHistoryEntity> userServiceEventHistory;
 
@@ -253,12 +250,4 @@ public class UserServiceDetailsEntity implements Serializable {
 		this.amount = amount;
 	}
 
-	public String getPublishedlinkurl() {
-		return publishedlinkurl;
-	}
-
-	public void setPublishedlinkurl(String publishedlinkurl) {
-		this.publishedlinkurl = publishedlinkurl;
-	}
-	
 }
