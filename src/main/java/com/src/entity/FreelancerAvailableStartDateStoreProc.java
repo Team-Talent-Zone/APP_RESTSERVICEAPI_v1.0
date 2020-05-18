@@ -67,7 +67,6 @@ public class FreelancerAvailableStartDateStoreProc {
 	@Column(name = "HOURLYRATE")
 	private Integer hourlyRate;
 	
-
 	@Column(name = "feedbackby")
 	private String feedBackBy;
 

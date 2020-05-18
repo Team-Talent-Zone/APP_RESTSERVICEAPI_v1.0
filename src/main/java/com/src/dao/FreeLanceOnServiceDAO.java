@@ -7,8 +7,8 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreelanceOnServiceAllJobView;
-import com.src.entity.FreelanceOnServiceAvailableForJobView;
+import com.src.entity.FreelanceOnServiceJobPostedView;
+import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
@@ -79,7 +79,7 @@ public interface FreeLanceOnServiceDAO {
 	/**
 	 * Gets all the user details if isJobAvailable is false
 	 */
-	public ArrayList<FreelanceOnServiceAvailableForJobView> getUserDetailsByJobAvailable();
+	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable();
 
 	/**
 	 * Gets all the user details if isJobAvailable is false and by job start on
@@ -91,6 +91,6 @@ public interface FreeLanceOnServiceDAO {
 	 * Gets all the user details job details
 	 * 
 	 */
-	public ArrayList<FreelanceOnServiceAllJobView> getUserAllJobDetailsBySubCategory(String scategory);
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
 
 }
