@@ -87,7 +87,8 @@ public interface FreeLanceOnServiceSVC {
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton , String scategory);
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton,
+			String scategory);
 
 	/**
 	 * Gets all the user details job details
@@ -96,5 +97,11 @@ public interface FreeLanceOnServiceSVC {
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
 
+	/**
+	 * Gets all the user details job details by userId
+	 * 
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
 
 }

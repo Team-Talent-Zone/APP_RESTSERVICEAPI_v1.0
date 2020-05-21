@@ -27,6 +27,12 @@ public class FreelanceOnServiceJobPostedView {
 	
 	@Column(name = "freelanceuserId")
 	private Integer freelanceuserId;
+	
+	@Column(name = "userId")
+	private Integer userId;
+	
+	@Column(name = "subcategorylabel")
+	private String subcategorylabel;
 
 	@Column(name = "bizname")
 	private String bizname;
@@ -87,12 +93,18 @@ public class FreelanceOnServiceJobPostedView {
 
 	@Column(name = "isjobcancel")
 	private Boolean isjobcancel;
+	
+	@Column(name = "isjobaccepted")
+	private Boolean isjobaccepted;
 
 	@Column(name = "isjobactive")
 	private Boolean isjobactive;
 
 	@Column(name = "joblocation")
 	private String joblocation;
+	
+	@Column(name = "isdeactive")
+	private String isdeactive;
 
 	@Column(name = "jobdescription")
 	private String jobdescription;
@@ -414,7 +426,37 @@ public class FreelanceOnServiceJobPostedView {
 	public void setIsjobactive(Boolean isjobactive) {
 		this.isjobactive = isjobactive;
 	}
-	
-	
 
+	public Boolean getIsjobaccepted() {
+		return isjobaccepted;
+	}
+
+	public void setIsjobaccepted(Boolean isjobaccepted) {
+		this.isjobaccepted = isjobaccepted;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getSubcategorylabel() {
+		return subcategorylabel;
+	}
+
+	public void setSubcategorylabel(String subcategorylabel) {
+		this.subcategorylabel = subcategorylabel;
+	}
+
+	public String getIsdeactive() {
+		return isdeactive;
+	}
+
+	public void setIsdeactive(String isdeactive) {
+		this.isdeactive = isdeactive;
+	}
+	
 }

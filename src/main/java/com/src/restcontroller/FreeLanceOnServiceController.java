@@ -100,7 +100,7 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get the Free Lance On Service Details by UserId.
+	 * Get the FreeLance On Service Details by UserId.
 	 * 
 	 * @param userId
 	 */
@@ -171,11 +171,25 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	/**
 	 * Get All FU User Job Details
 	 */
-	
+
 	@RequestMapping(value = "/getUserAllJobDetailsBySubCategory/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllJobDetails(@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
+	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllJobDetails(
+			@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
 		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC
 				.getUserAllJobDetailsBySubCategory(scategory);
 		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
 	}
+
+	/**
+	 * Get All Job Details By UserId
+	 */
+
+	@RequestMapping(value = "/getUserAllJobDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllJobDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC
+				.getUserAllJobDetailsByUserId(userId);
+		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
 }

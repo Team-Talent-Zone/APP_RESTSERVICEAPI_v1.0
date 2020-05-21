@@ -253,5 +253,20 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
+		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceJobPostedView.class);
+		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		if (freelanceOnServiceAllJobViews != null) {
+			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
+		}
+		return null;
+	}
 
 }
