@@ -61,7 +61,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceEntity.setIsjobamtpaidtofu(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcompleted(Boolean.FALSE);
-		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE); 
+		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
 		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
@@ -113,8 +113,8 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 * To Get All Free Lance Service Details.
 	 */
 	@Override
-	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
-		return freeLanceOnServiceDAO.getAllFreelanceOnServiceDetails();
+	public FreeLanceOnServiceEntity getAllFreelanceOnServiceDetailsByJobId(int jobId) {
+		return freeLanceOnServiceDAO.getAllFreelanceOnServiceDetailsByJobId(jobId);
 	}
 
 	/**
@@ -155,6 +155,15 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
 		return freeLanceOnServiceDAO.getUserAllJobDetailsByUserId(userId);
+	}
+
+	@Override
+	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		freeLanceOnServiceDAO.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
+		if (freeLanceOnServiceEntity.getServiceId() > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

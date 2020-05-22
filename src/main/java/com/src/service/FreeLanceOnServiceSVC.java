@@ -52,7 +52,7 @@ public interface FreeLanceOnServiceSVC {
 	/**
 	 * To Get the all free lance Service Details.
 	 */
-	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
+	public FreeLanceOnServiceEntity getAllFreelanceOnServiceDetailsByJobId(int jobId);
 
 	/**
 	 * Get the Free Lance on Service Details by UserId.
@@ -103,5 +103,11 @@ public interface FreeLanceOnServiceSVC {
 	 * 
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
+
+	/**
+	 * To delete the FreeLance On Service Details.
+	 */
+	
+	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 }

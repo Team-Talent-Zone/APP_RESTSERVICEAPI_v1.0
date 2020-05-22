@@ -89,16 +89,17 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get All Freelance on Service Details from the List.
+	 * Get Freelance on Service Details by Job Id.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllFreelanceOnServiceDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreeLanceOnServiceEntity>> getAllFreelanceOnServiceDetails() {
-		ArrayList<FreeLanceOnServiceEntity> freeLanceOnServiceEntity = freeLanceOnServiceSVC
-				.getAllFreelanceOnServiceDetails();
-		return new ResponseEntity<ArrayList<FreeLanceOnServiceEntity>>(freeLanceOnServiceEntity, HttpStatus.OK);
+	@RequestMapping(value = "/getAllFreelanceOnServiceDetailsByJobId/{jobId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetailsByJobId(
+			@PathVariable(UserConstant.JOB_ID) int jobId) {
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceSVC
+				.getAllFreelanceOnServiceDetailsByJobId(jobId);
+		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
 	}
-
+ 
 	/**
 	 * Get the FreeLance On Service Details by UserId.
 	 * 
@@ -112,6 +113,15 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
 	}
 
+	/**
+	 * To delete the FreeLance On Service Details.
+	 */
+	@RequestMapping(value = "/deleteFreelanceSVCDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> deleteFreelanceSVCDetails(@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		boolean isDeleted =freeLanceOnServiceSVC.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
+		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
+
+	}
 	/**
 	 * Get the Free Lancer On Service Details when service end date after 2 days
 	 * 

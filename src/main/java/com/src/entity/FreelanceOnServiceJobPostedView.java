@@ -130,7 +130,17 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "cbaphoneno")
 	private String cbaphoneno;
 	
+	@Column(name = "txnid")
+	private String txnid;
 	
+	public String getTxnid() {
+		return txnid;
+	}
+
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+
 	public String getFuphoneno() {
 		return fuphoneno;
 	}

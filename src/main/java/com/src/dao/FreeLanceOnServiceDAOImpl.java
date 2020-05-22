@@ -164,17 +164,19 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	 * 
 	 * @throws RestCustomException
 	 */
+	@SuppressWarnings("unused")
 	@Transactional
-	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails() {
+	public FreeLanceOnServiceEntity getAllFreelanceOnServiceDetailsByJobId(int jobId) {
 		LOGGER.info(UserConstant.USER_DAO_GETALLFREELANCEONSERVICE);
-		@SuppressWarnings("unchecked")
-		List<FreeLanceOnServiceEntity> freeLanceOnServiceEntity = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreeLanceOnServiceEntity.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.list();
-		int size = freeLanceOnServiceEntity != null ? freeLanceOnServiceEntity.size() : 0;
-		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLFREELANCEONSERVICE + size);
-		if (size > 0) {
-			return (ArrayList<FreeLanceOnServiceEntity>) freeLanceOnServiceEntity;
+		FreeLanceOnServiceEntity freeLanceOnServiceEntity = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceOnServiceEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.JOB_ID, jobId));
+		freeLanceOnServiceEntity = (FreeLanceOnServiceEntity) criteria.uniqueResult();
+		if (freeLanceOnServiceEntity != null) {
+			return freeLanceOnServiceEntity;
+		}
+		if (freeLanceOnServiceEntity != null) {
+			return freeLanceOnServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
@@ -267,6 +269,17 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
 		}
 		return null;
+	}
+
+	@Transactional
+	public void deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		// TODO Auto-generated method stub
+		try {
+			sessionFactory.getCurrentSession().delete(freeLanceOnServiceEntity);
+		} catch (RestCustomException e) {
+			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
+					.getProperty(CustomMsgProperties.DELETEFUONSERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
+		}
 	}
 
 }

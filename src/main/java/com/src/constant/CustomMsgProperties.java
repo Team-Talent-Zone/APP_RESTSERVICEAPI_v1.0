@@ -45,6 +45,7 @@ public class CustomMsgProperties {
 	public static final String FREELANCEHISTORY_UNABLE_TO_SAVE_ERRORMSG = "freelancehistory_unabletosave_errorMsg";
 	public static final String FREELANCEDOC_UNABLE_TO_SAVE_ERRORMSG = "freelancedocs_unabletosave_errorMsg";
 	public static final String GETALLUSERSERVICES_NOUSERSSERVICESFOUND_ERRORMSG = "getAllUserService_nouserservicefound_errorMsg";
+	public static final String DELETEFUONSERVICEDETAILS_UNABLETOUPDATE_ERRORMSG = "deleteFUOnServiceDetails_unabletodelete_errorMsg";
 
 	private CustomMsgProperties() {
 	}

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -134,7 +135,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
 				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null
-						&& paymentEntity.getServiceids() != null) {
+						&& paymentEntity.getServiceids() != null && paymentEntity.getServiceids().length() > 0) {
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String[] serviceIds = paymentEntity.getServiceids().split(",");
 					for (String serviceid : serviceIds) {
@@ -172,6 +173,25 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 						}
 						userServiceDetailsDAO.saveUserServiceDetails(userServiceDetailsEntity);
 					}
+				}
+
+			}
+
+			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
+				if (paymentEntity.getPaymentsCBATrans().getPayuMoneyId() != null && paymentEntity.getJobids() != null
+						&& paymentEntity.getJobids().length() > 0) {
+					FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceDAO
+							.getAllFreelanceOnServiceDetailsByJobId(Integer.parseInt(paymentEntity.getJobids()));
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
+						freeLanceOnServiceEntity.setIsjobcompleted(true);
+						freeLanceOnServiceEntity.setIsjobactive(true);
+						freeLanceOnServiceEntity.setTxnid(paymentEntity.getPaymentsCBATrans().getTxnid());
+					}
+					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
+						freeLanceOnServiceEntity.setTxnid(paymentEntity.getPaymentsCBATrans().getTxnid());
+					}
+					freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+					freeLanceOnServiceDAO.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntity);
 				}
 
 			}
@@ -271,7 +291,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public  ArrayList<PaymentHistoryFUView> getPaymentFUDetailsByUserId(int userId) {
+	public ArrayList<PaymentHistoryFUView> getPaymentFUDetailsByUserId(int userId) {
 		return paymentDAO.getPaymentFUDetailsByUserId(userId);
 	}
 
@@ -281,7 +301,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public  ArrayList<PaymentHistoryCBAView> getPaymentCBADetailsByUserId(int userId) {
+	public ArrayList<PaymentHistoryCBAView> getPaymentCBADetailsByUserId(int userId) {
 		return paymentDAO.getPaymentCBADetailsByUserId(userId);
 	}
 
