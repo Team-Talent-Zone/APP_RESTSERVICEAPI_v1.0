@@ -52,7 +52,7 @@ public interface FreeLanceOnServiceSVC {
 	/**
 	 * To Get the all free lance Service Details.
 	 */
-	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
+	public FreeLanceOnServiceEntity getAllFreelanceOnServiceDetailsByJobId(int jobId);
 
 	/**
 	 * Get the Free Lance on Service Details by UserId.
@@ -87,7 +87,8 @@ public interface FreeLanceOnServiceSVC {
 	 * @param isJobAvailable
 	 * 
 	 */
-	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton , String scategory);
+	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton,
+			String scategory);
 
 	/**
 	 * Gets all the user details job details
@@ -96,5 +97,17 @@ public interface FreeLanceOnServiceSVC {
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
 
+	/**
+	 * Gets all the user details job details by userId
+	 * 
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
+
+	/**
+	 * To delete the FreeLance On Service Details.
+	 */
+	
+	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 }

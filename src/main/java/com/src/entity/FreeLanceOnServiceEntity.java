@@ -74,10 +74,10 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	private Float amount;
 
 	@Column(name = "tocompanyamount")
-	private Float tocompanyamount;
+	private String tocompanyamount;
 
 	@Column(name = "tofreelanceamount")
-	private Float tofreelanceamount;
+	private String tofreelanceamount;
 
 	@Column(name = "isjobamtpaidtofu")
 	private boolean isjobamtpaidtofu;
@@ -117,6 +117,21 @@ public class FreeLanceOnServiceEntity implements Serializable {
 
 	@Column(name = "jobdescription")
 	private String jobdescription;
+	
+	@Column(name = "txnid")
+	private String txnid;
+	
+	@Column(name = "futxnid")
+	private String futxnid;
+	
+	
+	public String getFutxnid() {
+		return futxnid;
+	}
+
+	public void setFutxnid(String futxnid) {
+		this.futxnid = futxnid;
+	}
 
 	public String getJobdescription() {
 		return jobdescription;
@@ -334,20 +349,28 @@ public class FreeLanceOnServiceEntity implements Serializable {
 		this.subcategory = subcategory;
 	}
 
-	public Float getTocompanyamount() {
+	public String getTocompanyamount() {
 		return tocompanyamount;
 	}
 
-	public void setTocompanyamount(Float tocompanyamount) {
+	public void setTocompanyamount(String tocompanyamount) {
 		this.tocompanyamount = tocompanyamount;
 	}
 
-	public Float getTofreelanceamount() {
+	public String getTofreelanceamount() {
 		return tofreelanceamount;
 	}
 
-	public void setTofreelanceamount(Float tofreelanceamount) {
+	public void setTofreelanceamount(String tofreelanceamount) {
 		this.tofreelanceamount = tofreelanceamount;
+	}
+
+	public String getTxnid() {
+		return txnid;
+	}
+
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
 	}
 	
 }

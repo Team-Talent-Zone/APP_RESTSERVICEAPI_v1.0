@@ -53,7 +53,7 @@ public interface FreeLanceOnServiceDAO {
 	/**
 	 * To get All Free LanceService Details.
 	 */
-	public ArrayList<FreeLanceOnServiceEntity> getAllFreelanceOnServiceDetails();
+	public FreeLanceOnServiceEntity getAllFreelanceOnServiceDetailsByJobId(int jobId);
 
 	/**
 	 * Get the Free Lance on Service Details by UserId.
@@ -92,5 +92,17 @@ public interface FreeLanceOnServiceDAO {
 	 * 
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
+
+	/**
+	 * Gets all the user details job details by userId
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
+
+	/**
+	 * To delete the FreeLance On Service Details.
+	 */
+
+	public void deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 }
