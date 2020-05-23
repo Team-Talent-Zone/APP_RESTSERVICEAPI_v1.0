@@ -183,8 +183,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 					FreeLanceOnServiceEntity freeLanceOnServiceEntity = freeLanceOnServiceDAO
 							.getAllFreelanceOnServiceDetailsByJobId(Integer.parseInt(paymentEntity.getJobids()));
 					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Success")) {
-						freeLanceOnServiceEntity.setIsjobcompleted(true);
-						freeLanceOnServiceEntity.setIsjobactive(true);
+						freeLanceOnServiceEntity.setIsjobamtpaidtocompany(true);
 						freeLanceOnServiceEntity.setTxnid(paymentEntity.getPaymentsCBATrans().getTxnid());
 					}
 					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {

@@ -120,6 +120,18 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	
 	@Column(name = "txnid")
 	private String txnid;
+	
+	@Column(name = "futxnid")
+	private String futxnid;
+	
+	
+	public String getFutxnid() {
+		return futxnid;
+	}
+
+	public void setFutxnid(String futxnid) {
+		this.futxnid = futxnid;
+	}
 
 	public String getJobdescription() {
 		return jobdescription;

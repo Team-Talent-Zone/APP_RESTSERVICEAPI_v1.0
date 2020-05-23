@@ -133,6 +133,9 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "txnid")
 	private String txnid;
 	
+	@Column(name = "futxnid")
+	private String futxnid;
+	
 	public String getTxnid() {
 		return txnid;
 	}
@@ -468,5 +471,12 @@ public class FreelanceOnServiceJobPostedView {
 	public void setIsdeactive(String isdeactive) {
 		this.isdeactive = isdeactive;
 	}
-	
+
+	public String getFutxnid() {
+		return futxnid;
+	}
+
+	public void setFutxnid(String futxnid) {
+		this.futxnid = futxnid;
+	}
 }
