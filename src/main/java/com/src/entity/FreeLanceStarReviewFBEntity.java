@@ -29,7 +29,7 @@ public class FreeLanceStarReviewFBEntity implements Serializable {
 	private static final long serialVersionUID = 495528534806932352L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "Id")
 	@GeneratedValue
 	private Integer id;
 
@@ -45,16 +45,19 @@ public class FreeLanceStarReviewFBEntity implements Serializable {
 	private Integer userId;
 
 	@Column(name = "feedbackby")
-	private String feedBackBy;
+	private String feedbackby;
 
 	@Column(name = "starrate")
-	private Integer starRate;
+	private Integer starrate;
 
 	@Column(name = "feedbackon")
-	private String feedBackOn;
+	private String feedbackon;
 
 	@Column(name = "feedbackcomment")
-	private String feedBackComment;
+	private String feedbackcomment;
+	
+	@Column(name = "freelanceuserId")
+	private Integer freelanceuserId;
 
 	public Integer getId() {
 		return id;
@@ -88,36 +91,48 @@ public class FreeLanceStarReviewFBEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getFeedBackBy() {
-		return feedBackBy;
+	
+
+	public String getFeedbackby() {
+		return feedbackby;
 	}
 
-	public void setFeedBackBy(String feedBackBy) {
-		this.feedBackBy = feedBackBy;
+	public void setFeedbackby(String feedbackby) {
+		this.feedbackby = feedbackby;
 	}
 
-	public Integer getStarRate() {
-		return starRate;
+	public Integer getStarrate() {
+		return starrate;
 	}
 
-	public void setStarRate(Integer starRate) {
-		this.starRate = starRate;
+	public void setStarrate(Integer starrate) {
+		this.starrate = starrate;
 	}
 
-	public String getFeedBackOn() {
-		return feedBackOn;
+	public String getFeedbackon() {
+		return feedbackon;
 	}
 
-	public void setFeedBackOn(String feedBackOn) {
-		this.feedBackOn = feedBackOn;
+	public void setFeedbackon(String feedbackon) {
+		this.feedbackon = feedbackon;
 	}
 
-	public String getFeedBackComment() {
-		return feedBackComment;
+	public String getFeedbackcomment() {
+		return feedbackcomment;
 	}
 
-	public void setFeedBackComment(String feedBackComment) {
-		this.feedBackComment = feedBackComment;
+	public void setFeedbackcomment(String feedbackcomment) {
+		this.feedbackcomment = feedbackcomment;
 	}
+
+	public Integer getFreelanceuserId() {
+		return freelanceuserId;
+	}
+
+	public void setFreelanceuserId(Integer freelanceuserId) {
+		this.freelanceuserId = freelanceuserId;
+	}
+
+	
 
 }
