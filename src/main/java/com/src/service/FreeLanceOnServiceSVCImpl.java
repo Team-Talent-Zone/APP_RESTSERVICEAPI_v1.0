@@ -89,8 +89,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 	@Override
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
-		freeLanceStarReviewFB.setFeedBackOn(CommonUtilites.getCurrentDateInNewFormat());
-
+		freeLanceStarReviewFB.setFeedbackon(CommonUtilites.getCurrentDateInNewFormat());
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = new FreeLanceOnServiceEntity();
 		freeLanceOnServiceEntity.setJobId(freeLanceStarReviewFB.getJobId());
 		freeLanceStarReviewFB.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
