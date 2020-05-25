@@ -1,7 +1,6 @@
 package com.src.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -43,8 +42,8 @@ public class WidgetForServiceEntity implements Serializable {
 	@Column(name = "STATUS")
 	private String status;
 
-	@Column(name = "PUBLISHEDON")
-	private String publishedon;
+	@Column(name = "updatedon")
+	private String updatedon;
 
 	@Column(name = "HOSTNAME")
 	private String hostname;
@@ -55,8 +54,8 @@ public class WidgetForServiceEntity implements Serializable {
 	@Column(insertable = true, updatable = false, name = "serviceid")
 	private int serviceId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "widgetEntity")
-	private Set<WidgetLayoutEntity> widgetLayoutEntity;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "widgetEntity")
+	private WidgetLayoutEntity widgetLayoutEntity;
 
 	public Integer getWidgetId() {
 		return widgetId;
@@ -98,12 +97,12 @@ public class WidgetForServiceEntity implements Serializable {
 		this.status = status;
 	}
 
-	public String getPublishedon() {
-		return publishedon;
+	public String getUpdatedon() {
+		return updatedon;
 	}
 
-	public void setPublishedon(String publishedon) {
-		this.publishedon = publishedon;
+	public void setUpdatedon(String updatedon) {
+		this.updatedon = updatedon;
 	}
 
 	public String getHostname() {
@@ -130,11 +129,11 @@ public class WidgetForServiceEntity implements Serializable {
 		this.serviceId = serviceId;
 	}
 
-	public Set<WidgetLayoutEntity> getWidgetLayoutEntity() {
+	public WidgetLayoutEntity getWidgetLayoutEntity() {
 		return widgetLayoutEntity;
 	}
 
-	public void setWidgetLayoutEntity(Set<WidgetLayoutEntity> widgetLayoutEntity) {
+	public void setWidgetLayoutEntity(WidgetLayoutEntity widgetLayoutEntity) {
 		this.widgetLayoutEntity = widgetLayoutEntity;
 	}
 

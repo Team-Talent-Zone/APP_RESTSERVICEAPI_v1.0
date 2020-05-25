@@ -1,17 +1,15 @@
 package com.src.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.src.constant.WidgetConstant;
 import com.src.entity.WidgetForServiceEntity;
 import com.src.entity.WidgetLayoutEntity;
 import com.src.entity.WidgetNotificationHistoryEntity;
 import com.src.utils.CommonUtilites;
-import com.src.constant.WidgetConstant;
 
 /**
  * The <code> WidgetServiceImpl </code> class provides the implementation for
@@ -31,12 +29,9 @@ public class WidgetServiceImpl extends AbstractServiceManager implements WidgetS
 	@Override
 	public WidgetForServiceEntity saveWidgetService(WidgetForServiceEntity widgetForServiceEntity) {
 		widgetForServiceEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		Set<WidgetLayoutEntity> widgetLayoutEntities = new HashSet<WidgetLayoutEntity>();
+		WidgetLayoutEntity widgetLayoutEntities = new WidgetLayoutEntity();
 		if (widgetForServiceEntity.getWidgetLayoutEntity() != null) {
-			for (WidgetLayoutEntity widgetLayoutEntity : widgetForServiceEntity.getWidgetLayoutEntity()) {
-				widgetLayoutEntities.add(widgetLayoutEntity);
-				widgetLayoutEntity.setWidgetEntity(widgetForServiceEntity);
-			}
+			widgetLayoutEntities.setWidgetEntity(widgetForServiceEntity);
 			widgetForServiceEntity.setWidgetLayoutEntity(widgetLayoutEntities);
 		}
 		return widgetDAO.saveWidgetService(widgetForServiceEntity);
@@ -48,14 +43,10 @@ public class WidgetServiceImpl extends AbstractServiceManager implements WidgetS
 	 */
 	@Override
 	public WidgetForServiceEntity saveOrUpdateWidget(WidgetForServiceEntity widgetForServiceEntity) {
-
-		Set<WidgetLayoutEntity> widgetLayoutEntities = new HashSet<WidgetLayoutEntity>();
+		widgetForServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 
 		if (widgetForServiceEntity.getWidgetLayoutEntity() != null) {
-			for (WidgetLayoutEntity widgetLayoutEntity : widgetForServiceEntity.getWidgetLayoutEntity()) {
-				widgetLayoutEntities.add(widgetLayoutEntity);
-				widgetLayoutEntity.setWidgetEntity(widgetForServiceEntity);
-			}
+			WidgetLayoutEntity widgetLayoutEntities = widgetForServiceEntity.getWidgetLayoutEntity();
 			widgetForServiceEntity.setWidgetLayoutEntity(widgetLayoutEntities);
 		}
 
