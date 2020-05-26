@@ -36,7 +36,7 @@ public interface WidgetDAO {
 	 * 
 	 * @return
 	 */
-	public ArrayList<WidgetForServiceEntity> getAllWidgetDetails();
+	public WidgetForServiceEntity getAllWidgetDetails(int widgetId);
 
 	/**
 	 * To save Widget Notification history details.

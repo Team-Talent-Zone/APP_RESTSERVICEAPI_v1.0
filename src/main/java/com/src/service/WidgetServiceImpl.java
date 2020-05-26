@@ -29,8 +29,8 @@ public class WidgetServiceImpl extends AbstractServiceManager implements WidgetS
 	@Override
 	public WidgetForServiceEntity saveWidgetService(WidgetForServiceEntity widgetForServiceEntity) {
 		widgetForServiceEntity.setCreatedOn(CommonUtilites.getCurrentDateInNewFormat());
-		WidgetLayoutEntity widgetLayoutEntities = new WidgetLayoutEntity();
 		if (widgetForServiceEntity.getWidgetLayoutEntity() != null) {
+			WidgetLayoutEntity widgetLayoutEntities = widgetForServiceEntity.getWidgetLayoutEntity();
 			widgetLayoutEntities.setWidgetEntity(widgetForServiceEntity);
 			widgetForServiceEntity.setWidgetLayoutEntity(widgetLayoutEntities);
 		}
@@ -47,6 +47,7 @@ public class WidgetServiceImpl extends AbstractServiceManager implements WidgetS
 
 		if (widgetForServiceEntity.getWidgetLayoutEntity() != null) {
 			WidgetLayoutEntity widgetLayoutEntities = widgetForServiceEntity.getWidgetLayoutEntity();
+			widgetLayoutEntities.setWidgetEntity(widgetForServiceEntity);
 			widgetForServiceEntity.setWidgetLayoutEntity(widgetLayoutEntities);
 		}
 
@@ -58,8 +59,8 @@ public class WidgetServiceImpl extends AbstractServiceManager implements WidgetS
 	 * This Method is to get Complete Widget details.
 	 */
 	@Override
-	public ArrayList<WidgetForServiceEntity> getAllWidgetDetails() {
-		return widgetDAO.getAllWidgetDetails();
+	public WidgetForServiceEntity getAllWidgetDetails(int widgetId) {
+		return widgetDAO.getAllWidgetDetails(widgetId);
 	}
 
 	/**
