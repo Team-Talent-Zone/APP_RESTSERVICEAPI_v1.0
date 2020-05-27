@@ -11,6 +11,7 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
@@ -163,6 +164,11 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails() {
+		return freeLanceOnServiceDAO.getFUFeebackDetails();
 	}
 
 }

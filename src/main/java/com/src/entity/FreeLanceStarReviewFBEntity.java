@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @version 1.0
  *
  */
+
 @Entity(name = "freeLanceStarReviewFB")
 @Table(name = "APP_FREELANCE_STARREVIEWS_FEEDBACK")
 public class FreeLanceStarReviewFBEntity implements Serializable {
@@ -132,7 +133,5 @@ public class FreeLanceStarReviewFBEntity implements Serializable {
 	public void setFreelanceuserId(Integer freelanceuserId) {
 		this.freelanceuserId = freelanceuserId;
 	}
-
-	
 
 }

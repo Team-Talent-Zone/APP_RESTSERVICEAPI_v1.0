@@ -17,6 +17,7 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
@@ -202,4 +203,16 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
+	/**
+	 * Get User Details when isJobAvailable is false.
+	 * 
+	 * @param isJobAvailable
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getFUFeebackDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>> getFUFeebackDetails() {
+		ArrayList<FreeLanceTestimonialsDetailsView> freelanceUserEntity = freeLanceOnServiceSVC
+				.getFUFeebackDetails();
+		return new ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>>(freelanceUserEntity, HttpStatus.OK);
+	}
 }
