@@ -20,6 +20,7 @@ import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
+import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
@@ -280,6 +281,20 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(CustomMsgProperties.DELETEFUONSERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails() {
+		List<FreeLanceTestimonialsDetailsView> freeLanceTestimonialsDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreeLanceTestimonialsDetailsView.class);
+		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<FreeLanceTestimonialsDetailsView>) freeLanceTestimonialsDetailsViews;
+		}
+		return null;
 	}
 
 }

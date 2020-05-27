@@ -58,11 +58,11 @@ public class WidgetLayoutEntity implements Serializable {
 	@Column(name = "FOOTERCOMPANYADDRESS")
 	private String footercompanyaddress;
 
-	@Column(name = "FOOTERICONHREF")
-	private String footericonhref;
+	@Column(name = "footerfburl")
+	private String footerfburl;
 
-	@Column(name = "FOOTERICONURL")
-	private String footericonurl;
+	@Column(name = "footerinstaurl")
+	private String footerinstaurl;
 
 	public Integer getId() {
 		return id;
@@ -136,20 +136,20 @@ public class WidgetLayoutEntity implements Serializable {
 		this.footercompanyaddress = footercompanyaddress;
 	}
 
-	public String getFootericonhref() {
-		return footericonhref;
+	public String getFooterfburl() {
+		return footerfburl;
 	}
 
-	public void setFootericonhref(String footericonhref) {
-		this.footericonhref = footericonhref;
+	public void setFooterfburl(String footerfburl) {
+		this.footerfburl = footerfburl;
 	}
 
-	public String getFootericonurl() {
-		return footericonurl;
+	public String getFooterinstaurl() {
+		return footerinstaurl;
 	}
 
-	public void setFootericonurl(String footericonurl) {
-		this.footericonurl = footericonurl;
+	public void setFooterinstaurl(String footerinstaurl) {
+		this.footerinstaurl = footerinstaurl;
 	}
 
 }

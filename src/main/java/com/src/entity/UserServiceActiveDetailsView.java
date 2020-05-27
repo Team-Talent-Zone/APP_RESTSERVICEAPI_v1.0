@@ -83,6 +83,9 @@ public class UserServiceActiveDetailsView {
 	@Column(name = "txnid")
 	private String txnid; 
 	
+	@Column(name = "widgetId")
+	private String widgetId; 
+	
 	
 	public String getTxnid() {
 		return txnid;
@@ -242,6 +245,14 @@ public class UserServiceActiveDetailsView {
 
 	public void setIsservicepurchased(boolean isservicepurchased) {
 		this.isservicepurchased = isservicepurchased;
+	}
+
+	public String getWidgetId() {
+		return widgetId;
+	}
+
+	public void setWidgetId(String widgetId) {
+		this.widgetId = widgetId;
 	}
 	
 	

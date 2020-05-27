@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
+import com.src.constant.UserConstant;
+import com.src.constant.WidgetConstant;
 import com.src.entity.WidgetForServiceEntity;
 import com.src.entity.WidgetNotificationHistoryEntity;
 import com.src.exception.RestCustomException;
-import com.src.constant.WidgetConstant;
 
 /**
  * The <code> WidgetDAOImpl </code> class handles data access operation for
@@ -62,17 +64,19 @@ public class WidgetDAOImpl extends AbstractDAOManager implements WidgetDAO {
 	/**
 	 * This method is to get the widget details.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unused" })
 	@Transactional
-	public ArrayList<WidgetForServiceEntity> getAllWidgetDetails() {
+	public WidgetForServiceEntity getAllWidgetDetails(int widgetId) {
 		LOGGER.info(WidgetConstant.GETALLWIDGETDETAILS);
-		List<WidgetForServiceEntity> widgetForServiceEntity = null;
+
+		WidgetForServiceEntity widgetForServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(WidgetForServiceEntity.class);
-		widgetForServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = widgetForServiceEntity != null ? widgetForServiceEntity.size() : 0;
-		LOGGER.debug(WidgetConstant.INSIDE_GETALLWIDGET_DETAILS_DAO + size);
-		if (size > 0) {
-			return (ArrayList<WidgetForServiceEntity>) widgetForServiceEntity;
+		criteria.add(Restrictions.eq(UserConstant.WIDGETID, widgetId));
+		widgetForServiceEntity = (WidgetForServiceEntity) criteria.setMaxResults(1).uniqueResult();
+
+		LOGGER.debug(WidgetConstant.INSIDE_GETALLWIDGET_DETAILS_DAO + widgetForServiceEntity.getWidgetId());
+		if (widgetForServiceEntity != null) {
+			return widgetForServiceEntity;
 		}
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));

@@ -33,7 +33,7 @@ public interface WidgetService {
 	 * To Get the all Widget Details.
 	 * 
 	 */
-	public ArrayList<WidgetForServiceEntity> getAllWidgetDetails();
+	public WidgetForServiceEntity getAllWidgetDetails(int widgetId);
 
 	/**
 	 * To save Widget Notification history details.

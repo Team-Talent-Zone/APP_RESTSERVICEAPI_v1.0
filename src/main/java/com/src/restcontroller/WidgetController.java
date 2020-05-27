@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.UserConstant;
 import com.src.entity.WidgetForServiceEntity;
 import com.src.entity.WidgetNotificationHistoryEntity;
 
@@ -48,13 +50,13 @@ public class WidgetController extends AbstractRestManager {
 	}
 
 	/**
-	 * Method is to get Complete Widget Details.
+	 * Method is to get Complete Widget Details by widgetId.
 	 * 
 	 */
-	@RequestMapping(value = "/getAllWidgetDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<WidgetForServiceEntity>> getAllWidgetDetails() {
-		ArrayList<WidgetForServiceEntity> listofAllWidget = widgetService.getAllWidgetDetails();
-		return new ResponseEntity<ArrayList<WidgetForServiceEntity>>(listofAllWidget, HttpStatus.OK);
+	@RequestMapping(value = "/getAllWidgetDetailsyWidgetId/{widgetId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<WidgetForServiceEntity> getAllWidgetDetails(@PathVariable(UserConstant.WIDGETID) int widgetId) {
+		WidgetForServiceEntity listofAllWidget = widgetService.getAllWidgetDetails(widgetId);
+		return new ResponseEntity<WidgetForServiceEntity>(listofAllWidget, HttpStatus.OK);
 	}
 
 	/**
