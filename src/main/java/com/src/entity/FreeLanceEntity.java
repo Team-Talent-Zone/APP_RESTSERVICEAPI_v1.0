@@ -80,6 +80,15 @@ public class FreeLanceEntity implements Serializable {
 	@Column(name = "BGCURRENTSTATUS")
 	private String bgcurrentstatus;
 
+	@Column(name = "ACCOUNTNO")
+	private String accountno;
+
+	@Column(name = "IFSC")
+	private String ifsc;
+
+	@Column(name = "BENEFICIARYID")
+	private String beneficiaryid;
+
 	public Integer getFreeLanceId() {
 		return freeLanceId;
 	}
@@ -208,6 +217,28 @@ public class FreeLanceEntity implements Serializable {
 		this.bgcurrentstatus = bgcurrentstatus;
 	}
 
-	
+	public String getAccountno() {
+		return accountno;
+	}
+
+	public void setAccountno(String accountno) {
+		this.accountno = accountno;
+	}
+
+	public String getIfsc() {
+		return ifsc;
+	}
+
+	public void setIfsc(String ifsc) {
+		this.ifsc = ifsc;
+	}
+
+	public String getBeneficiaryid() {
+		return beneficiaryid;
+	}
+
+	public void setBeneficiaryid(String beneficiaryid) {
+		this.beneficiaryid = beneficiaryid;
+	}
 
 }
