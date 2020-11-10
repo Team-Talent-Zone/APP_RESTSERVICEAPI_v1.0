@@ -81,13 +81,13 @@ public class FreeLanceEntity implements Serializable {
 	private String bgcurrentstatus;
 
 	@Column(name = "ACCOUNTNO")
-	private String accountno;
+	private Integer accountno;
 
 	@Column(name = "IFSC")
 	private String ifsc;
 
 	@Column(name = "BENEFICIARYID")
-	private String beneficiaryid;
+	private Integer beneficiaryid;
 
 	public Integer getFreeLanceId() {
 		return freeLanceId;
@@ -217,11 +217,11 @@ public class FreeLanceEntity implements Serializable {
 		this.bgcurrentstatus = bgcurrentstatus;
 	}
 
-	public String getAccountno() {
+	public Integer getAccountno() {
 		return accountno;
 	}
 
-	public void setAccountno(String accountno) {
+	public void setAccountno(Integer accountno) {
 		this.accountno = accountno;
 	}
 
@@ -233,11 +233,11 @@ public class FreeLanceEntity implements Serializable {
 		this.ifsc = ifsc;
 	}
 
-	public String getBeneficiaryid() {
+	public Integer getBeneficiaryid() {
 		return beneficiaryid;
 	}
 
-	public void setBeneficiaryid(String beneficiaryid) {
+	public void setBeneficiaryid(Integer beneficiaryid) {
 		this.beneficiaryid = beneficiaryid;
 	}
 
