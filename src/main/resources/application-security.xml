@@ -28,22 +28,34 @@
 			authentication-failure-url="/accessdenied"></form-login>
 	</http>
 
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="restservicebasicauthuser"
-					password="TL#2017@REST*832463$#" authorities="ROLE_ADMIN" />
-			</user-service>
+	<!-- <authentication-manager> <authentication-provider> <user-service> <user 
+		name="restservicebasicauthuser" password="TL#2017@REST*832463$#" authorities="ROLE_ADMIN" 
+		/> </user-service> </authentication-provider> </authentication-manager> -->
+
+	<beans:bean id="authenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService"
+			ref="userDetailsService" />
+		<beans:property name="passwordEncoder" ref="encoder" />
+	</beans:bean>
+	<beans:bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<beans:property name="providers"
+			ref="authenticationProvider">
+		</beans:property>
+	</beans:bean>
+	<authentication-manager
+		alias="authenticationManager">
+		<authentication-provider
+			user-service-ref="userDetailsService">
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
-	<!-- <beans:bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider"> 
-		<beans:property name="userDetailsService" ref="userDetailsService" /> <beans:property 
-		name="passwordEncoder" ref="encoder" /> </beans:bean> <beans:bean id="authenticationManager" 
-		class="org.springframework.security.authentication.ProviderManager"> <beans:property 
-		name="providers" ref="authenticationProvider"> </beans:property> </beans:bean> 
-		<authentication-manager alias="authenticationManager"> <authentication-provider 
-		user-service-ref="userDetailsService"> <password-encoder ref="encoder" /> 
-		</authentication-provider> </authentication-manager> <beans:bean id="encoder" 
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> 
-		<beans:constructor-arg name="strength" value="11" /> </beans:bean> -->
+
+	<beans:bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength"
+			value="11" />
+	</beans:bean>
+
 </beans:beans>
