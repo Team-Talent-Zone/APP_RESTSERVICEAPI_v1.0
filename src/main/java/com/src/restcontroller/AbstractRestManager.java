@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.src.helper.SendEmailHelper;
@@ -29,7 +30,7 @@ class AbstractRestManager {
 	protected Properties applicationConfigProperties;
 
 	@Autowired
-	protected UserService userDetailsService;
+	protected UserService userDetailService;
 
 	@Autowired
 	protected ReferenceLookUpService referenceLookUpService;
@@ -53,5 +54,9 @@ class AbstractRestManager {
 	protected WidgetService widgetService;
 	
  	SendEmailHelper emailHelper = new SendEmailHelper();
+ 	
+ 	@Autowired
+ 	protected BCryptPasswordEncoder byBCryptPasswordEncoder;
+ 	 
 
 }

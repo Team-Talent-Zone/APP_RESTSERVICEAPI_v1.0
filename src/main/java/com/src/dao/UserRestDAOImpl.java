@@ -11,6 +11,7 @@ import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 * @param username
 	 */
 	@Transactional
-	public UserEntity findByUsername(String username) {
+	public UserEntity findByUsername(String username) throws UsernameNotFoundException {
 		LOGGER.info(UserConstant.USER_DAO_FINDBYUSERNAME);
 		UserEntity userEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
@@ -51,7 +52,8 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
 		userEntity = (UserEntity) criteria.uniqueResult();
 		if (userEntity != null && userEntity.isIsactive()) {
-			return userEntity;
+			return  userEntity;
+
 		}
 		if (userEntity != null && !userEntity.isIsactive()) {
 			throw new RestCustomException(HttpStatus.FOUND,
@@ -92,7 +94,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 	 */
 	@Transactional
 	public boolean checkUsernameNotExist(String username) {
-		try {
 			LOGGER.info(UserConstant.USER_DAO_CHECKUSERNAME);
 			UserEntity userEntity = null;
 			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
@@ -101,10 +102,9 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			if (userEntity == null) {
 				return true;
 			}
-		} catch (RuntimeException e) {
-			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-		}
-		return false;
+			throw new RestCustomException(HttpStatus.NO_CONTENT,
+					applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_ISFOUND_ERRORMSG) + " "
+							+ username);
 	}
 
 	/**
@@ -159,14 +159,14 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		LOGGER.info(UserConstant.USER_DAO_GETALLUSERS);
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.ISACTIVE, true));
+		criteria.createAlias(UserConstant.FREELANCEHISOTRY, UserConstant.FREELANCEDETAILS_ALIAS, JoinType.NONE);
 		userEntityList = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = userEntityList != null ? userEntityList.size() : 0;
 		LOGGER.debug(UserConstant.USER_DAO_INSIDE_GETALLUSERS + size);
 		if (size > 0) {
 			return (ArrayList<UserEntity>) userEntityList;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 	/**
@@ -211,8 +211,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 					.getProperty(CustomMsgProperties.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
 	}
-
-	
 
 	/**
 	 * Gets all the notification details based on the user Id

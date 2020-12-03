@@ -112,5 +112,7 @@ public interface FreeLanceOnServiceSVC {
 	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
+	
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
 
 }

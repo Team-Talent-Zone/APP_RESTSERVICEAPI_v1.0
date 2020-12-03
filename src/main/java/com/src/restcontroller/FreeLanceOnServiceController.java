@@ -204,7 +204,7 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get User Details when isJobAvailable is false.
+	 * Get all Freelancer reviews given by client.
 	 * 
 	 * @param isJobAvailable
 	 * @return list of user details
@@ -214,5 +214,18 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		ArrayList<FreeLanceTestimonialsDetailsView> freelanceUserEntity = freeLanceOnServiceSVC
 				.getFUFeebackDetails();
 		return new ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get User Details when isJobAvailable is false.
+	 * 
+	 * @param isJobAvailable
+	 * @return list of user details
+	 */
+	@RequestMapping(value = "/getFUFeebackDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>> getFUFeebackDetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<FreeLanceStarReviewFBEntity> freelanceUserEntity = freeLanceOnServiceSVC
+				.getFUFeebackDetailsUserId(userId);
+		return new ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>>(freelanceUserEntity, HttpStatus.OK);
 	}
 }

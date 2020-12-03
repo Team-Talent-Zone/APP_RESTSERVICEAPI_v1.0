@@ -51,6 +51,8 @@ public class FreeLanceTestimonialsDetailsView implements Serializable {
 	@Column(name = "fullname")
 	private String fullname ;
 
+	@Column(name = "freelanceuserId")
+	private Integer userId;
 	
 	public String getAvtarurl() {
 		return avtarurl;
@@ -115,12 +117,13 @@ public class FreeLanceTestimonialsDetailsView implements Serializable {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	
-		 
-
-
-	
-
-	
-
 }

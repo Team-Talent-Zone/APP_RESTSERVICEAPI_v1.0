@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,16 +32,26 @@ import com.src.entity.UserNotificationEntity;
 @Controller
 public class UserRestController extends AbstractRestManager {
 
+	
+	@RequestMapping(value = "/auth", method = RequestMethod.GET)
+    public String auth(ModelMap model) {
+        return "login";
+    }
+	
+	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+	public String loginerror() {
+		return "denied";
+	}
+	
 	/**
 	 * Get the User Details by UserName.
 	 * 
 	 * @param username
 	 * @throws JSONException
 	 */
-	@RequestMapping(value = "/findByUsername/{username}/{password}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username,
-			@PathVariable(UserConstant.USERPSWD) String password) {
-		UserEntity userEntity = userDetailsService.findByUsername(username, password);
+	@RequestMapping(value = "/findByUsername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserEntity> findByUsername(@PathVariable(UserConstant.USERNAME) String username) {
+		UserEntity userEntity = userDetailService.findByUsername(username);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -51,7 +62,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getUserByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> getUserByUserId(@PathVariable(UserConstant.USERID) int userId) {
-		UserEntity userEntity = userDetailsService.getUserByUserId(userId);
+		UserEntity userEntity = userDetailService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -61,7 +72,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getAllUsers/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getAllUsers() {
-		ArrayList<UserEntity> listofAllUsers = userDetailsService.getAllUsers();
+		ArrayList<UserEntity> listofAllUsers = userDetailService.getAllUsers();
 		return new ResponseEntity<ArrayList<UserEntity>>(listofAllUsers, HttpStatus.OK);
 	}
 
@@ -72,7 +83,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getUsersByRole/{role}/", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<UserEntity>> getUsersByRole(@PathVariable(UserConstant.ROLE) String role) {
-		ArrayList<UserEntity> listOfBusinessAdminUsers = userDetailsService.getUsersByRole(role);
+		ArrayList<UserEntity> listOfBusinessAdminUsers = userDetailService.getUsersByRole(role);
 		return new ResponseEntity<ArrayList<UserEntity>>(listOfBusinessAdminUsers, HttpStatus.OK);
 	}
 
@@ -84,7 +95,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/saveorupdateuser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveorupdateUserDetails(@RequestBody UserEntity userEntityObj) {
-		UserEntity userEntity = userDetailsService.saveorupdateUserDetails(userEntityObj);
+		UserEntity userEntity = userDetailService.saveorupdateUserDetails(userEntityObj);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -97,7 +108,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/saveUser/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntityObject) {
-		UserEntity userEntity = userDetailsService.saveUser(userEntityObject);
+		UserEntity userEntity = userDetailService.saveUser(userEntityObject);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -110,7 +121,7 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/saveUserNotification/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserNotificationEntity> saveUserNotification(
 			@RequestBody UserNotificationEntity userNotificationEntity) {
-		UserNotificationEntity notificationEntity = userDetailsService.saveUserNotification(userNotificationEntity);
+		UserNotificationEntity notificationEntity = userDetailService.saveUserNotification(userNotificationEntity);
 		return new ResponseEntity<UserNotificationEntity>(notificationEntity, HttpStatus.OK);
 	}
 
@@ -122,7 +133,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/checkusername/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> checkUsername(@PathVariable(UserConstant.USERNAME) String username) {
-		UserEntity userEntity = userDetailsService.checkUsername(username);
+		UserEntity userEntity = userDetailService.checkUsername(username);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
@@ -134,7 +145,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/checkusernamenotexist/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> checkUsernameNotExist(@PathVariable(UserConstant.USERNAME) String username) {
-		boolean isusernotexist = userDetailsService.checkUsernameNotExist(username);
+		boolean isusernotexist = userDetailService.checkUsernameNotExist(username);
 		return new ResponseEntity<Boolean>(isusernotexist, HttpStatus.OK);
 	}
 
@@ -146,7 +157,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userDetailsService.forgetPassword(username), HttpStatus.OK);
+		return new ResponseEntity<UserEntity>(userDetailService.forgetPassword(username), HttpStatus.OK);
 	}
 
 	/**
@@ -159,7 +170,7 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/getNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserNotificationDetailsView>> getNotificationDetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<UserNotificationDetailsView> userNotificationDetailsEntityViews = userDetailsService
+		ArrayList<UserNotificationDetailsView> userNotificationDetailsEntityViews = userDetailService
 				.getNotificationDetailsByUserId(userId);
 		return new ResponseEntity<ArrayList<UserNotificationDetailsView>>(userNotificationDetailsEntityViews,
 				HttpStatus.OK);
@@ -172,7 +183,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getUserByRecoveryPwd/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getUserByRecoveryPwd() {
-		ArrayList<UserEntity> userEntity = userDetailsService.getUserByRecoveryPwd();
+		ArrayList<UserEntity> userEntity = userDetailService.getUserByRecoveryPwd();
 		return new ResponseEntity<ArrayList<UserEntity>>(userEntity, HttpStatus.OK);
 	}
 
@@ -183,7 +194,7 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getFUUserDetailsWhenInCompleteProfile/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<UserEntity>> getFUUserDetailsWhenInCompleteProfile() {
-		ArrayList<UserEntity> freelanceUserEntities = userDetailsService.getFUUserDetailsWhenInCompleteProfile();
+		ArrayList<UserEntity> freelanceUserEntities = userDetailService.getFUUserDetailsWhenInCompleteProfile();
 		return new ResponseEntity<ArrayList<UserEntity>>(freelanceUserEntities, HttpStatus.OK);
 	}
 
@@ -196,7 +207,7 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/saveFreeLanceHistory/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FreeLanceHistoryEntity> saveFreeLanceHistory(
 			@RequestBody FreeLanceHistoryEntity freeLanceHistoryEntity) {
-		FreeLanceHistoryEntity historyEntity = userDetailsService.saveFreeLanceHistory(freeLanceHistoryEntity);
+		FreeLanceHistoryEntity historyEntity = userDetailService.saveFreeLanceHistory(freeLanceHistoryEntity);
 		return new ResponseEntity<FreeLanceHistoryEntity>(historyEntity, HttpStatus.OK);
 	}
 
@@ -209,7 +220,7 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/saveFreeLanceDocument/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FreeLanceDocumentsEntity> saveFreeLanceDocument(
 			@RequestBody FreeLanceDocumentsEntity freeLanceDocumentsEntity) {
-		FreeLanceDocumentsEntity docEntity = userDetailsService.saveFreeLanceDocument(freeLanceDocumentsEntity);
+		FreeLanceDocumentsEntity docEntity = userDetailService.saveFreeLanceDocument(freeLanceDocumentsEntity);
 		return new ResponseEntity<FreeLanceDocumentsEntity>(docEntity, HttpStatus.OK);
 	}
 
@@ -221,6 +232,6 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/prepareAdminToSignUp/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> prepareAdminToSignUp(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userDetailsService.prepareAdminToSignUp(username), HttpStatus.OK);
+		return new ResponseEntity<UserEntity>(userDetailService.prepareAdminToSignUp(username), HttpStatus.OK);
 	}
 }

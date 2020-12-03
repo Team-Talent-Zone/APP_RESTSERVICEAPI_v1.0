@@ -106,8 +106,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		if (size > 0) {
 			return (ArrayList<AllActiveNewSeviceDetailsView>) newServiceEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 	
 
@@ -129,8 +128,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		if (size > 0) {
 			return (ArrayList<NewServiceEntity>) newServiceEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 	/**

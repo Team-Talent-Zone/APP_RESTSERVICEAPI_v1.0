@@ -56,11 +56,8 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 		if (size > 0) {
 			return (ArrayList<FreelanceOnServiceSearchView>) freelanceUserEntity;
-		} else {
-			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-					.getProperty(CustomMsgProperties.GETUSERDETAILSBYJOBAVAILABLE_INVAILD_ERRORMSG));
-		}
-
+		} 
+		return null;
 	}
 
 	/**
@@ -179,8 +176,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		if (freeLanceOnServiceEntity != null) {
 			return freeLanceOnServiceEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 	/**
@@ -293,6 +289,21 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
 		if (size > 0) {
 			return (ArrayList<FreeLanceTestimonialsDetailsView>) freeLanceTestimonialsDetailsViews;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
+		List<FreeLanceStarReviewFBEntity> freeLanceTestimonialsDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreeLanceStarReviewFBEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.FREELANCEID, userId));
+		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<FreeLanceStarReviewFBEntity>) freeLanceTestimonialsDetailsViews;
 		}
 		return null;
 	}

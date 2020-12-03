@@ -78,8 +78,7 @@ public class WidgetDAOImpl extends AbstractDAOManager implements WidgetDAO {
 		if (widgetForServiceEntity != null) {
 			return widgetForServiceEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 	/**
@@ -117,8 +116,7 @@ public class WidgetDAOImpl extends AbstractDAOManager implements WidgetDAO {
 		if (size > 0) {
 			return (ArrayList<WidgetNotificationHistoryEntity>) widgetNotificationHistoryEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 }

@@ -138,8 +138,7 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		if (size > 0) {
 			return (ArrayList<UserServiceDetailsEntity>) newUserServiceEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETALLUSERS_NOUSERSFOUND_ERRORMSG));
+		return null;
 	}
 
 	/**

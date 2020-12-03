@@ -114,10 +114,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		}
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
-
 		userBizEntity.setUserdetails(userEntity);
 		userEntity.setUserbizdetails(userBizEntity);
-
 		return userRestDAO.saveUser(userEntity);
 	}
 
@@ -152,8 +150,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setIsrecoverypwd(Boolean.FALSE);
 		}
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
+		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
@@ -179,15 +177,12 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			UserManagerDetailsEntity usermanagerdetailsentity = userEntity.getUsermanagerdetailsentity();
 			usermanagerdetailsentity.setUserdetails(userEntity);
 			userEntity.setUsermanagerdetailsentity(usermanagerdetailsentity);
-
 		}
 
 		userRoleEntity.setUserdetails(userEntity);
 		userEntity.setUserroles(userRoleEntity);
-
 		userBizEntity.setUserdetails(userEntity);
 		userEntity.setUserbizdetails(userBizEntity);
-
 		userRestDAO.saveorupdateUserDetails(userEntity);
 		return userEntity;
 	}
@@ -198,8 +193,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 * @param username
 	 * @return
 	 */
-	public UserEntity findByUsername(String username, String password) {
-		System.out.println("password" + encoder.encode(password));
+	public UserEntity findByUsername(String username) {
 		return userRestDAO.findByUsername(username);
 	}
 

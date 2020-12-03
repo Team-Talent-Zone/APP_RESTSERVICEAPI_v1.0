@@ -76,5 +76,6 @@ public class UserConstant {
 	public static final String FREELANCER_USER = "FREELANCER_USER";
 	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
 	public static final Object CORE_SERVICE_SUPPORT_TEAM = "CORE_SERVICE_SUPPORT_TEAM";
+	public static final String FREELANCEID = "freelanceuserId";
 
 }

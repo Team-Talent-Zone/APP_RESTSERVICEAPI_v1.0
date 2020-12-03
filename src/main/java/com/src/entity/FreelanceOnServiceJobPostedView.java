@@ -136,6 +136,12 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "futxnid")
 	private String futxnid;
 	
+	@Column(name = "DIFFINMINS")
+	private Boolean diffinmins;
+	
+	@Column(name = "JOBACCEPTEDDATE")
+	private String jobaccepteddate;
+	
 	public String getTxnid() {
 		return txnid;
 	}
@@ -479,4 +485,21 @@ public class FreelanceOnServiceJobPostedView {
 	public void setFutxnid(String futxnid) {
 		this.futxnid = futxnid;
 	}
+
+	public Boolean getDiffinmins() {
+		return diffinmins;
+	}
+
+	public void setDiffinmins(Boolean diffinmins) {
+		this.diffinmins = diffinmins;
+	}
+
+	public String getJobaccepteddate() {
+		return jobaccepteddate;
+	}
+
+	public void setJobaccepteddate(String jobaccepteddate) {
+		this.jobaccepteddate = jobaccepteddate;
+	}
+	
 }

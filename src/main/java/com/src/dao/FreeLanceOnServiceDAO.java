@@ -108,5 +108,6 @@ public interface FreeLanceOnServiceDAO {
 	
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
 
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
 
 }

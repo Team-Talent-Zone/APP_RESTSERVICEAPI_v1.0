@@ -26,7 +26,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(RestCustomException.class)
 	@ResponseBody
 	public ResponseEntity<APIError> handleException(RestCustomException e) {
-		APIError apiErrorObj = new APIError(e.getMessage(), e.getStatusCode().name(), e.getStatusCode().value());
+		APIError apiErrorObj = new APIError(e.getErrormessage(), e.getHttpStatus().name(), e.getHttpStatus().value());
 		return buildResponseEntity(apiErrorObj);
 	}
 

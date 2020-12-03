@@ -23,7 +23,7 @@ public interface UserService {
 	 * 
 	 * @param username
 	 */
-	public UserEntity findByUsername(String username, String password);
+	public UserEntity findByUsername(String username);
 
 	/**
 	 * Save the User Details.

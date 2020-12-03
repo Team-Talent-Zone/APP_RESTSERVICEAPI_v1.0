@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ public class CommonUtilites {
 	 */
 	public static String getCurrentDateInNewFormat() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 		Calendar cal = Calendar.getInstance();
 		return dateFormat.format(cal.getTime());
 	}
@@ -65,6 +67,7 @@ public class CommonUtilites {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, -1);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 		return dateFormat.format(cal.getTime());
 	}
 }

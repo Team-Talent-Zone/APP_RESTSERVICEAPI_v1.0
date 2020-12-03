@@ -1,5 +1,10 @@
 package com.src.testsamplecode;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import org.apache.velocity.VelocityContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,12 +14,14 @@ public class TestCode {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		 
-	    String phone = "345,6789,";
-	    String[] output = phone.split(",");
-
-		for (String serviceid : output) {
-			System.out.println(serviceid);
-		}
+		CalendarDemo();
+	}
+	
+	public static void CalendarDemo()  {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+		Calendar cal = Calendar.getInstance();
+		System.out.println(dateFormat.format(cal.getTime()));
 	}
 	public static VelocityContext generateVelocityObject(JSONArray jsonArray) throws Exception {
 		VelocityContext context = new VelocityContext();
