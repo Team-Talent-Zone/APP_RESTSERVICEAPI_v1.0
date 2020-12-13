@@ -1,6 +1,9 @@
 package com.src.restcontroller;
 
+
+import java.net.URL;
 import java.util.ArrayList;
+
 
 import org.json.JSONException;
 import org.springframework.http.HttpStatus;
@@ -12,13 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.src.constant.UserConstant;
+import com.src.entity.CreatePayOutBeneficiary;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
+
 
 /**
  * The <code> UserRestController </code> class defines managed beans which
@@ -31,6 +36,8 @@ import com.src.entity.UserNotificationEntity;
 
 @Controller
 public class UserRestController extends AbstractRestManager {
+	
+	UserEntity cloneUserEntity = new UserEntity();
 
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
@@ -65,6 +72,32 @@ public class UserRestController extends AbstractRestManager {
 		UserEntity userEntity = userDetailService.getUserByUserId(userId);
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
+	
+	/**
+	 * To create benificiary details and save in db.
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/createbenificiary/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CreatePayOutBeneficiary> createbenificiary(@PathVariable(UserConstant.USERID) int userId) {
+		ObjectMapper objectmapper = new ObjectMapper();
+		ResponseEntity<UserEntity> userEntity = getUserByUserId(userId);
+		CreatePayOutBeneficiary createpayoutbenfi = new CreatePayOutBeneficiary();
+		createpayoutbenfi.setName(userEntity.getBody().getFullname());
+		createpayoutbenfi.setAccountno(userEntity.getBody().getFreeLanceDetails().getAccountno().toString());
+		createpayoutbenfi.setIfsc(userEntity.getBody().getFreeLanceDetails().getIfsc());
+		createpayoutbenfi.setMobile(userEntity.getBody().getPhoneno());
+		try {
+			CreatePayOutBeneficiary response = objectmapper
+					.readValue(new URL("https://test.payumoney.com/payout/beneficiary"), CreatePayOutBeneficiary.class);
+			cloneUserEntity.getFreeLanceDetails().setBeneficiaryid(response.getData().getBeneficiaryId());
+			saveorupdateUserDetails(cloneUserEntity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	/**
 	 * Get All User Details from the List.

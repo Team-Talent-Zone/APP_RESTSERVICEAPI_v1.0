@@ -1,6 +1,7 @@
 package com.src.restcontroller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
@@ -27,6 +29,7 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
+import com.src.entity.Token;
 
 /**
  * The <code> PaymentController </code> class defines managed beans which
@@ -39,6 +42,22 @@ import com.src.entity.PaymentRefundTranscationHistEntity;
 @Controller
 public class PaymentController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+	
+	/**
+	 * Method to generate a unqiue token for payout functionality.
+	 * 
+	 */
+	@RequestMapping(value = "/generatetoken/" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void GenerateToken() {
+		Token token = new Token();
+		ObjectMapper objectmapper = new ObjectMapper();
+		try {
+			token = objectmapper.readValue(new URL("https://uat-accounts.payu.in/oauth/token"), Token.class);
+			System.out.println("Token generated successfully: "+ token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Method is to save Payment Details.
