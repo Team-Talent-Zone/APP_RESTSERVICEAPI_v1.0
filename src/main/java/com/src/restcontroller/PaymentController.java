@@ -176,9 +176,22 @@ public class PaymentController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/createBenificiaryPayout/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CreatePayOutBeneficiary> createBenificiaryPayout(
-			@PathVariable(UserConstant.USERID) int userId) throws Exception  {
+			@PathVariable(UserConstant.USERID) int userId) throws Exception {
 		CreatePayOutBeneficiary createBenificiaryPayout = paymentService.createBenificiaryPayout(userId);
 		return new ResponseEntity<CreatePayOutBeneficiary>(createBenificiaryPayout, HttpStatus.OK);
+
+	}
+
+	/**
+	 * To verify account details.
+	 * 
+	 * @param beneficiaryName
+	 */
+	@RequestMapping(value = "/verifyAccountPayout/{accountNumber}/{ifscCode}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
+			@PathVariable(UserConstant.IFSC_CODE) String ifscCode) throws Exception {
+		String beneficiaryName = paymentService.verifyAccountPayout(accountNumber, ifscCode);
+		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
 
 	}
 

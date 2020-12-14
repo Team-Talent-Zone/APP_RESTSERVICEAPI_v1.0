@@ -323,6 +323,12 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	}
 
 	@Override
+	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception {
+
+		return null;
+	}
+
+	@Override
 	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
 		UserEntity userEntity = userRestDAO.getUserByUserId(userId);

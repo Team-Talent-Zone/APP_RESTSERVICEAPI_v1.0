@@ -77,5 +77,7 @@ public class UserConstant {
 	public static final Object CORE_SERVICE_SUPPORT_MANAGER = "CORE_SERVICE_SUPPORT_MANAGER";
 	public static final Object CORE_SERVICE_SUPPORT_TEAM = "CORE_SERVICE_SUPPORT_TEAM";
 	public static final String FREELANCEID = "freelanceuserId";
+	public static final String ACCOUNT_NUMBER = "accountNumber";
+	public static final String IFSC_CODE = "ifscCode";
 
 }
