@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.src.constant.UserConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
@@ -227,5 +228,17 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		ArrayList<FreeLanceStarReviewFBEntity> freelanceUserEntity = freeLanceOnServiceSVC
 				.getFUFeebackDetailsUserId(userId);
 		return new ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>>(freelanceUserEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get All bell notification to the platform.
+	 * 
+	 * @return list of notification view details
+	 */
+	@RequestMapping(value = "/getAllBellNotificationDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllBellNotificationDetails() {
+		ArrayList<AllBellNotificationsView> allBellNotificationsViews = freeLanceOnServiceSVC
+				.getAllBellNotificationDetails();
+		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(allBellNotificationsViews, HttpStatus.OK);
 	}
 }

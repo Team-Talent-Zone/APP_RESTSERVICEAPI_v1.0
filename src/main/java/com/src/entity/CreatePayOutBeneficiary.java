@@ -23,13 +23,13 @@ public class CreatePayOutBeneficiary implements Serializable {
 	private String msg;
 	private String code;
 
-	BeneficiaryDetails data;
+	PayoutBeneficiaryDetails data;
 
-	public BeneficiaryDetails getData() {
+	public PayoutBeneficiaryDetails getData() {
 		return data;
 	}
 
-	public void setData(BeneficiaryDetails data) {
+	public void setData(PayoutBeneficiaryDetails data) {
 		this.data = data;
 	}
 

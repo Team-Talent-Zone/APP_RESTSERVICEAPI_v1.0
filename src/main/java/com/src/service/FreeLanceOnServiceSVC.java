@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
@@ -114,5 +115,8 @@ public interface FreeLanceOnServiceSVC {
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
 	
 	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
+	
+	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
+
 
 }

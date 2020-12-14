@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.CreatePayOutBeneficiary;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -90,6 +91,8 @@ public interface PaymentService {
 	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status);
 	
 	public PaymentEntity getPaymentDetailsByTxnId(String txnid);
+	
+	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception ;
 
 
 }

@@ -1,17 +1,24 @@
 package com.src.service;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.constant.UtilityConfig;
+import com.src.entity.CreatePayOutBeneficiary;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
@@ -21,6 +28,7 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
+import com.src.entity.PayoutToken;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserServiceDetailsEntity;
@@ -312,6 +320,67 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	@Override
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId) {
 		return paymentDAO.getPaymentRefundTranHistByUserId(userId);
+	}
+
+	@Override
+	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception {
+		ObjectMapper objectmapper = new ObjectMapper();
+		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
+		CreatePayOutBeneficiary createpayoutbenfi = new CreatePayOutBeneficiary();
+		createpayoutbenfi.setName(userEntity.getFullname());
+		createpayoutbenfi.setAccountno(userEntity.getFreeLanceDetails().getAccountno().toString());
+		createpayoutbenfi.setIfsc(userEntity.getFreeLanceDetails().getIfsc());
+		createpayoutbenfi.setMobile(userEntity.getPhoneno());
+		URL url = new URL(
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_BENIFICATORY_URL_SHORTKEY));
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Authorization", generateToken());
+		con.setRequestProperty("payoutMerchantId",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
+		con.setDoOutput(true);
+
+		String jsonString = objectmapper.writeValueAsString(createpayoutbenfi);
+		try (OutputStream os = con.getOutputStream()) {
+			byte[] input = jsonString.getBytes("utf-8");
+			os.write(input, 0, input.length);
+		}
+		int code = con.getResponseCode();
+		System.out.println(code);
+
+		CreatePayOutBeneficiary response = objectmapper.readValue(con.getInputStream(), CreatePayOutBeneficiary.class);
+		userEntity.getFreeLanceDetails().setBeneficiaryid(response.getData().getBeneficiaryId());
+		userRestDAO.saveorupdateUserDetails(userEntity);
+		return response;
+	}
+
+	private String generateToken() throws Exception {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("client_id",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_CLIENT_ID_SHORTKEY));
+		jsonObj.put("username",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_USERNAME_SHORTKEY));
+		jsonObj.put("password",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_PASSWORD_SHORTKEY));
+		jsonObj.put("grant_type", "password");
+		jsonObj.put("scope", "create_payout_transactions");
+		ObjectMapper objectmapper = new ObjectMapper();
+		URL url = new URL(referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_TOKEN_URL_SHORTKEY));
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+
+		String jsonString = objectmapper.writeValueAsString(jsonObj);
+		try (OutputStream os = con.getOutputStream()) {
+			byte[] input = jsonString.getBytes("utf-8");
+			os.write(input, 0, input.length);
+		}
+		int code = con.getResponseCode();
+		System.out.println(code);
+
+		PayoutToken response = objectmapper.readValue(con.getInputStream(), PayoutToken.class);
+		return response.getAccess_token();
 	}
 
 }

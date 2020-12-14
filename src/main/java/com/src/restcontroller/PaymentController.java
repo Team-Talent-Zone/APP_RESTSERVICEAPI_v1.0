@@ -1,7 +1,6 @@
 package com.src.restcontroller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.src.constant.UserConstant;
+import com.src.entity.CreatePayOutBeneficiary;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -29,7 +28,6 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
-import com.src.entity.Token;
 
 /**
  * The <code> PaymentController </code> class defines managed beans which
@@ -42,22 +40,6 @@ import com.src.entity.Token;
 @Controller
 public class PaymentController extends AbstractRestManager {
 	final Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	
-	/**
-	 * Method to generate a unqiue token for payout functionality.
-	 * 
-	 */
-	@RequestMapping(value = "/generatetoken/" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void GenerateToken() {
-		Token token = new Token();
-		ObjectMapper objectmapper = new ObjectMapper();
-		try {
-			token = objectmapper.readValue(new URL("https://uat-accounts.payu.in/oauth/token"), Token.class);
-			System.out.println("Token generated successfully: "+ token);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Method is to save Payment Details.
@@ -155,7 +137,7 @@ public class PaymentController extends AbstractRestManager {
 	 * Get the FU Payment Details by UserId.
 	 * 
 	 * @param userId
-	 */ 
+	 */
 	@RequestMapping(value = "/getPaymentFUDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<PaymentHistoryFUView>> getPaymentFUDetailsByUserId(
 			@PathVariable(UserConstant.USERID) int userId) {
@@ -185,6 +167,19 @@ public class PaymentController extends AbstractRestManager {
 			@PathVariable(UserConstant.USERID) int userId) {
 		PaymentRefundTranscationHistEntity paymentEntity = paymentService.getPaymentRefundTranHistByUserId(userId);
 		return new ResponseEntity<PaymentRefundTranscationHistEntity>(paymentEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * To create benificiary details and save in db.
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/createBenificiaryPayout/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CreatePayOutBeneficiary> createBenificiaryPayout(
+			@PathVariable(UserConstant.USERID) int userId) throws Exception  {
+		CreatePayOutBeneficiary createBenificiaryPayout = paymentService.createBenificiaryPayout(userId);
+		return new ResponseEntity<CreatePayOutBeneficiary>(createBenificiaryPayout, HttpStatus.OK);
+
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
@@ -79,7 +80,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		if (freeLanceOnServiceEntity.isIsjobaccepted() && !freeLanceOnServiceEntity.isIsjobcompleted()) {
 			freeLanceOnServiceEntity.setJobaccepteddate(CommonUtilites.getCurrentDateInNewFormat());
-		}  
+		}
 		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
 		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
@@ -177,6 +178,11 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
 		return freeLanceOnServiceDAO.getFUFeebackDetailsUserId(userId);
 
+	}
+
+	@Override
+	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails() {
+		return freeLanceOnServiceDAO.getAllBellNotificationDetails();
 	}
 
 }

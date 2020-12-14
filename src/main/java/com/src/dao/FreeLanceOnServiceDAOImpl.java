@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
@@ -49,14 +50,13 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable() {
 		LOGGER.info(UserConstant.USER_SERVICE_DAO_GETUSERSERVICEBYSERVICEID);
 		List<FreelanceOnServiceSearchView> freelanceUserEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceSearchView.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreelanceOnServiceSearchView.class);
 		freelanceUserEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freelanceUserEntity != null ? freelanceUserEntity.size() : 0;
 
 		if (size > 0) {
 			return (ArrayList<FreelanceOnServiceSearchView>) freelanceUserEntity;
-		} 
+		}
 		return null;
 	}
 
@@ -77,7 +77,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 
 		if (size > 0) {
 			return (ArrayList<FreelancerAvailableStartDateStoreProc>) availableStartDateStoreProcs;
-		} 
+		}
 		return null;
 
 	}
@@ -252,7 +252,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
@@ -297,13 +297,25 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 	@Override
 	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
 		List<FreeLanceStarReviewFBEntity> freeLanceTestimonialsDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreeLanceStarReviewFBEntity.class);
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceStarReviewFBEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.FREELANCEID, userId));
 		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
 		if (size > 0) {
 			return (ArrayList<FreeLanceStarReviewFBEntity>) freeLanceTestimonialsDetailsViews;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails() {
+		List<AllBellNotificationsView> allBellNotificationsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
+		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
 		}
 		return null;
 	}

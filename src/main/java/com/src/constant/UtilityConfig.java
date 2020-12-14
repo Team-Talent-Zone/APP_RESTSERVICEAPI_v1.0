@@ -42,4 +42,17 @@ public class UtilityConfig {
 	public static final String PREFERED_LANGUAGE_HINDI = "hi";
 	public static final String MIME_TYPE_HTML = "html";
 	public static final String MIME_TYPE_TEXT = "text";
+	
+	/*
+	 * Payumoney details
+	 * 
+	 */
+	
+	public static final String PAYOUT_API_BENIFICATORY_URL_SHORTKEY = "bURL";
+	public static final String PAYOUT_API_MERCHANTID_SHORTKEY = "payoutId";
+	public static final String PAYOUT_API_TOKEN_URL_SHORTKEY = "tURL";
+	public static final String PAYOUT_API_CLIENT_ID_SHORTKEY = "clientId";
+	public static final String PAYOUT_API_USERNAME_SHORTKEY = "pusername";
+	public static final String PAYOUT_API_PASSWORD_SHORTKEY = "ppassword";
+
 }
