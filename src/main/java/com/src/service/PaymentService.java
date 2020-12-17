@@ -94,6 +94,7 @@ public interface PaymentService {
 	
 	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception ;
 
-	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception ;
+	public String verifyAccountPayout( String accountNumber, String ifscCode) throws Exception ;
+
 
 }

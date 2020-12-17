@@ -53,4 +53,5 @@ public class AbstractServiceManager {
 	@Autowired
 	protected WidgetDAO widgetDAO;
 
+
 }

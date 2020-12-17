@@ -55,7 +55,7 @@ public class PaymentController extends AbstractRestManager {
 	/**
 	 * Method is to save PaymentFU Transaction Details.
 	 * 
-	 * @param fuTranscationHistEntity
+	 * @param fuTranscationHist Entity
 	 */
 	@RequestMapping(value = "/savePaymentsFUTranscations/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PaymentFUTranscationHistEntity> savePaymentsFUTranscations(
@@ -170,7 +170,7 @@ public class PaymentController extends AbstractRestManager {
 	}
 
 	/**
-	 * To create benificiary details and save in db.
+	 * To create benificiary details and save in database.
 	 * 
 	 * @param userId
 	 */
@@ -184,11 +184,11 @@ public class PaymentController extends AbstractRestManager {
 
 	/**
 	 * To verify account details.
-	 * 
+	 *  
 	 * @param beneficiaryName
 	 */
 	@RequestMapping(value = "/verifyAccountPayout/{accountNumber}/{ifscCode}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
+	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.USERID) int userId, @PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
 			@PathVariable(UserConstant.IFSC_CODE) String ifscCode) throws Exception {
 		String beneficiaryName = paymentService.verifyAccountPayout(accountNumber, ifscCode);
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);

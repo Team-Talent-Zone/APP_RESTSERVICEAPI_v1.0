@@ -49,6 +49,8 @@ public class UtilityConfig {
 	 */
 	
 	public static final String PAYOUT_API_BENIFICATORY_URL_SHORTKEY = "bURL";
+	public static final String PAYOUT_API_INITIATE_TRANSFER_URL_SHORTKEY = "iURL";
+	public static final String PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY = "vURL";
 	public static final String PAYOUT_API_MERCHANTID_SHORTKEY = "payoutId";
 	public static final String PAYOUT_API_TOKEN_URL_SHORTKEY = "tURL";
 	public static final String PAYOUT_API_CLIENT_ID_SHORTKEY = "clientId";

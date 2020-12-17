@@ -29,6 +29,8 @@ import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutToken;
+import com.src.entity.PayoutVerifyAccountRequest;
+import com.src.entity.PayoutVerifyAccountResponseData;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserServiceDetailsEntity;
@@ -322,12 +324,42 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		return paymentDAO.getPaymentRefundTranHistByUserId(userId);
 	}
 
+	/*
+	 * It validates the account and sends beneficiary name as response.
+	 */
 	@Override
 	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception {
+		ObjectMapper objectmapper = new ObjectMapper();
+		PayoutVerifyAccountRequest request = new PayoutVerifyAccountRequest();
+		request.setAccountNumber(accountNumber);
+		request.setIfscCode(ifscCode);
+//		request.setMerchantRefId(merchantRefId);
+		URL url = new URL(
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Authorization", generateToken());
+		con.setRequestProperty("payoutMerchantId",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
+		con.setDoOutput(true);
 
-		return null;
+		String jsonString = objectmapper.writeValueAsString(request);
+		try (OutputStream os = con.getOutputStream()) {
+			byte[] input = jsonString.getBytes("utf-8");
+			os.write(input, 0, input.length);
+		}
+		int code = con.getResponseCode();
+		System.out.println(code);
+
+		PayoutVerifyAccountResponseData response = objectmapper.readValue(con.getInputStream(),
+				PayoutVerifyAccountResponseData.class);
+		return response.getBeneficiaryName();
 	}
 
+	/*
+	 * It creates a unqiue benficiary id, which helps payout transfers.
+	 */
 	@Override
 	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
@@ -360,7 +392,9 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		userRestDAO.saveorupdateUserDetails(userEntity);
 		return response;
 	}
-
+	/*
+	 *  Generates unique token key for payout transfers.
+	 */
 	private String generateToken() throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("client_id",
