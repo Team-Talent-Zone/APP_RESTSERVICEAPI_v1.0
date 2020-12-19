@@ -29,6 +29,8 @@ import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutToken;
+import com.src.entity.PayoutTransferRequest;
+import com.src.entity.PayoutTransferResponse;
 import com.src.entity.PayoutVerifyAccountRequest;
 import com.src.entity.PayoutVerifyAccountResponseData;
 import com.src.entity.ReferenceLookUpTemplateEntity;
@@ -324,8 +326,11 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		return paymentDAO.getPaymentRefundTranHistByUserId(userId);
 	}
 
-	/*
+	/**
 	 * It validates the account and sends beneficiary name as response.
+	 * 
+	 * @param accountNumber
+	 * @param ifscCode
 	 */
 	@Override
 	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception {
@@ -356,9 +361,50 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 				PayoutVerifyAccountResponseData.class);
 		return response.getBeneficiaryName();
 	}
+	
+	/**
+	 * Method for intiating transfer (payout). 
+	 * 
+	 * @param userId
+	 */
+	@Override
+	public String payoutTransfer(int userId) throws Exception {
+		ObjectMapper objectmapper = new ObjectMapper();
+		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
+		PayoutTransferRequest payouttransferrequest = new PayoutTransferRequest();
+		payouttransferrequest.setBeneficiaryName(userEntity.getFullname());
+		payouttransferrequest.setBeneficiaryAccountNumber(userEntity.getFreeLanceDetails().getAccountno().toString());
+		payouttransferrequest.setBeneficiaryIfscCode(userEntity.getFreeLanceDetails().getIfsc());
+//			payouttransferrequest.setPurpose();
+//			payouttransferrequest.setAmount(amount);
+//			payouttransferrequest.setBatchId(batchId);
+//			payouttransferrequest.getMerchantRefId();
+//			payouttransferrequest.setPaymentType(paymentType);
+		URL url = new URL(
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Authorization", generateToken());
+		con.setRequestProperty("payoutMerchantId",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
+		con.setDoOutput(true);
+		String jsonString = objectmapper.writeValueAsString(payouttransferrequest);
+		try (OutputStream os = con.getOutputStream()) {
+			byte[] input = jsonString.getBytes("utf-8");
+			os.write(input, 0, input.length);
+		}
+		int code = con.getResponseCode();
+		System.out.println(code);
 
-	/*
+		PayoutTransferResponse response = objectmapper.readValue(con.getInputStream(), PayoutTransferResponse.class);
+		return response.getMsg();
+	}
+		
+	/**
 	 * It creates a unqiue benficiary id, which helps payout transfers.
+	 * 
+	 * @param userId
 	 */
 	@Override
 	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception {
@@ -392,7 +438,8 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		userRestDAO.saveorupdateUserDetails(userEntity);
 		return response;
 	}
-	/*
+	
+	/**
 	 *  Generates unique token key for payout transfers.
 	 */
 	private String generateToken() throws Exception {

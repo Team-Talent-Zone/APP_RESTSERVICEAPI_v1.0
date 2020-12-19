@@ -194,5 +194,18 @@ public class PaymentController extends AbstractRestManager {
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
 
 	}
+	
+	/**
+	 * API call for intiating transfer (payout). 
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value = "/transfer/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> payoutTransfer(@PathVariable(UserConstant.USERID) int userId) throws Exception {
+		String message = paymentService.payoutTransfer(userId);
+		return new ResponseEntity<String>(message, HttpStatus.OK);
+
+	}
+	
 
 }

@@ -91,10 +91,29 @@ public interface PaymentService {
 	public String payuCallback(String mihpayid, String txnid, PaymentMode mode, String hash, String status);
 	
 	public PaymentEntity getPaymentDetailsByTxnId(String txnid);
-	
+		
+	/**
+	 * It creates a unqiue benficiary id, which helps payout transfers.
+	 * 
+	 * @param userId
+	 */
 	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception ;
 
+	/**
+	 * It validates the account and sends beneficiary name as response.
+	 * 
+	 * @param accountNumber
+	 * @param ifscCode
+	 */
 	public String verifyAccountPayout( String accountNumber, String ifscCode) throws Exception ;
+
+	/**
+	 * Method for intiating transfer (payout). 
+	 * 
+	 * @param userId
+	 */
+	public String payoutTransfer(int userId) throws Exception;
+
 
 
 }
