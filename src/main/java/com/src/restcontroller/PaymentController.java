@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.src.constant.UserConstant;
-import com.src.entity.CreatePayOutBeneficiary;
+import com.src.constant.UtilityConfig;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -71,9 +71,9 @@ public class PaymentController extends AbstractRestManager {
 			HttpServletResponse res) throws IOException {
 		if (mihpayid != null) {
 			String transcationid = paymentService.payuCallback(mihpayid, txnid, mode, hash, status);
-			res.sendRedirect("http://localhost:4200/dashboard/" + transcationid);
+			res.sendRedirect(referenceLookUpService.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_SUCCESS_URL_SHORTKEY) + transcationid);
 		} else {
-			res.sendRedirect("http://localhost:4200/dashboard/");
+			res.sendRedirect(referenceLookUpService.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_FAIL_URL_SHORTKEY));
 		}
 	}
 
@@ -174,11 +174,11 @@ public class PaymentController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/createBenificiaryPayout/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CreatePayOutBeneficiary> createBenificiaryPayout(
+	@RequestMapping(value = "/createBenificiaryPayout/{userId}/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> createBenificiaryPayout(
 			@PathVariable(UserConstant.USERID) int userId) throws Exception {
-		CreatePayOutBeneficiary createBenificiaryPayout = paymentService.createBenificiaryPayout(userId);
-		return new ResponseEntity<CreatePayOutBeneficiary>(createBenificiaryPayout, HttpStatus.OK);
+		String benificiaryId = paymentService.createBenificiaryPayout(userId);
+		return new ResponseEntity<String>(benificiaryId, HttpStatus.OK);
 
 	}
 

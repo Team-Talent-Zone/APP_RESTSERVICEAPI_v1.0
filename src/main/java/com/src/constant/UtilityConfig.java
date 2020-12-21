@@ -53,6 +53,8 @@ public class UtilityConfig {
 	public static final String PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY = "vURL";
 	public static final String PAYOUT_API_MERCHANTID_SHORTKEY = "payoutId";
 	public static final String PAYOUT_API_TOKEN_URL_SHORTKEY = "tURL";
+	public static final String PAYIN_GATEWAY_SUCCESS_URL_SHORTKEY = "sURL";
+	public static final String PAYIN_GATEWAY_FAIL_URL_SHORTKEY = "fURL";
 	public static final String PAYOUT_API_CLIENT_ID_SHORTKEY = "clientId";
 	public static final String PAYOUT_API_USERNAME_SHORTKEY = "pusername";
 	public static final String PAYOUT_API_PASSWORD_SHORTKEY = "ppassword";

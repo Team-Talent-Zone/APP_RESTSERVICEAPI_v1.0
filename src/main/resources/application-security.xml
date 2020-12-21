@@ -19,13 +19,7 @@
 		<csrf disabled="true" />
 		<intercept-url pattern="/payment-response"
 			access="permitAll" />
-		<intercept-url pattern="/login"
-			access="isAuthenticated()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-		<intercept-url pattern="/accessdenied"
-			access="permitAll"></intercept-url>
-		<form-login login-page="/login"
-			authentication-failure-url="/accessdenied"></form-login>
 	</http>
 
 	<!-- <authentication-manager> <authentication-provider> <user-service> <user 

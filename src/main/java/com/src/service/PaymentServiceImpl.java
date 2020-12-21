@@ -1,5 +1,6 @@
 package com.src.service;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,7 +8,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -338,13 +347,13 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		PayoutVerifyAccountRequest request = new PayoutVerifyAccountRequest();
 		request.setAccountNumber(accountNumber);
 		request.setIfscCode(ifscCode);
-//		request.setMerchantRefId(merchantRefId);
+		request.setMerchantRefId(CommonUtilites.genRandomAlphaNumeric());
 		URL url = new URL(
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("POST");
 		con.setRequestProperty("Content-Type", "application/json");
-		con.setRequestProperty("Authorization", generateToken());
+		con.setRequestProperty("Authorization", "bearer " + generateToken());
 		con.setRequestProperty("payoutMerchantId",
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
 		con.setDoOutput(true);
@@ -359,11 +368,14 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 
 		PayoutVerifyAccountResponseData response = objectmapper.readValue(con.getInputStream(),
 				PayoutVerifyAccountResponseData.class);
-		return response.getBeneficiaryName();
+		if (response.getError() == null) {
+			return response.getBeneficiaryName();
+		}
+		return response.getError();
 	}
-	
+
 	/**
-	 * Method for intiating transfer (payout). 
+	 * Method for intiating transfer (payout).
 	 * 
 	 * @param userId
 	 */
@@ -400,74 +412,79 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		PayoutTransferResponse response = objectmapper.readValue(con.getInputStream(), PayoutTransferResponse.class);
 		return response.getMsg();
 	}
-		
+
 	/**
 	 * It creates a unqiue benficiary id, which helps payout transfers.
 	 * 
 	 * @param userId
 	 */
 	@Override
-	public CreatePayOutBeneficiary createBenificiaryPayout(int userId) throws Exception {
+	public String createBenificiaryPayout(int userId) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
 		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
-		CreatePayOutBeneficiary createpayoutbenfi = new CreatePayOutBeneficiary();
-		createpayoutbenfi.setName(userEntity.getFullname());
-		createpayoutbenfi.setAccountno(userEntity.getFreeLanceDetails().getAccountno().toString());
-		createpayoutbenfi.setIfsc(userEntity.getFreeLanceDetails().getIfsc());
-		createpayoutbenfi.setMobile(userEntity.getPhoneno());
-		URL url = new URL(
+		JSONObject json = new JSONObject();
+		json.put("name", userEntity.getFullname());
+		json.put("accountNo", userEntity.getFreeLanceDetails().getAccountno().toString());
+		json.put("ifsc", userEntity.getFreeLanceDetails().getIfsc());
+		json.put("email", userEntity.getUsername());
+		StringEntity se = new StringEntity(json.toString());
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost connection = new HttpPost(
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_BENIFICATORY_URL_SHORTKEY));
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("POST");
-		con.setRequestProperty("Content-Type", "application/json");
-		con.setRequestProperty("Authorization", generateToken());
-		con.setRequestProperty("payoutMerchantId",
+		connection.setHeader("Content-Type", "application/json");
+		connection.setHeader("Authorization", "bearer " + generateToken());
+		connection.setHeader("payoutMerchantId",
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
-		con.setDoOutput(true);
+		connection.setEntity(se);
 
-		String jsonString = objectmapper.writeValueAsString(createpayoutbenfi);
-		try (OutputStream os = con.getOutputStream()) {
-			byte[] input = jsonString.getBytes("utf-8");
-			os.write(input, 0, input.length);
+		CloseableHttpResponse response = httpClient.execute(connection);
+		if (response.getStatusLine().getStatusCode() == 200) {
+			InputStream content = response.getEntity().getContent();
+			CreatePayOutBeneficiary benficiaryResp = objectmapper.readValue(content, CreatePayOutBeneficiary.class);
+			System.out.println("this is test" + benficiaryResp.getData().get("beneficiaryId"));
+			if (benficiaryResp.getData().get("beneficiaryId").toString() != null) {
+				userEntity.getFreeLanceDetails()
+						.setBeneficiaryid(benficiaryResp.getData().get("beneficiaryId").intValue());
+				userRestDAO.saveorupdateUserDetails(userEntity);
+				if (userEntity.getFreeLanceDetails().getBeneficiaryid() > 0) {
+					return benficiaryResp.getData().get("beneficiaryId").toString();
+				}
+			}
 		}
-		int code = con.getResponseCode();
-		System.out.println(code);
-
-		CreatePayOutBeneficiary response = objectmapper.readValue(con.getInputStream(), CreatePayOutBeneficiary.class);
-		userEntity.getFreeLanceDetails().setBeneficiaryid(response.getData().getBeneficiaryId());
-		userRestDAO.saveorupdateUserDetails(userEntity);
-		return response;
+		return null;
 	}
-	
+
 	/**
-	 *  Generates unique token key for payout transfers.
+	 * 
+	 * Generates unique token key for payout transfers.
 	 */
 	private String generateToken() throws Exception {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("client_id",
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_CLIENT_ID_SHORTKEY));
-		jsonObj.put("username",
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_USERNAME_SHORTKEY));
-		jsonObj.put("password",
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_PASSWORD_SHORTKEY));
-		jsonObj.put("grant_type", "password");
-		jsonObj.put("scope", "create_payout_transactions");
+
+		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
+		parametersBody.add(new BasicNameValuePair("grant_type", "password"));
+
+		parametersBody.add(new BasicNameValuePair("client_id",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_CLIENT_ID_SHORTKEY)));
+		parametersBody.add(new BasicNameValuePair("username",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_USERNAME_SHORTKEY)));
+		parametersBody.add(new BasicNameValuePair("password",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_PASSWORD_SHORTKEY)));
+		parametersBody.add(new BasicNameValuePair("scope", "create_payout_transactions"));
+
 		ObjectMapper objectmapper = new ObjectMapper();
-		URL url = new URL(referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_TOKEN_URL_SHORTKEY));
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("POST");
-		con.setDoOutput(true);
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost connection = new HttpPost(
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_TOKEN_URL_SHORTKEY));
+		connection.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		connection.setEntity(new UrlEncodedFormEntity(parametersBody));
 
-		String jsonString = objectmapper.writeValueAsString(jsonObj);
-		try (OutputStream os = con.getOutputStream()) {
-			byte[] input = jsonString.getBytes("utf-8");
-			os.write(input, 0, input.length);
-		}
-		int code = con.getResponseCode();
-		System.out.println(code);
+		CloseableHttpResponse response = httpClient.execute(connection);
 
-		PayoutToken response = objectmapper.readValue(con.getInputStream(), PayoutToken.class);
-		return response.getAccess_token();
+		InputStream content = response.getEntity().getContent();
+		PayoutToken tokens = objectmapper.readValue(content, PayoutToken.class);
+
+		return tokens.getAccess_token().toString();
+
 	}
 
 }
