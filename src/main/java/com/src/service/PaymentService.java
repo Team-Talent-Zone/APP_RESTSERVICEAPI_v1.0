@@ -10,7 +10,6 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
-import com.src.entity.PayoutBeneficiaryDetails;
 
 /**
  * The <code> PaymentService </code> interface defines payment service Details.
