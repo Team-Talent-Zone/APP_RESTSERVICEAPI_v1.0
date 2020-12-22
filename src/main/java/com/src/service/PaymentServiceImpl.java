@@ -1,9 +1,6 @@
 package com.src.service;
 
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +26,7 @@ import com.src.constant.UserConstant;
 import com.src.constant.UtilityConfig;
 import com.src.entity.CreatePayOutBeneficiary;
 import com.src.entity.FreeLanceOnServiceEntity;
+import com.src.entity.FreelancerPaymentInput;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -38,9 +36,7 @@ import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutToken;
-import com.src.entity.PayoutTransferRequest;
 import com.src.entity.PayoutTransferResponse;
-import com.src.entity.PayoutVerifyAccountRequest;
 import com.src.entity.PayoutVerifyAccountResponseData;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
@@ -343,35 +339,33 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 */
 	@Override
 	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception {
+
+		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
+		parametersBody.add(new BasicNameValuePair("accountNumber", accountNumber));
+		parametersBody.add(new BasicNameValuePair("ifscCode", ifscCode));
+		parametersBody.add(new BasicNameValuePair("merchantRefId", CommonUtilites.genRandomAlphaNumeric()));
+
 		ObjectMapper objectmapper = new ObjectMapper();
-		PayoutVerifyAccountRequest request = new PayoutVerifyAccountRequest();
-		request.setAccountNumber(accountNumber);
-		request.setIfscCode(ifscCode);
-		request.setMerchantRefId(CommonUtilites.genRandomAlphaNumeric());
-		URL url = new URL(
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost connection = new HttpPost(
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("POST");
-		con.setRequestProperty("Content-Type", "application/json");
-		con.setRequestProperty("Authorization", "bearer " + generateToken());
-		con.setRequestProperty("payoutMerchantId",
+		connection.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		connection.setHeader("Authorization", "bearer " + generateToken());
+		connection.setHeader("payoutMerchantId",
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
-		con.setDoOutput(true);
 
-		String jsonString = objectmapper.writeValueAsString(request);
-		try (OutputStream os = con.getOutputStream()) {
-			byte[] input = jsonString.getBytes("utf-8");
-			os.write(input, 0, input.length);
-		}
-		int code = con.getResponseCode();
-		System.out.println(code);
+		connection.setEntity(new UrlEncodedFormEntity(parametersBody));
 
-		PayoutVerifyAccountResponseData response = objectmapper.readValue(con.getInputStream(),
-				PayoutVerifyAccountResponseData.class);
-		if (response.getError() == null) {
-			return response.getBeneficiaryName();
+		CloseableHttpResponse response = httpClient.execute(connection);
+		if (response.getStatusLine().getStatusCode() == 200) {
+			InputStream content = response.getEntity().getContent();
+			PayoutVerifyAccountResponseData verfiyAcct = objectmapper.readValue(content,
+					PayoutVerifyAccountResponseData.class);
+			if (verfiyAcct.getData().get("beneficiaryName").toString().length() > 0) {
+				return verfiyAcct.getData().get("beneficiaryName").toString();
+			}
 		}
-		return response.getError();
+		return null;
 	}
 
 	/**
@@ -380,37 +374,34 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public String payoutTransfer(int userId) throws Exception {
+	public PayoutTransferResponse payoutTransfer(FreelancerPaymentInput freelancerPaymentInput) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
-		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
-		PayoutTransferRequest payouttransferrequest = new PayoutTransferRequest();
-		payouttransferrequest.setBeneficiaryName(userEntity.getFullname());
-		payouttransferrequest.setBeneficiaryAccountNumber(userEntity.getFreeLanceDetails().getAccountno().toString());
-		payouttransferrequest.setBeneficiaryIfscCode(userEntity.getFreeLanceDetails().getIfsc());
-//			payouttransferrequest.setPurpose();
-//			payouttransferrequest.setAmount(amount);
-//			payouttransferrequest.setBatchId(batchId);
-//			payouttransferrequest.getMerchantRefId();
-//			payouttransferrequest.setPaymentType(paymentType);
-		URL url = new URL(
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("POST");
-		con.setRequestProperty("Content-Type", "application/json");
-		con.setRequestProperty("Authorization", generateToken());
-		con.setRequestProperty("payoutMerchantId",
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
-		con.setDoOutput(true);
-		String jsonString = objectmapper.writeValueAsString(payouttransferrequest);
-		try (OutputStream os = con.getOutputStream()) {
-			byte[] input = jsonString.getBytes("utf-8");
-			os.write(input, 0, input.length);
-		}
-		int code = con.getResponseCode();
-		System.out.println(code);
 
-		PayoutTransferResponse response = objectmapper.readValue(con.getInputStream(), PayoutTransferResponse.class);
-		return response.getMsg();
+		JSONObject json = new JSONObject();
+		json.put("beneficiaryId", freelancerPaymentInput.getBeneficiaryId());
+		json.put("purpose", freelancerPaymentInput.getPurpose());
+		json.put("amount", freelancerPaymentInput.getAmount());
+		json.put("batchId", freelancerPaymentInput.getBatchId());
+		json.put("merchantRefId", freelancerPaymentInput.getMerchantRefId());
+		json.put("paymentType", freelancerPaymentInput.getPaymentType());
+
+		StringEntity se = new StringEntity(json.toString());
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost connection = new HttpPost(referenceLookUpDAO
+				.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_INITIATE_TRANSFER_URL_SHORTKEY));
+		connection.setHeader("Content-Type", "application/json");
+		connection.setHeader("Authorization", "bearer " + generateToken());
+		connection.setHeader("payoutMerchantId",
+				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
+		connection.setEntity(se);
+
+		CloseableHttpResponse response = httpClient.execute(connection);
+		if (response.getStatusLine().getStatusCode() == 200) {
+			InputStream content = response.getEntity().getContent();
+			PayoutTransferResponse benficiaryResp = objectmapper.readValue(content, PayoutTransferResponse.class);
+			return benficiaryResp;
+		}
+		return null;
 	}
 
 	/**
@@ -479,12 +470,12 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		connection.setEntity(new UrlEncodedFormEntity(parametersBody));
 
 		CloseableHttpResponse response = httpClient.execute(connection);
-
-		InputStream content = response.getEntity().getContent();
-		PayoutToken tokens = objectmapper.readValue(content, PayoutToken.class);
-
-		return tokens.getAccess_token().toString();
-
+		if (response.getStatusLine().getStatusCode() == 200) {
+			InputStream content = response.getEntity().getContent();
+			PayoutToken tokens = objectmapper.readValue(content, PayoutToken.class);
+			return tokens.getAccess_token().toString();
+		}
+		return null;
 	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.src.constant.UserConstant;
 import com.src.constant.UtilityConfig;
+import com.src.entity.FreelancerPaymentInput;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -28,6 +29,7 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
+import com.src.entity.PayoutTransferResponse;
 
 /**
  * The <code> PaymentController </code> class defines managed beans which
@@ -187,8 +189,8 @@ public class PaymentController extends AbstractRestManager {
 	 *  
 	 * @param beneficiaryName
 	 */
-	@RequestMapping(value = "/verifyAccountPayout/{accountNumber}/{ifscCode}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.USERID) int userId, @PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
+	@RequestMapping(value = "/verifyAccountPayout/{accountNumber}/{ifscCode}/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
 			@PathVariable(UserConstant.IFSC_CODE) String ifscCode) throws Exception {
 		String beneficiaryName = paymentService.verifyAccountPayout(accountNumber, ifscCode);
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
@@ -200,10 +202,10 @@ public class PaymentController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/transfer/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> payoutTransfer(@PathVariable(UserConstant.USERID) int userId) throws Exception {
-		String message = paymentService.payoutTransfer(userId);
-		return new ResponseEntity<String>(message, HttpStatus.OK);
+	@RequestMapping(value = "/payment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PayoutTransferResponse> payoutTransfer(@RequestBody FreelancerPaymentInput freelancerPaymentInputList) throws Exception {
+		PayoutTransferResponse payoutTransferResponse = paymentService.payoutTransfer(freelancerPaymentInputList);
+		return new ResponseEntity<PayoutTransferResponse>(payoutTransferResponse, HttpStatus.OK);
 
 	}
 	

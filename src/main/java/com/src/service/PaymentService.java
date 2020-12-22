@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.FreelancerPaymentInput;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
@@ -10,6 +11,7 @@ import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
+import com.src.entity.PayoutTransferResponse;
 
 /**
  * The <code> PaymentService </code> interface defines payment service Details.
@@ -111,8 +113,6 @@ public interface PaymentService {
 	 * 
 	 * @param userId
 	 */
-	public String payoutTransfer(int userId) throws Exception;
-
-
+	public PayoutTransferResponse payoutTransfer(FreelancerPaymentInput freelancerPaymentInputs) throws Exception;
 
 }

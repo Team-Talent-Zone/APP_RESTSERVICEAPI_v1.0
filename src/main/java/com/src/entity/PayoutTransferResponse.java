@@ -2,15 +2,19 @@ package com.src.entity;
 
 import java.io.Serializable;
 
-public class PayoutTransferResponse implements Serializable{
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
+
+public class PayoutTransferResponse implements Serializable {
 
 	private static final long serialVersionUID = -5255327750602996566L;
-	
+
 	private boolean status;
 	private String msg;
 	private String code;
-	
-	PayoutTransferResponseData data;
+
+	@JsonProperty("data")
+	private JsonNode data;
 
 	public boolean isStatus() {
 		return status;
@@ -36,14 +40,12 @@ public class PayoutTransferResponse implements Serializable{
 		this.code = code;
 	}
 
-	public PayoutTransferResponseData getData() {
+	public JsonNode getData() {
 		return data;
 	}
 
-	public void setData(PayoutTransferResponseData data) {
+	public void setData(JsonNode data) {
 		this.data = data;
 	}
-	
-	
 
 }
