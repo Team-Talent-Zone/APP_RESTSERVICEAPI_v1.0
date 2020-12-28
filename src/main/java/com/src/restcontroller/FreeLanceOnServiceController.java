@@ -101,7 +101,7 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 				.getAllFreelanceOnServiceDetailsByJobId(jobId);
 		return new ResponseEntity<FreeLanceOnServiceEntity>(freeLanceOnServiceEntity, HttpStatus.OK);
 	}
- 
+
 	/**
 	 * Get the FreeLance On Service Details by UserId.
 	 * 
@@ -119,11 +119,13 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	 * To delete the FreeLance On Service Details.
 	 */
 	@RequestMapping(value = "/deleteFreelanceSVCDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> deleteFreelanceSVCDetails(@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
-		boolean isDeleted =freeLanceOnServiceSVC.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
+	public ResponseEntity<Boolean> deleteFreelanceSVCDetails(
+			@RequestBody FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
+		boolean isDeleted = freeLanceOnServiceSVC.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
 		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 
 	}
+
 	/**
 	 * Get the Free Lancer On Service Details when service end date after 2 days
 	 * 
@@ -205,6 +207,17 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	}
 
 	/**
+	 * List of Freelancers to whom company has to pay the job invoice amount
+	 */
+
+	@RequestMapping(value = "/getUserAllPendingPaymentOfFreelancer/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllPendingPaymentOfFreelancer() {
+		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC
+				.getUserAllPendingPaymentOfFreelancer();
+		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
 	 * Get all Freelancer reviews given by client.
 	 * 
 	 * @param isJobAvailable
@@ -212,11 +225,10 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/getFUFeebackDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>> getFUFeebackDetails() {
-		ArrayList<FreeLanceTestimonialsDetailsView> freelanceUserEntity = freeLanceOnServiceSVC
-				.getFUFeebackDetails();
+		ArrayList<FreeLanceTestimonialsDetailsView> freelanceUserEntity = freeLanceOnServiceSVC.getFUFeebackDetails();
 		return new ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>>(freelanceUserEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get User Details when isJobAvailable is false.
 	 * 
@@ -224,12 +236,13 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	 * @return list of user details
 	 */
 	@RequestMapping(value = "/getFUFeebackDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>> getFUFeebackDetailsByUserId(@PathVariable(UserConstant.USERID) int userId) {
+	public ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>> getFUFeebackDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
 		ArrayList<FreeLanceStarReviewFBEntity> freelanceUserEntity = freeLanceOnServiceSVC
 				.getFUFeebackDetailsUserId(userId);
 		return new ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>>(freelanceUserEntity, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Get All bell notification to the platform.
 	 * 

@@ -320,4 +320,22 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer() {
+		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceJobPostedView.class);
+		criteria.add(Restrictions.eq(UserConstant.ISJOBACTIVE, 1));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOFU, 1));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBCOMPLETED, 1));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOCOMPANY, 0));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBACCEPTED, 1));
+		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		if (freelanceOnServiceAllJobViews != null) {
+			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
+		}
+		return null;
+	}
 }

@@ -76,6 +76,12 @@ public class UserBizEntity implements Serializable {
 	@Column(name = "LNG")
 	private Float lng;
 	
+	@Column(name = "ACCEPTSIGNUPTERMS")
+	private boolean acceptsignupterms;
+	
+	@Column(name = "ACCEPTEDITPROFILETERMS")
+	private boolean accepteditprofileterms;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	@JsonIgnore
@@ -216,6 +222,22 @@ public class UserBizEntity implements Serializable {
 
 	public Float getLng() {
 		return lng;
+	}
+
+	public boolean isAcceptsignupterms() {
+		return acceptsignupterms;
+	}
+
+	public void setAcceptsignupterms(boolean acceptsignupterms) {
+		this.acceptsignupterms = acceptsignupterms;
+	}
+
+	public boolean isAccepteditprofileterms() {
+		return accepteditprofileterms;
+	}
+
+	public void setAccepteditprofileterms(boolean accepteditprofileterms) {
+		this.accepteditprofileterms = accepteditprofileterms;
 	}
 
 } 

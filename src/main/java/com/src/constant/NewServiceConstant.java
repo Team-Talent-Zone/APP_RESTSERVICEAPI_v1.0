@@ -63,9 +63,12 @@ public class NewServiceConstant {
 	public static final String SERVICE_HISTORY_USING_MANAGERID = "serviceHistorymappingObj.managerId";
 	public static final String USERID = "userId";
 	public static final String SERVICE_TERM_3M = "3_M";
-	public static final String SERVICE_TERM_1MF = "1_MF";
+	public static final String SERVICE_TERM_1WF = "1_WF";
 	public static final String SERVICE_TERM_6M = "6_M";
 	public static final String SERVICE_TERM_1Y = "1_Y";
+	public static final String SERVICE_TERM_1W = "1_W";
+	public static final String SERVICE_TERM_1M = "1_M";
+
 
 	private NewServiceConstant() {
 	}

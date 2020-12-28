@@ -185,4 +185,9 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getAllBellNotificationDetails();
 	}
 
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer() {
+		return freeLanceOnServiceDAO.getUserAllPendingPaymentOfFreelancer();
+	}
+
 }

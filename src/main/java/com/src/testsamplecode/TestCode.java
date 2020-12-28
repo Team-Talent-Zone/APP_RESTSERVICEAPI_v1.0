@@ -21,6 +21,7 @@ public class TestCode {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_WEEK, 7);
 		System.out.println(dateFormat.format(cal.getTime()));
 	}
 	public static VelocityContext generateVelocityObject(JSONArray jsonArray) throws Exception {

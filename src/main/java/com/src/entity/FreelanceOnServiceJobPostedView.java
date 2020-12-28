@@ -142,6 +142,9 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "JOBACCEPTEDDATE")
 	private String jobaccepteddate;
 	
+	@Column(name ="BENEFICIARYID")
+	private Integer beneficiaryId;
+	
 	public String getTxnid() {
 		return txnid;
 	}
@@ -501,5 +504,15 @@ public class FreelanceOnServiceJobPostedView {
 	public void setJobaccepteddate(String jobaccepteddate) {
 		this.jobaccepteddate = jobaccepteddate;
 	}
+
+	public Integer getBeneficiaryId() {
+		return beneficiaryId;
+	}
+
+	public void setBeneficiaryId(Integer beneficiaryId) {
+		this.beneficiaryId = beneficiaryId;
+	}
+	
+	
 	
 }

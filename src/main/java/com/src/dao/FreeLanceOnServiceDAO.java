@@ -112,5 +112,7 @@ public interface FreeLanceOnServiceDAO {
 	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
 
 	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
+	
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer();
 
 }

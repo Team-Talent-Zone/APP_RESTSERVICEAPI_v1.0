@@ -169,8 +169,8 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 								cal.add(Calendar.MONTH, 3);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
 							} else if (userServiceDetailsEntity.getValidPeriodCode()
-									.equals(NewServiceConstant.SERVICE_TERM_1MF)) {
-								cal.add(Calendar.MONTH, 1);
+									.equals(NewServiceConstant.SERVICE_TERM_1WF)) {
+								cal.add(Calendar.DAY_OF_WEEK, 7);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
 							} else if (userServiceDetailsEntity.getValidPeriodCode()
 									.equals(NewServiceConstant.SERVICE_TERM_6M)) {
@@ -179,6 +179,14 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 							} else if (userServiceDetailsEntity.getValidPeriodCode()
 									.equals(NewServiceConstant.SERVICE_TERM_1Y)) {
 								cal.add(Calendar.MONTH, 12);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							} else if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_1W)) {
+								cal.add(Calendar.DAY_OF_WEEK, 7);
+								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
+							} else if (userServiceDetailsEntity.getValidPeriodCode()
+									.equals(NewServiceConstant.SERVICE_TERM_1M)) {
+								cal.add(Calendar.MONTH, 1);
 								userServiceDetailsEntity.setServiceendon(dateFormat.format(cal.getTime()));
 							}
 						}

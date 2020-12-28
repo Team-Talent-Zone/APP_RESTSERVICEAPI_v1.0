@@ -80,4 +80,10 @@ public class UserConstant {
 	public static final String ACCOUNT_NUMBER = "accountNumber";
 	public static final String IFSC_CODE = "ifscCode";
 
+	public static final String ISJOBACTIVE = "isjobactive";
+	public static final String ISJOBAMTPAIDTOFU = "isjobamtpaidtofu";
+	public static final String ISJOBCOMPLETED = "isjobcompleted";
+
+	public static final String ISJOBAMTPAIDTOCOMPANY = "isjobamtpaidtocompany";
+	public static final String ISJOBACCEPTED = "isjobaccepted";
 }

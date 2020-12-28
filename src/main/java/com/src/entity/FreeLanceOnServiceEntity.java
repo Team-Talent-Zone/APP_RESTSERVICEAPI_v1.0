@@ -128,6 +128,8 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "futxnid")
 	private String futxnid;
 	
+	@Column(name = "ACCEPTJOBTERMS")
+	private boolean acceptjobterms;
 	
 	public String getFutxnid() {
 		return futxnid;
@@ -384,6 +386,13 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	public void setJobaccepteddate(String jobaccepteddate) {
 		this.jobaccepteddate = jobaccepteddate;
 	}
-	
+
+	public boolean isAcceptjobterms() {
+		return acceptjobterms;
+	}
+
+	public void setAcceptjobterms(boolean acceptjobterms) {
+		this.acceptjobterms = acceptjobterms;
+	}
 	
 }

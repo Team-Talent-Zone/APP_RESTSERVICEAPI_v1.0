@@ -118,5 +118,6 @@ public interface FreeLanceOnServiceSVC {
 	
 	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
 
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer();
 
 }
