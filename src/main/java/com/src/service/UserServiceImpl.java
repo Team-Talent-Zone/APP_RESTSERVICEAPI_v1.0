@@ -74,7 +74,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setFullname(userEntity.getFirstname() + " " + userEntity.getLastname());
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
-
+		userBizEntity.setAccepteditprofileterms(Boolean.FALSE);
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			userEntity.setIsactive(Boolean.FALSE);
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
