@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+import  org.json.JSONArray;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -17,6 +17,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,7 @@ import com.src.entity.PayoutVerifyAccountResponseData;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserServiceDetailsEntity;
+import com.src.exception.RestCustomException;
 import com.src.utils.CommonUtilites;
 import com.src.utils.PaymentUtil;
 
@@ -392,8 +394,9 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		json.put("batchId", freelancerPaymentInput.getBatchId());
 		json.put("merchantRefId", freelancerPaymentInput.getMerchantRefId());
 		json.put("paymentType", freelancerPaymentInput.getPaymentType());
-
-		StringEntity se = new StringEntity(json.toString());
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(json);
+		StringEntity se = new StringEntity(jsonArray.toString());
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost connection = new HttpPost(referenceLookUpDAO
 				.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_INITIATE_TRANSFER_URL_SHORTKEY));
@@ -440,13 +443,20 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		if (response.getStatusLine().getStatusCode() == 200) {
 			InputStream content = response.getEntity().getContent();
 			CreatePayOutBeneficiary benficiaryResp = objectmapper.readValue(content, CreatePayOutBeneficiary.class);
-			System.out.println("this is test" + benficiaryResp.getData().get("beneficiaryId"));
-			if (benficiaryResp.getData().get("beneficiaryId").toString() != null) {
-				userEntity.getFreeLanceDetails()
-						.setBeneficiaryid(benficiaryResp.getData().get("beneficiaryId").intValue());
-				userRestDAO.saveorupdateUserDetails(userEntity);
-				if (userEntity.getFreeLanceDetails().getBeneficiaryid() > 0) {
-					return benficiaryResp.getData().get("beneficiaryId").toString();
+			System.out.println("this is test" + benficiaryResp.getData().get("error"));
+			if (benficiaryResp.getData().get("error") == null) {
+				if (benficiaryResp.getData().get("beneficiaryId").toString() != null) {
+					userEntity.getFreeLanceDetails()
+							.setBeneficiaryid(benficiaryResp.getData().get("beneficiaryId").intValue());
+					userRestDAO.saveorupdateUserDetails(userEntity);
+					if (userEntity.getFreeLanceDetails().getBeneficiaryid() > 0) {
+						return benficiaryResp.getData().get("beneficiaryId").toString();
+					}
+				}
+			} else {
+				if (benficiaryResp.getData().get("errorCodes").toString() == "1005") {
+					throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR,
+							benficiaryResp.getData().get("error").toString());
 				}
 			}
 		}

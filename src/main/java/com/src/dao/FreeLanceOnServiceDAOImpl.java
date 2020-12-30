@@ -326,11 +326,11 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.add(Restrictions.eq(UserConstant.ISJOBACTIVE, 1));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOFU, 1));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBCOMPLETED, 1));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOCOMPANY, 0));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBACCEPTED, 1));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBACTIVE, true));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOFU, false));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBCOMPLETED, true));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOCOMPANY, true));
+		criteria.add(Restrictions.eq(UserConstant.ISJOBACCEPTED, true));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {

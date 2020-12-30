@@ -9,12 +9,17 @@ import org.apache.velocity.VelocityContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+
 public class TestCode {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		 
-		CalendarDemo();
+		Gson gson = new Gson();
+			String x=new String(gson.toJson("abcd"));
+		String z=x.replace("\"", "");
+		System.out.println(z);
+		//CalendarDemo();
 	}
 	
 	public static void CalendarDemo()  {

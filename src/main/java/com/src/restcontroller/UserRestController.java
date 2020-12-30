@@ -27,7 +27,7 @@ import com.src.entity.UserNotificationEntity;
  * provides back-end functionality or the <code>UserDetails</code> pages.
  * 
  * @author azmiri.
- * @version 1.0
+ * @version 1.0getUserByRecoveryPwd
  * 
  */
 
