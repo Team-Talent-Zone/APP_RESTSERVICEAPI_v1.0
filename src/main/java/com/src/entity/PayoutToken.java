@@ -2,6 +2,16 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+/**
+ * The <code>PayoutToken </code> defines a class
+ * to generate a unique token which
+ * is used for Payout functionality.
+ * 
+ * @author azmiri
+ * @version 1.0
+ *
+ */
+
 public class PayoutToken implements Serializable {
 
 	private static final long serialVersionUID = 8411482816741692633L;

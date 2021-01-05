@@ -241,6 +241,11 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 						+ " for user Id : " + userId);
 	}
 
+	/**
+	 * To save or update the payment details.
+	 * 
+	 * @param paymentEntity
+	 */
 	@Transactional
 	public void saveorupdatePayments(PaymentEntity paymentEntity) {
 		try {

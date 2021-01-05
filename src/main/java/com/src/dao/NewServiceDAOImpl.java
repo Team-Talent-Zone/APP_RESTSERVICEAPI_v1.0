@@ -207,6 +207,11 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		return null;
 	} 
 
+	/**
+	 * To check if the service name is exist by passing service name.
+	 * 
+	 * @param servicename
+	 */
 	public boolean checkNewServiceIsExist(String servicename) {
 
 		NewServiceEntity newServiceEntity = null;
@@ -219,6 +224,11 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		return false;
 	}
 	
+	/**
+	 * To Get the all Service Details by service id.
+	 * 
+	 * @return
+	 */
 	public NewServiceEntity getNewServiceDetailsByServiceId(int ourserviceId) {
 
 		NewServiceEntity newServiceEntity = null;

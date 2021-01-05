@@ -34,14 +34,14 @@ public interface WidgetDAO {
 	/**
 	 * To Get the all Widget Details.
 	 * 
-	 * @return
+	 * @param widgetId
 	 */
 	public WidgetForServiceEntity getAllWidgetDetails(int widgetId);
 
 	/**
 	 * To save Widget Notification history details.
 	 * 
-	 * @param newServiceEntity
+	 * @param widgetNotificationHistoryEntity
 	 */
 	public WidgetNotificationHistoryEntity saveWidgetNotificationHist(
 			WidgetNotificationHistoryEntity widgetNotificationHistoryEntity);

@@ -1,5 +1,14 @@
 package com.src.entity;
 
+/**
+ * The <code> FreelancerPaymentInput </code> class defines
+ * a POJO that sends a request to the freelancer
+ * payout functionality.
+ * 
+ * @author azmiri
+ * @version 1.0
+ */
+
 public class FreelancerPaymentInput {
 
 	public int beneficiaryId;

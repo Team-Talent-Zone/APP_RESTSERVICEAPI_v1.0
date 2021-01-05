@@ -2,6 +2,15 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+/**
+ * The <code> PayoutTransferRequest </code> POJO class
+ * provides a functionality for payout transfer request.
+ * 
+ * @author azmiri
+ * @version 1.0
+ *
+ */
+
 public class PayoutTransferRequest implements Serializable {
 
 	private static final long serialVersionUID = 567883350595725107L;

@@ -5,6 +5,15 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * The <code> PayoutVerifyAccountResponseData </code>
+ *  class defines a POJO which is a response 
+ *  data for payout verify account functionality.
+ * 
+ * @author azmiri
+ * @version 1.0
+ *
+ */
 public class PayoutVerifyAccountResponseData implements Serializable {
 
 	private static final long serialVersionUID = 8480275827741452611L;

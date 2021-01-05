@@ -108,10 +108,10 @@ public interface FreeLanceOnServiceSVC {
 
 	/**
 	 * To delete the FreeLance On Service Details.
-	 */
-	
+	 */	
 	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
+	
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
 	
 	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);

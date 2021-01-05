@@ -84,7 +84,7 @@ public class WidgetDAOImpl extends AbstractDAOManager implements WidgetDAO {
 	/**
 	 * To save Widget Notification history details.
 	 * 
-	 * @param newServiceEntity
+	 * @param widgetNotificationHistoryEntity
 	 */
 	@Transactional
 	public WidgetNotificationHistoryEntity saveWidgetNotificationHist(

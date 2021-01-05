@@ -104,7 +104,6 @@ public interface FreeLanceOnServiceDAO {
 	/**
 	 * To delete the FreeLance On Service Details.
 	 */
-
 	public void deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 	
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
@@ -113,6 +112,9 @@ public interface FreeLanceOnServiceDAO {
 
 	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
 	
+	/** 
+	 * To get all the pending payments of freelancer.
+	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer();
 
 }

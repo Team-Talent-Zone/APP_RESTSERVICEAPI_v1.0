@@ -67,6 +67,17 @@ public class PaymentController extends AbstractRestManager {
 		return new ResponseEntity<PaymentFUTranscationHistEntity>(paymentEnityRespObj, HttpStatus.OK);
 	}
 
+	/**
+	 * This method is to generate payment process from CBA.
+	 * 
+	 * @param mihpayid
+	 * @param status
+	 * @param mode
+	 * @param txnid
+	 * @param hash
+	 * @param res
+	 * @throws IOException
+	 */
 	@RequestMapping(path = "/payment-response", method = RequestMethod.POST)
 	public @ResponseBody void payuCallback(@RequestParam String mihpayid, @RequestParam String status,
 			@RequestParam PaymentMode mode, @RequestParam String txnid, @RequestParam String hash,

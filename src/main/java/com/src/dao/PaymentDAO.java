@@ -96,6 +96,11 @@ public interface PaymentDAO {
 	 */
 	public PaymentEntity getPaymentDetailsByTxnId(String txnid);
 	
+	/**
+	 * To save or update the payment details.
+	 * 
+	 * @param paymentEntity
+	 */
 	public void saveorupdatePayments(PaymentEntity paymentEntity);
 
 }

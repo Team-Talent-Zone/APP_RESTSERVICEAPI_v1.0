@@ -5,6 +5,15 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * The <code> PayoutTransferResponse </code> POJO class
+ * provides a functionality for payout transfer response.
+ * 
+ * @author azmiri
+ * @version 1.0
+ *
+ */
+
 public class PayoutTransferResponse implements Serializable {
 
 	private static final long serialVersionUID = -5255327750602996566L;

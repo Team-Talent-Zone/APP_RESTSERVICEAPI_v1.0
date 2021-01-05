@@ -20,11 +20,25 @@ import com.src.entity.UploadUtilEntity;
 import com.src.entity.UtilEntity;
 import com.src.utils.CommonUtilites;
 
+/**
+ * The <code> UtilityController </code> class defines managed beans which
+ * provides back-end functionality or the <code>UtilEntity</code> pages.
+ * 
+ * @author Ishaq
+ *
+ */
+
 @Controller
 public class UtilityController extends AbstractRestManager {
 
 	final Logger logger = LoggerFactory.getLogger(UtilityController.class);
 
+	/**This method is for uploading an avatar as a display image.
+	 * 
+	 * @param uploadUtilEntity
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
@@ -37,6 +51,13 @@ public class UtilityController extends AbstractRestManager {
 		return new ResponseEntity<String>(gson.toJson(avatarURL), HttpStatus.OK);
 	}
 
+	/**
+	 * This method is for uploading background verification documents.
+	 * 
+	 * @param uploadUtilEntity
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
 		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
@@ -48,6 +69,13 @@ public class UtilityController extends AbstractRestManager {
 		return new ResponseEntity<String>(gson.toJson(bgDocURL), HttpStatus.OK);
 	}
 
+	/**
+	 * This method is for uploading widgets.
+	 * 
+	 * @param uploadUtilEntity
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody UploadUtilEntity uploadUtilEntity)
 			throws IOException {
@@ -61,12 +89,27 @@ public class UtilityController extends AbstractRestManager {
 
 	}
 
+	/**
+	 * This method is for generating an email notification.
+	 * 
+	 * @param utilEntity
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/sendemail/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UtilEntity> sendEmail(@RequestBody UtilEntity utilEntity) throws Exception {
 		UtilEntity utilEntityResponse = utilService.sendEmail(utilEntity);
 		return new ResponseEntity<UtilEntity>(utilEntityResponse, HttpStatus.OK);
 	}
 
+	/**
+	 * This method is for translating text.
+	 * 
+	 * @param targetLanguage
+	 * @param targetText
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/translatetext/{targetText}/{targetLanguage}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UtilEntity> translateText(@PathVariable String targetLanguage,
 			@PathVariable String targetText) throws Exception {

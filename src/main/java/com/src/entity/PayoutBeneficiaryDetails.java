@@ -2,6 +2,16 @@ package com.src.entity;
 
 import java.io.Serializable;
 
+
+/**
+ * The <code> BeneficiaryDetails </code> class defines 
+ * the freelancer bank/payment details
+ * to perform payout functionality.
+ * 
+ * @author Azmiri
+ * @version 1.0
+ *
+ */
 public class PayoutBeneficiaryDetails implements Serializable {
 
 	private static final long serialVersionUID = -5095780759069974217L;

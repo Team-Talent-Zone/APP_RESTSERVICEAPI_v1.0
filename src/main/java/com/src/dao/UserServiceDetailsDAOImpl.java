@@ -143,6 +143,8 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 
 	/**
 	 * To save the User Service Notification.
+	 * 
+	 * @param userServiceNotfication
 	 */
 	@Transactional
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication) {
@@ -175,7 +177,9 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 	}
 
 	/**
-	 * To get the User Service Details Notification by User id.
+	 * To get the User Service Details Notification by User id.  
+	 * 
+	 * @param userId
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -211,6 +215,12 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		return null;
 	}
 
+	/**
+	 * To save User Service Event History Details.
+	 * 
+	 * @param UserServiceEventHistoryEntity
+	 * @return
+	 */
 	@Transactional
 	public void saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity) {
 		try {
@@ -221,6 +231,11 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		}
 	}
 
+	/**
+	 * To get the User Service Details by userId.
+	 * 
+	 * @param userId
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId) {

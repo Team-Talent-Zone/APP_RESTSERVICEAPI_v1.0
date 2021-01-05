@@ -238,6 +238,11 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		return null;
 	}
 
+	/**
+	 * To get all users job details by Sub Category.
+	 *  
+	 *  @param scategory 
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory) {
@@ -253,6 +258,11 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		return null;
 	}
 
+	/**
+	 * To get all users job details by UserID.
+	 *  
+	 *  @param userId 
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
@@ -267,7 +277,12 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 		return null;
 	}
-
+    
+	/**
+	 * To delete the FreeLance On Service Details.
+	 * 
+	 * @param freeLanceOnServiceEntity
+	 */
 	@Transactional
 	public void deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		// TODO Auto-generated method stub
@@ -279,6 +294,9 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails() {
@@ -319,7 +337,10 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		}
 		return null;
 	}
-
+	
+	/** 
+	 * To get all the pending payments of freelancer.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer() {
