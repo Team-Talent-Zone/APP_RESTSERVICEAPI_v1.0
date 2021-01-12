@@ -98,7 +98,7 @@ public interface PaymentService {
 	 * 
 	 * @param userId
 	 */
-	public String createBenificiaryPayout(int userId) throws Exception ;
+	public String createBenificiaryPayout(int userId , String accountNumber, String ifscCode) throws Exception ;
 
 	/**
 	 * It validates the account and sends beneficiary name as response.

@@ -23,7 +23,7 @@ public class UtilityConfig {
 	/*
 	 * AWS S3 Bucket Configuration Details
 	 */
-	public static final String PROJECT_ID_DEV = "astral-scout-261009";
+	public static final String PROJECT_ID_DEV = "tonal-mote-300908";
 	public static final String SUFFIX = "/";
 	public static final String S3_BUCKETNAME_AVATAR = "platform-user-avatars";
 	public static final String S3_BUCKETNAME_BG_DOCS = "platform-freelancer-bg-documents";

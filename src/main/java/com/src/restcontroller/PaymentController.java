@@ -30,6 +30,7 @@ import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutTransferResponse;
+import com.src.entity.PayoutVerifyAccountRequest;
 
 /**
  * The <code> PaymentController </code> class defines managed beans which
@@ -84,9 +85,11 @@ public class PaymentController extends AbstractRestManager {
 			HttpServletResponse res) throws IOException {
 		if (mihpayid != null) {
 			String transcationid = paymentService.payuCallback(mihpayid, txnid, mode, hash, status);
-			res.sendRedirect(referenceLookUpService.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_SUCCESS_URL_SHORTKEY) + transcationid);
+			res.sendRedirect(referenceLookUpService
+					.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_SUCCESS_URL_SHORTKEY) + transcationid);
 		} else {
-			res.sendRedirect(referenceLookUpService.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_FAIL_URL_SHORTKEY));
+			res.sendRedirect(
+					referenceLookUpService.getReferenceLookupByShortKey(UtilityConfig.PAYIN_GATEWAY_FAIL_URL_SHORTKEY));
 		}
 	}
 
@@ -187,38 +190,38 @@ public class PaymentController extends AbstractRestManager {
 	 * 
 	 * @param userId
 	 */
-	@RequestMapping(value = "/createBenificiaryPayout/{userId}/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createBenificiaryPayout(
-			@PathVariable(UserConstant.USERID) int userId) throws Exception {
-		String benificiaryId = paymentService.createBenificiaryPayout(userId);
+	@RequestMapping(value = "/createBenificiaryPayout/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> createBenificiaryPayout(@RequestBody PayoutVerifyAccountRequest payoutVerifyAccountRequest)
+			throws Exception {
+		String benificiaryId = paymentService.createBenificiaryPayout(payoutVerifyAccountRequest.getUserid(),
+				payoutVerifyAccountRequest.getAccountnumber(), payoutVerifyAccountRequest.getIfsccode());
 		return new ResponseEntity<String>(benificiaryId, HttpStatus.OK);
 
 	}
 
 	/**
 	 * To verify account details.
-	 *  
+	 * 
 	 * @param beneficiaryName
+	 * @return 
 	 */
-	@RequestMapping(value = "/verifyAccountPayout/{accountNumber}/{ifscCode}/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> verifyAccountPayout(@PathVariable(UserConstant.ACCOUNT_NUMBER) String accountNumber,
-			@PathVariable(UserConstant.IFSC_CODE) String ifscCode) throws Exception {
-		String beneficiaryName = paymentService.verifyAccountPayout(accountNumber, ifscCode);
+	@RequestMapping(value = "/verifyAccountPayout/", method = RequestMethod.POST ,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> verifyAccountPayout(@RequestBody PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
+		String beneficiaryName = paymentService.verifyAccountPayout(payoutVerifyAccountRequest.getAccountnumber(), payoutVerifyAccountRequest.getIfsccode());
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
-
 	}
-	
+
 	/**
-	 * API call for intiating transfer (payout). 
+	 * API call for intiating transfer (payout).
 	 * 
 	 * @param userId
 	 */
 	@RequestMapping(value = "/payment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PayoutTransferResponse> payoutTransfer(@RequestBody FreelancerPaymentInput freelancerPaymentInputList) throws Exception {
+	public ResponseEntity<PayoutTransferResponse> payoutTransfer(
+			@RequestBody FreelancerPaymentInput freelancerPaymentInputList) throws Exception {
 		PayoutTransferResponse payoutTransferResponse = paymentService.payoutTransfer(freelancerPaymentInputList);
 		return new ResponseEntity<PayoutTransferResponse>(payoutTransferResponse, HttpStatus.OK);
 
 	}
-	
 
 }

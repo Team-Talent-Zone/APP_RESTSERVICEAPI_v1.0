@@ -75,6 +75,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 		userBizEntity.setAccepteditprofileterms(Boolean.FALSE);
+		userBizEntity.setAcceptsignupterms(Boolean.TRUE);
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			userEntity.setIsactive(Boolean.FALSE);
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();
@@ -152,6 +153,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 		UserBizEntity userBizEntity = userEntity.getUserbizdetails();
 		UserRoleEntity userRoleEntity = userEntity.getUserroles();
+		userBizEntity.setAccepteditprofileterms(Boolean.TRUE);
 
 		if (userRoleEntity.getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			FreeLanceEntity freelanceentity = userEntity.getFreeLanceDetails();

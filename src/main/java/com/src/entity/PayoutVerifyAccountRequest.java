@@ -3,51 +3,44 @@ package com.src.entity;
 import java.io.Serializable;
 
 /**
-  * The <code> PayoutVerifyAccountRequest </code>
- *  class defines a POJO which is a request 
- *  data for payout verify account functionality.
+ * The <code> PayoutVerifyAccountRequest </code> class defines a POJO which is a
+ * request data for payout verify account functionality.
  * 
  * @author azmiri
  * @version 1.0
  *
  */
 
-
 public class PayoutVerifyAccountRequest implements Serializable {
 
 	private static final long serialVersionUID = 5315065184092039811L;
-	
-	private String accountNumber;
-	private String ifscCode;
-	private String merchantRefId;
-	private String amount;
-	
-	
-	public String getAccountNumber() {
-		return accountNumber;
+
+	private String accountnumber;
+	private String ifsccode;
+	private int userid;
+
+	public String getAccountnumber() {
+		return accountnumber;
 	}
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+
+	public void setAccountnumber(String accountnumber) {
+		this.accountnumber = accountnumber;
 	}
-	public String getIfscCode() {
-		return ifscCode;
+
+	public String getIfsccode() {
+		return ifsccode;
 	}
-	public void setIfscCode(String ifscCode) {
-		this.ifscCode = ifscCode;
+
+	public void setIfsccode(String ifsccode) {
+		this.ifsccode = ifsccode;
 	}
-	public String getMerchantRefId() {
-		return merchantRefId;
+
+	public int getUserid() {
+		return userid;
 	}
-	public void setMerchantRefId(String merchantRefId) {
-		this.merchantRefId = merchantRefId;
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
-	public String getAmount() {
-		return amount;
-	}
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-	
-	
-	
+
 }

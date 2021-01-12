@@ -38,7 +38,7 @@ public class TestGoogleTranslationAPI {
 
 	public static void translateText(ArrayList<TestStaticContent> arrayList) throws IOException {
 		// TODO(developer): Replace these variables before running the sample.
-		String projectId = "astral-scout-261009";
+		String projectId = "tonal-mote-300908";
 		// Supported Languages: https://cloud.google.com/translate/docs/languages
 		String targetLanguage = "hi";
 		for (TestStaticContent tsc : arrayList) {

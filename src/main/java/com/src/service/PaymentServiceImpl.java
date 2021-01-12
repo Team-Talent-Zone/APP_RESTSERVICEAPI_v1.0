@@ -421,13 +421,13 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public String createBenificiaryPayout(int userId) throws Exception {
+	public String createBenificiaryPayout(int userId,String accountNumber, String ifscCode) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
 		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
 		JSONObject json = new JSONObject();
 		json.put("name", userEntity.getFullname());
-		json.put("accountNo", userEntity.getFreeLanceDetails().getAccountno().toString());
-		json.put("ifsc", userEntity.getFreeLanceDetails().getIfsc());
+		json.put("accountNo", accountNumber);
+		json.put("ifsc", ifscCode);
 		json.put("email", userEntity.getUsername());
 		StringEntity se = new StringEntity(json.toString());
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -454,10 +454,8 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 					}
 				}
 			} else {
-				if (benficiaryResp.getData().get("errorCodes").toString() == "1005") {
 					throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR,
 							benficiaryResp.getData().get("error").toString());
-				}
 			}
 		}
 		return null;

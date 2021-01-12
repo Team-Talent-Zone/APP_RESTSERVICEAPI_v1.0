@@ -81,7 +81,7 @@ public class FreeLanceEntity implements Serializable {
 	private String bgcurrentstatus;
 
 	@Column(name = "ACCOUNTNO")
-	private Integer accountno;
+	private String accountno;
 
 	@Column(name = "IFSC")
 	private String ifsc;
@@ -217,11 +217,11 @@ public class FreeLanceEntity implements Serializable {
 		this.bgcurrentstatus = bgcurrentstatus;
 	}
 
-	public Integer getAccountno() {
+	public String getAccountno() {
 		return accountno;
 	}
 
-	public void setAccountno(Integer accountno) {
+	public void setAccountno(String accountno) {
 		this.accountno = accountno;
 	}
 
