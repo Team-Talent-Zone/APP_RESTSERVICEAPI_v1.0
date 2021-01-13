@@ -12,6 +12,7 @@ import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutTransferResponse;
+import com.src.entity.PayoutVerifyAccountRequest;
 
 /**
  * The <code> PaymentService </code> interface defines payment service Details.
@@ -84,7 +85,7 @@ public interface PaymentService {
 
 	/**
 	 * Get the Payment Refund transaction Details by UserId.
-	 * 
+	 *  
 	 * @param userId
 	 */
 	public PaymentRefundTranscationHistEntity getPaymentRefundTranHistByUserId(int userId);
@@ -98,7 +99,7 @@ public interface PaymentService {
 	 * 
 	 * @param userId
 	 */
-	public String createBenificiaryPayout(int userId , String accountNumber, String ifscCode) throws Exception ;
+	public String createBenificiaryPayout(PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception ;
 
 	/**
 	 * It validates the account and sends beneficiary name as response.
@@ -106,7 +107,7 @@ public interface PaymentService {
 	 * @param accountNumber
 	 * @param ifscCode
 	 */
-	public String verifyAccountPayout( String accountNumber, String ifscCode) throws Exception ;
+	public String verifyAccountPayout( PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception ;
 
 	/**
 	 * Method for intiating transfer (payout). 

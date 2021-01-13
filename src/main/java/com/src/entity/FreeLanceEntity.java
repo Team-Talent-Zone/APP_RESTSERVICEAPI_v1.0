@@ -79,6 +79,9 @@ public class FreeLanceEntity implements Serializable {
 	
 	@Column(name = "BGCURRENTSTATUS")
 	private String bgcurrentstatus;
+	
+	@Column(name = "ACCOUNTNAME")
+	private String accountname;
 
 	@Column(name = "ACCOUNTNO")
 	private String accountno;
@@ -241,4 +244,12 @@ public class FreeLanceEntity implements Serializable {
 		this.beneficiaryid = beneficiaryid;
 	}
 
+	public String getAccountname() {
+		return accountname;
+	}
+
+	public void setAccountname(String accountname) {
+		this.accountname = accountname;
+	}
+	
 }

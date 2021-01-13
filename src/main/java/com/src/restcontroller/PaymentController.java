@@ -193,8 +193,7 @@ public class PaymentController extends AbstractRestManager {
 	@RequestMapping(value = "/createBenificiaryPayout/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> createBenificiaryPayout(@RequestBody PayoutVerifyAccountRequest payoutVerifyAccountRequest)
 			throws Exception {
-		String benificiaryId = paymentService.createBenificiaryPayout(payoutVerifyAccountRequest.getUserid(),
-				payoutVerifyAccountRequest.getAccountnumber(), payoutVerifyAccountRequest.getIfsccode());
+		String benificiaryId = paymentService.createBenificiaryPayout(payoutVerifyAccountRequest);
 		return new ResponseEntity<String>(benificiaryId, HttpStatus.OK);
 
 	}
@@ -207,7 +206,7 @@ public class PaymentController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/verifyAccountPayout/", method = RequestMethod.POST ,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> verifyAccountPayout(@RequestBody PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
-		String beneficiaryName = paymentService.verifyAccountPayout(payoutVerifyAccountRequest.getAccountnumber(), payoutVerifyAccountRequest.getIfsccode());
+		String beneficiaryName = paymentService.verifyAccountPayout(payoutVerifyAccountRequest);
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
 	}
 

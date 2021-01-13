@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import  org.json.JSONArray;
+
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -14,6 +14,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.entity.PayoutToken;
 import com.src.entity.PayoutTransferResponse;
+import com.src.entity.PayoutVerifyAccountRequest;
 import com.src.entity.PayoutVerifyAccountResponseData;
 import com.src.entity.ReferenceLookUpTemplateEntity;
 import com.src.entity.UserEntity;
@@ -348,11 +350,11 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param ifscCode
 	 */
 	@Override
-	public String verifyAccountPayout(String accountNumber, String ifscCode) throws Exception {
+	public String verifyAccountPayout(PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
 
 		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
-		parametersBody.add(new BasicNameValuePair("accountNumber", accountNumber));
-		parametersBody.add(new BasicNameValuePair("ifscCode", ifscCode));
+		parametersBody.add(new BasicNameValuePair("accountNumber", payoutVerifyAccountRequest.getAccountnumber()));
+		parametersBody.add(new BasicNameValuePair("ifscCode", payoutVerifyAccountRequest.getIfsccode()));
 		parametersBody.add(new BasicNameValuePair("merchantRefId", CommonUtilites.genRandomAlphaNumeric()));
 
 		ObjectMapper objectmapper = new ObjectMapper();
@@ -421,13 +423,13 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * @param userId
 	 */
 	@Override
-	public String createBenificiaryPayout(int userId,String accountNumber, String ifscCode) throws Exception {
+	public String createBenificiaryPayout(PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
 		ObjectMapper objectmapper = new ObjectMapper();
-		UserEntity userEntity = userRestDAO.getUserByUserId(userId);
+		UserEntity userEntity = userRestDAO.getUserByUserId(payoutVerifyAccountRequest.getUserid());
 		JSONObject json = new JSONObject();
-		json.put("name", userEntity.getFullname());
-		json.put("accountNo", accountNumber);
-		json.put("ifsc", ifscCode);
+		json.put("name", payoutVerifyAccountRequest.getAccountname());
+		json.put("accountNo", payoutVerifyAccountRequest.getAccountnumber());
+		json.put("ifsc", payoutVerifyAccountRequest.getIfsccode());
 		json.put("email", userEntity.getUsername());
 		StringEntity se = new StringEntity(json.toString());
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -454,8 +456,8 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 					}
 				}
 			} else {
-					throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR,
-							benficiaryResp.getData().get("error").toString());
+				throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR,
+						benficiaryResp.getData().get("error").toString());
 			}
 		}
 		return null;

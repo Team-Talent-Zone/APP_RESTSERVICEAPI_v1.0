@@ -18,6 +18,7 @@ public class PayoutVerifyAccountRequest implements Serializable {
 	private String accountnumber;
 	private String ifsccode;
 	private int userid;
+	private String accountname;
 
 	public String getAccountnumber() {
 		return accountnumber;
@@ -43,4 +44,13 @@ public class PayoutVerifyAccountRequest implements Serializable {
 		this.userid = userid;
 	}
 
+	public String getAccountname() {
+		return accountname;
+	}
+
+	public void setAccountname(String accountname) {
+		this.accountname = accountname;
+	}
+
+	
 }
