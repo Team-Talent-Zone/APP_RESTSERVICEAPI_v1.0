@@ -35,7 +35,7 @@ public class SendEmailHelper {
 	 * @param utilEntity
 	 * @throws Exception
 	 */
-	public UtilEntity prepareEmail(UtilEntity utilEntity) throws Exception {
+	public UtilEntity prepareEmail(UtilEntity utilEntity, String apikey, String applicationName) throws Exception {
 		logger.debug("Inside the SendEmailHelper Class : prepareEmail method");
 		VelocityHelper velocityHelper = new VelocityHelper();
 		JSONArray jsonarray = new JSONArray();
@@ -48,9 +48,9 @@ public class SendEmailHelper {
 					|| utilEntity.getPreferlang().equals(UtilityConfig.PREFERED_LANGUAGE_HINDI)) {
 				TranslateHelper translateHelper = new TranslateHelper();
 				htmlFormat = translateHelper.translateText(utilEntity.getPreferlang(), htmlFormat,
-						UtilityConfig.MIME_TYPE_HTML);
+						UtilityConfig.MIME_TYPE_HTML, apikey, applicationName);
 				String subject = translateHelper.translateText(utilEntity.getPreferlang(), utilEntity.getSubject(),
-						UtilityConfig.MIME_TYPE_TEXT);
+						UtilityConfig.MIME_TYPE_TEXT, apikey, applicationName);
 				utilEntity.setSubject(subject);
 			}
 			utilEntity.setBody(htmlFormat);

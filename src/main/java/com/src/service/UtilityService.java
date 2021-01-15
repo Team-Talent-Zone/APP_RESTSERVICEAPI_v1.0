@@ -51,6 +51,6 @@ public interface UtilityService {
 	 * @param targetText
 	 * @throws Exception
 	 */
-	public String translateText(String targetLanguage, String targetText) throws Exception;
+	public String translateText(String targetLanguage, String targetText);
 
 }

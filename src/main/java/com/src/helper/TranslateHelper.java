@@ -1,7 +1,18 @@
 package com.src.helper;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Arrays;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.model.TranslationsListResponse;
+import com.google.api.services.translate.model.TranslationsResource;
 import com.google.cloud.translate.v3.LocationName;
 import com.google.cloud.translate.v3.TranslateTextRequest;
 import com.google.cloud.translate.v3.TranslateTextResponse;
@@ -17,7 +28,9 @@ import com.src.constant.UtilityConfig;
  * @version 1.0
  *
  */
-public class TranslateHelper {
+public class TranslateHelper{
+
+	final Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
 	/**
 	 * This method is for Translating Text.
@@ -27,15 +40,55 @@ public class TranslateHelper {
 	 * @param type
 	 * @throws Exception
 	 */
-	public String translateText(String targetLanguage, String text, String type) throws Exception {
+	public String translateText(String targetLanguage, String text, String type, String apiKey , String applicationName) {
 
 		String mimeType = null;
+		
 		if (type.equals(UtilityConfig.MIME_TYPE_HTML)) {
-			mimeType = "text/html";
+			mimeType = "html";
 		} else {
-			mimeType = "text/plain";
+			mimeType = "text";
 		}
 
+		return callAPIMethod(targetLanguage, text, mimeType, applicationName, apiKey);
+	}
+
+	private String callAPIMethod(String targetLanguage, String text, String mimeType, String applicationName,
+			String apiKey) {
+		String translationText = null;
+		logger.debug("===================Translate API Call Start=====================");
+		try {
+			Translate t = new Translate.Builder(GoogleNetHttpTransport.newTrustedTransport(),
+					GsonFactory.getDefaultInstance(), null)
+							// Set your application name
+							.setApplicationName(applicationName).build();
+			Locale locale = new Locale(targetLanguage);
+			locale.getISO3Language();
+			Translate.Translations.List list;
+
+			list = t.new Translations().list(Arrays.asList(text),
+					// Target language
+					locale.getISO3Language()).setFormat(mimeType);
+
+			// TODO: Set your API-Key from https://console.developers.google.com/
+			list.setKey(apiKey);
+			TranslationsListResponse response = list.execute();
+			for (TranslationsResource translationsResource : response.getTranslations()) {
+				translationText = translationsResource.getTranslatedText();
+
+			}
+			logger.debug("===================Translate API Call End=====================");
+			return translationText;
+		} catch (GeneralSecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unused")
+	private String callAPI(String targetLanguage, String text, String mimeType) throws IOException {
 		String translationText = null;
 		// Initialize client that will be used to send requests. This client only needs
 		// to be created

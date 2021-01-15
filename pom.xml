@@ -149,8 +149,22 @@
 		<dependency>
 			<groupId>com.google.cloud</groupId>
 			<artifactId>google-cloud-translate</artifactId>
-			<version>1.94.1</version>
+			<version>LATEST</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-gson</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-jackson</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
 	</dependencies>
 	<profiles>
 		<profile>

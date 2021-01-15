@@ -20,15 +20,17 @@ import com.src.helper.TranslateHelper;
  *
  */
 @Service("utilService")
-public class UtilityServiceImpl implements UtilityService {
+public class UtilityServiceImpl extends AbstractServiceManager implements UtilityService {
 	final static Logger logger = LoggerFactory.getLogger(UtilityServiceImpl.class);
 
 	/**
 	 * This method is for sending emails.
 	 */
 	public UtilEntity sendEmail(UtilEntity utilEntity) throws Exception {
+		String applicationName = referenceLookUpDAO.getReferenceLookupByShortKey("appname");
+		String apiKey = referenceLookUpDAO.getReferenceLookupByShortKey("googleapikey");
 		SendEmailHelper emailHelper = new SendEmailHelper();
-		return emailHelper.prepareEmail(utilEntity);
+		return emailHelper.prepareEmail(utilEntity , apiKey, applicationName);
 	}
 
 	/**
@@ -58,9 +60,13 @@ public class UtilityServiceImpl implements UtilityService {
 	/**
 	 * This method is translate text.
 	 */
-	public String translateText(String targetLanguage, String targetText) throws Exception {
+	public String translateText(String targetLanguage, String targetText) {
+		String applicationName = referenceLookUpDAO.getReferenceLookupByShortKey("appname");
+		String apiKey = referenceLookUpDAO.getReferenceLookupByShortKey("googleapikey");
+
 		TranslateHelper translateHelper = new TranslateHelper();
-		return translateHelper.translateText(targetLanguage, targetText, UtilityConfig.MIME_TYPE_TEXT);
+		return translateHelper.translateText(targetLanguage, targetText, UtilityConfig.MIME_TYPE_TEXT, apiKey,
+				applicationName);
 	}
 
 }

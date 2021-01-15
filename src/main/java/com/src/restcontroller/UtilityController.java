@@ -112,7 +112,8 @@ public class UtilityController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/translatetext/{targetText}/{targetLanguage}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UtilEntity> translateText(@PathVariable String targetLanguage,
-			@PathVariable String targetText) throws Exception {
+			@PathVariable String targetText)  {
+		
 		String translateText = utilService.translateText(targetLanguage, targetText);
 		UtilEntity util = new UtilEntity();
 		util.setTranslateresp(translateText);

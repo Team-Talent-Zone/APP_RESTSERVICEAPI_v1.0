@@ -16,7 +16,7 @@ public class TestGoogleTranslationAPI {
 		ArrayList<TestStaticContent> arrayList = new ArrayList<TestStaticContent>();
 		TestStaticContent testStaticContent1 = new TestStaticContent();
 		testStaticContent1.setContent(
-				"A platform that publishes N number of service (sites) to a individual or a company into a technology to manage their business features");
+				"<h1>A platform that publishes N number of service (sites) to a individual or a company into a technology to manage their business features</h1>");
 
 		TestStaticContent testStaticContent2 = new TestStaticContent();
 		testStaticContent2.setContent(
@@ -40,7 +40,7 @@ public class TestGoogleTranslationAPI {
 		// TODO(developer): Replace these variables before running the sample.
 		String projectId = "tonal-mote-300908";
 		// Supported Languages: https://cloud.google.com/translate/docs/languages
-		String targetLanguage = "hi";
+		String targetLanguage = "te";
 		for (TestStaticContent tsc : arrayList) {
 			translateText(projectId, targetLanguage, tsc.getContent());
 		}
