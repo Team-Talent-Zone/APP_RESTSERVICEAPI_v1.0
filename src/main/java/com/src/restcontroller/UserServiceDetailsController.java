@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
@@ -179,10 +181,34 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	 * To delete the User Service Details.
 	 */
 	@RequestMapping(value = "/deleteUserSVCDetails/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> deleteUserSVCDetails(@RequestBody UserServiceDetailsEntity userServiceDetailsEntityObject) {
-		boolean isDeleted =userServiceDetailsService.deleteUserSVCDetails(userServiceDetailsEntityObject);
+	public ResponseEntity<Boolean> deleteUserSVCDetails(
+			@RequestBody UserServiceDetailsEntity userServiceDetailsEntityObject) {
+		boolean isDeleted = userServiceDetailsService.deleteUserSVCDetails(userServiceDetailsEntityObject);
 		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 
+	}
+
+	/**
+	 * Get All Bell Noticication by userId
+	 * 
+	 */
+	@RequestMapping(value = "/getAllBellNotifications/{uid}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllBellNotifications(
+			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_UID) int uid) {
+		ArrayList<AllBellNotificationsView> listofServiceExpirations = userServiceDetailsService
+				.getAllBellNotifications(uid);
+		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(listofServiceExpirations, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get All Bell Noticication by role code
+	 *  
+	 */
+	@RequestMapping(value = "/getAllAdminBellNotifications/{visibility}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllAdminBellNotifications(@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY) String visibility) {
+		ArrayList<AllBellNotificationsView> listofServiceExpirations = userServiceDetailsService
+				.getAllAdminBellNotifications(visibility);
+		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(listofServiceExpirations, HttpStatus.OK);
 	}
 
 }

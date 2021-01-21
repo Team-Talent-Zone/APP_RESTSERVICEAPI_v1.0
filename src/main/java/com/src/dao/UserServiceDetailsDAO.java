@@ -2,6 +2,7 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
@@ -27,7 +28,6 @@ public interface UserServiceDetailsDAO {
 	 */
 	public UserServiceDetailsEntity saveUserServiceDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 
-
 	/**
 	 * To save User Service Event History Details.
 	 * 
@@ -36,7 +36,6 @@ public interface UserServiceDetailsDAO {
 	 */
 	public void saveUserServiceEventHistory(UserServiceEventHistoryEntity eventHistoryEntity);
 
-	
 	/**
 	 * To edit and update the user Service details.
 	 * 
@@ -89,15 +88,24 @@ public interface UserServiceDetailsDAO {
 	 * To get the User Service Details Pending Payments Notification.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
-	
+
 	/**
 	 * To get the User Service Details by userId.
 	 */
 	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
-	
+
 	/**
 	 * To delete the User Service Details.
 	 */
 	public void deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 
+	/**
+	 * To get all bell notifications by userId.
+	 */
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId);
+	
+	/**
+	 * To get all bell notifications.
+	 */
+	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode);
 }

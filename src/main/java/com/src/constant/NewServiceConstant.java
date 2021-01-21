@@ -50,6 +50,9 @@ public class NewServiceConstant {
 	public static final String USER_SERVICE_DETAILS_ALIAS = "userSvcDtls";
 	public static final String USER_SERVICE_DETAILS_ISACTIVE = "isactive";
 	public static final String USER_SERVICE_DETAILS_USERID = "userid";
+	public static final String USER_SERVICE_DETAILS_UID = "uid";
+	public static final String USER_SERVICE_DETAILS_VISIBLITY = "visibility";
+
 	public static final String USER_SERVICE_SVC = "newSVCService";
 	public static final String USER_SERVICE_DETAILS_SERVICE = "userServiceDtls";
 	public static final String FREE_LANCE_ON_SERVICE = "freeLanceOnService";

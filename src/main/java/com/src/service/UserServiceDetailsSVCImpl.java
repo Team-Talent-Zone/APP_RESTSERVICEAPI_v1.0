@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
@@ -161,6 +162,16 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId) {
+		return userServiceDetailsDAO.getAllBellNotifications(userId);
+	}
+	
+	@Override
+	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode) {
+		return userServiceDetailsDAO.getAllAdminBellNotifications(roleCode);
 	}
 
 }

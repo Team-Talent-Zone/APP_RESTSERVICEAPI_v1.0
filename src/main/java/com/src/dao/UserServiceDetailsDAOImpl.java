@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
@@ -253,6 +254,32 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 			}
 		} catch (Exception e) {
 			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId) {
+		List<AllBellNotificationsView> allBellNotificationsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_UID, userId));
+		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
+		}
+		return null;
+	}
+	@SuppressWarnings("unchecked")
+	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode) {
+		List<AllBellNotificationsView> allBellNotificationsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY, roleCode));
+		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
 		}
 		return null;
 	}

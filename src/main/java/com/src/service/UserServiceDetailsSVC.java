@@ -2,6 +2,7 @@ package com.src.service;
 
 import java.util.ArrayList;
 
+import com.src.entity.AllBellNotificationsView;
 import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
@@ -101,6 +102,16 @@ public interface UserServiceDetailsSVC {
 	 * To delete the User Service Details.
 	 */
 	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
+	
+	/**
+	 * To get all bell notifications by userId.
+	 */
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId);
+	
+	/**
+	 * To get all bell notifications.
+	 */
+	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode);
 
 
 }
