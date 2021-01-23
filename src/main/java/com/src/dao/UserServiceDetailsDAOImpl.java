@@ -260,10 +260,11 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId) {
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility) {
 		List<AllBellNotificationsView> allBellNotificationsViews = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
 		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_UID, userId));
+		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY, visibility));
 		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
 		if (size > 0) {

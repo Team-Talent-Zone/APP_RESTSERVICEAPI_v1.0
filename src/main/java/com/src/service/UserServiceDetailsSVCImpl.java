@@ -165,8 +165,8 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 	}
 
 	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId) {
-		return userServiceDetailsDAO.getAllBellNotifications(userId);
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility) {
+		return userServiceDetailsDAO.getAllBellNotifications(userId , visibility);
 	}
 	
 	@Override

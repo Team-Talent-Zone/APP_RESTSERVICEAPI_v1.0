@@ -192,9 +192,12 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		if (size > 0) {
 			return   (ArrayList<PaymentHistoryFUView>) paymentFUTranscationHistEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
-						+ " for user Id : " + userId);
+		return null;
+		/*
+		 * throw new RestCustomException(HttpStatus.NO_CONTENT,
+		 * applicationConfigProperties.getProperty(CustomMsgProperties.
+		 * GETUSERBYUSERID_USERNOTFOUND_ERRORMSG) + " for user Id : " + userId);
+		 */
 	}
 
 	/**
@@ -215,9 +218,12 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		if (size > 0) { 
 			return  (ArrayList<PaymentHistoryCBAView>)  paymentCBATranscationHistEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
-				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
-						+ " for user Id : " + userId);
+		return null;
+		/*
+		 * throw new RestCustomException(HttpStatus.NO_CONTENT,
+		 * applicationConfigProperties.getProperty(CustomMsgProperties.
+		 * GETUSERBYUSERID_USERNOTFOUND_ERRORMSG) + " for user Id : " + userId);
+		 */
 	}
 
 	/**

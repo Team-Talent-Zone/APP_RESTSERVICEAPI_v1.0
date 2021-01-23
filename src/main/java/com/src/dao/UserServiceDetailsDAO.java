@@ -102,7 +102,7 @@ public interface UserServiceDetailsDAO {
 	/**
 	 * To get all bell notifications by userId.
 	 */
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId);
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility);
 	
 	/**
 	 * To get all bell notifications.

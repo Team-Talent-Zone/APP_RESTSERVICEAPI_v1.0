@@ -104,9 +104,9 @@ public interface UserServiceDetailsSVC {
 	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 	
 	/**
-	 * To get all bell notifications by userId.
+	 * To get all bell notifications by userId and Role Code.
 	 */
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId);
+	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String roleCode);
 	
 	/**
 	 * To get all bell notifications.

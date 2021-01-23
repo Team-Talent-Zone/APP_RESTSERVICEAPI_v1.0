@@ -192,11 +192,12 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	 * Get All Bell Noticication by userId
 	 * 
 	 */
-	@RequestMapping(value = "/getAllBellNotifications/{uid}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAllBellNotifications/{uid}/{visibility}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllBellNotifications(
-			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_UID) int uid) {
+			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_UID) int uid , 
+			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY) String visibility) {
 		ArrayList<AllBellNotificationsView> listofServiceExpirations = userServiceDetailsService
-				.getAllBellNotifications(uid);
+				.getAllBellNotifications(uid , visibility);
 		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(listofServiceExpirations, HttpStatus.OK);
 	}
 	
