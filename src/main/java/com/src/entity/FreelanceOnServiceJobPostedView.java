@@ -103,8 +103,11 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "joblocation")
 	private String joblocation;
 	
-	@Column(name = "isdeactive")
-	private String isdeactive;
+	@Column(name = "deactivefromnewjobs")
+	private String deactivefromnewjobs;
+	
+	@Column(name = "deactivefromupcomingjob")
+	private String deactivefromupcomingjob;
 
 	@Column(name = "jobdescription")
 	private String jobdescription;
@@ -144,6 +147,21 @@ public class FreelanceOnServiceJobPostedView {
 	
 	@Column(name ="BENEFICIARYID")
 	private Integer beneficiaryId;
+	
+	@Column(name = "FREELANCERJOBATTENDANT")
+	private String freelancerjobattendant;
+	
+	@Column(name = "CBAJOBATTENDANTDATE")
+	private String cbajobattendantdate;
+	
+	@Column(name = "FREELANCERJOBATTENDANTDATE")
+	private String freelancerjobattendantdate;
+	
+	@Column(name = "ISFREELANCERJOBATTENDANT")
+	private boolean isfreelancerjobattendant;
+	
+	@Column(name = "ISJOBVOLIATION")
+	private boolean isjobvoliation;
 	
 	public String getTxnid() {
 		return txnid;
@@ -472,13 +490,22 @@ public class FreelanceOnServiceJobPostedView {
 	public void setSubcategorylabel(String subcategorylabel) {
 		this.subcategorylabel = subcategorylabel;
 	}
+	 
 
-	public String getIsdeactive() {
-		return isdeactive;
+	public String getDeactivefromnewjobs() {
+		return deactivefromnewjobs;
 	}
 
-	public void setIsdeactive(String isdeactive) {
-		this.isdeactive = isdeactive;
+	public void setDeactivefromnewjobs(String deactivefromnewjobs) {
+		this.deactivefromnewjobs = deactivefromnewjobs;
+	}
+
+	public String getDeactivefromupcomingjob() {
+		return deactivefromupcomingjob;
+	}
+
+	public void setDeactivefromupcomingjob(String deactivefromupcomingjob) {
+		this.deactivefromupcomingjob = deactivefromupcomingjob;
 	}
 
 	public String getFutxnid() {
@@ -512,7 +539,47 @@ public class FreelanceOnServiceJobPostedView {
 	public void setBeneficiaryId(Integer beneficiaryId) {
 		this.beneficiaryId = beneficiaryId;
 	}
-	
+
+
+	public String getFreelancerjobattendant() {
+		return freelancerjobattendant;
+	}
+
+	public void setFreelancerjobattendant(String freelancerjobattendant) {
+		this.freelancerjobattendant = freelancerjobattendant;
+	}
+
+	public String getCbajobattendantdate() {
+		return cbajobattendantdate;
+	}
+
+	public void setCbajobattendantdate(String cbajobattendantdate) {
+		this.cbajobattendantdate = cbajobattendantdate;
+	}
+
+	public String getFreelancerjobattendantdate() {
+		return freelancerjobattendantdate;
+	}
+
+	public void setFreelancerjobattendantdate(String freelancerjobattendantdate) {
+		this.freelancerjobattendantdate = freelancerjobattendantdate;
+	}
+
+	public boolean isIsfreelancerjobattendant() {
+		return isfreelancerjobattendant;
+	}
+
+	public void setIsfreelancerjobattendant(boolean isfreelancerjobattendant) {
+		this.isfreelancerjobattendant = isfreelancerjobattendant;
+	}
+
+	public boolean isIsjobvoliation() {
+		return isjobvoliation;
+	}
+
+	public void setIsjobvoliation(boolean isjobvoliation) {
+		this.isjobvoliation = isjobvoliation;
+	}
 	
 	
 }

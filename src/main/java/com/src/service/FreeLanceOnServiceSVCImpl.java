@@ -78,9 +78,6 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-		if (freeLanceOnServiceEntity.isIsjobaccepted() && !freeLanceOnServiceEntity.isIsjobcompleted()) {
-			freeLanceOnServiceEntity.setJobaccepteddate(CommonUtilites.getCurrentDateInNewFormat());
-		}
 		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
 		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);

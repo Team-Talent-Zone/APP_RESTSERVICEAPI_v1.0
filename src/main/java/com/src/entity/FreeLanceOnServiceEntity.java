@@ -131,6 +131,27 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "ACCEPTJOBTERMS")
 	private boolean acceptjobterms;
 	
+	@Column(name = "ISFREELANCERJOBATTENDANT")
+	private boolean isfreelancerjobattendant;
+	
+	@Column(name = "CBAJOBATTENDANTDATE")
+	private String cbajobattendantdate;
+	
+	@Column(name = "FREELANCERJOBATTENDANTDATE")
+	private String freelancerjobattendantdate;
+
+	@Column(name = "ISJOBVOLIATION")
+	private boolean isjobvoliation;
+	
+	
+	public boolean isIsjobvoliation() {
+		return isjobvoliation;
+	}
+
+	public void setIsjobvoliation(boolean isjobvoliation) {
+		this.isjobvoliation = isjobvoliation;
+	}
+
 	public String getFutxnid() {
 		return futxnid;
 	}
@@ -393,6 +414,30 @@ public class FreeLanceOnServiceEntity implements Serializable {
 
 	public void setAcceptjobterms(boolean acceptjobterms) {
 		this.acceptjobterms = acceptjobterms;
+	}
+
+	public boolean isIsfreelancerjobattendant() {
+		return isfreelancerjobattendant;
+	}
+
+	public void setIsfreelancerjobattendant(boolean isfreelancerjobattendant) {
+		this.isfreelancerjobattendant = isfreelancerjobattendant;
+	}
+
+	public String getCbajobattendantdate() {
+		return cbajobattendantdate;
+	}
+
+	public void setCbajobattendantdate(String cbajobattendantdate) {
+		this.cbajobattendantdate = cbajobattendantdate;
+	}
+
+	public String getFreelancerjobattendantdate() {
+		return freelancerjobattendantdate;
+	}
+
+	public void setFreelancerjobattendantdate(String freelancerjobattendantdate) {
+		this.freelancerjobattendantdate = freelancerjobattendantdate;
 	}
 	
 }
