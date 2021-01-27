@@ -183,7 +183,7 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get All FU User Job Details
+	 * Get All FU User Job Details By Category
 	 */
 
 	@RequestMapping(value = "/getUserAllJobDetailsBySubCategory/{scategory}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -191,6 +191,16 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 			@PathVariable(UserConstant.JOB_SUBCATEGORY) String scategory) {
 		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC
 				.getUserAllJobDetailsBySubCategory(scategory);
+		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
+	}
+
+	/**
+	 * Get All FU User Job Details
+	 */
+
+	@RequestMapping(value = "/getUserAllJobDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>> getUserAllJobDetails() {
+		ArrayList<FreelanceOnServiceJobPostedView> freelanceUserEntity = freeLanceOnServiceSVC.getUserAllJobDetails();
 		return new ResponseEntity<ArrayList<FreelanceOnServiceJobPostedView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 

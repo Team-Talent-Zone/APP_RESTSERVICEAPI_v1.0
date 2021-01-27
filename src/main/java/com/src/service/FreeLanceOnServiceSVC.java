@@ -93,11 +93,18 @@ public interface FreeLanceOnServiceSVC {
 			String scategory);
 
 	/**
-	 * Gets all the user details job details
+	 * Gets all the user details job details by sub category
 	 * 
 	 * 
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
+	
+	/**
+	 * Gets all the user details job details
+	 * 
+	 * 
+	 */
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetails();
 
 	/**
 	 * Gets all the user details job details by userId

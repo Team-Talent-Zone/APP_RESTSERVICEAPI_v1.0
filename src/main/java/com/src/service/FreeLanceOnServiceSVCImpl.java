@@ -151,6 +151,14 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getUserAllJobDetailsBySubCategory(scategory);
 	}
 
+	/**
+	 * To Get FU user job details.
+	 */
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetails() {
+		return freeLanceOnServiceDAO.getUserAllJobDetails();
+	}
+	
 	@Override
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
 		return freeLanceOnServiceDAO.getUserAllJobDetailsByUserId(userId);
