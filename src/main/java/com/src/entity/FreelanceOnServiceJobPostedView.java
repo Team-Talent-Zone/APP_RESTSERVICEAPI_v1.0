@@ -22,6 +22,9 @@ import org.hibernate.annotations.Immutable;
 public class FreelanceOnServiceJobPostedView {
 
 	@Id
+	@Column(name = "ID")
+	private String id;
+	
 	@Column(name = "jobId")
 	private Integer jobId;
 	
@@ -580,6 +583,13 @@ public class FreelanceOnServiceJobPostedView {
 	public void setIsjobvoliation(boolean isjobvoliation) {
 		this.isjobvoliation = isjobvoliation;
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 }
