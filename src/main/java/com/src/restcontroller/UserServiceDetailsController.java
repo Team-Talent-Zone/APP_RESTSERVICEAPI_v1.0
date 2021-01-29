@@ -101,6 +101,14 @@ public class UserServiceDetailsController extends AbstractRestManager {
 				.getAllUserServiceDetailsByUserId(userId);
 		return new ResponseEntity<ArrayList<UserServiceActiveDetailsView>>(listofAllUserService, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/getAllUserServiceDetailsView/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<UserServiceActiveDetailsView>> getAllUserServiceDetailsView() {
+		ArrayList<UserServiceActiveDetailsView> listofAllUserService = userServiceDetailsService
+				.getAllUserServiceDetailsView();
+		return new ResponseEntity<ArrayList<UserServiceActiveDetailsView>>(listofAllUserService, HttpStatus.OK);
+	}
+
 
 	/**
 	 * Get the User Service Details by Service Id.

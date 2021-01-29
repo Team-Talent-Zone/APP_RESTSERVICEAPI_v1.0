@@ -93,6 +93,8 @@ public interface UserServiceDetailsDAO {
 	 * To get the User Service Details by userId.
 	 */
 	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
+	
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView();
 
 	/**
 	 * To delete the User Service Details.

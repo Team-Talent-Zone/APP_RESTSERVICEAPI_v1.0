@@ -284,4 +284,24 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		}
 		return null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView() {
+		try {
+			LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
+			List<UserServiceActiveDetailsView> newUserServiceEntity = null;
+			Criteria criteria = this.sessionFactory.getCurrentSession()
+					.createCriteria(UserServiceActiveDetailsView.class);
+			newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
+			LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
+			if (size > 0) {
+				return (ArrayList<UserServiceActiveDetailsView>) newUserServiceEntity;
+			}
+		} catch (Exception e) {
+			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+		return null;
+	}
 }

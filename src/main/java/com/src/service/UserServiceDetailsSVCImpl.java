@@ -174,4 +174,9 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceDetailsDAO.getAllAdminBellNotifications(roleCode);
 	}
 
+	@Override
+	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView() {
+		return userServiceDetailsDAO.getAllUserServiceDetailsView();
+	}
+
 }

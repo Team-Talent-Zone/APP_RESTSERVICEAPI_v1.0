@@ -143,7 +143,18 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "ISJOBVOLIATION")
 	private boolean isjobvoliation;
 	
+	@Column(name = "RESOLVEDVOLIATIONREASON")
+	private String resolvedvoliationreason;
 	
+	
+	public String getResolvedvoliationreason() {
+		return resolvedvoliationreason;
+	}
+
+	public void setResolvedvoliationreason(String resolvedvoliationreason) {
+		this.resolvedvoliationreason = resolvedvoliationreason;
+	}
+
 	public boolean isIsjobvoliation() {
 		return isjobvoliation;
 	}

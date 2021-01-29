@@ -166,6 +166,18 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "ISJOBVOLIATION")
 	private boolean isjobvoliation;
 	
+	@Column(name = "RESOLVEDVOLIATIONREASON")
+	private String resolvedvoliationreason;
+	
+	
+	public String getResolvedvoliationreason() {
+		return resolvedvoliationreason;
+	}
+
+	public void setResolvedvoliationreason(String resolvedvoliationreason) {
+		this.resolvedvoliationreason = resolvedvoliationreason;
+	}
+
 	public String getTxnid() {
 		return txnid;
 	}

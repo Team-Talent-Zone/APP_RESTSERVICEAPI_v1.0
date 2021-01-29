@@ -85,7 +85,15 @@ public class UserServiceActiveDetailsView {
 	
 	@Column(name = "widgetId")
 	private String widgetId; 
+
+	@Column(name = "fullname")
+	private String fullname; 
 	
+	@Column(name = "bizname")
+	private String bizname; 
+	
+	@Column(name = "phoneno")
+	private String phoneno; 
 	
 	public String getTxnid() {
 		return txnid;
