@@ -95,6 +95,30 @@ public class UserServiceActiveDetailsView {
 	@Column(name = "phoneno")
 	private String phoneno; 
 	
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getBizname() {
+		return bizname;
+	}
+
+	public void setBizname(String bizname) {
+		this.bizname = bizname;
+	}
+
+	public String getPhoneno() {
+		return phoneno;
+	}
+
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
+	}
+
 	public String getTxnid() {
 		return txnid;
 	}

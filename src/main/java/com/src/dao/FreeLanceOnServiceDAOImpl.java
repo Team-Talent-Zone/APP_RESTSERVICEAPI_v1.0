@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -371,6 +372,22 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		criteria.add(Restrictions.eq(UserConstant.ISJOBCOMPLETED, true));
 		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOCOMPANY, true));
 		criteria.add(Restrictions.eq(UserConstant.ISJOBACCEPTED, true));
+		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		if (freelanceOnServiceAllJobViews != null) {
+			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId) {
+		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceJobPostedView.class);
+		criteria.add(Restrictions.eq(UserConstant.FREELANCERID, userId));
+		criteria.addOrder(Order.desc("jobstartedon"));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {

@@ -198,4 +198,9 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getUserAllPendingPaymentOfFreelancer();
 	}
 
+	@Override
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId) {
+		return freeLanceOnServiceDAO.getUserAllJobDetailsByFreelancerId(userId);
+	}
+
 }

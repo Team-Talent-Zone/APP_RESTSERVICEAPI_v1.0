@@ -112,6 +112,8 @@ public interface FreeLanceOnServiceSVC {
 	 * 
 	 */
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
+	
+	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId);
 
 	/**
 	 * To delete the FreeLance On Service Details.
