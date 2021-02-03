@@ -49,9 +49,10 @@ public class SendEmailHelper {
 				TranslateHelper translateHelper = new TranslateHelper();
 				htmlFormat = translateHelper.translateText(utilEntity.getPreferlang(), htmlFormat,
 						UtilityConfig.MIME_TYPE_HTML, apikey, applicationName);
-				String subject = translateHelper.translateText(utilEntity.getPreferlang(), utilEntity.getSubject(),
-						UtilityConfig.MIME_TYPE_TEXT, apikey, applicationName);
-				utilEntity.setSubject(subject);
+			//	String subject = translateHelper.translateText(utilEntity.getPreferlang(), utilEntity.getSubject(),
+			//			UtilityConfig.MIME_TYPE_TEXT, apikey, applicationName);
+			//	utilEntity.setSubject(subject);
+				utilEntity.setSubject(utilEntity.getSubject());
 			}
 			utilEntity.setBody(htmlFormat);
 			utilEntity = sendEmail(utilEntity);
