@@ -74,8 +74,11 @@ public class FreeLanceEntity implements Serializable {
 	@Column(name = "HOURLYRATE")
 	private Integer hourlyRate;
 	
-	@Column(name = "PERCENTAGEDEDUCT")
-	private float percentageDeduct;
+	@Column(name = "FUPERCENTAGE")
+	private int fupercentage;
+	
+	@Column(name = "COMPANYPERCENTAGE")
+	private int companypercentage;
 	
 	@Column(name = "BGCURRENTSTATUS")
 	private String bgcurrentstatus;
@@ -187,7 +190,7 @@ public class FreeLanceEntity implements Serializable {
 	public void setHourlyRate(Integer hourlyRate) {
 		this.hourlyRate = hourlyRate;
 	}
-
+ 
 	public UserEntity getUserdetails() {
 		return userdetails;
 	}
@@ -196,12 +199,20 @@ public class FreeLanceEntity implements Serializable {
 		this.userdetails = userdetails;
 	}
 
-	public float getPercentageDeduct() {
-		return percentageDeduct;
+	public int getFupercentage() {
+		return fupercentage;
 	}
 
-	public void setPercentageDeduct(float percentageDeduct) {
-		this.percentageDeduct = percentageDeduct;
+	public void setFupercentage(int fupercentage) {
+		this.fupercentage = fupercentage;
+	}
+
+	public int getCompanypercentage() {
+		return companypercentage;
+	}
+
+	public void setCompanypercentage(int companypercentage) {
+		this.companypercentage = companypercentage;
 	}
 
 	public boolean isIsregfeedone() {

@@ -146,7 +146,18 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "RESOLVEDVOLIATIONREASON")
 	private String resolvedvoliationreason;
 	
+	@Column(name = "associatedadminId")
+	private Integer associatedadminId;
 	
+	
+	public Integer getAssociatedadminId() {
+		return associatedadminId;
+	}
+
+	public void setAssociatedadminId(Integer associatedadminId) {
+		this.associatedadminId = associatedadminId;
+	}
+
 	public String getResolvedvoliationreason() {
 		return resolvedvoliationreason;
 	}

@@ -170,6 +170,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceOnServiceEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.JOB_ID, jobId));
+		criteria.addOrder(Order.desc("jobId"));
 		freeLanceOnServiceEntity = (FreeLanceOnServiceEntity) criteria.uniqueResult();
 		if (freeLanceOnServiceEntity != null) {
 			return freeLanceOnServiceEntity;
@@ -192,6 +193,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceOnServiceEntity.class);
 		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		criteria.addOrder(Order.desc("jobId"));
 		freeLanceOnServiceEntity = (FreeLanceOnServiceEntity) criteria.uniqueResult();
 		if (freeLanceOnServiceEntity != null) {
 			return freeLanceOnServiceEntity;
@@ -251,6 +253,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceJobPostedView.class);
 		criteria.add(Restrictions.eq(UserConstant.JOB_SUBCATEGORY, scategory));
+		criteria.addOrder(Order.desc("jobId"));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {
@@ -270,8 +273,8 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceJobPostedView.class);
+		criteria.addOrder(Order.desc("jobId"));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
 		if (freelanceOnServiceAllJobViews != null) {
 			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
 		}
@@ -290,6 +293,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceJobPostedView.class);
 		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
+		criteria.addOrder(Order.desc("jobId"));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {
@@ -387,7 +391,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 		Criteria criteria = this.sessionFactory.getCurrentSession()
 				.createCriteria(FreelanceOnServiceJobPostedView.class);
 		criteria.add(Restrictions.eq(UserConstant.FREELANCERID, userId));
-		criteria.addOrder(Order.desc("jobstartedon"));
+		criteria.addOrder(Order.desc("jobId"));
 		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
 		if (freelanceOnServiceAllJobViews != null) {

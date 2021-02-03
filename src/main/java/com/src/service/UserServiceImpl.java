@@ -98,7 +98,8 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			freelanceentity.setIsbgstarted(Boolean.FALSE);
 			freelanceentity.setIsprofilecompleted(Boolean.FALSE);
 			freelanceentity.setIsregfeedone(Boolean.FALSE);
-
+			freelanceentity.setFupercentage(80);
+			freelanceentity.setCompanypercentage(20);
 			freelanceentity.setUserdetails(userEntity);
 			userEntity.setFreeLanceDetails(freelanceentity);
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);

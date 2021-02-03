@@ -97,6 +97,10 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "isjobcancel")
 	private Boolean isjobcancel;
 	
+	
+	@Column(name = "jobacceptdecisionflag")
+	private Boolean jobacceptdecisionflag;
+	
 	@Column(name = "isjobaccepted")
 	private Boolean isjobaccepted;
 
@@ -169,7 +173,29 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "RESOLVEDVOLIATIONREASON")
 	private String resolvedvoliationreason;
 	
+	@Column(name = "associatedadminId")
+	private Integer associatedadminId;
 	
+	@Column(name = "isratedforjob")
+	private boolean isratedforjob; 
+	
+
+	public boolean isIsratedforjob() {
+		return isratedforjob;
+	}
+
+	public void setIsratedforjob(boolean isratedforjob) {
+		this.isratedforjob = isratedforjob;
+	}
+
+	public Integer getAssociatedadminId() {
+		return associatedadminId;
+	}
+
+	public void setAssociatedadminId(Integer associatedadminId) {
+		this.associatedadminId = associatedadminId;
+	}
+
 	public String getResolvedvoliationreason() {
 		return resolvedvoliationreason;
 	}
@@ -603,5 +629,15 @@ public class FreelanceOnServiceJobPostedView {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public Boolean getJobacceptdecisionflag() {
+		return jobacceptdecisionflag;
+	}
+
+	public void setJobacceptdecisionflag(Boolean jobacceptdecisionflag) {
+		this.jobacceptdecisionflag = jobacceptdecisionflag;
+	}
+	
+	
 	
 }
