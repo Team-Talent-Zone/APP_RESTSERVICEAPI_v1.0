@@ -23,7 +23,6 @@ public class UtilityConfig {
 	/*
 	 * AWS S3 Bucket Configuration Details
 	 */
-	public static final String PROJECT_ID_DEV = "tonal-mote-300908";
 	public static final String SUFFIX = "/";
 	public static final String S3_BUCKETNAME_AVATAR = "platform-user-avatars";
 	public static final String S3_BUCKETNAME_BG_DOCS = "platform-freelancer-bg-documents";
@@ -32,6 +31,8 @@ public class UtilityConfig {
 	public static final String FOLDER_FREELANCE_BG = "bgcheck";
 	public static final String FOLDER_SITE_WIDGETS = "widgets";
 	public static final String FOLDER_WIDGETS = "WIDGETS";
+	public static final String API_KEY = "AKIA4COD2FPEPQBAZTR4";
+	public static final String API_KEY_SECERT = "4oTBtbLC5IETsPcGbw4hebon9lEdx93AJZfPcQgQ";
 
 	/*
 	 * Email Template short keys details
@@ -44,7 +45,13 @@ public class UtilityConfig {
 	public static final String MIME_TYPE_TEXT = "text";
 	
 	/*
-	 * Payumoney details
+	 * Google Translator 
+	 */
+	
+	public static final String PROJECT_ID_DEV = "tonal-mote-300908";
+
+	/*
+	 * Payu money details
 	 * 
 	 */
 	

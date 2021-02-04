@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -34,9 +36,10 @@ public class S3AWSHelper {
 	 */
 	public String uploadAvatarsInS3(File inputFile, int userid) {
 		String fileExtension = getFileExtension(inputFile);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 		try {
-			logger.debug("Attempting to upload profile picture of user");
+			logger.debug("=====Attempting to upload profile picture of user====== Bucket Name " +UtilityConfig.S3_BUCKETNAME_AVATAR);
 
 			String fileName = getFileNameWithoutExtension(inputFile) + "_avatar." + fileExtension;
 			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + userid;
@@ -72,9 +75,11 @@ public class S3AWSHelper {
 	 */
 	public String uploadBgDocsInS3(File inputFile, int userid) {
 		String fileExtension = getFileExtension(inputFile);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+	
 		try {
-			logger.debug("Attempting to upload documents relared to background of the freelance user");
+			logger.debug("====Attempting to upload documents relared to background of the skilled worker===== Bucket name " + UtilityConfig.S3_BUCKETNAME_BG_DOCS);
 			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
 			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX + userid;
 			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_BG_DOCS, fileName, s3, inputFile,
@@ -108,9 +113,11 @@ public class S3AWSHelper {
 	public String uploadWidgetPicsInS3(File inputFile, int userid) {
 
 		String fileExtension = getFileExtension(inputFile);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+	
 		try {
-			logger.debug("Attempting to upload widgets of the new host site for the CBA user");
+			logger.debug("=======Attempting to upload widgets of the new host site for the CBA user ===== Bucket Name : "+UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS);
 			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
 			String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX + userid;
 			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS, fileName, s3,
