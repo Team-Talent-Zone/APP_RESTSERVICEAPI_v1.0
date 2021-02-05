@@ -14,7 +14,6 @@ import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserBizEntity;
 import com.src.entity.UserEntity;
 import com.src.entity.UserManagerDetailsEntity;
-import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
 import com.src.entity.UserRoleEntity;
 import com.src.utils.CommonUtilites;
@@ -243,16 +242,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public ArrayList<UserEntity> getUserByRecoveryPwd() {
 		return userRestDAO.getUserByRecoveryPwd();
 
-	}
-
-	/**
-	 * Gets all the notification details based on the userId
-	 * 
-	 * @param userId
-	 * 
-	 */
-	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId) {
-		return userRestDAO.getNotificationDetailsByUserId(userId);
 	}
 
 	/**

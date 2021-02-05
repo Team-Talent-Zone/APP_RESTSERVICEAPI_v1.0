@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.src.helper.SendEmailHelper;
+import com.src.service.AllViewServiceSVC;
 import com.src.service.FreeLanceOnServiceSVC;
 import com.src.service.NewSVCService;
 import com.src.service.PaymentService;
@@ -52,6 +53,9 @@ class AbstractRestManager {
 
 	@Autowired
 	protected WidgetService widgetService;
+	
+	@Autowired
+	protected AllViewServiceSVC allViewSvc;
 	
  	SendEmailHelper emailHelper = new SendEmailHelper();
  	

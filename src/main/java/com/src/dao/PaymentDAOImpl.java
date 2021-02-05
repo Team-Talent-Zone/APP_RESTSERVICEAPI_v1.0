@@ -1,8 +1,5 @@
 package com.src.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -17,8 +14,6 @@ import com.src.constant.UserConstant;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
-import com.src.entity.PaymentHistoryCBAView;
-import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
 import com.src.exception.RestCustomException;
@@ -172,58 +167,6 @@ public class PaymentDAOImpl extends AbstractDAOManager implements PaymentDAO {
 		throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
-	}
-
-	/**
-	 * Get the FU Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public  ArrayList<PaymentHistoryFUView> getPaymentFUDetailsByUserId(int userId) {
-		logger.info(PaymentConstant.PAYMENT_GETFUPAYMENT_DETAILSBYUSERID);
-		List<PaymentHistoryFUView> paymentFUTranscationHistEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(PaymentHistoryFUView.class);
-		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		paymentFUTranscationHistEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = paymentFUTranscationHistEntity != null ? paymentFUTranscationHistEntity.size() : 0;
-		if (size > 0) {
-			return   (ArrayList<PaymentHistoryFUView>) paymentFUTranscationHistEntity;
-		}
-		return null;
-		/*
-		 * throw new RestCustomException(HttpStatus.NO_CONTENT,
-		 * applicationConfigProperties.getProperty(CustomMsgProperties.
-		 * GETUSERBYUSERID_USERNOTFOUND_ERRORMSG) + " for user Id : " + userId);
-		 */
-	}
-
-	/**
-	 * Get the CBA Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public ArrayList<PaymentHistoryCBAView> getPaymentCBADetailsByUserId(int userId) {
-		logger.info(PaymentConstant.PAYMENT_GETCBAPAYMENT_DETAILSBYUSERID);
-		List<PaymentHistoryCBAView> paymentCBATranscationHistEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(PaymentHistoryCBAView.class);
-		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		paymentCBATranscationHistEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = paymentCBATranscationHistEntity != null ? paymentCBATranscationHistEntity.size() : 0;
-		if (size > 0) { 
-			return  (ArrayList<PaymentHistoryCBAView>)  paymentCBATranscationHistEntity;
-		}
-		return null;
-		/*
-		 * throw new RestCustomException(HttpStatus.NO_CONTENT,
-		 * applicationConfigProperties.getProperty(CustomMsgProperties.
-		 * GETUSERBYUSERID_USERNOTFOUND_ERRORMSG) + " for user Id : " + userId);
-		 */
 	}
 
 	/**

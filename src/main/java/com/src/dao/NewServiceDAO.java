@@ -3,7 +3,6 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
-import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 
@@ -38,14 +37,7 @@ public interface NewServiceDAO {
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
- 
-	/**
-	 * To get All Service Details.
-	 * 
-	 */
-	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails();
-
-	/**
+ 	/**
 	 * To get All Service Details.
 	 * 
 	 */

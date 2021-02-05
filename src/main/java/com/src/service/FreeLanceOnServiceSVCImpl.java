@@ -1,21 +1,12 @@
 package com.src.service;
 
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
-import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
-import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
-import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreeLanceTestimonialsDetailsView;
-import com.src.entity.FreelanceOnServiceJobPostedView;
-import com.src.entity.FreelanceOnServiceSearchView;
-import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.utils.CommonUtilites;
 
@@ -32,26 +23,7 @@ import com.src.utils.CommonUtilites;
 @Transactional(rollbackFor = { Exception.class })
 public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements FreeLanceOnServiceSVC {
 
-	/**
-	 * Gets all the user details if isJobAvailable is false
-	 * 
-	 * @param isJobAvailable
-	 * 
-	 */
-	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable() {
-		return freeLanceOnServiceDAO.getUserDetailsByJobAvailable();
-	}
 
-	/**
-	 * Gets all the user details if isJobAvailable is false and createdon
-	 * 
-	 * @param isJobAvailable
-	 * 
-	 */
-	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByCreateOn(String jobstarton,
-			String scategory) {
-		return freeLanceOnServiceDAO.getUserDetailsByJobAvailableByJobStartOn(jobstarton, scategory);
-	}
 
 	/**
 	 * To save Free Lance On Service Details.
@@ -131,42 +103,6 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getFreeLanceOnServiceDetailsByUserId(userId);
 	}
 
-	/**
-	 * To get FU on service Expiration Details.
-	 */
-	@Override
-	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
-		return freeLanceOnServiceDAO.getFUOnServiceExpirationDetails();
-	}
-
-	/**
-	 * To Get FU Service Notification Details By UserId.
-	 */
-	@Override
-	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
-		return freeLanceOnServiceDAO.getFUOnServiceNotificationDetailsByUserId(userId);
-	}
-
-	/**
-	 * To Get FU user job details.
-	 */
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory) {
-		return freeLanceOnServiceDAO.getUserAllJobDetailsBySubCategory(scategory);
-	}
-
-	/**
-	 * To Get FU user job details.
-	 */
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetails() {
-		return freeLanceOnServiceDAO.getUserAllJobDetails();
-	}
-	
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
-		return freeLanceOnServiceDAO.getUserAllJobDetailsByUserId(userId);
-	}
 
 	@Override
 	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
@@ -177,30 +113,5 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return false;
 	}
 
-	@Override
-	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails() {
-		return freeLanceOnServiceDAO.getFUFeebackDetails();
-	}
-
-	@Override
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
-		return freeLanceOnServiceDAO.getFUFeebackDetailsUserId(userId);
-
-	}
-
-	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails() {
-		return freeLanceOnServiceDAO.getAllBellNotificationDetails();
-	}
-
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer() {
-		return freeLanceOnServiceDAO.getUserAllPendingPaymentOfFreelancer();
-	}
-
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId) {
-		return freeLanceOnServiceDAO.getUserAllJobDetailsByFreelancerId(userId);
-	}
 
 }

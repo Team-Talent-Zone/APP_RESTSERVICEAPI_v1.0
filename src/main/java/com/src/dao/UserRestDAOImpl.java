@@ -21,7 +21,6 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
-import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
 import com.src.exception.RestCustomException;
 
@@ -212,32 +211,6 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		} catch (RestCustomException e) {
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(CustomMsgProperties.SAVEORUPDATEUSERDETAILS_UNABLETOUPDATE_ERRORMSG));
-		}
-	}
-
-	/**
-	 * Gets all the notification details based on the user Id
-	 * 
-	 * @throws RestCustomException
-	 * @param userId
-	 * 
-	 */
-
-	@SuppressWarnings("unchecked")
-	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId) {
-
-		LOGGER.info(UserConstant.USER_DAO_GETNOTIFICATIONUSEDETAILSBYUSERID);
-		List<UserNotificationDetailsView> userNotificationDetailsEntityViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(UserNotificationDetailsView.class);
-		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		userNotificationDetailsEntityViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = userNotificationDetailsEntityViews != null ? userNotificationDetailsEntityViews.size() : 0;
-
-		if (size > 0) {
-			return (ArrayList<UserNotificationDetailsView>) userNotificationDetailsEntityViews;
-		} else {
-			throw new RestCustomException(HttpStatus.NO_CONTENT, applicationConfigProperties
-					.getProperty(CustomMsgProperties.GETNOTIFICATIONDETAILSBYUSERID_INVAILD_ERRORMSG));
 		}
 	}
 

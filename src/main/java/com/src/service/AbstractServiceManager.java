@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.src.dao.AllViewServiceDAO;
 import com.src.dao.FreeLanceOnServiceDAO;
 import com.src.dao.NewServiceDAO;
 import com.src.dao.PaymentDAO;
@@ -52,6 +53,9 @@ public class AbstractServiceManager {
 	
 	@Autowired
 	protected WidgetDAO widgetDAO;
+	
+	@Autowired
+	protected AllViewServiceDAO allViewServiceDAO;
 
 
 }

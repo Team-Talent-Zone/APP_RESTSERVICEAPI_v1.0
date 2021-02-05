@@ -32,8 +32,6 @@ import com.src.entity.FreelancerPaymentInput;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
-import com.src.entity.PaymentHistoryCBAView;
-import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
@@ -311,26 +309,6 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	@Override
 	public PaymentEntity getPaymentDetailsByUserId(int userId) {
 		return paymentDAO.getPaymentDetailsByUserId(userId);
-	}
-
-	/**
-	 * Get the FU Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@Override
-	public ArrayList<PaymentHistoryFUView> getPaymentFUDetailsByUserId(int userId) {
-		return paymentDAO.getPaymentFUDetailsByUserId(userId);
-	}
-
-	/**
-	 * Get the CBA Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@Override
-	public ArrayList<PaymentHistoryCBAView> getPaymentCBADetailsByUserId(int userId) {
-		return paymentDAO.getPaymentCBADetailsByUserId(userId);
 	}
 
 	/**

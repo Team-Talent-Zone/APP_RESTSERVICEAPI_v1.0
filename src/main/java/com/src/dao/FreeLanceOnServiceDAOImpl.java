@@ -16,14 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
-import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
-import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
-import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreeLanceTestimonialsDetailsView;
-import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
 import com.src.entity.FreelancerAvailableStartDateStoreProc;
 import com.src.exception.RestCustomException;
@@ -202,105 +197,6 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
-
-	/**
-	 * To Get the FU on Service Expiration Details.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails() {
-		List<FreeLanceOnServiceExpirationDetailsView> freeLanceOnServiceExpirationDetailsView = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreeLanceOnServiceExpirationDetailsView.class);
-		freeLanceOnServiceExpirationDetailsView = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		if (freeLanceOnServiceExpirationDetailsView != null) {
-			return (ArrayList<FreeLanceOnServiceExpirationDetailsView>) freeLanceOnServiceExpirationDetailsView;
-		}
-		return null;
-	}
-
-	/**
-	 * To Get the FU on Service Notification Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId) {
-		List<FreeLanceOnServiceNotificationDetailsView> freeLanceOnServiceNotificationDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreeLanceOnServiceNotificationDetailsView.class);
-		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		freeLanceOnServiceNotificationDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.list();
-
-		if (freeLanceOnServiceNotificationDetailsViews != null) {
-			return (ArrayList<FreeLanceOnServiceNotificationDetailsView>) freeLanceOnServiceNotificationDetailsViews;
-		}
-		return null;
-	}
-
-	/**
-	 * To get all users job details by Sub Category.
-	 *  
-	 *  @param scategory 
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory) {
-		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.add(Restrictions.eq(UserConstant.JOB_SUBCATEGORY, scategory));
-		criteria.addOrder(Order.desc("jobId"));
-		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
-		}
-		return null;
-	}
-	
-	
-	/** To get all users job details 
-	 *  
-	 *  @param scategory 
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetails() {
-		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.addOrder(Order.desc("jobId"));
-		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
-		}
-		return null;
-	}
-
-	/**
-	 * To get all users job details by UserID.
-	 *  
-	 *  @param userId 
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId) {
-		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.add(Restrictions.eq(UserConstant.USERID, userId));
-		criteria.addOrder(Order.desc("jobId"));
-		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
-		}
-		return null;
-	}
     
 	/**
 	 * To delete the FreeLance On Service Details.
@@ -316,87 +212,5 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(CustomMsgProperties.DELETEFUONSERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
-	}
-
-	/**
-	 * 
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails() {
-		List<FreeLanceTestimonialsDetailsView> freeLanceTestimonialsDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreeLanceTestimonialsDetailsView.class);
-		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<FreeLanceTestimonialsDetailsView>) freeLanceTestimonialsDetailsViews;
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
-		List<FreeLanceStarReviewFBEntity> freeLanceTestimonialsDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceStarReviewFBEntity.class);
-		criteria.add(Restrictions.eq(UserConstant.FREELANCEID, userId));
-		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<FreeLanceStarReviewFBEntity>) freeLanceTestimonialsDetailsViews;
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails() {
-		List<AllBellNotificationsView> allBellNotificationsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
-		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
-		}
-		return null;
-	}
-	
-	/** 
-	 * To get all the pending payments of freelancer.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer() {
-		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.add(Restrictions.eq(UserConstant.ISJOBACTIVE, true));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOFU, false));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBCOMPLETED, true));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBAMTPAIDTOCOMPANY, true));
-		criteria.add(Restrictions.eq(UserConstant.ISJOBACCEPTED, true));
-		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId) {
-		List<FreelanceOnServiceJobPostedView> freelanceOnServiceAllJobViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(FreelanceOnServiceJobPostedView.class);
-		criteria.add(Restrictions.eq(UserConstant.FREELANCERID, userId));
-		criteria.addOrder(Order.desc("jobId"));
-		freelanceOnServiceAllJobViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		if (freelanceOnServiceAllJobViews != null) {
-			return (ArrayList<FreelanceOnServiceJobPostedView>) freelanceOnServiceAllJobViews;
-		}
-		return null;
 	}
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
-import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.utils.CommonUtilites;
@@ -83,14 +82,6 @@ public class NewSVCServiceImpl extends AbstractServiceManager implements NewSVCS
 		newServiceEntity.setOurserviceId(newServiceHistoryEntity.getOurserviceId());
 		newServiceHistoryEntity.setNewService(newServiceEntity);
 		return newServiceRestDAO.saveNewServiceHistory(newServiceHistoryEntity);
-	}
-
-	/**
-	 * To Get All Service Details.
-	 */
-	@Override
-	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails() {
-		return newServiceRestDAO.getAllServiceDetails();
 	}
 	
 	/**

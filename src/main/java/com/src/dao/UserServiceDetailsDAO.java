@@ -2,13 +2,9 @@ package com.src.dao;
 
 import java.util.ArrayList;
 
-import com.src.entity.AllBellNotificationsView;
-import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
-import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
-import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsDAO </code> interface defines a data access
@@ -73,41 +69,13 @@ public interface UserServiceDetailsDAO {
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
 
 	/**
-	 * To get the User Expiration Details Notification.
-	 */
-	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
-
-	/**
-	 * To get the User Service Details Notification by User id.
-	 * 
-	 * @param userId
-	 */
-	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
-
-	/**
 	 * To get the User Service Details Pending Payments Notification.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getUserServicePendingPayment();
-
-	/**
-	 * To get the User Service Details by userId.
-	 */
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
-	
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView();
 
 	/**
 	 * To delete the User Service Details.
 	 */
 	public void deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 
-	/**
-	 * To get all bell notifications by userId.
-	 */
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility);
-	
-	/**
-	 * To get all bell notifications.
-	 */
-	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode);
-}
+	}

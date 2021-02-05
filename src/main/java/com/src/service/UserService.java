@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
-import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
 
 /**
@@ -100,14 +99,6 @@ public interface UserService {
 	 * 
 	 */
 	public ArrayList<UserEntity> getFUUserDetailsWhenInCompleteProfile();
-
-	/**
-	 * Gets all the notification details based on the user Id
-	 * 
-	 * @param userId
-	 * 
-	 */
-	public ArrayList<UserNotificationDetailsView> getNotificationDetailsByUserId(int userId);
 
 	/**
 	 * To Save the Free Lancer History.

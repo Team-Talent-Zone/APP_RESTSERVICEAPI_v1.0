@@ -8,14 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.NewServiceConstant;
-import com.src.entity.AllBellNotificationsView;
 import com.src.entity.NewServiceEntity;
-import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
-import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
-import com.src.entity.UserServiceNotificationDetailsView;
 import com.src.utils.CommonUtilites;
 
 /**
@@ -127,20 +123,6 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceNotfication;
 	}
 
-	/**
-	 * To get the user service Expiration Details.
-	 */
-	@Override
-	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
-		return userServiceDetailsDAO.getUserServiceExpirationDetails();
-	}
-
-	/**
-	 * To get User service Notification Details by user id.
-	 */
-	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
-		return userServiceDetailsDAO.getUserServiceNotificationDetailsByUserId(userId);
-	}
 
 	/**
 	 * To get User Service pending payments.
@@ -150,10 +132,6 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return userServiceDetailsDAO.getUserServicePendingPayment();
 	}
 
-	@Override
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId) {
-		return userServiceDetailsDAO.getAllUserServiceDetailsByUserId(userId);
-	}
 
 	@Override
 	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity) {
@@ -164,19 +142,5 @@ public class UserServiceDetailsSVCImpl extends AbstractServiceManager implements
 		return false;
 	}
 
-	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility) {
-		return userServiceDetailsDAO.getAllBellNotifications(userId , visibility);
-	}
-	
-	@Override
-	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode) {
-		return userServiceDetailsDAO.getAllAdminBellNotifications(roleCode);
-	}
-
-	@Override
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView() {
-		return userServiceDetailsDAO.getAllUserServiceDetailsView();
-	}
 
 }

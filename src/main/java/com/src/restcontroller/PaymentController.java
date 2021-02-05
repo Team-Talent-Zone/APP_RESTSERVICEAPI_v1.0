@@ -1,7 +1,6 @@
 package com.src.restcontroller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,8 +23,6 @@ import com.src.entity.FreelancerPaymentInput;
 import com.src.entity.PaymentCBATranscationHistEntity;
 import com.src.entity.PaymentEntity;
 import com.src.entity.PaymentFUTranscationHistEntity;
-import com.src.entity.PaymentHistoryCBAView;
-import com.src.entity.PaymentHistoryFUView;
 import com.src.entity.PaymentMode;
 import com.src.entity.PaymentNotificationHistEntity;
 import com.src.entity.PaymentRefundTranscationHistEntity;
@@ -149,29 +146,6 @@ public class PaymentController extends AbstractRestManager {
 		return new ResponseEntity<PaymentEntity>(paymentEntity, HttpStatus.OK);
 	}
 
-	/**
-	 * Get the FU Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@RequestMapping(value = "/getPaymentFUDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<PaymentHistoryFUView>> getPaymentFUDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<PaymentHistoryFUView> paymentEntity = paymentService.getPaymentFUDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<PaymentHistoryFUView>>(paymentEntity, HttpStatus.OK);
-	}
-
-	/**
-	 * Get the CBA Payment Details by UserId.
-	 * 
-	 * @param userId
-	 */
-	@RequestMapping(value = "/getPaymentCBADetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<PaymentHistoryCBAView>> getPaymentCBADetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<PaymentHistoryCBAView> paymentEntity = paymentService.getPaymentCBADetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<PaymentHistoryCBAView>>(paymentEntity, HttpStatus.OK);
-	}
 
 	/**
 	 * Get the Refund Transaction History Details by UserId.

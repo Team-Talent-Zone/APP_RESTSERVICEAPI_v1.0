@@ -14,13 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
-import com.src.entity.AllBellNotificationsView;
-import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
-import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
-import com.src.entity.UserServiceNotificationDetailsView;
 import com.src.exception.RestCustomException;
 
 /**
@@ -159,45 +155,7 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
 
-	/**
-	 * To get the User Expiration Details Notification.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails() {
-		List<UserServiceExpirationDetailsView> userServiceExpirationDetails = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserServiceExpirationDetailsView.class);
-		userServiceExpirationDetails = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = userServiceExpirationDetails != null ? userServiceExpirationDetails.size() : 0;
-
-		if (size > 0) {
-			return (ArrayList<UserServiceExpirationDetailsView>) userServiceExpirationDetails;
-		}
-		return null;
-	}
-
-	/**
-	 * To get the User Service Details Notification by User id.  
-	 * 
-	 * @param userId
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId) {
-		List<UserServiceNotificationDetailsView> userServiceNotificationDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession()
-				.createCriteria(UserServiceNotificationDetailsView.class);
-		userServiceNotificationDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = userServiceNotificationDetailsViews != null ? userServiceNotificationDetailsViews.size() : 0;
-
-		if (size > 0) {
-			return (ArrayList<UserServiceNotificationDetailsView>) userServiceNotificationDetailsViews;
-		}
-		throw new RestCustomException(HttpStatus.BAD_REQUEST,
-				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
-	}
-
+	
 	/**
 	 * To get the User Service Details Pending Payments Notification.
 	 */
@@ -232,76 +190,5 @@ public class UserServiceDetailsDAOImpl extends AbstractDAOManager implements Use
 		}
 	}
 
-	/**
-	 * To get the User Service Details by userId.
-	 * 
-	 * @param userId
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId) {
-		try {
-			LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
-			List<UserServiceActiveDetailsView> newUserServiceEntity = null;
-			Criteria criteria = this.sessionFactory.getCurrentSession()
-					.createCriteria(UserServiceActiveDetailsView.class);
-			criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_USERID, userId));
-			newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-			int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
-			LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
-			if (size > 0) {
-				return (ArrayList<UserServiceActiveDetailsView>) newUserServiceEntity;
-			}
-		} catch (Exception e) {
-			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String visibility) {
-		List<AllBellNotificationsView> allBellNotificationsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
-		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_UID, userId));
-		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY, visibility));
-		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
-		}
-		return null;
-	}
-	@SuppressWarnings("unchecked")
-	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode) {
-		List<AllBellNotificationsView> allBellNotificationsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllBellNotificationsView.class);
-		criteria.add(Restrictions.eq(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY, roleCode));
-		allBellNotificationsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = allBellNotificationsViews != null ? allBellNotificationsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<AllBellNotificationsView>) allBellNotificationsViews;
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView() {
-		try {
-			LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLUSERSERVICEDETAILS);
-			List<UserServiceActiveDetailsView> newUserServiceEntity = null;
-			Criteria criteria = this.sessionFactory.getCurrentSession()
-					.createCriteria(UserServiceActiveDetailsView.class);
-			newUserServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-			int size = newUserServiceEntity != null ? newUserServiceEntity.size() : 0;
-			LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLUSERSERVICEDETAILS + size);
-			if (size > 0) {
-				return (ArrayList<UserServiceActiveDetailsView>) newUserServiceEntity;
-			}
-		} catch (Exception e) {
-			throw new RestCustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-		}
-		return null;
-	}
+	
 }

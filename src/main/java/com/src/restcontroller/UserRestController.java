@@ -18,7 +18,6 @@ import com.src.constant.UserConstant;
 import com.src.entity.FreeLanceDocumentsEntity;
 import com.src.entity.FreeLanceHistoryEntity;
 import com.src.entity.UserEntity;
-import com.src.entity.UserNotificationDetailsView;
 import com.src.entity.UserNotificationEntity;
 
 
@@ -164,22 +163,6 @@ public class UserRestController extends AbstractRestManager {
 	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
 		return new ResponseEntity<UserEntity>(userDetailService.forgetPassword(username), HttpStatus.OK);
-	}
-
-	/**
-	 * Get User Notification Details when userId
-	 * 
-	 * @param userId
-	 * @return list of user details
-	 * 
-	 */
-	@RequestMapping(value = "/getNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserNotificationDetailsView>> getNotificationDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<UserNotificationDetailsView> userNotificationDetailsEntityViews = userDetailService
-				.getNotificationDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<UserNotificationDetailsView>>(userNotificationDetailsEntityViews,
-				HttpStatus.OK);
 	}
 
 	/**

@@ -11,15 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.src.constant.NewServiceConstant;
 import com.src.constant.UserConstant;
-import com.src.entity.AllBellNotificationsView;
-import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
-import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
-import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsController </code> class defines managed beans
@@ -89,28 +84,6 @@ public class UserServiceDetailsController extends AbstractRestManager {
 	}
 
 	/**
-	 * Get the List of all User Service Details by UserId.
-	 * 
-	 * @param userId
-	 */
-
-	@RequestMapping(value = "/getAllUserServiceDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceActiveDetailsView>> getAllUserServiceDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<UserServiceActiveDetailsView> listofAllUserService = userServiceDetailsService
-				.getAllUserServiceDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<UserServiceActiveDetailsView>>(listofAllUserService, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/getAllUserServiceDetailsView/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceActiveDetailsView>> getAllUserServiceDetailsView() {
-		ArrayList<UserServiceActiveDetailsView> listofAllUserService = userServiceDetailsService
-				.getAllUserServiceDetailsView();
-		return new ResponseEntity<ArrayList<UserServiceActiveDetailsView>>(listofAllUserService, HttpStatus.OK);
-	}
-
-
-	/**
 	 * Get the User Service Details by Service Id.
 	 * 
 	 * @param userId
@@ -147,32 +120,6 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		return new ResponseEntity<UserServiceNotfications>(userServiceNotficationEntity, HttpStatus.OK);
 	}
 
-	/**
-	 * Get User Service Details when service end date after 2 days
-	 * 
-	 */
-	@RequestMapping(value = "/getUserServiceExpirationDetails/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceExpirationDetailsView>> getUserServiceExpirationDetails() {
-		ArrayList<UserServiceExpirationDetailsView> listofServiceExpirations = userServiceDetailsService
-				.getUserServiceExpirationDetails();
-		return new ResponseEntity<ArrayList<UserServiceExpirationDetailsView>>(listofServiceExpirations, HttpStatus.OK);
-	}
-
-	/**
-	 * Get UserService Notification Details when userId
-	 * 
-	 * @param userId
-	 * @return list of user details
-	 * 
-	 */
-	@RequestMapping(value = "/getUserServiceNotificationDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<UserServiceNotificationDetailsView>> getUserServiceNotificationDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<UserServiceNotificationDetailsView> userServiceNotificationDetailsViews = userServiceDetailsService
-				.getUserServiceNotificationDetailsByUserId(userId);
-		return new ResponseEntity<ArrayList<UserServiceNotificationDetailsView>>(userServiceNotificationDetailsViews,
-				HttpStatus.OK);
-	}
 
 	/**
 	 * Get User Service Details when service is pending with payment
@@ -194,30 +141,6 @@ public class UserServiceDetailsController extends AbstractRestManager {
 		boolean isDeleted = userServiceDetailsService.deleteUserSVCDetails(userServiceDetailsEntityObject);
 		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 
-	}
-
-	/**
-	 * Get All Bell Noticication by userId
-	 * 
-	 */
-	@RequestMapping(value = "/getAllBellNotifications/{uid}/{visibility}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllBellNotifications(
-			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_UID) int uid , 
-			@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY) String visibility) {
-		ArrayList<AllBellNotificationsView> listofServiceExpirations = userServiceDetailsService
-				.getAllBellNotifications(uid , visibility);
-		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(listofServiceExpirations, HttpStatus.OK);
-	}
-	
-	/**
-	 * Get All Bell Noticication by role code
-	 *  
-	 */
-	@RequestMapping(value = "/getAllAdminBellNotifications/{visibility}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<AllBellNotificationsView>> getAllAdminBellNotifications(@PathVariable(NewServiceConstant.USER_SERVICE_DETAILS_VISIBLITY) String visibility) {
-		ArrayList<AllBellNotificationsView> listofServiceExpirations = userServiceDetailsService
-				.getAllAdminBellNotifications(visibility);
-		return new ResponseEntity<ArrayList<AllBellNotificationsView>>(listofServiceExpirations, HttpStatus.OK);
 	}
 
 }

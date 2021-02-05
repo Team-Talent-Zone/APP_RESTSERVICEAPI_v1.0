@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.src.constant.CustomMsgProperties;
 import com.src.constant.NewServiceConstant;
-import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 import com.src.exception.RestCustomException;
@@ -87,28 +86,6 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		throw new RestCustomException(HttpStatus.BAD_REQUEST,
 				applicationConfigProperties.getProperty(CustomMsgProperties.NEWSERVICE_UNABLE_TO_SAVE_ERRORMSG));
 	}
-
-	/**
-	 * To Get all the Service Details.
-	 * 
-	 * @throw RestCustomException
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails() {
-		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
-		List<AllActiveNewSeviceDetailsView> newServiceEntity = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(AllActiveNewSeviceDetailsView.class);
-	 
-		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
-		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
-		if (size > 0) {
-			return (ArrayList<AllActiveNewSeviceDetailsView>) newServiceEntity;
-		}
-		return null;
-	}
-	
 
 	/**
 	 * To Get all the Service Details.

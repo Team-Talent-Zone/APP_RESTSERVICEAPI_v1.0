@@ -56,6 +56,8 @@ public class NewServiceConstant {
 	public static final String USER_SERVICE_SVC = "newSVCService";
 	public static final String USER_SERVICE_DETAILS_SERVICE = "userServiceDtls";
 	public static final String FREE_LANCE_ON_SERVICE = "freeLanceOnService";
+	public static final String ALLVIEW_SERVICE = "allviewService";
+
 	public static final String SERVICE_HISTORY_ALIAS_MANAGERID = "sHistory.managerId";
 	public static final String MANAGEID = "managerId";
 	public static final String NAME = "name";

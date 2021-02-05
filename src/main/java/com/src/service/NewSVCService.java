@@ -2,7 +2,6 @@ package com.src.service;
 
 import java.util.ArrayList;
 
-import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.NewServiceEntity;
 import com.src.entity.NewServiceHistoryEntity;
 
@@ -40,13 +39,7 @@ public interface NewSVCService {
 	 */
 	public NewServiceHistoryEntity saveNewServiceHistory(NewServiceHistoryEntity newServiceHistoryEntity);
 
-	/**
-	 * To Get the all Service Details for CBA.
-	 * 
-	 * @return
-	 */
-	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails();
-	
+		
 	/**
 	 * To Get the all Service Details for Manage Services.
 	 * 

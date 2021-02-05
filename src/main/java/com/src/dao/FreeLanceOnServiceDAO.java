@@ -1,17 +1,8 @@
 package com.src.dao;
 
-import java.util.ArrayList;
-
-import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
-import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotification;
-import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
 import com.src.entity.FreeLanceStarReviewFBEntity;
-import com.src.entity.FreeLanceTestimonialsDetailsView;
-import com.src.entity.FreelanceOnServiceJobPostedView;
-import com.src.entity.FreelanceOnServiceSearchView;
-import com.src.entity.FreelancerAvailableStartDateStoreProc;
 
 /**
  * The <code> FreeLanceOnServiceDAO </code> interface defines a data access
@@ -65,65 +56,8 @@ public interface FreeLanceOnServiceDAO {
 	public FreeLanceOnServiceEntity getFreeLanceOnServiceDetailsByUserId(int userId);
 
 	/**
-	 * Get the FU on Service Expiration Details.
-	 * 
-	 */
-	public ArrayList<FreeLanceOnServiceExpirationDetailsView> getFUOnServiceExpirationDetails();
-
-	/**
-	 * Get the FU on Service Notification Details by UserId.
-	 * 
-	 * @param userId
-	 * 
-	 */
-	public ArrayList<FreeLanceOnServiceNotificationDetailsView> getFUOnServiceNotificationDetailsByUserId(int userId);
-
-	/**
-	 * Gets all the user details if isJobAvailable is false
-	 */
-	public ArrayList<FreelanceOnServiceSearchView> getUserDetailsByJobAvailable();
-
-	/**
-	 * Gets all the user details if isJobAvailable is false and by job start on
-	 */
-	public ArrayList<FreelancerAvailableStartDateStoreProc> getUserDetailsByJobAvailableByJobStartOn(String jobstarton,
-			String scategory);
-
-	/**
-	 * Gets all the user details job details by sub category
-	 * 
-	 */
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsBySubCategory(String scategory);
-	
-	/**
-	 * Gets all the user details job details
-	 * 
-	 */
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetails();
-
-	/**
-	 * Gets all the user details job details by userId
-	 * 
-	 */
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByUserId(int userId);
-
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByFreelancerId(int userId);
-
-
-	/**
 	 * To delete the FreeLance On Service Details.
 	 */
 	public void deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 	
-	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
-
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
-
-	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
-	
-	/** 
-	 * To get all the pending payments of freelancer.
-	 */
-	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer();
-
 }

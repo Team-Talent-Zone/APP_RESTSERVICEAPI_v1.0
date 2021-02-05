@@ -2,13 +2,9 @@ package com.src.service;
 
 import java.util.ArrayList;
 
-import com.src.entity.AllBellNotificationsView;
-import com.src.entity.UserServiceActiveDetailsView;
 import com.src.entity.UserServiceDetailsEntity;
 import com.src.entity.UserServiceEventHistoryEntity;
-import com.src.entity.UserServiceExpirationDetailsView;
 import com.src.entity.UserServiceNotfications;
-import com.src.entity.UserServiceNotificationDetailsView;
 
 /**
  * The <code> UserServiceDetailsService </code> interface defines a business
@@ -64,15 +60,6 @@ public interface UserServiceDetailsSVC {
 	 * @return Get All User Service Details.
 	 */
 	public ArrayList<UserServiceDetailsEntity> getAllUserServiceDetails();
-	
-	/**
-	 * To Get the all User Service Details by userId.
-	 * 
-	 * @return Get All User Service Details.
-	 */
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsByUserId(int userId);
-	
-	public ArrayList<UserServiceActiveDetailsView> getAllUserServiceDetailsView();
 
 
 	/**
@@ -82,18 +69,6 @@ public interface UserServiceDetailsSVC {
 	 * @return
 	 */
 	public UserServiceNotfications saveUserServiceNotification(UserServiceNotfications userServiceNotfication);
-
-	/**
-	 * To get User Service Expiration Details.
-	 */
-	public ArrayList<UserServiceExpirationDetailsView> getUserServiceExpirationDetails();
-
-	/**
-	 * To Get User Service Notification Details by User Id.
-	 * 
-	 * @param userId
-	 */
-	public ArrayList<UserServiceNotificationDetailsView> getUserServiceNotificationDetailsByUserId(int userId);
 
 	/**
 	 * To get user Service Pending payments.
@@ -106,15 +81,5 @@ public interface UserServiceDetailsSVC {
 	 */
 	public boolean deleteUserSVCDetails(UserServiceDetailsEntity userServiceDetailsEntity);
 	
-	/**
-	 * To get all bell notifications by userId and Role Code.
-	 */
-	public ArrayList<AllBellNotificationsView> getAllBellNotifications(int userId , String roleCode);
-	
-	/**
-	 * To get all bell notifications.
-	 */
-	public ArrayList<AllBellNotificationsView> getAllAdminBellNotifications(String roleCode);
-
 
 }

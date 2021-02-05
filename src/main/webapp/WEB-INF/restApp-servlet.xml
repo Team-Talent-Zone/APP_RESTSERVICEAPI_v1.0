@@ -102,6 +102,10 @@
 	<bean id="widgetDAO" class="com.src.dao.WidgetDAOImpl"></bean>
 	<bean id="widgetService" class="com.src.service.WidgetServiceImpl"></bean>
 	
+		<bean id="allViewSvc" class="com.src.service.AllViewServiceSVCImpl"></bean>
+	<bean id="allViewServiceDAO" class="com.src.dao.AllViewServiceDAOImpl"></bean>
+	
+	
 	
 
 
