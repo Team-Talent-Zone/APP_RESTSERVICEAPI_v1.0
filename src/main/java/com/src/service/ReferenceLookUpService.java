@@ -57,5 +57,8 @@ public interface ReferenceLookUpService {
 	 * @param shortkey
 	 */
 	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey);
+	
+	public ReferenceLookUpMappingSubCategoryEntity getReferenceLookupMappingSubCategoryByCode(String code);
+
 
 }

@@ -63,4 +63,11 @@ public class ReferenceLookUpServiceImpl extends AbstractServiceManager implement
 	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey) {
 		return referenceLookUpDAO.getLookupTemplateEntityByShortkey(shortkey);
 	}
+	
+	/**
+	 * To get REference Lookup Mapping Sub category by Code details.
+	 */
+	public ReferenceLookUpMappingSubCategoryEntity getReferenceLookupMappingSubCategoryByCode(String code) {
+		return referenceLookUpDAO.getReferenceLookupMappingSubCategoryByCode(code);
+	}
 }

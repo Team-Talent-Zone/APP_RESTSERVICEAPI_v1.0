@@ -57,4 +57,11 @@ public interface ReferenceLookUpDAO {
 	 */
 	public ReferenceLookUpTemplateEntity getLookupTemplateEntityByShortkey(String shortkey);
 
+	/**
+	 * This method is to get Lookup Sub Category details by code .
+	 * 
+	 * @param shortkey
+	 */
+	public ReferenceLookUpMappingSubCategoryEntity getReferenceLookupMappingSubCategoryByCode(String code);
+
 }

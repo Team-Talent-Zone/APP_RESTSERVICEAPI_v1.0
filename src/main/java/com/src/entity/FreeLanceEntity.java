@@ -56,11 +56,12 @@ public class FreeLanceEntity implements Serializable {
 	@Column(name = "ISBGSTARTED")
 	private boolean isbgstarted;
 
-	@Column(name = "ISJOBAVAILABLE")
-	private boolean isJobAvailable;
-
+ 
 	@Column(name = "SUBCATEGORY")
 	private String subCategory;
+	
+	@Column(name = "subcategorylabel")
+	private String subcategorylabel;
 
 	@Column(name = "CATEGORY")
 	private String category;
@@ -94,6 +95,15 @@ public class FreeLanceEntity implements Serializable {
 
 	@Column(name = "BENEFICIARYID")
 	private Integer beneficiaryid;
+
+	
+	public String getSubcategorylabel() {
+		return subcategorylabel;
+	}
+
+	public void setSubcategorylabel(String subcategorylabel) {
+		this.subcategorylabel = subcategorylabel;
+	}
 
 	public Integer getFreeLanceId() {
 		return freeLanceId;
@@ -142,15 +152,7 @@ public class FreeLanceEntity implements Serializable {
 	public void setIsbgstarted(boolean isbgstarted) {
 		this.isbgstarted = isbgstarted;
 	} 
-
-	public boolean isJobAvailable() {
-		return isJobAvailable;
-	}
-
-	public void setJobAvailable(boolean isJobAvailable) {
-		this.isJobAvailable = isJobAvailable;
-	}
-
+ 
 	public String getSubCategory() {
 		return subCategory;
 	}

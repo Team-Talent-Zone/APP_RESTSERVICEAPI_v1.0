@@ -93,7 +93,6 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 				}
 				userEntity.setFreelancedocumententity(freeLanceDocumentEntities);
 			}
-			freelanceentity.setJobAvailable(Boolean.FALSE);
 			freelanceentity.setIsbgdone(Boolean.FALSE);
 			freelanceentity.setIsbgstarted(Boolean.FALSE);
 			freelanceentity.setIsprofilecompleted(Boolean.FALSE);

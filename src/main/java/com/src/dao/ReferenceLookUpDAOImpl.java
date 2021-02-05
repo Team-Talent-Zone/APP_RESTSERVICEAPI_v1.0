@@ -148,6 +148,23 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 				.getProperty(CustomMsgProperties.REFERNCELOOKUPMAPPINGSUBCATEGORIES_MAPID_ERRORMSG));
 
 	}
+	
+	/**
+	 * This method is to get Reference Lookup details by sub category by code id.
+	 * 
+	 * @param mapId
+	 * @throws RestCustomException
+	 */
+	public ReferenceLookUpMappingSubCategoryEntity getReferenceLookupMappingSubCategoryByCode(String code) {
+		ReferenceLookUpMappingSubCategoryEntity lookUpMappingSubCategoryEntities = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpMappingSubCategoryEntity.class);
+		criteria.add(Restrictions.eq("code", code));
+		lookUpMappingSubCategoryEntities = (ReferenceLookUpMappingSubCategoryEntity) criteria.uniqueResult();
+		if (lookUpMappingSubCategoryEntities != null) {
+			return lookUpMappingSubCategoryEntities;
+		}
+		return null;
+	}
 
 	/**
 	 * This method is to get Lookup Template details by short key.

@@ -53,5 +53,12 @@ public class ReferenceLookUpController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<ReferenceLookUpMappingSubCategoryEntity>>(
 				referenceLookUpService.getReferenceLookupMappingSubCategoryByMapId(mapId), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/getReferenceLookupMappingSubCategoryByCode/{code}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ReferenceLookUpMappingSubCategoryEntity> getReferenceLookupMappingSubCategoryByCode(
+			@PathVariable("code") String code) {
+		return new ResponseEntity<ReferenceLookUpMappingSubCategoryEntity>(
+				referenceLookUpService.getReferenceLookupMappingSubCategoryByCode(code), HttpStatus.OK);
+	}
 
 }
