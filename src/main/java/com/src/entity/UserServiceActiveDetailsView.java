@@ -92,6 +92,9 @@ public class UserServiceActiveDetailsView {
 	@Column(name = "bizname")
 	private String bizname; 
 	
+	@Column(name = "biztype")
+	private String biztype; 
+	
 	@Column(name = "phoneno")
 	private String phoneno; 
 	
@@ -285,6 +288,14 @@ public class UserServiceActiveDetailsView {
 
 	public void setWidgetId(String widgetId) {
 		this.widgetId = widgetId;
+	}
+
+	public String getBiztype() {
+		return biztype;
+	}
+
+	public void setBiztype(String biztype) {
+		this.biztype = biztype;
 	}
 	
 	
