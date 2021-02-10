@@ -168,5 +168,8 @@ public interface AllViewServiceSVC {
 	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
 
 	public ArrayList<FreelanceOnServiceJobPostedView> getUserAllPendingPaymentOfFreelancer();
+	
+	public FreelanceOnServiceJobPostedView getUserAllJobDetailsByJobId(int jobId);
+
 
 }

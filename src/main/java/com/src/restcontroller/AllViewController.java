@@ -282,6 +282,17 @@ public class AllViewController extends AbstractRestManager {
 	}
 
 	/**
+	 * Get All Job Details By JobId  */
+
+	@RequestMapping(value = "/getUserAllJobDetailsByJobId/{jobId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreelanceOnServiceJobPostedView> getUserAllJobDetailsByJobId(
+			@PathVariable(UserConstant.JOB_ID) int jobId) {
+		FreelanceOnServiceJobPostedView freelanceUserEntity = allViewSvc
+				.getUserAllJobDetailsByJobId(jobId);
+		return new ResponseEntity<FreelanceOnServiceJobPostedView>(freelanceUserEntity, HttpStatus.OK);
+	}
+	
+	/**
 	 * Get All Job Details By Freelancer Id
 	 */
 

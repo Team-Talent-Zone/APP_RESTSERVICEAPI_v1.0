@@ -573,4 +573,18 @@ public class AllViewServiceDAOImpl extends AbstractDAOManager implements AllView
 		}
 		return null;
 	}
+
+	@Override
+	public FreelanceOnServiceJobPostedView getUserAllJobDetailsByJobId(int jobId) {
+		FreelanceOnServiceJobPostedView freelanceOnServiceAllJobViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession()
+				.createCriteria(FreelanceOnServiceJobPostedView.class);
+		criteria.add(Restrictions.eq(UserConstant.JOB_ID, jobId));
+		criteria.addOrder(Order.desc("jobId"));
+		freelanceOnServiceAllJobViews = (FreelanceOnServiceJobPostedView) criteria.uniqueResult();
+		if (freelanceOnServiceAllJobViews != null) {
+			return   freelanceOnServiceAllJobViews;
+		}
+		return null;
+	}
 }

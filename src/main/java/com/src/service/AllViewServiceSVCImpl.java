@@ -225,5 +225,10 @@ public class AllViewServiceSVCImpl extends AbstractServiceManager implements All
 	public ArrayList<GraphSkillWorkerVoliationDataView> getGraphSKVoliationData() {
 		return allViewServiceDAO.getGraphSKVoliationData();
 	}
+	
+	@Override
+	public FreelanceOnServiceJobPostedView getUserAllJobDetailsByJobId(int jobId) {
+		return allViewServiceDAO.getUserAllJobDetailsByJobId( jobId);
+	}
 
 }

@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.src.constant.NewServiceConstant;
+import com.src.constant.PaymentConstant;
 import com.src.constant.UserConstant;
 import com.src.constant.UtilityConfig;
 import com.src.entity.CreatePayOutBeneficiary;
@@ -68,9 +69,13 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 		userEntity.setUserId(paymentEntity.getUserId());
 		paymentEntity.setUserdetails(userEntity);
+		String sUrl = referenceLookUpDAO.getReferenceLookupByShortKey(PaymentConstant.sUrl);
+		String fUrl = referenceLookUpDAO.getReferenceLookupByShortKey(PaymentConstant.fUrl);
+		String paymentKey = referenceLookUpDAO.getReferenceLookupByShortKey(PaymentConstant.paymentKey);
+		String paymentSalt = referenceLookUpDAO.getReferenceLookupByShortKey(PaymentConstant.paymentSalt);
 
 		PaymentUtil paymentUtil = new PaymentUtil();
-		paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity);
+		paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity , fUrl , sUrl , paymentSalt , paymentKey);
 		if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			PaymentFUTranscationHistEntity fuTranscationHistEntity = new PaymentFUTranscationHistEntity();
 			fuTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));

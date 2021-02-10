@@ -23,20 +23,20 @@ import com.src.utils.CommonUtilites;
 @Transactional(rollbackFor = { Exception.class })
 public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements FreeLanceOnServiceSVC {
 
-
-
 	/**
 	 * To save Free Lance On Service Details.
 	 */
 	@Override
 	public FreeLanceOnServiceEntity saveFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-		freeLanceOnServiceEntity.setIsjobaccepted(Boolean.FALSE);
+		if (freeLanceOnServiceEntity.getResolvedvoliationreason() == null) {
+			freeLanceOnServiceEntity.setIsjobaccepted(Boolean.FALSE);
+			freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
+		}
 		freeLanceOnServiceEntity.setIsjobamtpaidtofu(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcompleted(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobcancel(Boolean.FALSE);
-		freeLanceOnServiceEntity.setIsjobactive(Boolean.FALSE);
 		freeLanceOnServiceEntity.setIsjobamtpaidtocompany(Boolean.FALSE);
 		UserServiceDetailsEntity userServiceDetailsEntity = new UserServiceDetailsEntity();
 		userServiceDetailsEntity.setServiceId(freeLanceOnServiceEntity.getServiceId());
@@ -50,10 +50,13 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	@Override
 	public FreeLanceOnServiceEntity saveOrUpdateFreeLanceOnService(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-		/*if (!freeLanceOnServiceEntity.isIsjobaccepted() && !freeLanceOnServiceEntity.isIsjobcompleted()) {
-			freeLanceOnServiceEntity.setIsjobaccepted(true);
-			freeLanceOnServiceEntity.setJobaccepteddate(CommonUtilites.getCurrentDateInNewFormat());
-		}*/
+		/*
+		 * if (!freeLanceOnServiceEntity.isIsjobaccepted() &&
+		 * !freeLanceOnServiceEntity.isIsjobcompleted()) {
+		 * freeLanceOnServiceEntity.setIsjobaccepted(true);
+		 * freeLanceOnServiceEntity.setJobaccepteddate(CommonUtilites.
+		 * getCurrentDateInNewFormat()); }
+		 */
 		UserServiceDetailsEntity userServiceDetails = new UserServiceDetailsEntity();
 		userServiceDetails.setServiceId(freeLanceOnServiceEntity.getServiceId());
 		freeLanceOnServiceEntity.setUserServiceDetails(userServiceDetails);
@@ -103,7 +106,6 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		return freeLanceOnServiceDAO.getFreeLanceOnServiceDetailsByUserId(userId);
 	}
 
-
 	@Override
 	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity) {
 		freeLanceOnServiceDAO.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
@@ -112,6 +114,5 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 		}
 		return false;
 	}
-
 
 }

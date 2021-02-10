@@ -4,21 +4,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
+import com.src.constant.PaymentConstant;
 import com.src.entity.PaymentEntity;
 
 public class PaymentUtil {
 
-	private static final String paymentKey = "IbDWFxRT";
 
-	private static final String paymentSalt = "vHHOr8Ishp"; 
-	
-	private static final String serviceProvider = "payu_paisa"; 
 
-	private static final String sUrl = "http://localhost:8080/RestAPI/payment-response";
-
-	private static final String fUrl = "http://localhost:8080/RestAPI/payment-response";
-
-	public PaymentEntity populatePaymentDetail(PaymentEntity paymentDetail) {
+	public PaymentEntity populatePaymentDetail(PaymentEntity paymentDetail , String fUrl , String sUrl , String paymentSalt , String paymentKey ) {
 		String hashString = "";
 		Random rand = new Random();
 		String randomId = Integer.toString(rand.nextInt()) + (System.currentTimeMillis() / 1000L);
@@ -41,7 +34,7 @@ public class PaymentUtil {
 		paymentDetail.setFurl(fUrl);
 		paymentDetail.setSurl(sUrl);
 		paymentDetail.setKey(paymentKey);
-		paymentDetail.setService_provider(serviceProvider);
+		paymentDetail.setService_provider(PaymentConstant.serviceProvider);
 		return paymentDetail;
 	}
 

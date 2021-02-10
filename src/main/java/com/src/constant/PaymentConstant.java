@@ -23,4 +23,13 @@ public class PaymentConstant {
 	public static final String PAYMENT_GETCBAPAYMENT_DETAILSBYUSERID = "Inside Payment DAO getPaymentCBADetailsByUserId method";
 	public static final String PAYMENT_GETPAYMENTHISTNOTI_DETAILSBYUSERID = "Inside Payment DAO getPaymentRefundTranHistByUserId method";
 	
+	public static final String paymentKey = "mkey";
+
+	public static final String paymentSalt = "salt"; 
+	
+	public static final String serviceProvider = "payu_paisa"; 
+
+	public static final String sUrl = "surlServer";
+
+	public static final String fUrl = "furlServer";
 }

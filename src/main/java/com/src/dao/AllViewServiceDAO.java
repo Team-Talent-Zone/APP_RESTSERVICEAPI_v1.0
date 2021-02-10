@@ -159,6 +159,7 @@ public interface AllViewServiceDAO {
 	
 	public ArrayList<GraphSkillWorkerVoliationDataView> getGraphSKVoliationData();
 
+	public FreelanceOnServiceJobPostedView getUserAllJobDetailsByJobId(int jobId);
 
 
 
