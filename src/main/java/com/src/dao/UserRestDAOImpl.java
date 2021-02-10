@@ -81,9 +81,10 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 		if (userEntity != null) {
 			return userEntity;
 		}
-		throw new RestCustomException(HttpStatus.NO_CONTENT,
+		return null;
+		/*throw new RestCustomException(HttpStatus.NO_CONTENT,
 				applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_USERNOTFOUND_ERRORMSG) + " "
-						+ username);
+						+ username);*/
 	}
 
 	/**
@@ -102,9 +103,10 @@ public class UserRestDAOImpl extends AbstractDAOManager implements UserRestDAO {
 			if (userEntity == null) {
 				return true;
 			}
-			throw new RestCustomException(HttpStatus.NO_CONTENT,
+			return false;
+			/*throw new RestCustomException(HttpStatus.NO_CONTENT,
 					applicationConfigProperties.getProperty(CustomMsgProperties.CHECK_USERNAME_ISFOUND_ERRORMSG) + " "
-							+ username);
+							+ username);*/
 	}
 
 	/**

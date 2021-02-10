@@ -207,11 +207,12 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	public UserEntity forgetPassword(String username) {
 
 		UserEntity userEntity = userRestDAO.checkUsername(username);
-		String newPassword = CommonUtilites.genRandomAlphaNumeric();
-		userEntity.setIsrecoverypwd(Boolean.TRUE);
-		userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
-		userEntity.setPassword(newPassword);
-
+		if (userEntity != null) {
+			String newPassword = CommonUtilites.genRandomAlphaNumeric();
+			userEntity.setIsrecoverypwd(Boolean.TRUE);
+			userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+			userEntity.setPassword(newPassword);
+		}
 		return userEntity;
 	}
 

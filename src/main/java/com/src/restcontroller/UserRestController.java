@@ -162,7 +162,8 @@ public class UserRestController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/forgetPassword/{username}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable(UserConstant.USERNAME) String username) {
-		return new ResponseEntity<UserEntity>(userDetailService.forgetPassword(username), HttpStatus.OK);
+		UserEntity entity = userDetailService.forgetPassword(username);
+		return new ResponseEntity<UserEntity>(entity, HttpStatus.OK);
 	}
 
 	/**
