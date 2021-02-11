@@ -1,12 +1,11 @@
 package com.src.service;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.src.constant.UtilityConfig;
+import com.src.entity.UploadUtilEntity;
 import com.src.entity.UtilEntity;
 import com.src.helper.S3AWSHelper;
 import com.src.helper.SendEmailHelper;
@@ -32,29 +31,29 @@ public class UtilityServiceImpl extends AbstractServiceManager implements Utilit
 		SendEmailHelper emailHelper = new SendEmailHelper();
 		return emailHelper.prepareEmail(utilEntity , apiKey, applicationName);
 	}
-
+ 
 	/**
 	 * This method is for uploading avatas in S3.
 	 */
-	public String uploadAvatarsInS3(File inputFile, int userid) {
+	public String uploadAvatarsInS3(UploadUtilEntity uploadUtilEntity) {
 		S3AWSHelper s3awsHelper = new S3AWSHelper();
-		return s3awsHelper.uploadAvatarsInS3(inputFile, userid);
+		return s3awsHelper.uploadAvatarsInS3(uploadUtilEntity);
 	}
 
 	/**
 	 * This method is for uploading Background document in S3.
 	 */
-	public String uploadBgDocsInS3(File inputFile, int userid) {
+	public String uploadBgDocsInS3(UploadUtilEntity uploadUtilEntity) {
 		S3AWSHelper s3awsHelper = new S3AWSHelper();
-		return s3awsHelper.uploadBgDocsInS3(inputFile, userid);
+		return s3awsHelper.uploadBgDocsInS3(uploadUtilEntity);
 	}
 
 	/**
 	 * This method is for uploading widget picture in S3.
 	 */
-	public String uploadWidgetPicsInS3(File inputFile, int userid) {
+	public String uploadWidgetPicsInS3(UploadUtilEntity uploadUtilEntity) {
 		S3AWSHelper s3awsHelper = new S3AWSHelper();
-		return s3awsHelper.uploadWidgetPicsInS3(inputFile, userid);
+		return s3awsHelper.uploadWidgetPicsInS3(uploadUtilEntity);
 	}
 
 	/**

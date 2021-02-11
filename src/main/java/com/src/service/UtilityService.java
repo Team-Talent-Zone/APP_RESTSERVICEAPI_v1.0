@@ -1,7 +1,6 @@
 package com.src.service;
 
-import java.io.File;
-
+import com.src.entity.UploadUtilEntity;
 import com.src.entity.UtilEntity;
 
 /**
@@ -26,7 +25,7 @@ public interface UtilityService {
 	 * @param inputFile
 	 * @param userid
 	 */
-	public String uploadAvatarsInS3(File inputFile, int userid);
+	public String uploadAvatarsInS3(UploadUtilEntity uploadUtilEntity);
 
 	/**
 	 * This method is for uploading Background documents in S3.
@@ -34,7 +33,7 @@ public interface UtilityService {
 	 * @param inputFile
 	 * @param userid
 	 */
-	public String uploadBgDocsInS3(File inputFile, int userid);
+	public String uploadBgDocsInS3(UploadUtilEntity uploadUtilEntity);
 
 	/**
 	 * This method is for uploading widget pictures in S3.
@@ -42,7 +41,7 @@ public interface UtilityService {
 	 * @param inputFile
 	 * @param userid
 	 */
-	public String uploadWidgetPicsInS3(File inputFile, int userid);
+	public String uploadWidgetPicsInS3(UploadUtilEntity uploadUtilEntity);
 
 	/**
 	 * This method is for Translating Text.

@@ -9,19 +9,22 @@ import org.apache.velocity.VelocityContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
 public class TestCode {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		Gson gson = new Gson();
-			String x=new String(gson.toJson("abcd"));
-		String z=x.replace("\"", "");
-		System.out.println(z);
+		System.out.println(getFileExtension("test.jpeg"));
 		//CalendarDemo();
 	}
 	
+	public static String getFileExtension(String fileName) {
+		String extension = null;
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i);
+		}
+		return extension;
+	}
 	public static void CalendarDemo()  {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));

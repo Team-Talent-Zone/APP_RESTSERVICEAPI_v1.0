@@ -1,9 +1,7 @@
 package com.src.restcontroller;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 import com.src.entity.UploadUtilEntity;
 import com.src.entity.UtilEntity;
-import com.src.utils.CommonUtilites;
 
 /**
  * The <code> UtilityController </code> class defines managed beans which
@@ -41,13 +38,8 @@ public class UtilityController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/uploadavatar/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadAvatarsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
-		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
-		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
-
 		Gson gson = new Gson();
-		String avatarURL = utilService.uploadAvatarsInS3(tempFile, uploadUtilEntity.getUserid());
+		String avatarURL = utilService.uploadAvatarsInS3(uploadUtilEntity);
 		return new ResponseEntity<String>(gson.toJson(avatarURL), HttpStatus.OK);
 	}
 
@@ -60,12 +52,8 @@ public class UtilityController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/uploadbgdocs/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadBgDocsInS3(@RequestBody UploadUtilEntity uploadUtilEntity) throws IOException {
-		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
-		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 		Gson gson = new Gson();
-		String bgDocURL = utilService.uploadBgDocsInS3(tempFile, uploadUtilEntity.getUserid());
+		String bgDocURL = utilService.uploadBgDocsInS3(uploadUtilEntity);
 		return new ResponseEntity<String>(gson.toJson(bgDocURL), HttpStatus.OK);
 	}
 
@@ -79,12 +67,8 @@ public class UtilityController extends AbstractRestManager {
 	@RequestMapping(value = "/uploadwidgets/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> uploadWidgetPicsInS3(@RequestBody UploadUtilEntity uploadUtilEntity)
 			throws IOException {
-		String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-		File tempFile = new File(CommonUtilites.genRandomAlphaNumeric() + uploadUtilEntity.getFilename());
-		FileUtils.writeByteArrayToFile(tempFile, imageBytes);
 		Gson gson = new Gson();
-		String widgetURL = utilService.uploadWidgetPicsInS3(tempFile, uploadUtilEntity.getUserid());
+		String widgetURL = utilService.uploadWidgetPicsInS3(uploadUtilEntity);
 		return new ResponseEntity<String>(gson.toJson(widgetURL), HttpStatus.OK);
 
 	}

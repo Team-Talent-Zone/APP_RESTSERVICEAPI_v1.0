@@ -70,4 +70,13 @@ public class CommonUtilites {
 		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 		return dateFormat.format(cal.getTime());
 	}
+	
+	public static String getFileExtension(String fileName) {
+		String extension = null;
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i);
+		}
+		return extension;
+	}
 }

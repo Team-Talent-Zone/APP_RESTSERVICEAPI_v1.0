@@ -1,6 +1,9 @@
 package com.src.helper;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +16,10 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.src.constant.UtilityConfig;
+import com.src.entity.UploadUtilEntity;
 
 /**
  * This <code>S3AWSHelper</code>defines uploading avatars, Background documents
@@ -34,19 +39,28 @@ public class S3AWSHelper {
 	 * @param userid
 	 * @exception AmazonServiceException
 	 */
-	public String uploadAvatarsInS3(File inputFile, int userid) {
-		String fileExtension = getFileExtension(inputFile);
+	public String uploadAvatarsInS3(UploadUtilEntity uploadUtilEntity) {
+		logger.debug("=====Inside the S3AWSHelper Class uploadAvatarsInS3 Method======");
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-		try {
-			logger.debug("=====Attempting to upload profile picture of user====== Bucket Name " +UtilityConfig.S3_BUCKETNAME_AVATAR);
-
-			String fileName = getFileNameWithoutExtension(inputFile) + "_avatar." + fileExtension;
-			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + userid;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_AVATAR, fileName, s3, inputFile,
-					folderToCreate);
-			return docURL;
-
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1)
+				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+		try { 
+			logger.debug("=====Attempting to upload profile picture of user====== Bucket Name "
+					+ UtilityConfig.S3_BUCKETNAME_AVATAR);
+			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
+	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			ObjectMetadata metadata = new ObjectMetadata();
+			metadata.setContentLength(imageBytes.length);
+			metadata.setContentType("image/png");
+			metadata.setCacheControl("public, max-age=31536000");
+			InputStream fis = new ByteArrayInputStream(imageBytes);
+			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_AVATAR,
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+							.withCannedAcl(CannedAccessControlList.PublicRead);
+			s3.putObject(putObjectRequest);
+			logger.debug("Returning the URL of uploaded document in the S3");
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_AVATAR, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
 					+ "to Amazon S3, but was rejected with an error response for some reason.");
@@ -73,18 +87,28 @@ public class S3AWSHelper {
 	 * @param userid
 	 * @exception AmazonServiceException
 	 */
-	public String uploadBgDocsInS3(File inputFile, int userid) {
-		String fileExtension = getFileExtension(inputFile);
+	public String uploadBgDocsInS3(UploadUtilEntity uploadUtilEntity) {
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-	
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1)
+				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 		try {
-			logger.debug("====Attempting to upload documents relared to background of the skilled worker===== Bucket name " + UtilityConfig.S3_BUCKETNAME_BG_DOCS);
-			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
-			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX + userid;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_BG_DOCS, fileName, s3, inputFile,
-					folderToCreate);
-			return docURL;
+			logger.debug(
+					"====Attempting to upload documents relared to background of the skilled worker===== Bucket name "
+							+ UtilityConfig.S3_BUCKETNAME_BG_DOCS);
+			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
+	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			ObjectMetadata metadata = new ObjectMetadata();
+			metadata.setContentLength(imageBytes.length);
+			metadata.setContentType("application/pdf");
+			metadata.setCacheControl("public, max-age=31536000");
+			InputStream fis = new ByteArrayInputStream(imageBytes);
+			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_BG_DOCS,
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+							.withCannedAcl(CannedAccessControlList.PublicRead);
+			s3.putObject(putObjectRequest);
+			logger.debug("Returning the URL of uploaded document in the S3");
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_BG_DOCS, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
 
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
@@ -110,19 +134,31 @@ public class S3AWSHelper {
 	 * @param userid
 	 * @exception AmazonServiceException
 	 */
-	public String uploadWidgetPicsInS3(File inputFile, int userid) {
+	public String uploadWidgetPicsInS3(UploadUtilEntity uploadUtilEntity) {
 
-		String fileExtension = getFileExtension(inputFile);
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-	
+		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1)
+				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+
 		try {
-			logger.debug("=======Attempting to upload widgets of the new host site for the CBA user ===== Bucket Name : "+UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS);
-			String fileName = getFileNameWithoutExtension(inputFile) + "." + fileExtension;
-			String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX + userid;
-			String docURL = createFolderOrUploadObject(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS, fileName, s3,
-					inputFile, folderToCreate);
-			return docURL;
+			logger.debug(
+					"=======Attempting to upload widgets of the new host site for the CBA user ===== Bucket Name : "
+							+ UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS);
+			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
+	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+				String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			ObjectMetadata metadata = new ObjectMetadata();
+			metadata.setContentLength(imageBytes.length);
+			metadata.setContentType("image/png");
+			metadata.setCacheControl("public, max-age=31536000");
+			InputStream fis = new ByteArrayInputStream(imageBytes);
+			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS,
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+							.withCannedAcl(CannedAccessControlList.PublicRead);
+			s3.putObject(putObjectRequest);
+			logger.debug("Returning the URL of uploaded document in the S3");
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
+	
 
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
@@ -141,54 +177,5 @@ public class S3AWSHelper {
 		return null;
 	}
 
-	/**
-	 * This method is for creating folder or uploading objects.
-	 * 
-	 * @param bucketName
-	 * @param fileName
-	 * @param client
-	 * @param inputFile
-	 * @param folderName
-	 */
-	private String createFolderOrUploadObject(String bucketName, String fileName, AmazonS3 client, File inputFile,
-			String folderName) {
-		logger.debug("Uploading the File to S3");
-		// create meta-data for your folder and set content-length to 0
-		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
-				folderName + UtilityConfig.SUFFIX + fileName, inputFile)
-						.withCannedAcl(CannedAccessControlList.PublicRead);
-		// Making the URL public to access it.
-		// send request to S3 to create folder
-		client.putObject(putObjectRequest);
-		logger.debug("Returning the URL of uploaded document in the S3");
-		return client.getUrl(bucketName, folderName + UtilityConfig.SUFFIX + fileName).toString();
-
-	}
-
-	/**
-	 * This method is to get File Extension.
-	 * 
-	 * @param file
-	 */
-	private String getFileExtension(File file) {
-		logger.debug("Attempting to get extension of File uploaded");
-		String fileName = file.getName();
-		if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-			return fileName.substring(fileName.lastIndexOf(".") + 1);
-		else
-			return "";
-	}
-
-	/**
-	 * This method is to get file name without extension.
-	 * 
-	 * @param file
-	 */
-	private String getFileNameWithoutExtension(File file) {
-		String fileName = file.getName();
-		if (fileName.indexOf(".") > 0)
-			fileName = fileName.substring(0, fileName.lastIndexOf("."));
-		return fileName;
-	}
 
 }
