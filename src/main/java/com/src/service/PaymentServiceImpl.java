@@ -75,7 +75,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		String paymentSalt = referenceLookUpDAO.getReferenceLookupByShortKey(PaymentConstant.paymentSalt);
 
 		PaymentUtil paymentUtil = new PaymentUtil();
-		paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity , fUrl , sUrl , paymentSalt , paymentKey);
+		paymentEntity = paymentUtil.populatePaymentDetail(paymentEntity, fUrl, sUrl, paymentSalt, paymentKey);
 		if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			PaymentFUTranscationHistEntity fuTranscationHistEntity = new PaymentFUTranscationHistEntity();
 			fuTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));
@@ -334,24 +334,26 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 */
 	@Override
 	public String verifyAccountPayout(PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
-
-		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
-		parametersBody.add(new BasicNameValuePair("accountNumber", payoutVerifyAccountRequest.getAccountnumber()));
-		parametersBody.add(new BasicNameValuePair("ifscCode", payoutVerifyAccountRequest.getIfsccode()));
-		parametersBody.add(new BasicNameValuePair("merchantRefId", CommonUtilites.genRandomAlphaNumeric()));
+		logger.debug("Inside verifyAccountPayout method PaymentServiceImpl Class:");
 
 		ObjectMapper objectmapper = new ObjectMapper();
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-		HttpPost connection = new HttpPost(
-				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY));
+		String url = referenceLookUpDAO
+				.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY);
+		HttpPost connection = new HttpPost(url);
+		String unqiueId = CommonUtilites.genRandomNumeric();
+		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
+		parametersBody.add(new BasicNameValuePair("accountNumber", payoutVerifyAccountRequest.getAccountnumber()));
+		parametersBody.add(new BasicNameValuePair("ifscCode", payoutVerifyAccountRequest.getIfsccode()));
+		parametersBody.add(new BasicNameValuePair("merchantRefId", unqiueId));
 		connection.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		connection.setHeader("Authorization", "bearer " + generateToken());
 		connection.setHeader("payoutMerchantId",
 				referenceLookUpDAO.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_MERCHANTID_SHORTKEY));
-
 		connection.setEntity(new UrlEncodedFormEntity(parametersBody));
 
 		CloseableHttpResponse response = httpClient.execute(connection);
+
 		if (response.getStatusLine().getStatusCode() == 200) {
 			InputStream content = response.getEntity().getContent();
 			PayoutVerifyAccountResponseData verfiyAcct = objectmapper.readValue(content,
@@ -364,12 +366,14 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	}
 
 	/**
-	 * Method for intiating transfer (payout).
+	 * Method for initiating transfer (payout).
 	 * 
 	 * @param userId
 	 */
 	@Override
 	public PayoutTransferResponse payoutTransfer(FreelancerPaymentInput freelancerPaymentInput) throws Exception {
+		logger.debug("Inside payoutTransfer method PaymentServiceImpl Class:");
+
 		ObjectMapper objectmapper = new ObjectMapper();
 
 		JSONObject json = new JSONObject();
@@ -407,6 +411,8 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 */
 	@Override
 	public String createBenificiaryPayout(PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
+		logger.debug("Inside createBenificiaryPayout method PaymentServiceImpl Class:");
+
 		ObjectMapper objectmapper = new ObjectMapper();
 		UserEntity userEntity = userRestDAO.getUserByUserId(payoutVerifyAccountRequest.getUserid());
 		JSONObject json = new JSONObject();
@@ -451,6 +457,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 * Generates unique token key for payout transfers.
 	 */
 	private String generateToken() throws Exception {
+		logger.debug("Inside generateToken method PaymentServiceImpl Class:");
 
 		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
 		parametersBody.add(new BasicNameValuePair("grant_type", "password"));

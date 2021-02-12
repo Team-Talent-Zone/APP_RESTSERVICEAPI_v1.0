@@ -180,7 +180,9 @@ public class PaymentController extends AbstractRestManager {
 	 */
 	@RequestMapping(value = "/verifyAccountPayout/", method = RequestMethod.POST ,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> verifyAccountPayout(@RequestBody PayoutVerifyAccountRequest payoutVerifyAccountRequest) throws Exception {
+		logger.debug("This is verifiy Account Payout PaymentController ",  payoutVerifyAccountRequest);
 		String beneficiaryName = paymentService.verifyAccountPayout(payoutVerifyAccountRequest);
+		logger.debug("This is verifiy Account Payout PaymentController beneficiaryName : ",  beneficiaryName);
 		return new ResponseEntity<String>(beneficiaryName, HttpStatus.OK);
 	}
 

@@ -55,12 +55,13 @@ public class S3AWSHelper {
 			metadata.setContentType("image/png");
 			metadata.setCacheControl("public, max-age=31536000");
 			InputStream fis = new ByteArrayInputStream(imageBytes);
+			String filename = uploadUtilEntity.getFilename();
 			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_AVATAR,
-					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+					folderToCreate + UtilityConfig.SUFFIX + filename , fis,metadata)
 							.withCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObjectRequest);
 			logger.debug("Returning the URL of uploaded document in the S3");
-			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_AVATAR, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_AVATAR, folderToCreate + UtilityConfig.SUFFIX + filename).toString();
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
 					+ "to Amazon S3, but was rejected with an error response for some reason.");

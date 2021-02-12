@@ -1,12 +1,10 @@
 package com.src.utils;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Random;
 import java.util.TimeZone;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,24 +36,14 @@ public class CommonUtilites {
 		return dateFormat.format(cal.getTime());
 	}
 
+	
 	/**
-	 * genRandomAlphaNumeric - To get Random Alpha Numeric Data.
+	 * genRandomNumeric - To get Random  Numeric Data.
 	 * 
 	 * @return Random Data.
 	 */
-	public static String genRandomAlphaNumeric() {
-		String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-		int n = alphabet.length();
-		String result = "";
-		Random r;
-		try {
-			r = SecureRandom.getInstanceStrong();
-			for (int i = 0; i < 10; i++)
-				result = result + alphabet.charAt(r.nextInt(n));
-		} catch (NoSuchAlgorithmException e) {
-			logger.debug("Exception in CommonUtilites-genRandomAlphaNumeric():" + e);
-		}
-		return result;
+	public static String genRandomNumeric() {
+		return String.valueOf(ThreadLocalRandom.current().nextInt());
 	}
 
 	/**

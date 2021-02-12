@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
@@ -98,8 +99,11 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		LOGGER.info(NewServiceConstant.NEW_SERVICE_DAO_GETALLSERVICEDETAILS);
 		List<NewServiceEntity> newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
-	 
+		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
+				JoinType.INNER_JOIN);
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		criteria.addOrder(Order.desc("sHistory.decisionOn"));
+
 		int size = newServiceEntity != null ? newServiceEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILS + size);
 		if (size > 0) {
@@ -150,6 +154,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY_ALIAS_MAPPING,
 				NewServiceConstant.SERVICE_HISTORY_MAPPING_OBJ, JoinType.INNER_JOIN);
 		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_USING_USERID, userId));
+
 		newServiceHistoryEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = newServiceHistoryEntity != null ? newServiceHistoryEntity.size() : 0;
 		LOGGER.debug(NewServiceConstant.NEW_SERVICE_DAO_INSIDE_GETALLSERVICEDETAILSBYUSERID + size);
@@ -174,6 +179,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		criteria.add(Restrictions.eq("createdOn", CommonUtilites.getPreviousDate()));
 		criteria.createAlias(NewServiceConstant.SERVICE_HISTORY, NewServiceConstant.SERVICE_HISTORY_ALIAS,
 				JoinType.INNER_JOIN);
+
 		criteria.add(Restrictions.eq(NewServiceConstant.SERVICE_HISTORY_ALIAS_STATUS,
 				NewServiceConstant.NEW_SERVICE_STATUS_APPROVED));
 		newServiceEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -211,6 +217,7 @@ public class NewServiceDAOImpl extends AbstractDAOManager implements NewServiceD
 		NewServiceEntity newServiceEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(NewServiceEntity.class);
 		criteria.add(Restrictions.eq(NewServiceConstant.OURSERVICEID, ourserviceId));
+
 		newServiceEntity = (NewServiceEntity) criteria.uniqueResult();
 		if (newServiceEntity != null) {
 			return newServiceEntity;

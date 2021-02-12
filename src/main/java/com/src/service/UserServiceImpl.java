@@ -103,7 +103,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 			userEntity.setFreelancehistoryentity(freeLanceHistoryEntities);
 
 		} else if (userRoleEntity.getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
-			userEntity.setUniqueidentificationcode(CommonUtilites.genRandomAlphaNumeric());
+			userEntity.setUniqueidentificationcode(CommonUtilites.genRandomNumeric());
 			userEntity.setIsactive(Boolean.FALSE);
 		} else if ((userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_MANAGER))
 				|| (userRoleEntity.getRolecode().equals(UserConstant.CORE_SERVICE_SUPPORT_TEAM))) {
@@ -208,7 +208,7 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 
 		UserEntity userEntity = userRestDAO.checkUsername(username);
 		if (userEntity != null) {
-			String newPassword = CommonUtilites.genRandomAlphaNumeric();
+			String newPassword = CommonUtilites.genRandomNumeric();
 			userEntity.setIsrecoverypwd(Boolean.TRUE);
 			userEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
 			userEntity.setPassword(newPassword);
@@ -224,10 +224,11 @@ public class UserServiceImpl extends AbstractServiceManager implements UserServi
 	 */
 	public UserEntity prepareAdminToSignUp(String username) {
 
-		UserEntity userEntity = new UserEntity();
+		UserEntity userEntity = null;
 		boolean checkUsernameNotExist = userRestDAO.checkUsernameNotExist(username);
 		if (checkUsernameNotExist) {
-			String newPassword = CommonUtilites.genRandomAlphaNumeric();
+			userEntity =  new UserEntity();
+			String newPassword = CommonUtilites.genRandomNumeric();
 			userEntity.setIsactive(Boolean.TRUE);
 			userEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
 			userEntity.setPassword(newPassword);
