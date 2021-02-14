@@ -341,7 +341,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		String url = referenceLookUpDAO
 				.getReferenceLookupByShortKey(UtilityConfig.PAYOUT_API_VERIFY_ACCOUNT_URL_SHORTKEY);
 		HttpPost connection = new HttpPost(url);
-		String unqiueId = CommonUtilites.genRandomNumeric();
+		String unqiueId = CommonUtilites.genRandomAplhaNumeric();
 		List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
 		parametersBody.add(new BasicNameValuePair("accountNumber", payoutVerifyAccountRequest.getAccountnumber()));
 		parametersBody.add(new BasicNameValuePair("ifscCode", payoutVerifyAccountRequest.getIfsccode()));

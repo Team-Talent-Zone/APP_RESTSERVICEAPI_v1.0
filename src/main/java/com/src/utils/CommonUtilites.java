@@ -4,8 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +42,8 @@ public class CommonUtilites {
 	 * 
 	 * @return Random Data.
 	 */
-	public static String genRandomNumeric() {
-		return String.valueOf(ThreadLocalRandom.current().nextInt());
+	public static String genRandomAplhaNumeric() {
+		return RandomStringUtils.randomAlphabetic(10);
 	}
 
 	/**
