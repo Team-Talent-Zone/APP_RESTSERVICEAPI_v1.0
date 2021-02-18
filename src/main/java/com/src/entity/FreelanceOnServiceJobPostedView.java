@@ -97,7 +97,6 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "isjobcancel")
 	private Boolean isjobcancel;
 	
-	
 	@Column(name = "jobacceptdecisionflag")
 	private Boolean jobacceptdecisionflag;
 	
@@ -179,6 +178,28 @@ public class FreelanceOnServiceJobPostedView {
 	@Column(name = "isratedforjob")
 	private boolean isratedforjob; 
 	
+	@Column(name = "ISLIVELOCATIONTRACKING")
+	private boolean islivelocationtracking;
+	
+	@Column(name = "livelocationtracking")
+	private String livelocationtracking;
+	
+	
+	public boolean isIslivelocationtracking() {
+		return islivelocationtracking;
+	}
+
+	public void setIslivelocationtracking(boolean islivelocationtracking) {
+		this.islivelocationtracking = islivelocationtracking;
+	}
+
+	public String getLivelocationtracking() {
+		return livelocationtracking;
+	}
+
+	public void setLivelocationtracking(String livelocationtracking) {
+		this.livelocationtracking = livelocationtracking;
+	}
 
 	public boolean isIsratedforjob() {
 		return isratedforjob;

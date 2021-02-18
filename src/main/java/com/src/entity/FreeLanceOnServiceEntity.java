@@ -149,7 +149,17 @@ public class FreeLanceOnServiceEntity implements Serializable {
 	@Column(name = "associatedadminId")
 	private Integer associatedadminId;
 	
+	@Column(name = "ISLIVELOCATIONTRACKING")
+	private boolean islivelocationtracking;
 	
+	public boolean isIslivelocationtracking() {
+		return islivelocationtracking;
+	}
+
+	public void setIslivelocationtracking(boolean islivelocationtracking) {
+		this.islivelocationtracking = islivelocationtracking;
+	}
+
 	public Integer getAssociatedadminId() {
 		return associatedadminId;
 	}
