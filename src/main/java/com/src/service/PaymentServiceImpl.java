@@ -64,7 +64,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	 */
 	@Override
 	public PaymentEntity savePayments(PaymentEntity paymentEntity) {
-		paymentEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+		paymentEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 
 		UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 		userEntity.setUserId(paymentEntity.getUserId());
@@ -79,7 +79,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
 			PaymentFUTranscationHistEntity fuTranscationHistEntity = new PaymentFUTranscationHistEntity();
 			fuTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));
-			fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 			fuTranscationHistEntity.setEmail(paymentEntity.getEmail());
 			fuTranscationHistEntity.setMobile(paymentEntity.getPhone());
 			fuTranscationHistEntity.setPayments(paymentEntity);
@@ -92,7 +92,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 		if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
 			PaymentCBATranscationHistEntity cbaTranscationHistEntity = new PaymentCBATranscationHistEntity();
 			cbaTranscationHistEntity.setAmount(Float.parseFloat(paymentEntity.getAmount()));
-			cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+			cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 			cbaTranscationHistEntity.setEmail(paymentEntity.getEmail());
 			cbaTranscationHistEntity.setMobile(paymentEntity.getPhone());
 			cbaTranscationHistEntity.setPayments(paymentEntity);
@@ -122,7 +122,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 			UserEntity userEntity = userRestDAO.getUserByUserId(paymentEntity.getUserId());
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.FREELANCER_USER)) {
 				PaymentFUTranscationHistEntity fuTranscationHistEntity = paymentEntity.getPaymentsFUTrans();
-				fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+				fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 				fuTranscationHistEntity.setHash(hash);
 				if (mode != null) {
 					fuTranscationHistEntity.setMode(mode.name());
@@ -134,7 +134,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 			}
 			if (userEntity.getUserroles().getRolecode().equals(UserConstant.CLIENT_BUSINESS_ADMINISTRATOR)) {
 				PaymentCBATranscationHistEntity cbaTranscationHistEntity = paymentEntity.getPaymentsCBATrans();
-				cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+				cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 				cbaTranscationHistEntity.setHash(hash);
 				if (mode != null) {
 					cbaTranscationHistEntity.setMode(mode.name());
@@ -170,7 +170,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
 							userServiceDetailsEntity.setTxnid(paymentEntity.getTxnid());
-							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
+							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateIndianFormat());
 							if (userServiceDetailsEntity.getValidPeriodCode()
 									.equals(NewServiceConstant.SERVICE_TERM_3M)) {
 								cal.add(Calendar.MONTH, 3);
@@ -221,7 +221,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 					if (paymentEntity.getPaymentsCBATrans().getStatus().equals("Failed")) {
 						freeLanceOnServiceEntity.setTxnid(paymentEntity.getPaymentsCBATrans().getTxnid());
 					}
-					freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateInNewFormat());
+					freeLanceOnServiceEntity.setUpdatedon(CommonUtilites.getCurrentDateIndianFormat());
 					freeLanceOnServiceDAO.saveOrUpdateFreeLanceOnService(freeLanceOnServiceEntity);
 				}
 
@@ -237,7 +237,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	@Override
 	public PaymentFUTranscationHistEntity savePaymentsFUTranscations(
 			PaymentFUTranscationHistEntity fuTranscationHistEntity) {
-		fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+		fuTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 
 		PaymentEntity pentity = new PaymentEntity();
 		pentity.setPaymentId(fuTranscationHistEntity.getPaymentId());
@@ -255,7 +255,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	@Override
 	public PaymentCBATranscationHistEntity savePaymentsCBATranscations(
 			PaymentCBATranscationHistEntity cbaTranscationHistEntity) {
-		cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+		cbaTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 
 		PaymentEntity pentity = new PaymentEntity();
 		pentity.setPaymentId(cbaTranscationHistEntity.getPaymentId());
@@ -273,7 +273,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 	@Override
 	public PaymentRefundTranscationHistEntity savePaymentsRefundTranscations(
 			PaymentRefundTranscationHistEntity refundTranscationHistEntity) {
-		refundTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateInNewFormat());
+		refundTranscationHistEntity.setCreatedon(CommonUtilites.getCurrentDateIndianFormat());
 
 		PaymentEntity pentity = new PaymentEntity();
 		pentity.setPaymentId(refundTranscationHistEntity.getPaymentId());

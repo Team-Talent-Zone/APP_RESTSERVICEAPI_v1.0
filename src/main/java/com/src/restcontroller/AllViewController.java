@@ -16,7 +16,6 @@ import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
-import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
@@ -327,18 +326,7 @@ public class AllViewController extends AbstractRestManager {
 		return new ResponseEntity<ArrayList<FreeLanceTestimonialsDetailsView>>(freelanceUserEntity, HttpStatus.OK);
 	}
 
-	/**
-	 * Get User Details when isJobAvailable is false.
-	 * 
-	 * @param isJobAvailable
-	 * @return list of user details
-	 */
-	@RequestMapping(value = "/getFUFeebackDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>> getFUFeebackDetailsByUserId(
-			@PathVariable(UserConstant.USERID) int userId) {
-		ArrayList<FreeLanceStarReviewFBEntity> freelanceUserEntity = allViewSvc.getFUFeebackDetailsUserId(userId);
-		return new ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>>(freelanceUserEntity, HttpStatus.OK);
-	}
+	
 
 	/**
 	 * Get All bell notification to the platform.

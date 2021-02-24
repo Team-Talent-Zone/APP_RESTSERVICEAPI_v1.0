@@ -22,7 +22,6 @@ import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
-import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
@@ -440,20 +439,6 @@ public class AllViewServiceDAOImpl extends AbstractDAOManager implements AllView
 		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
 		if (size > 0) {
 			return (ArrayList<FreeLanceTestimonialsDetailsView>) freeLanceTestimonialsDetailsViews;
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
-		List<FreeLanceStarReviewFBEntity> freeLanceTestimonialsDetailsViews = null;
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceStarReviewFBEntity.class);
-		criteria.add(Restrictions.eq(UserConstant.FREELANCEID, userId));
-		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
-		if (size > 0) {
-			return (ArrayList<FreeLanceStarReviewFBEntity>) freeLanceTestimonialsDetailsViews;
 		}
 		return null;
 	}

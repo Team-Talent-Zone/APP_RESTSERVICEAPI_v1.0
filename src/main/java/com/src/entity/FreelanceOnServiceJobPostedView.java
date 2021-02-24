@@ -66,6 +66,9 @@ public class FreelanceOnServiceJobPostedView {
 
 	@Column(name = "fullname")
 	private String fullname;
+	
+	@Column(name = "firstname")
+	private String firstname;
 
 	@Column(name = "shortaddress")
 	private String shortaddress;
@@ -658,7 +661,13 @@ public class FreelanceOnServiceJobPostedView {
 	public void setJobacceptdecisionflag(Boolean jobacceptdecisionflag) {
 		this.jobacceptdecisionflag = jobacceptdecisionflag;
 	}
-	
-	
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 	
 }

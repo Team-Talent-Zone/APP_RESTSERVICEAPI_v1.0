@@ -36,6 +36,17 @@ public class CommonUtilites {
 		return dateFormat.format(cal.getTime());
 	}
 
+	/**
+	 * getCurrentDateInNewFormat- To get the Current Date in New Format.
+	 * 
+	 * @return Date Format.
+	 */
+	public static String getCurrentDateIndianFormat() {
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+		Calendar cal = Calendar.getInstance();
+		return dateFormat.format(cal.getTime());
+	}
 	
 	/**
 	 * genRandomNumeric - To get Random  Numeric Data.

@@ -10,7 +10,6 @@ import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
-import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
@@ -111,12 +110,6 @@ public class AllViewServiceSVCImpl extends AbstractServiceManager implements All
 	@Override
 	public ArrayList<AllActiveNewSeviceDetailsView> getAllServiceDetails() {
 		return allViewServiceDAO.getAllServiceDetails();
-	}
-	
-	@Override
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
-		return allViewServiceDAO.getFUFeebackDetailsUserId(userId);
-
 	}
 
 	/**

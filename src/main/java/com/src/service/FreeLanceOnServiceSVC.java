@@ -1,5 +1,7 @@
 package com.src.service;
 
+import java.util.ArrayList;
+
 import com.src.entity.FreeLanceOnServiceEntity;
 import com.src.entity.FreeLanceOnServiceNotification;
 import com.src.entity.FreeLanceStarReviewFBEntity;
@@ -60,5 +62,8 @@ public interface FreeLanceOnServiceSVC {
 	 */	
 	public boolean deleteFreelanceSVCDetails(FreeLanceOnServiceEntity freeLanceOnServiceEntity);
 
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
+
+	public FreeLanceStarReviewFBEntity getFUFeebackDetailsByJobId(int jobId);
 
 }

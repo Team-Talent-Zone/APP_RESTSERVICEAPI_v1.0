@@ -1,5 +1,7 @@
 package com.src.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,7 +72,7 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 	 */
 	@Override
 	public FreeLanceStarReviewFBEntity saveFreeLanceStarReviewFB(FreeLanceStarReviewFBEntity freeLanceStarReviewFB) {
-		freeLanceStarReviewFB.setFeedbackon(CommonUtilites.getCurrentDateInNewFormat());
+		freeLanceStarReviewFB.setFeedbackon(CommonUtilites.getCurrentDateIndianFormat());
 		FreeLanceOnServiceEntity freeLanceOnServiceEntity = new FreeLanceOnServiceEntity();
 		freeLanceOnServiceEntity.setJobId(freeLanceStarReviewFB.getJobId());
 		freeLanceStarReviewFB.setFreeLanceOnServiceEntity(freeLanceOnServiceEntity);
@@ -114,6 +116,18 @@ public class FreeLanceOnServiceSVCImpl extends AbstractServiceManager implements
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
+		return freeLanceOnServiceDAO.getFUFeebackDetailsUserId(userId);
+
+	}
+	
+	@Override
+	public FreeLanceStarReviewFBEntity getFUFeebackDetailsByJobId(int jobId) {
+		return freeLanceOnServiceDAO.getFUFeebackDetailsByJobId(jobId);
+
 	}
 
 }

@@ -26,7 +26,7 @@ public class GraphFURRatingView {
 	private String fullname;
 
 	@Column(name = "STARRATE")
-	private int starrate;
+	private double starrate;
 
 	public String getFullname() {
 		return fullname;
@@ -36,11 +36,11 @@ public class GraphFURRatingView {
 		this.fullname = fullname;
 	}
 
-	public int getStarrate() {
+	public double getStarrate() {
 		return starrate;
 	}
 
-	public void setStarrate(int starrate) {
+	public void setStarrate(double starrate) {
 		this.starrate = starrate;
 	}
 

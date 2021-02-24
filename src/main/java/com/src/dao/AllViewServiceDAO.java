@@ -6,7 +6,6 @@ import com.src.entity.AllActiveNewSeviceDetailsView;
 import com.src.entity.AllBellNotificationsView;
 import com.src.entity.FreeLanceOnServiceExpirationDetailsView;
 import com.src.entity.FreeLanceOnServiceNotificationDetailsView;
-import com.src.entity.FreeLanceStarReviewFBEntity;
 import com.src.entity.FreeLanceTestimonialsDetailsView;
 import com.src.entity.FreelanceOnServiceJobPostedView;
 import com.src.entity.FreelanceOnServiceSearchView;
@@ -111,10 +110,8 @@ public interface AllViewServiceDAO {
 
 	public ArrayList<FreeLanceTestimonialsDetailsView> getFUFeebackDetails();
 
-	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId);
 
 	public ArrayList<AllBellNotificationsView> getAllBellNotificationDetails();
-	
 	
 	/** 
 	 * To get all the pending payments of freelancer.

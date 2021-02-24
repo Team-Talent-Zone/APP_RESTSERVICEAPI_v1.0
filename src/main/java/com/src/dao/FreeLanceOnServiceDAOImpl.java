@@ -197,7 +197,7 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 				applicationConfigProperties.getProperty(CustomMsgProperties.GETUSERBYUSERID_USERNOTFOUND_ERRORMSG)
 						+ " for user Id : " + userId);
 	}
-    
+
 	/**
 	 * To delete the FreeLance On Service Details.
 	 * 
@@ -212,5 +212,34 @@ public class FreeLanceOnServiceDAOImpl extends AbstractDAOManager implements Fre
 			throw new RestCustomException(HttpStatus.BAD_REQUEST, applicationConfigProperties
 					.getProperty(CustomMsgProperties.DELETEFUONSERVICEDETAILS_UNABLETOUPDATE_ERRORMSG));
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<FreeLanceStarReviewFBEntity> getFUFeebackDetailsUserId(int userId) {
+		List<FreeLanceStarReviewFBEntity> freeLanceTestimonialsDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceStarReviewFBEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.FREELANCEID, userId));
+		criteria.addOrder(Order.desc("feedbackon"));
+
+		freeLanceTestimonialsDetailsViews = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		int size = freeLanceTestimonialsDetailsViews != null ? freeLanceTestimonialsDetailsViews.size() : 0;
+		if (size > 0) {
+			return (ArrayList<FreeLanceStarReviewFBEntity>) freeLanceTestimonialsDetailsViews;
+		}
+		return null;
+	}
+
+	@Override
+	public FreeLanceStarReviewFBEntity getFUFeebackDetailsByJobId(int jobId) {
+		FreeLanceStarReviewFBEntity freeLanceTestimonialsDetailsViews = null;
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(FreeLanceStarReviewFBEntity.class);
+		criteria.add(Restrictions.eq(UserConstant.JOB_ID, jobId));
+
+		freeLanceTestimonialsDetailsViews = (FreeLanceStarReviewFBEntity) criteria.uniqueResult();
+		if (freeLanceTestimonialsDetailsViews != null) {
+			return freeLanceTestimonialsDetailsViews;
+		}
+		return null;
 	}
 }

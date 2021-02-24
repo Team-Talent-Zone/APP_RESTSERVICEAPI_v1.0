@@ -1,5 +1,7 @@
 package com.src.restcontroller;
 
+import java.util.ArrayList;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -115,6 +117,32 @@ public class FreeLanceOnServiceController extends AbstractRestManager {
 		boolean isDeleted = freeLanceOnServiceSVC.deleteFreelanceSVCDetails(freeLanceOnServiceEntity);
 		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 
+	}
+	
+	/**
+	 * Get UserFeedBack Details by userId.
+	 * 
+	 * @param userId
+	 * @return list of user feedback details
+	 */
+	@RequestMapping(value = "/getFUFeebackDetailsByUserId/{userId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>> getFUFeebackDetailsByUserId(
+			@PathVariable(UserConstant.USERID) int userId) {
+		ArrayList<FreeLanceStarReviewFBEntity> freelanceUserEntity = freeLanceOnServiceSVC.getFUFeebackDetailsUserId(userId);
+		return new ResponseEntity<ArrayList<FreeLanceStarReviewFBEntity>>(freelanceUserEntity, HttpStatus.OK);
+	}
+	
+	/**
+	 * Get UserFeedBack Details by jobId.
+	 * 
+	 * @param userId
+	 * @return list of user feedback details
+	 */
+	@RequestMapping(value = "/getFUFeebackDetailsByJobId/{jobId}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FreeLanceStarReviewFBEntity> getFUFeebackDetailsByJobId(
+			@PathVariable(UserConstant.JOB_ID) int jobId) {
+		FreeLanceStarReviewFBEntity freelanceUserEntity = freeLanceOnServiceSVC.getFUFeebackDetailsByJobId(jobId);
+		return new ResponseEntity<FreeLanceStarReviewFBEntity>(freelanceUserEntity, HttpStatus.OK);
 	}
 
 	
