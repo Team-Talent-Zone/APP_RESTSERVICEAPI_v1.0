@@ -170,7 +170,7 @@ public class PaymentServiceImpl extends AbstractServiceManager implements Paymen
 							userServiceDetailsEntity.setIsservicepurchased(true);
 							userServiceDetailsEntity.setStatus("PAYMENT_PAID");
 							userServiceDetailsEntity.setTxnid(paymentEntity.getTxnid());
-							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateIndianFormat());
+							userServiceDetailsEntity.setServicestarton(CommonUtilites.getCurrentDateInNewFormat());
 							if (userServiceDetailsEntity.getValidPeriodCode()
 									.equals(NewServiceConstant.SERVICE_TERM_3M)) {
 								cal.add(Calendar.MONTH, 3);

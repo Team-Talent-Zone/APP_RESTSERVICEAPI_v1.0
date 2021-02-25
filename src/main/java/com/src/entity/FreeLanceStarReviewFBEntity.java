@@ -34,7 +34,7 @@ public class FreeLanceStarReviewFBEntity implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(insertable = true, updatable = false, name = "JOBID")
+	@Column(insertable = false, updatable = false, name = "JOBID")
 	private Integer jobId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
