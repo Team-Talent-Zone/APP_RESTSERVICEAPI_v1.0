@@ -43,6 +43,10 @@ public class ReferenceLookUpMappingSubCategoryEntity implements Serializable {
 
 	@Column(name = "SHORTKEY")
 	private String shortkey;
+	
+	@Column(name = "ORDERID")
+	private int orderid;
+	
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "mapId", nullable = false)
@@ -116,4 +120,12 @@ public class ReferenceLookUpMappingSubCategoryEntity implements Serializable {
 		this.shortkey = shortkey;
 	}
 
+	public int getOrderid() {
+		return orderid;
+	}
+
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
+ 
 }

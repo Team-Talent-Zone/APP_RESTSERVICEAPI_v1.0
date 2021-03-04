@@ -45,6 +45,7 @@ public class ReferenceLookUpDAOImpl extends AbstractDAOManager implements Refere
 		List<ReferenceLookUpEntity> referenceLookUpEntity = null;
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(ReferenceLookUpEntity.class);
 		criteria.add(Restrictions.eq("key", key));
+		
 		referenceLookUpEntity = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		int size = referenceLookUpEntity != null ? referenceLookUpEntity.size() : 0;
 		logger.debug(
