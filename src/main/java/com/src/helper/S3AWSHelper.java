@@ -20,6 +20,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.src.constant.UtilityConfig;
 import com.src.entity.UploadUtilEntity;
+import com.src.utils.CommonUtilites;
 
 /**
  * This <code>S3AWSHelper</code>defines uploading avatars, Background documents
@@ -44,12 +45,13 @@ public class S3AWSHelper {
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(UtilityConfig.API_KEY, UtilityConfig.API_KEY_SECERT);
 		AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1)
 				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-		try { 
+		try {
 			logger.debug("=====Attempting to upload profile picture of user====== Bucket Name "
 					+ UtilityConfig.S3_BUCKETNAME_AVATAR);
 			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
-			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+			String folderToCreate = UtilityConfig.FOLDER_USER_AVATAR + UtilityConfig.SUFFIX
+					+ uploadUtilEntity.getUserid();
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentLength(imageBytes.length);
 			metadata.setContentType("image/png");
@@ -57,11 +59,12 @@ public class S3AWSHelper {
 			InputStream fis = new ByteArrayInputStream(imageBytes);
 			String filename = uploadUtilEntity.getFilename();
 			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_AVATAR,
-					folderToCreate + UtilityConfig.SUFFIX + filename , fis,metadata)
+					folderToCreate + UtilityConfig.SUFFIX + filename, fis, metadata)
 							.withCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObjectRequest);
 			logger.debug("Returning the URL of uploaded document in the S3");
-			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_AVATAR, folderToCreate + UtilityConfig.SUFFIX + filename).toString();
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_AVATAR, folderToCreate + UtilityConfig.SUFFIX + filename)
+					.toString();
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
 					+ "to Amazon S3, but was rejected with an error response for some reason.");
@@ -97,19 +100,27 @@ public class S3AWSHelper {
 					"====Attempting to upload documents relared to background of the skilled worker===== Bucket name "
 							+ UtilityConfig.S3_BUCKETNAME_BG_DOCS);
 			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
-			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+			String folderToCreate = UtilityConfig.FOLDER_FREELANCE_BG + UtilityConfig.SUFFIX
+					+ uploadUtilEntity.getUserid();
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentLength(imageBytes.length);
-			metadata.setContentType("application/pdf");
+			if (CommonUtilites.getFileExtension(uploadUtilEntity.getFilename()).equals(".pdf")) {
+				metadata.setContentType("application/pdf");
+			} else if (CommonUtilites.getFileExtension(uploadUtilEntity.getFilename()).equals(".zip")) {
+				metadata.setContentType("application/zip");
+			} else {
+				metadata.setContentType("image/png");
+			}
 			metadata.setCacheControl("public, max-age=31536000");
 			InputStream fis = new ByteArrayInputStream(imageBytes);
 			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_BG_DOCS,
-					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis, metadata)
 							.withCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObjectRequest);
 			logger.debug("Returning the URL of uploaded document in the S3");
-			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_BG_DOCS, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_BG_DOCS,
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
 
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
@@ -146,20 +157,21 @@ public class S3AWSHelper {
 					"=======Attempting to upload widgets of the new host site for the CBA user ===== Bucket Name : "
 							+ UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS);
 			String base64Image = uploadUtilEntity.getBase64image().split(",")[1];
-	        byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
-				String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX + uploadUtilEntity.getUserid();
+			byte[] imageBytes = DatatypeConverter.parseBase64Binary(base64Image);
+			String folderToCreate = UtilityConfig.FOLDER_SITE_WIDGETS + UtilityConfig.SUFFIX
+					+ uploadUtilEntity.getUserid();
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentLength(imageBytes.length);
 			metadata.setContentType("image/png");
 			metadata.setCacheControl("public, max-age=31536000");
 			InputStream fis = new ByteArrayInputStream(imageBytes);
 			PutObjectRequest putObjectRequest = new PutObjectRequest(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS,
-					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis,metadata)
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename(), fis, metadata)
 							.withCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObjectRequest);
 			logger.debug("Returning the URL of uploaded document in the S3");
-			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS, folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
-	
+			return s3.getUrl(UtilityConfig.S3_BUCKETNAME_SITE_WIDGETS,
+					folderToCreate + UtilityConfig.SUFFIX + uploadUtilEntity.getFilename()).toString();
 
 		} catch (AmazonServiceException ase) {
 			logger.error("Caught an AmazonServiceException, which means your request made it "
@@ -177,6 +189,5 @@ public class S3AWSHelper {
 		}
 		return null;
 	}
-
 
 }
